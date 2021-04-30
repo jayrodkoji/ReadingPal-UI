@@ -1,0 +1,54 @@
+<ion-grid style="height: 100%;display: flex; flex-direction: column; padding: 0">
+  <ion-row style="background: var(--ion-color-primary)" class="ion-justify-content-between">
+    <ion-col size="auto">
+      <h3 style="text-align: center; color: white; padding-left: 10px; margin-top: 7px;">Create an Award</h3>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-button fill="clear" class="dismiss-btn"(click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="auto">
+      <ion-avatar class="badge-icon" style="width: 180px; height: 180px; margin-top: 15px;" (click)="fileInput.click()">
+        <img src={{uploadedBadgeIconUrl}}  onerror="src='assets/icon/AddBadgeIcon.png'" style="width: 200px;">
+        <input id="file-upload" type="file" #fileInput style="display: none" (change)="handleIconFileSelect($event)"/>
+      </ion-avatar>
+    </ion-col>
+  </ion-row>
+  <ion-row class="badges-row ion-justify-content-center">
+    <ion-col size="auto">
+      <ion-label>
+        Upload or Select an Badge
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row class="badges-row ion-justify-content-center">
+    <ion-col size="auto" class="icon-col" *ngFor="let icon of this.badgeIconPaths; let i = index">
+      <ion-avatar style="width: 95px; height: 95px" (click)="this.badgeIndex = i; uploadedBadgeIconUrl = this.badgeIconPaths[i]">
+        <img [ngClass]="badgeIndex == i ? 'badge-selected' : 'badge-not-selected'"
+          [src]="icon"/>
+      </ion-avatar>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="10">
+      <ion-input type="text" [(ngModel)]="badgeName" placeholder="Name" name="badgeName" required="true"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center" style="margin-bottom: 10px;">
+    <ion-col size="10">
+      <ion-textarea type="text" [(ngModel)]="badgeDescription" placeholder="Message" name="badgeDescription" required="true"></ion-textarea>
+    </ion-col>
+  </ion-row>
+  <ion-row style="flex-grow: 1;">
+    <ion-col style="padding: 0; height: 100%">
+      <div class="form-actions" style="height: 100%;">
+        <ion-button type="submit" [disabled]="!badgeName || !badgeDescription || (badgeIndex == -1 && !uploadedBadgeIcon) "
+                    fill="clear" class="submit-btn"
+                    (click)=create()>submit</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

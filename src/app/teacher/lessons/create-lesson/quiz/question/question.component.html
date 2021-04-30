@@ -1,0 +1,55 @@
+<ion-content>
+  <ion-grid style="padding: 0">
+    <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding-left: 10px;">
+      <ion-col>
+        <h1 style="color: white; font-size: 40px;" class="modal-title">Add Question</h1>
+      </ion-col>
+      <ion-col size="auto" >
+        <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="modalController.dismiss()">
+          <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="form" novalidate style="max-height: calc(600px - 124px); min-height: calc(600px - 124px); overflow: auto">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col class="add-card" style="max-width: 90%;">
+                <ion-button fill="clear" (click)="addChoice()" class="add-card-button">Add Choice</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-textarea rows="4" type="text" class="input" placeholder="Enter Question..." formControlName="questionText" style="--background: var(--main-content-background); border-radius: 4px;"></ion-textarea>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-grid formArrayName="choices">
+                  <ion-row class="ion-align-items-center" *ngFor="let choice of form.controls.choices.controls; let i = index" [formGroupName]="i">
+                    <ion-col size="auto">
+                      <ion-checkbox formControlName="correct" style="margin-top: 8px;" title="Toggle correct"></ion-checkbox>
+                    </ion-col>
+                    <ion-col>
+                      <ion-input type="text" class="input" formControlName="text" placeholder="Enter choice..." style="--background: var(--main-content-background); border-radius: 4px;"></ion-input>
+                    </ion-col>
+                    <ion-col size="auto" style="padding: 0">
+                      <ion-button fill="clear" style="margin: auto; height: 44px;" title="Remove choice" (click)="removeChoice(i)"><ion-icon name="close-outline"></ion-icon></ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>  
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="padding: 0">
+        <ion-button fill="clear" expand="full" (click)="save(form)">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>    
+

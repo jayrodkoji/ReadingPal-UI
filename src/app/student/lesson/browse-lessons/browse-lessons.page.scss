@@ -1,0 +1,24 @@
+.book-img {
+  background: transparent url('http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif') center no-repeat;
+  min-height: 176px;
+  min-width: 100px;
+  max-height: 176px;
+  max-width: 100px;
+}
+
+.filters {
+  min-width: 135px;
+  --min-height: 42px;
+  border-left: 1px solid #f3f3f3;
+  border-bottom: 1px solid #f3f3f3;
+  --background-hover: var(--ion-color-primary);
+}
+
+.lesson-card {
+  min-height: 90%;
+}
+
+.lesson-card:hover {
+  opacity: .9;
+  box-shadow: 1px 1px 5px grey;
+}

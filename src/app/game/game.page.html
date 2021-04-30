@@ -1,0 +1,4 @@
+<ion-content>
+  <app-vocab1-options *ngIf="onOptions" [lessonId]="lessonId"></app-vocab1-options>
+  <app-vocab1 *ngIf="!onOptions" [data]="vocab1Data" [vocabOptions]="vocabOptions"></app-vocab1>
+</ion-content>

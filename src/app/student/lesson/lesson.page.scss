@@ -1,0 +1,256 @@
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+.well {
+	width: 80%;
+	background-color: transparent !important;
+	border: none !important;
+}
+.scrolling {
+	width: 700px;
+	height: 100px;
+	background-color: #333;
+	overflow: auto;
+	white-space: nowrap;
+}
+.mysize {
+	height: 190px;
+	width: 150px;
+	padding-right: 20px;
+}
+.card {
+	margin: 3px;
+}
+.checked {
+	color: orange;
+}
+.col-md-3 {
+	display: inline-block;
+	margin-left: -4px;
+}
+.col-md-3 img {
+	width: 100%;
+	height: auto;
+}
+body .no-padding {
+	padding-left: 0;
+	padding-right: 0;
+}
+.carousel-control-prev, .carousel-control-next {
+	margin-top: 32px;
+	margin-bottom: 37px;
+	background-color: #000000;
+	width: 10%;
+}
+.carousel-control-prev {
+	background: rgb(0, 0, 0);
+	background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.carousel-control-next {
+	background: rgb(0, 0, 0);
+	background: linear-gradient(270deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+/* Book Select Custom CSS -- this is for the book shelf and carousel */
+
+.bookShelf {
+	margin-top: 20px;
+	height: 100%;
+}
+.bookShelfBackgroundImage {
+	//background-image: url('../../assets/Images/1594642450908-1.jpeg');
+	background-position: center;
+	background-size: 100%;
+	height: 975px;
+	width: 100%;
+}
+.bookShelfContent {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	margin: 10px auto;
+	height: 933px;
+}
+.carousel {
+	height: 100%;
+}
+.carousel-inner {
+	margin-top: 50px;
+}
+.carousel-indicators li {
+	background-color: #212121;
+}
+.carousel-indicators .active {
+	background-color: #FFF;
+}
+.bookSelectBookImage {
+	width: 100%;
+	padding: 0px 20px;
+	height: 220px;
+	overflow: hidden;
+	margin-top: 80px;
+}
+.bookSelectBookContent {
+	cursor: pointer;
+}
+.bookSelectBookContent:hover {
+	opacity: 0.8;
+}
+.bookSelectBookInfo {
+	height: 100px;
+	margin-top: calc(-50% + 15px);
+	padding: 5px 15px;
+	color: #FFF;
+	text-shadow: 1px 1px #000;
+	text-align: center;
+}
+.bookSelectBookInfoBackground {
+	// background-color: #FFF;
+	// opacity: 0.8;
+	position: absolute;
+	left: 13px;
+	height: 100%;
+	width: 90%;
+}
+.glass {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	box-shadow: 0 2px 1px 0 rgba(255, 255, 255, 0.4) inset, 0 6px 15px 2px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+	height: 100px;
+	width: 100%;
+}
+.glass:before, .glass:after {
+	content: "";
+	position: absolute;
+	background: rgba(255, 255, 255, 0.1);
+	width: 42px;
+	height: 100%;
+	top: -10px;
+	right: 50px;
+	-webkit-transform: rotate(50deg);
+	transform: rotate(50deg);
+	-webkit-transform-origin: top center;
+	transform-origin: top center;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+}
+.glass:after {
+	right: -20px;
+	width: 20px;
+}
+.bookSelectBookTitle {
+	position: relative;
+	font-family: helvetica;
+	font-size: 18px;
+	height: 40px;
+	width: 100%;
+	margin-top: 3px;
+	margin-bottom: 0px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.bookSelectWordCount {
+	position: relative;
+	width: 100%;
+}
+.bookSelectBookAverageRating {
+	position: relative;
+	width: 100%;
+}
+.textEngrave {
+	height: 60px;
+	width: 100%;
+	text-align: center;
+	text-shadow: -1px -1px rgba(0, 0, 0, 0.5), 1px 1px rgba(255, 255, 255, 0.5);
+	color: rgba(0, 0, 0, 0.5);
+	margin: 10px;
+	padding: 10px;
+	font-size: 30px;
+	margin-left: 20px;
+	margin-bottom: -70px;
+}
+.backgroundFiller {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-color: #000000;
+	z-index: -1;
+	background-image: url('https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');
+	background-position: center;
+	box-shadow: 0px 0px 100px 10px #000000 inset;
+	background-size: 100%;
+}
+.stars {
+	color: orange;
+	z-index: 9999;
+	position: relative;
+}
+
+
+.rating {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  overflow: hidden;
+  flex-direction: row-reverse;
+  height: 40px;
+  position: relative;
+}
+
+.rating-0 {
+  filter: grayscale(100%);
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  margin-top: auto;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23e3e3e3' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 76%;
+  transition: .3s;
+}
+
+.rating > input:checked ~ label,
+.rating > input:checked ~ label ~ label {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23fcd93a' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+
+.rating > input:not(:checked) ~ label:hover,
+.rating > input:not(:checked) ~ label:hover ~ label {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='126.729' height='126.73'%3e%3cpath fill='%23d8b11e' d='M121.215 44.212l-34.899-3.3c-2.2-.2-4.101-1.6-5-3.7l-12.5-30.3c-2-5-9.101-5-11.101 0l-12.4 30.3c-.8 2.1-2.8 3.5-5 3.7l-34.9 3.3c-5.2.5-7.3 7-3.4 10.5l26.3 23.1c1.7 1.5 2.4 3.7 1.9 5.9l-7.9 32.399c-1.2 5.101 4.3 9.3 8.9 6.601l29.1-17.101c1.9-1.1 4.2-1.1 6.1 0l29.101 17.101c4.6 2.699 10.1-1.4 8.899-6.601l-7.8-32.399c-.5-2.2.2-4.4 1.9-5.9l26.3-23.1c3.8-3.5 1.6-10-3.6-10.5z'/%3e%3c/svg%3e");
+}
+
+.feedback {
+  margin-top: -25px;
+  max-width: 360px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  z-index: 999;
+}
+
+ion-col ion-slides {
+	min-width: 150px;
+}

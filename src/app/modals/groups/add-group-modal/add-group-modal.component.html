@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-grid style="width: 100%; height: 100%; padding: 0;">
+    <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding-left: 10px;">
+      <ion-col>
+        <h1 style="color: white; font-size: 40px;" class="modal-title">Add Group</h1>
+      </ion-col>
+      <ion-col size="auto" >
+        <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="modalController.dismiss()">
+          <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-input placeholder="Enter title..." style="--background: var(--frosted); --padding-start: 10px; border-radius: 4px;" [(ngModel)]="groupTitle"></ion-input>
+          <ion-select placeholder="Select Class" style="max-width: 30%; margin-left: 10px;" [(ngModel)]="classSelected">
+            <ion-select-option *ngFor="let clss of classes" [value]="clss.id">{{clss.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="max-height: calc(100% - 172px);min-height: calc(100% - 172px); overflow: auto">
+      <ion-col style="padding: 0" style="max-height: calc(100% - 172px);min-height: calc(100% - 172px); overflow: auto">
+        <ion-list style="max-height: 100%;min-height: 100%; overflow: auto">
+          <ion-item *ngFor="let student of students">
+            <ion-avatar style="margin-right: 20px;"><ion-img [src]="getImage(student.profileimage)"></ion-img></ion-avatar>
+            <ion-label>{{student.firstName}} {{student.lastName}}</ion-label>
+            <ion-checkbox slot="start" [checked]="isInList(student)" (ionChange)="addSingleStudent($event, student)"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="padding: 0">
+        <ion-button [disabled]="studentToAdd.length == 0 || !classSelected || !groupTitle" fill="clear" expand="full" (click)="submit()">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

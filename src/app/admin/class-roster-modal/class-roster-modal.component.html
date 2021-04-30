@@ -1,0 +1,53 @@
+<ng-container>
+  <ion-content>
+    <ion-grid style="padding: 0">
+      <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding: 10px;">
+        <ion-col>
+          <h1 style="color: white; font-size: 40px;" class="modal-title">{{this.classroom.name}} Roster</h1>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h3>Roster Details</h3>
+        </ion-col>
+        <ion-col size="auto" *ngIf="potentialStudents">
+          <ion-button fill="clear" (click)="onRosterAdd()"
+                      [innerText]="potentialStudents ? 'Add Students to Class' : 'Gathering Students'">
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto" *ngIf="!potentialStudents" style="margin-right: 10px;">
+          <ion-spinner name="dots" style="margin-top: 10px; --color: var(--ion-color-primary)"></ion-spinner>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Name</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of this.allStudentsInClass; let i = index">
+              <td scope="row">{{i+1}}</td>
+              <td>{{user.username}}</td>
+              <td>{{user.firstName}} {{user.lastName}}</td>
+              <td>
+                <ion-button fill="clear" style="color: var(--default-font-color);" (click)="removeFromClass(user.username);">
+                  <ion-icon slot="icon-only" size="small" name="trash-outline"></ion-icon>
+                </ion-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ng-container>

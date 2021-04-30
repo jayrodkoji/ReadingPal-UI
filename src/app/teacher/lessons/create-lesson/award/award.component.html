@@ -1,0 +1,13 @@
+<ion-card style="height: 100%;">
+  <ion-grid style="padding: 0">
+    <ion-row class="ion-justify-content-between" style="background: var(--frosted)">
+      <ion-col>
+        <h3 style="padding: 10px;">Add Award</h3>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button style="padding-top: 10px;" fill="clear" (click)=createAward()>Create New Award</ion-button>
+      </ion-col>
+    </ion-row>
+    <app-badge-row [canSelect]=true></app-badge-row>
+  </ion-grid>
+</ion-card>

@@ -1,0 +1,18 @@
+<ion-card [ngStyle]="left ? {'background': 'var(--frosted)'}: {'background': 'white'}" style="box-shadow: none;">
+  <ion-grid>
+    <ion-row style="margin: auto; border-radius: 4px; padding: 10px;">
+      <ion-col size="2" [push]="left ? 0 : 10">
+        <ion-avatar style="height: 150px; width: 150px; margin:auto;">
+          <img [src]="userImage">
+        </ion-avatar>
+      </ion-col>
+      <ion-col [size]="left ? 9 : 8" [offset]="left ? 0 : 1" [pull]="left ? 0 : 2">
+        <p [innerText]="description"></p>
+        <ion-icon *ngIf="email"  name="mail" style="font-size: 24px;"></ion-icon>
+        <ion-text *ngIf="email" style="padding: 0 10px 10px 10px;position: relative; top: -8px;">{{email}}</ion-text>
+        <a *ngIf="linkedIn" [href]="linkedIn" target="_blank">
+        <ion-icon name="logo-linkedin" style="color: #0e76a8; font-size: 24px; margin-left: 10px;"></ion-icon></a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

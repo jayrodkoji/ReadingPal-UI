@@ -1,0 +1,73 @@
+<ion-content fullscreen style="--background: var(--main-content-background);height: calc(100vh - 56px)">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="!studentView">
+        <ion-card style="min-height: calc(96vh - 56px);">
+          <ion-grid style="padding: 0;">
+            <ion-row class="ion-justify-content-between" style="background-color: var(--ion-color-primary); padding: 10px">
+              <ion-col size="auto" size="11" style="align-self: center;">
+                <h1 style="color: white; font-size: 40px; padding-left: 10px; margin: auto">Create Lesson</h1>
+              </ion-col>
+              <ion-col size="auto" *ngIf="isComplete()" class="ion-align-self-center" size="auto" class="inner-col">
+                <ion-button (click)="publish()" [class.button-disabled]="publishing" style="--background: white; --color: var(--ion-color-primary);">
+                  <ng-container *ngIf="!isEdit">
+                    Publish
+                  </ng-container>
+                  <ng-container *ngIf="isEdit">
+                    Save
+                  </ng-container>
+                </ion-button>
+              </ion-col>
+              <ion-col size="auto"> 
+                <ion-checkbox [checked]="isComplete()" disabled="true" [ngClass]="'all-complete'" ></ion-checkbox>
+              </ion-col>
+              <!-- <ion-col size="auto" style="align-self: center;">
+                <ion-button *ngIf="!studentView" style="--background: white; --color: var(--ion-color-primary);" (click)="enterStudentView()">See Student View</ion-button>
+              </ion-col> -->
+            </ion-row>
+            <ion-row>
+              <ion-col size="6" class="inner-col">
+                <app-basic-info [lesson]="lesson"></app-basic-info>
+              </ion-col>
+              <ion-col size="6" class="inner-col">
+                <app-add-reading [initialReadingInfo]="initialReadingInfo"></app-add-reading>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="addAward">
+              <ion-col class="inner-col">
+                <app-award [initialBadge]="initialBadge"></app-award>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!addAward" style="padding: 15px;">
+              <ion-col size="12" class="add-card">
+                <ion-button fill="clear" (click)="addAward = true" class="add-card-button">Add Award</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="addVocabulary">
+              <ion-col class="inner-col">
+                <app-vocabulary [initialWords]="initialWords"></app-vocabulary>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!addVocabulary" style="padding: 15px;">
+              <ion-col size="12" class="add-card">
+                <ion-button fill="clear" (click)="addVocabulary = true" class="add-card-button">Add Vocabulary</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="addQuiz">
+              <ion-col class="inner-col">
+                <app-quiz [lessonId]="lessonId" [initialQuizzes]="initialQuizzes"></app-quiz>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!addQuiz" style="padding: 15px;">
+              <ion-col size="12" class="add-card">
+                <ion-button fill="clear" (click)="addQuiz = true"  class="add-card-button">Add Quiz</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+

@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<ion-content style="height: calc(100vh - 56px); --background: var(--main-content-background)">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card style="min-height: calc(96vh - 56px)">
+          <ion-grid style="padding: 0;">
+            <ion-row class="ion-justify-content-between" style="background-color: var(--ion-color-primary);">
+              <ion-col size="auto">
+                <h1 style="margin-top: 10px; padding-left: 10px; color: white; font-size: 40px;">Books</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-align-items-top" style="padding-top: 0">
+              <ion-col style="padding-right: 0; padding-top: 0; padding-left: 0;">
+                <ion-searchbar placeholder="Filter by @title, @author, or @level" [(ngModel)]="searchText"
+                               style="padding: 0; --background: var(--frosted); --box-shadow: none;border-bottom: 1px solid #f3f3f3;"></ion-searchbar>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" style="--ion-grid-column-padding: 0px;">
+                <ion-grid *ngIf="grid">
+                  <ion-row class="book-covers" *ngIf="allBooks">
+                    <ion-col size="auto" *ngFor="let book of allBooks | appBookSearchPipe: searchText; let i = index">
+                      <ion-card (click)="goToBook(book)">
+                        <ion-grid style="padding: 0">
+                          <ion-row>
+                            <ion-col class="container">
+                              <img [src]="book.base64Cover" width="160" height="256" class="image"/>
+                              <div class="middle">
+                                <div class="text">{{book.title}}</div>
+                              </div>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-card>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="book-covers" *ngIf="!allBooks">
+                    <ion-col size="auto" style="margin: auto;" class="align-self-center container"
+                             *ngFor="let book of counter(17)" >
+                      <ion-skeleton-text animated class="book-skeleton"></ion-skeleton-text>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

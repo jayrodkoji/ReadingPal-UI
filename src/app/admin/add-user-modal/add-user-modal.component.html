@@ -1,0 +1,145 @@
+<ng-container>
+  <ion-content>
+    <ion-grid style="width: 100%; height: 100%; padding: 0;">
+      <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding: 10px;">
+        <ion-col>
+          <h1 style="color: white; font-size: 40px;" class="modal-title" [innerText]="(inputFlag == 0 ? 'Edit' : 'Add') + ' User'"></h1>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height: calc(100% - 90px - 54px)">
+        <ion-col style="padding: 10px;">
+          <h3 style="padding: 10px 0 0 15px;">User Details</h3>
+          <hr>
+          <form>
+            <ion-grid>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> username:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input [disabled]="!inputFlag" type="text" name="username" placeholder="Enter username..." [(ngModel)]="user.username">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> password:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="text" name="Password" placeholder="Enter password..." [(ngModel)]="user.password">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> First Name:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="text" name="First name" placeholder="Enter first name..."
+                      [(ngModel)]="user.firstName"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> Last Name:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="text" name="Last name" placeholder="Enter last name..."
+                      [(ngModel)]="user.lastName"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> E-mail:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="text" name="E-mail" placeholder="Enter email..." [(ngModel)]="user.email">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> User Image:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="file" name="userimage" (change)="handleIconFileSelectProfile($event)"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label> Background Image:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="file" name="userback" placeholder="Enter User Image..."
+                    (change)="handleIconFileSelectBackground($event)"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="inputFlag != 0" class="ion-align-items-center">
+                <ion-col size="12">
+                  <ion-item lines="none">
+                    <ion-label>Role:</ion-label>
+                    <ion-select interface="popover" mode="ios" placeholder="Choose Role" name="teacherCode"
+                      [(ngModel)]="role.type">
+                      <ion-select-option value="Student">
+                        <ion-icon name="group1"></ion-icon>Student
+                      </ion-select-option>
+                      <ion-select-option value="Teacher">
+                        <ion-icon name="group1"></ion-icon>Teacher
+                      </ion-select-option>
+                      <ion-select-option value="Admin">
+                        <ion-icon name="group1"></ion-icon>Admin
+                      </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-end" style="height: 54px;">
+        <ion-col size="auto">
+          <ion-button fill="clear" (click)="saveUser(user, role)">
+            Save
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ng-container>

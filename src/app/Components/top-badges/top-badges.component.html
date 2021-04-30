@@ -1,0 +1,7 @@
+<ion-row class="badges-row">
+  <ion-col size="4" *ngFor="let badge of badges"  class="badge-col">
+    <ng-container *ngIf="badge.icon !== null && badge.icon !== undefined">
+      <img [src]="getIconImage(badge)"/>
+    </ng-container>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,19 @@
+ion-item {
+    --border-radius: 4px;
+}
+
+.list-ios:not(.list-inset):not(.list-ios-lines-none) .item:last-child {
+    --inner-border-width: 0;
+    --border-width: 0 0 0.55px 0;
+}
+
+dp-date-picker::ng-deep .dp-picker-input {
+    background: white !important;
+    border: var(--frosted) solid 2px;
+    border-radius: 4px;
+}
+
+dp-day-calendar.dp-material::ng-deep .dp-selected {
+    background: #bd2130;
+    color: #fff;
+}

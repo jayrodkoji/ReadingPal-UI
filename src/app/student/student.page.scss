@@ -1,0 +1,56 @@
+* {
+    font-family: Segoe UI; 
+}
+
+.logo{
+    width: 150px;
+}
+
+.card {
+    height: 50%;
+    width: 100%;
+}
+
+.side-pane {
+    --max-width: 55% !important;
+
+    .items-row {
+        height: 100%;
+    }
+
+    .log-out{
+        height: 10%;
+    }
+}
+
+ion-menu ion-item {
+    --padding-start: 10px;
+    border-radius: 4px 0px 0px 4px;
+  }
+
+ion-menu ion-item.selected {
+    --background: #EE3A23;
+    width: calc(100% + 5px);
+}
+
+ion-menu ion-item.selected {
+    --color: #fcfcfc;
+}
+
+ion-menu ion-item ion-label {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+@media screen and (min-width: 768px) {
+    .side-pane {
+        --max-width: 100% !important;
+    } 
+
+    ion-split-pane {
+        --border: 1px solid rgba(199, 199, 199, 0.185);
+        --side-max-width: 200px; 
+        --side-min-width: 200px;
+    }
+}

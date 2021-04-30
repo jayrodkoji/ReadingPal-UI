@@ -1,0 +1,45 @@
+<!-- TODO: Loading circle when assignedLessons is undefined -->
+  <ion-row *ngIf="assignedLessons" style="height:3%; margin-top: 30px;">
+    <ion-col size="auto" offset="0.5">
+      <ion-text color="secondary">
+        <h5 *ngIf="assignedLessons.length === 1">{{singularName}}</h5>
+        <h5 *ngIf="assignedLessons.length > 1">{{pluralName}}</h5>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+<ng-container *ngIf="assignedLessons && assignedLessons.length > 0">
+  <ion-row *ngFor="let lesson of assignedLessons; let i = index" class="ion-justify-content-center">
+    <ion-col size="11">
+      <ion-card class="current-lesson" [routerLink]="['../../lesson/lesson-overview', lesson.id]" routerDirection="root">
+
+        <ion-grid style="--ion-grid-padding: 0px;">
+          <ion-row>
+            <ion-col size="auto">
+              <img [src]="books[i].cover" style="max-height: 200px; max-width: 134px; min-height: 200px; min-width: 134px;">
+            </ion-col>
+            <ion-col size="auto">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-card-header>
+                      <ion-card-title>{{lesson.title}}</ion-card-title>
+                    </ion-card-header>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-card-content>
+                      Due {{lessonDueDate(i) | date : 'MMM d \'by\' h:mm a'}} ({{lessonDueDuration(i)}})
+                    </ion-card-content>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ng-container>

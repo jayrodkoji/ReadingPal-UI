@@ -1,0 +1,36 @@
+<app-header></app-header>
+
+<ion-content  style="--background: var(--frosted); max-height: calc(100% - 56px)">
+  <ion-grid style="padding: 15px">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-card style="min-height: calc(96vh - 56px); max-width: 1600px; min-width: 280px; margin: auto">
+          <ion-grid style="padding: 0;">
+            <ion-row style="background-color: var(--ion-color-primary);" class="ion-justify-content-between">
+              <ion-col size="auto" style="align-self: center;">
+                <h1 style="margin-top: 10px; padding-left: 10px; color: white; font-size: 40px;">Meet the Team</h1>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button fill="clear"
+                            style="margin-top: 15px;--background-hover-opacity: .3; --background-hover: white"
+                            routerLink="../home" routerDirection="root">
+                  <ion-icon name="home" style="color: white"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let user of teammates; let i = index" class="ion-justify-content-center" style="margin-top: 10px;">
+              <ion-col size="11">
+                <app-team-card
+                        [userImage]="user.img"
+                        [description]="user.description"
+                        [email]="user.email"
+                        [linkedIn]="user.linkedIn"
+                        [left]="!(i%2)"></app-team-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

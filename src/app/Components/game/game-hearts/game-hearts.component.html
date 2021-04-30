@@ -1,0 +1,9 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="4" *ngFor="let i of heartsMax|times">
+      <img *ngIf="i < heartsCurrent" class="game-heart" src="/assets/game/heart-25.png" />
+      <img *ngIf="i >= heartsCurrent" class="game-heart" src="/assets/game/heart-dark-25.png" />
+    </ion-col>
+
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,82 @@
+* {
+    font-family: Segoe UI; 
+}
+
+.logo{
+    width: 150px;
+}
+
+.side-pane {
+    --max-width: 55% !important;
+
+    .card {
+        height: 50%;
+        background-image: url(../../assets/Banner.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .card-grid {
+            height: 100%;
+            width: 100%;
+
+            .avatar-row {
+                height: 30%;
+
+                ion-col {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                ion-avatar {
+                    width: 100%;
+                    height: 100%;
+                    max-width: 120px  !important;
+                    max-height: 120px !important;
+                }
+
+            }
+        
+            .badges {
+                width: 100%;
+                height: 15%;
+                margin-top: 5px;
+            }
+                
+            .book-title-column{
+                padding: 0;
+
+                .current-book-title {
+                    font-size:calc(12px + 1.1vw);
+                    font-weight: bold;
+                    color: #fcfcfc;
+                    margin: 5px;
+                }
+            }
+
+
+            .book-img-row {
+                height: 40%;
+
+                .book-img-col{
+                    height: 100%;
+
+                    .book-img {
+                        height: 100%;
+                        overflow: hidden;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                    }
+                }
+            }
+        }
+    }
+
+    .items-row {
+        height: 100%;
+    }
+
+    .log-out{
+        margin-bottom: 10px;
+    }
+}

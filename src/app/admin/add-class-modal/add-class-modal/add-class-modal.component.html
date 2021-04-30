@@ -1,0 +1,76 @@
+<ng-container>
+  <ion-content>
+    <ion-grid style="width: 100%; height: 100%; padding: 0;">
+      <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding-left: 10px;">
+        <ion-col>
+          <h1 *ngIf="classroom.id == 0" style="color: white; font-size: 40px;" class="modal-title">Add Class</h1>
+          <h1 *ngIf="classroom.id != 0" style="color: white; font-size: 40px;" class="modal-title">Edit Class</h1>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height: calc(100% - 70px - 54px)">
+        <ion-col style="padding: 10px;">
+          <h3 style="padding: 10px 0 0 15px;">Class Details</h3>
+          <hr>
+          <form>
+            <ion-grid>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label>Class Name:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="text" name="className" placeholder="Enter class name..." [(ngModel)]="classroom.name"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-label style="padding-left: 15px;">Teacher:</ion-label>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-select interface="popover" mode="ios" placeholder="Select One" name="teacherCode"
+                              style="background: var(--main-content-background);"
+                              [(ngModel)]="classroom.teacherUserName">
+                    <ion-select-option *ngFor="let user of this.potentialTeachers; let i = index" value="{{user.username}}">
+                      <ion-icon name="group1"></ion-icon>{{user.username}}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-align-items-center">
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label>Grade:</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item lines="none" style="--background: var(--main-content-background);">
+                    <ion-input type="text" name="studentCode" placeholder="Enter class grade..."
+                      [(ngModel)]="classroom.grade"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-end" style="height: 54px;">
+        <ion-col size="auto">
+          <ion-button *ngIf="classroom.id == 0" fill="clear" (click)="saveClass(classroom)">
+            Save
+          </ion-button>
+          <ion-button *ngIf="classroom.id != 0" fill="clear" (click)="editClass(classroom)">
+            Save
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ng-container>

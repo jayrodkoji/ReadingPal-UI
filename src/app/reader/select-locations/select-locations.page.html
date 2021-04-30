@@ -1,0 +1,47 @@
+<ion-toolbar class="no-border text-center">
+  <ion-button slot="start" fill="clear" (click)="dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+  <ion-title mode="ios">
+    <img src="assets/logo/logo.svg" onerror="this.onerror=null; [src]='assets/logo/logo.png'" class="logo" style="margin: auto; width: 150px;">
+  </ion-title>
+  <ion-select slot="end" mode="ios" interface="popover" placeholder="Navigate to Chapter" class="custom-options" (ionChange)="navigateSection($event)">
+    <ion-select-option *ngFor="let chapter of toc" [value]=chapter>{{chapter.label}}</ion-select-option>
+  </ion-select>
+</ion-toolbar>
+
+<ion-content>
+  <ion-grid style="height: 100%; user-select: none;">
+    <ion-row style="height: 93%;">
+      <ion-col size="1" class="ion-align-self-center" *ngIf="!isMobile">
+        <ion-icon name="chevron-back-outline" id="prev" (click)="prev()"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-spinner name="crescent" class="spinner" *ngIf="!loaded"></ion-spinner>
+        <div id="viewer"></div>
+      </ion-col>
+      <ion-col size="1" class="ion-align-self-center" *ngIf="!isMobile">
+        <ion-icon name="chevron-forward-outline" id="next" (click)="next()"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="auto" offset="3" style="display: flex;align-items: center;">
+        <ion-checkbox style="margin:  0;padding:0;" [checked]="startLoc"></ion-checkbox>
+        <ion-button fill="clear" (click)="setStartLocation()">Set as Start Location</ion-button>
+        <ion-button fill="clear" [hidden]="!startLoc" (click)="startLoc = null">
+          x
+        </ion-button>
+      </ion-col>
+      <ion-col size="auto" offset="2" style="display: flex;align-items: center;">
+        <ion-checkbox style="margin:  0;padding:0;" [checked]="endLoc"></ion-checkbox>
+        <ion-button fill="clear" (click)="setEndLocation()">Set as End Location</ion-button>
+        <ion-button size="small" fill="clear" [hidden]="!endLoc" (click)="endLoc = null">
+          x
+        </ion-button>
+      </ion-col>
+      <ion-col style="align-items: center;text-align: end;">
+        <ion-button fill="clear" (click)="submit()" *ngIf="startLoc && endLoc" style="margin-right: 15px;">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

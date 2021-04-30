@@ -1,0 +1,66 @@
+ <!-- Settings -->
+ <ion-menu side="end" menuId="settings" contentId="main" class="settings">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title style="color: var(--default-font-color)">Settings</ion-title>
+      <ion-icon name="chevron-forward-outline" slot="end" style="margin-right: 10px;font-size: 24px; color: var(--default-font-color)" (click)="closeMenu()"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-grid style="padding:0">
+      <ion-row style="height: 500px; padding:0;">
+        <ion-col style="height: 500px; padding:0">
+          <ion-content scrollbar={{scrollbar}} style="min-height: 50px;">
+            <div style="background-color: #f2f2f2 !important;; overflow: auto;">
+              <ion-list style="padding-top: 0;">
+                <ion-item button [class.highlight]="selected_font == i" *ngFor="let font of fonts; let i = index" (click)="setFontFamily(i)">
+                  <ion-label [ngStyle]="{'font-family': font}">{{font}}</ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-content>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+<!--          <ion-label>Set default font size:</ion-label>-->
+          <ion-range [(ngModel)]="fontSize" min="60" max="200" step="10" (ionChange)="setFontSize($event.detail.value)">
+            <ion-icon size="small" slot="start" src="assets/increase_size.svg"  style="fill: var(--default-font-color)" (click)="fontSize = fontSize >= 60 ? fontSize - 10 : 60"></ion-icon>
+            <ion-icon slot="end" src="assets/increase_size.svg"  style="fill: var(--default-font-color)" (click)="fontSize = fontSize <= 200 ? fontSize + 10 : 200"></ion-icon>
+          </ion-range>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="padding: 0;">
+        <ion-button expand="full" mode="ios" fill="clear" [ngClass]="fontWeight === 'bold' ? 'weight-bold' : 'weight-normal'"
+          [ngStyle]="{'font-family': fonts[selected_font]}" 
+          (click)="toggleFontWeight()">Bold</ion-button>
+        </ion-col>
+        <ion-col style="padding: 0;">
+          <ion-button expand="full" mode="ios" fill="clear" [ngClass]="fontStyle === 'italic' ? 'style-italic' : 'style-normal'"
+            [ngStyle]="{'font-family': fonts[selected_font]}"
+            (click)="toggleFontStyle()">italic</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 20px;">
+        <ion-col>
+          <ion-label>Theme:</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row style="padding:0;" class="ion-align-items-center ion-justify-content-around">
+        <ion-col>
+          <ion-segment value="light" (ionChange)="changeTheme($event.detail.value)">
+            <ion-segment-button value="light">
+              <ion-label>Light</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="dark">
+              <ion-label>Dark</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main"></ion-router-outlet>

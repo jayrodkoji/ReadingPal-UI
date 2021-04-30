@@ -1,0 +1,30 @@
+
+.logo{
+    width: 150px;
+    margin: auto;
+}
+
+.selected {
+    --background: var(--ion-color-primary);
+}
+
+.default {
+    --background: white; 
+    --color: #212121;
+}
+
+.classes-button {
+    --border-radius: 4px 0px 0px 0px; 
+}
+
+.groups-button {
+    --border-radius: 0;;
+}
+
+.students-button {
+    --border-radius: 0px 4px 0px 0px;
+}
+
+.report-button {
+    --border-radius: 4px 4px 0px 0px;
+}

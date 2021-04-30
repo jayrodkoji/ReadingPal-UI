@@ -1,0 +1,57 @@
+<ion-content>
+  <ion-grid *ngIf="groups" style="width: 100%">
+    <form [formGroup]="innerForm">
+      <ion-row *ngIf="!addingGroup">
+        <ion-col>
+          <ion-button (click)="addGroup()">Add group</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="addingGroup" formGroupName="newGroup">
+        <ion-item>
+          <ion-col>
+            <ion-input type="text" class="input" formControlName="groupName" placeholder="Enter group name"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="newGroupSelectStudents()">Select students</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="saveGroup()">Save</ion-button>
+          </ion-col>
+        </ion-item>
+      </ion-row>
+
+      <ng-container [formGroup]="form">
+        <ng-container *ngIf="groups.length > 0" formArrayName="groups">
+          <ion-row *ngFor="let g of form.controls.groups.controls; let i = index" [formGroupName]="i">
+            <ion-col size="1">
+              <ion-checkbox formControlName="selected"></ion-checkbox>
+            </ion-col>
+            <ion-col size="8">
+              {{groups[i].name}}
+            </ion-col>
+            <ion-col size="2">
+              {{groups[i].students.length}} students
+            </ion-col>
+            <ion-col size="1">
+              <ion-button fill="clear" style="color: var(--default-font-color);" (click)="onClickDelete(i)">
+                <ion-icon slot="icon-only" size="small" name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+      </ng-container>
+
+      <ion-row *ngIf="groups.length === 0">
+        <ion-row>
+          No groups for this class.
+        </ion-row>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="text-align: end">
+          <ion-button (click)="submit()">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

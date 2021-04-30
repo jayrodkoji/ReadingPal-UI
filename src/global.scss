@@ -1,0 +1,258 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+// /* Core CSS required for Ionic components to work properly */
+// @import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.login-modal {
+    --max-height: 400px;
+    --max-width: 400px;
+    --border-radius: 4px;
+}
+
+/**** Word options Popover ****/
+.word-options {
+    --width: min(auto, 800px);
+    --background: transparent !important;
+    --box-shadow: none;
+}
+
+.word-options .popover-content {
+    --width: 370px;
+}
+
+/**** Color Picker Popover ****/
+.color-popover .popover-content {
+    overflow: hidden;
+    border-radius: 4px;
+    --background: transparent !important;
+}
+
+.color-popover {
+    --height: 250px;
+    --width: 200px;
+}
+
+.color-popover .circle-col {
+    height: 180px !important;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: auto;
+}
+
+.color-popover .circle-col::-webkit-scrollbar {
+    display: none;
+}
+
+.color-popover .circle-picker {
+    width: 100% !important;
+    padding: 5px;
+}
+
+.color-popover .sketch-picker {
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 160px !important;
+    margin: auto;
+}
+
+.color-popover .color-saturation {
+    border-radius: 4px 4px 0 0  !important;
+}
+
+.color-popover .saturation-white {
+    border-radius: 2px 0 0 0  !important;
+}
+
+.color-popover ion-col {
+    padding: 0;
+}
+
+.color-popover span, .color-popover input {
+    display: none !important;
+}
+
+.color-popover .sketch-alpha {
+    display: none;
+}
+
+.color-popover .sketch-sliders {
+    height: 24px !important;
+    width: 100% !important;
+    flex: none !important;
+}
+
+.color-popover .sketch-hue  {
+    min-height: 24px;
+}
+
+.color-popover .color-hue-slider {
+    min-height: 22px;
+}
+
+.color-popover .sketch-controls {
+    height: 77px !important;
+    flex-wrap: wrap !important;
+}
+
+.color-popover .sketch-color {
+    width: 100% !important;
+    height: 40px !important;
+    margin-left: 0 !important;
+}
+
+.color-popover .sketch-active {
+    box-shadow: rgb(0 0 0 / 5%) 0px 0px 0px 1px inset, rgb(0 0 0 / 20%) 0px 0px 5px inset !important;
+}
+
+/**** Image Zoom Modal ****/
+.image-modal {
+    --max-height: 95%;
+    --max-width: 95%;
+    --height: auto;
+    --width: auto;
+}
+
+.image-modal img {
+    display: block;
+    max-width: 100%;
+    max-height: 95vh; // required because parent doesn't have absolute height value
+    height: auto;
+    width: auto;
+}
+
+.book-cover-modal {
+    --max-height: 95%;
+    --max-width: 95%;
+    --height: auto;
+    --width: auto;
+}
+
+.book-cover-modal img {
+    display: block;
+    max-width: 100%;
+    max-height: 50vh; // required because parent doesn't have absolute height value
+    min-height: 50vh;
+    height: auto;
+    width: auto;
+}
+
+.options-card {
+    --height: 60px;
+    --max-width: 375px;
+    --border-radius: 4px;
+}
+
+.options-card .modal-wrapper {
+    position: fixed;
+    bottom: 5%;
+}
+
+
+// For select book location modal in create-lesson
+.select-locations {
+    --min-height: 90%;
+    --min-width: 90%;
+}
+
+
+// For navigation in select-location
+.select-lesson-navigation .popover-content{
+    width: fit-content;
+    height: fit-content;
+}
+
+
+.select-lesson-navigation .select-interface-option {
+    --inner-border-width: 0 !important;
+}
+
+.vocab-definition {
+    --min-width: 300px;
+    --max-width: 500px;
+}
+
+// create award modal
+.create-award {
+    --border-radius: 4px;
+    --max-width: 400px;
+}
+
+.add-book-modal {
+    --border-radius: 4px;
+}
+
+.annotation-list-options{
+    --max-width: 145px;
+}
+
+.add-class-modal {
+    --border-radius: 4px;
+    --max-height: 400px;
+    --max-width: 400px;
+}
+
+.add-user-modal {
+    --border-radius: 4px;
+    --min-height: 700px;
+    --max-height: 1000px;
+    --max-width: 650px;
+}
+
+.popover-content {
+    --max-height: 50%;
+}
+
+.popover-viewport.sc-ion-popover-ios {
+    padding-bottom: 1px;
+}
+
+.finished-reading-modal {
+    --max-width: 400px;
+    --max-height: 200px;
+}
+
+.select .alert-wrapper{
+    --min-width: 80%;
+}
+
+.select .alert-head{
+    background: var(--ion-color-primary);
+    --color: white;
+}
+
+.select .alert-head h2{
+    color: white;
+    font-size: 24px;
+}
+
+.assignment-component{
+    --height: min(80%, 800px);
+    --width: min(80%, 800px);
+}
+
+.group-modal {
+    --height: min(80%, 800px);
+    --width: min(80%, 800px);
+}

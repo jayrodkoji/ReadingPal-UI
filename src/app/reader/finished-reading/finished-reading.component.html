@@ -1,0 +1,15 @@
+<ion-grid style="height: 100%; padding: 0;">
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" style="background: var(--ion-color-primary); padding: 15px;">
+      <h2 style="text-align: center; color: white">You finished your assigned reading!</h2>
+    </ion-col>
+  </ion-row>
+  <ion-row style="margin-top: 30px;">
+    <ion-col size="12" class="ion-align-self-end">
+      <div style="display: flex" class="ion-justify-content-around">
+        <ion-button fill="clear" (click)="continueReading()">Continue Reading</ion-button>
+        <ion-button fill="clear" (click)="finishReading()">Return to lesson</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

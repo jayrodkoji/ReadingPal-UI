@@ -1,0 +1,21 @@
+<ion-list>
+  <ion-list-header *ngIf="!loadingToc">
+    Select Chapter
+  </ion-list-header>
+  <ion-grid *ngIf="loadingToc">
+    <ion-row>
+      <ion-col>
+        <ion-label>Loading... </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+  <ion-item *ngFor="let chapter of toc; let i = index" button="true" (click)="submitChapter(chapter, i)">
+    {{chapter.label}}
+  </ion-item>
+  <div id="view" hidden="true"></div>
+</ion-list>

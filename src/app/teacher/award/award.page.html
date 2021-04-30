@@ -1,0 +1,85 @@
+<app-header></app-header>
+
+<ion-content style="--background: var(--main-content-background); height: calc(100vh - 56px);">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card style="min-height: calc(96vh - 56px)">
+          <ion-grid style="padding: 0%;">
+            <ion-row style="background-color: var(--ion-color-primary);">
+              <ion-col size="auto">
+                <h1 style="margin-top: 10px; padding-left: 10px; color: white; font-size: 40px;">Awards</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-align-items-center" style=" margin-top: 20px;">
+              <ion-col size="8" offset="1">
+                <h5>Your Created Awards</h5>
+              </ion-col>
+              <ion-col size="2" style="text-align: end; right: 20px;">
+                <ion-button fill="clear" (click)=createAward()>Create Award</ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button *ngIf="creatorsBadgeList && !deleteAward" fill="clear" (click)="deleteAward = true">
+                  <ion-icon name="trash-outline" style="font-size: 20px;"></ion-icon>
+                </ion-button>
+                <ion-button *ngIf="creatorsBadgeList && deleteAward" fill="clear" (click)="deleteAward = false">
+                  <ion-icon name="trash" style="font-size: 20px;"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="creatorsBadgeList" class="badges-row">
+              <ion-col size="10" offset="1">
+                <ion-slides [options]=slideOpts>
+                  <ion-slide *ngFor="let badgeData of creatorsBadgeList; let i = index" style="max-width: 200px; max-height: 230px;">
+                    <app-award-card
+                            [award]='badgeData'
+                            [delete]="deleteAward"
+                            [owner]="true"
+                            (awardDeleted)="getAllBadges(); getBadgesByCreator();"
+                            (click)="updateAward(badgeData)"></app-award-card>
+                  </ion-slide>
+                </ion-slides>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!creatorsBadgeList" style="height: 130px;" class="ion-align-items-center">
+              <ion-col size="auto" offset="2">
+                <ion-icon name="ribbon-outline" style="font-size: 100px; color: #e3e3e3"></ion-icon>
+              </ion-col>
+              <ion-col size="auto">
+                <h5 style="color: #e3e3e3">You haven't created any awards...</h5>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="rPBadgeList" style="margin-top: 10px;">
+              <ion-col size="10" offset="1">
+                <h5>Reading Pal Created Awards</h5>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="rPBadgeList" class="badges-row">
+              <ion-col size="10" offset="1">
+                <ion-slides [options]=slideOpts>
+                  <ion-slide *ngFor="let badgeData of this.rPBadgeList; let i = index" style="max-width: 200px; max-height: 230px;">
+                    <app-award-card [award]='badgeData' [delete]="false" [owner]="false"></app-award-card>
+                  </ion-slide>
+                </ion-slides>
+              </ion-col>
+            </ion-row>
+            <ion-row style="margin-top: 10px;">
+              <ion-col size="10" offset="1">
+                <h5>Community Created Awards</h5>
+              </ion-col>
+            </ion-row>
+            <ion-row class="badges-row">
+              <ion-col size="10" offset="1">
+                <ion-slides [options]=communitySlideOpts>
+                  <ion-slide *ngFor="let badgeData of this.badgeDataList; let i = index" style="max-width: 200px; max-height: 230px;">
+                    <app-award-card [award]='badgeData' [delete]="false" [owner]="false"></app-award-card>
+                  </ion-slide>
+                </ion-slides>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>  
+    </ion-row>  
+  </ion-grid> 
+</ion-content>

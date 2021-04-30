@@ -1,0 +1,12 @@
+<ion-grid style="padding: 0;">
+  <ion-row *ngIf="hasDefinition">
+    <ion-col>
+      <dictionary [definitions]="definition" class="word-options"></dictionary>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hasDefinition">
+    <ion-col>
+      No Definition found...
+    </ion-col>
+  </ion-row>
+</ion-grid>

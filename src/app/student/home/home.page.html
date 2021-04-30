@@ -1,0 +1,111 @@
+<app-header></app-header>
+
+<ion-content style="--background: var(--main-content-background); height: calc(100vh - 56px);">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" style="padding: 15px;">
+        <ion-card style="min-height: calc(96vh - 56px); max-width: 1600px; margin: auto;">
+          <ion-grid class="ion-no-padding" style="min-height: 100%;">
+            <ion-row style="background-color: var(--ion-color-primary);">
+              <ion-col style="align-self: center; padding: 5px;">
+                <h1 style="margin-top: 10px; padding-left: 10px; color: white; font-size: 40px;">Home</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="(lessonAssignments && lessonAssignments.length == 0) || (overdueLessons && overdueLessons.length == 0) && (dueLessons && dueLessons.length == 0)" class="ion-justify-content-center">
+              <ion-col size="auto">
+                <ion-icon name="nutrition-outline" style="font-size: 200px; margin-top: 20px; color: #e7e7e7"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="(lessonAssignments && lessonAssignments.length == 0) || (overdueLessons && overdueLessons.length == 0) &&(dueLessons && dueLessons.length == 0)" class="ion-justify-content-center">
+              <ion-col size="auto">
+                <h4 style="color: #e7e7e7">No assignments to work on...</h4>
+              </ion-col>
+            </ion-row>
+
+            <app-assignment-list-view *ngIf="lessonAssignments"
+                    #overdueAssignments
+                    singularName="Overdue Lesson"
+                    pluralName="Overdue Lessons"></app-assignment-list-view>
+            <app-assignment-list-view *ngIf="lessonAssignments"
+                    #dueAssignments
+                    singularName="Current Lesson"
+                    pluralName="Current Lessons"></app-assignment-list-view>
+            <app-assignment-list-view *ngIf="lessonAssignments"
+                    #completedAssignments
+                    singularName="Completed Lesson"
+                    pluralName="Completed Lessons"></app-assignment-list-view>
+
+
+            <ng-container *ngIf="!dueLessons && (dueLessons &&  dueLessons.length != 0)">
+              <ion-row class="ion-justify-content-center" style="margin-top: 20px;">
+                <ion-col size="11" style="padding: 10px 0;">
+                  <ion-skeleton-text animated style="max-height: 25px; max-width: 200px; min-height: 25px; min-width: 200px; margin: 0;"></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let sk of [0, 1]"  class="ion-justify-content-center">
+                <ion-col size="11" style="padding: 10px;">
+                  <ion-grid style="padding: 0; border-radius: 4px; border: 2px solid var(--frosted)">
+                    <ion-row>
+                      <ion-col size="auto">
+                        <ion-skeleton-text animated style="max-height: 200px; max-width: 134px; min-height: 200px; min-width: 134px; margin: 0;"></ion-skeleton-text>
+                      </ion-col>
+                      <ion-col size="auto">
+                        <ion-grid>
+                          <ion-row>
+                            <ion-col style="margin: 16px;">
+                              <ion-skeleton-text animated style="height: 30px; width: 150px; margin: 0;"></ion-skeleton-text>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col style="margin: 13px 16px;" >
+                              <ion-skeleton-text animated style="height: 20px; width: 200px; margin: 0;"></ion-skeleton-text>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+
+            <ng-container *ngIf="!overdueLessons && (overdueLessons &&  overdueLessons.length != 0)">
+              <ion-row class="ion-justify-content-center" style="margin-top: 20px;">
+                <ion-col size="11" style="padding: 10px 0;">
+                  <ion-skeleton-text animated style="max-height: 25px; max-width: 200px; min-height: 25px; min-width: 200px; margin: 0;"></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let sk of [0, 1]"  class="ion-justify-content-center">
+                <ion-col size="11" style="padding: 10px;">
+                  <ion-grid style="padding: 0; border-radius: 4px; border: 2px solid var(--frosted)">
+                    <ion-row>
+                      <ion-col size="auto">
+                        <ion-skeleton-text animated style="max-height: 200px; max-width: 134px; min-height: 200px; min-width: 134px; margin: 0;"></ion-skeleton-text>
+                      </ion-col>
+                      <ion-col size="auto">
+                        <ion-grid>
+                          <ion-row>
+                            <ion-col style="margin: 16px;">
+                              <ion-skeleton-text animated style="height: 30px; width: 150px; margin: 0;"></ion-skeleton-text>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col style="margin: 13px 16px;" >
+                              <ion-skeleton-text animated style="height: 20px; width: 200px; margin: 0;"></ion-skeleton-text>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+              </ion-row>
+            </ng-container>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+

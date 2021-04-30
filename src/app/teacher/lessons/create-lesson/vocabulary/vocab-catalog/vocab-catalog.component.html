@@ -1,0 +1,73 @@
+<ion-content>
+  <ion-grid style="padding: 0">
+    <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding-left: 10px;">
+      <ion-col size="auto" *ngIf="viewing !== undefined">
+        <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="back()"><ion-icon name="chevron-back-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col>
+        <h1 style="color: white; font-size: 40px;" class="modal-title">Vocabulary Catalog</h1>
+      </ion-col>
+      <ion-col size="auto" >
+        <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="modalController.dismiss()">
+          <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ng-container *ngIf="lessons === undefined">
+      <ion-row *ngFor="let i of [0, 1]">
+        <ion-col size="2">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+        <ion-col>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+        <ion-col>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+    <ng-container *ngIf="lessons !== undefined && viewing === undefined">
+      <ion-row>
+        <ion-col style="padding: 0">
+          <ion-list style="max-height: calc(600px - 70px);overflow: auto">
+            <ion-item *ngFor="let lesson of lessons; let i = index" button (click)="view(i)">
+                <ion-col>
+                  <ion-label>
+                    {{lesson.title}}
+                  </ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-label *ngIf="vocab[i].length === 1">
+                    1 word
+                  </ion-label>
+                  <ion-label *ngIf="vocab[i].length > 1">
+                    {{vocab[i].length}} words
+                  </ion-label>
+                </ion-col>
+              </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <ng-container *ngIf="viewing !== undefined">
+      <ion-row class="ion-justify-content-center" style="min-height: calc(600px - 124px); min-height: calc(600px - 124px);">
+        <ion-col>
+          <ion-row>
+            <ion-col size="auto" *ngFor="let word of vocab[viewing]">
+              <ion-item lines="none">
+                <ion-label>{{word}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="text-align: end">
+          <ion-button fill="clear" (click)="select()">Select</ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-grid>
+</ion-content>

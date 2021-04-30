@@ -1,0 +1,14 @@
+<ion-row class="badges-row">
+  <ion-col>
+    <ion-slides [options]=slideOpts style="min-width: 155px;">
+      <ion-slide *ngFor="let badgeData of this.badgeDataList; let i = index" style="max-width: 220px; max-height: 250px;">
+        <app-award-card
+                *ngIf="canSelect"
+                [award]='badgeData'
+                [isSelected]="selectedBadgeIndex === i"
+                (click)="selected(i)" style="margin-top: 10px; margin-bottom: 10px;"></app-award-card>
+        <app-award-card *ngIf="!canSelect" [award]='badgeData'></app-award-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,95 @@
+<ion-grid class="exp-bar-stage-0" *ngIf="stage === 0">
+  <ng-container class="exp-bar-stage-0-container">
+      <ion-row>
+        <ion-col size="12" class="exp-centered">
+          You earned
+        </ion-col>
+        <ion-col size="12" class="exp-centered">
+          <span class="exp-number">{{expEarned}}</span><br />
+        </ion-col>
+        <ion-col size="12" class="exp-centered">
+          experience points!
+        </ion-col>
+      </ion-row>
+  </ng-container>
+</ion-grid>
+
+<ion-grid *ngIf="stage === 1 || stage === 2">
+  <div [ngClass]="isModal ? 'modal-margin' : ''" style="text-align: center">
+    <span [ngStyle]="{ 'visibility': (stage === 2) ? 'visible' : 'hidden'}">Level</span>
+    <ion-row>
+      <ion-col>
+        <ion-avatar class="level-display">
+          {{currentLevel.level}}
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row>
+    <ion-col [ngStyle]="{ 'visibility': (stage === 1) ? 'visible' : 'hidden'}" style="text-align: center">
+      {{animRemainingExpEarned}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="exp-bar-canvas-container" offset="1" size="10">
+      <canvas #barCanvas class="exp-bar-canvas"></canvas>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="stage === 2" style="text-align: center">
+    <ion-col>
+      {{currentLevel.remainingExp()}} experience points to level {{currentLevel.level + 1}}!
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="stage === 2 && isModal">
+    <ion-col>
+      <ion-button (click)="onDismiss()">Dismiss</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!--
+<ion-grid>
+  <ion-row style="height: 10%">
+    <ion-col>
+      <h3 style="text-align: center;">Create an Award</h3>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="auto">
+      <ion-avatar class="badge-icon" style="width: 200px; height: 200px;" (click)="openImageOptions($event)">
+        <img src={{uploadedBadgeIconUrl}}  onerror="src='assets/icon/AddBadgeIcon.png'" style="width: 200px;">
+      </ion-avatar>
+    </ion-col>
+  </ion-row>
+  <ion-row class="badges-row ion-justify-content-center">
+    <ion-col size="auto">
+      <ion-label>
+        Upload or Select an Badge
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row class="badges-row ion-justify-content-center">
+    <ion-col size="auto" class="badge-col" *ngFor="let icon of this.badgeIconPaths; let i = index">
+      <img width="80" height="80"
+           [src]="icon"
+           [ngClass]="badgeIndex == i ? 'badge-outlined' : ''"
+           (click)="setBadgeIndex(i); uploadedBadgeIconUrl = this.badgeIconPaths[i]"/>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="auto">
+      <ion-input type="text"  class="input" [(ngModel)]="badgeName" placeholder="Name" name="badgeName" required="true"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row style="height: 90px;" class="ion-justify-content-center">
+    <ion-col size="8">
+      <ion-textarea type="text" class="input" [(ngModel)]="badgeDescription" placeholder="Message" name="badgeDescription" required="true"></ion-textarea>
+    </ion-col>
+  </ion-row>
+  <ion-row style="margin-top: auto;">
+    <ion-col>
+      <div class="form-actions">
+        <ion-button type="submit" expand="block" class="btn-custom" id="login-btn" (click)=create()>Create badge</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>-->

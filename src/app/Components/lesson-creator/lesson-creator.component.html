@@ -1,0 +1,39 @@
+<form>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Book ID</th>
+      <th>Level</th>
+      <th>Chapter</th>
+      <th>Pages</th>
+      <th>Word count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <ion-input type="text"  class="input" [(ngModel)]="title" placeholder="Title" name="title" required="true"></ion-input>
+      </td>
+      <td>
+        <ion-input type="number" class="input" [(ngModel)]="bookID"  placeholder="0" name="bookID" required="true"></ion-input>
+      </td>
+      <td>
+        <ion-input type="number" class="input" [(ngModel)]="level"  placeholder="1" name="level" required="true"></ion-input>
+      </td>
+      <td>
+        <ion-input type="string" class="input" [(ngModel)]="chapter"  placeholder="1" name="chapter" required="true"></ion-input>
+      </td>
+      <td>
+        <ion-input type="string" class="input" [(ngModel)]="pagesCovered"  placeholder="x-y" name="pages" required="true"></ion-input>
+      </td>
+      <td>
+        <ion-input type="number" class="input" [(ngModel)]="wordCount"  placeholder="0" name="words" required="true"></ion-input>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <ion-button type="submit" expand="block" class="btn-custom" id="login-btn" (click)=create()>Create lesson</ion-button>
+  </div>
+</form>

@@ -1,0 +1,62 @@
+.highlight {
+    --background: #EE3A23;
+    --color: white;
+    outline: none;
+}
+
+.inner-scroll::part(scroll) {
+    background-color: red;
+}
+
+.dark {
+	background: #000;
+	color: #fff
+}
+
+.light {
+	background: #fff;
+	color: #000;
+}
+  
+ion-icon {
+    color: #212121;
+}
+
+ion-icon:hover {
+    opacity: .7;
+}
+
+.weight-normal {
+    color: #808080;
+    --background: var(--ion-background-color);
+    --background-activated: var(--ion-color-primary);
+    --background-hover:  rgba(245, 58, 58, 0.05);
+    font-weight: normal;
+}
+
+.weight-bold {
+    font-weight: bold;
+    --color: var(--ion-color-primary);
+    --background: var(--ion-background-color);
+    --background-activated:  rgba(245, 58, 58, 0.05);
+    --background-hover: rgba(245, 58, 58, 0.05);
+    --border-bottom: 3px var(--ion-color-primary);
+    border-bottom: 2px solid var(--ion-color-primary);
+}
+
+.style-normal {
+    color: #808080;
+    --background: var(--ion-background-color);
+    --background-activated: var(--ion-color-primary);
+    --background-hover: rgba(245, 58, 58, 0.05);
+    font-weight: normal;
+}
+
+.style-italic {
+    font-style: italic;
+    --color: var(--ion-color-primary);
+    --background: var(--ion-background-color);
+    --background-activated:  rgba(245, 58, 58, 0.05);
+    --background-hover: rgba(245, 58, 58, 0.05);
+    border-bottom: 2px solid var(--ion-color-primary);
+}

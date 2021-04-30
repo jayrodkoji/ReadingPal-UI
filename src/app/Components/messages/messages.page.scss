@@ -1,0 +1,79 @@
+.logo{
+  width: 150px;
+  margin: auto;
+}
+
+.odd {
+  --background: var(--frosted);
+}
+
+.even {
+  --background: #fcfcfc;
+}
+
+.guest-message {
+  display: inline;
+  background: white;
+  border-radius: 10px 10px 10px 4px;
+  margin: 0;
+  padding: 5px;
+  color: grey;
+  resize: none;
+  min-width: auto;
+  max-width: 80%;
+  word-break: break-all;
+}
+
+.my-message {
+  margin: 0;
+  background: var(--ion-color-primary);
+  color: white;
+  border-radius: 10px 10px 4px 10px;
+  padding: 5px;
+  border: none;
+  min-width: auto;
+  max-width: 80%;
+  word-break: break-all;
+}
+
+ion-item{
+  --background-hover: var(--ion-color-primary);
+  --background-hover-opacity: 0.2;
+}
+
+.selected {
+  --background: #EE3A2344;
+  --color: white;
+}
+
+ion-item {
+  opacity: 1;
+}
+
+.search-filter {
+  padding-left: 5px;
+  min-width: 120px;
+  text-align: center;
+  background: white;
+  border: 1px solid #f3f3f3;
+}
+
+.search-filter:hover {
+  background: #EE3A2344;
+}
+
+.search-filter::part(icon) {
+  display: none;
+}
+
+ion-searchbar {
+  padding: 0;
+  --background: var(--frosted);
+  --box-shadow: none;
+  paddin-left: 5px
+}
+
+.read-dot {
+  font-size: 8px;
+  color: var(--ion-color-primary);
+}

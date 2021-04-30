@@ -1,0 +1,15 @@
+.add-card {
+  border: dashed rgba(219, 219, 219, 0.651);
+  border-radius: 4px;
+  text-align: center;
+  height: 40px;
+  padding: 0px;
+
+  .add-card-button {
+    height: 100%;
+    width:100%;
+    margin: 0px;
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+}

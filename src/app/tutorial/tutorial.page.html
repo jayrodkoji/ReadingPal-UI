@@ -1,0 +1,255 @@
+<app-header></app-header>
+
+<ion-content style="--background: var(--frosted);height: calc(100vh - 56px)">
+  <ion-grid style="padding: 15px">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-card style="min-height: calc(96vh - 56px); max-width: 1600px; min-width: 280px; margin: auto">
+          <ion-grid style="padding: 0;">
+            <ion-row style="background-color: var(--ion-color-primary);" class="ion-justify-content-between">
+              <ion-col size="auto" style="align-self: center;">
+                <h1 style="margin-top: 10px; padding-left: 10px; color: white; font-size: 40px;">Tutorial</h1>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button fill="clear"
+                            style="margin-top: 15px;--background-hover-opacity: .3; --background-hover: white"
+                            routerLink="../home" routerDirection="root">
+                  <ion-icon name="home" style="color: white"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row style="padding: 10px;">
+              <ion-col size="10" offset="1">
+                <h1>Users</h1>
+              </ion-col>
+              <ion-col size="8" offset="2">
+                <p>Users can only be created by admins. Currently we have pre-defined users of which you can choose to experience
+                  ReadingPal. Choose from the Teachers or Students lists below to login as that user.</p>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around">
+              <ion-col *ngIf="teachers" size="3">
+                <ion-label>Teachers</ion-label>
+                <ion-select [(ngModel)]="currentTeacher" placeholder="teachers" (ionChange)="currentUser = currentTeacher; login()">
+                  <ion-select-option *ngFor="let user of teachers" [value]="user">{{user.username}}</ion-select-option>
+                </ion-select>
+              </ion-col>
+              <ion-col *ngIf="students" size="3">
+                <ion-label>Students</ion-label>
+                <ion-select [(ngModel)]="currentStudent" placeholder="students" (ionChange)="currentUser = currentStudent; login()">
+                  <ion-select-option *ngFor="let user of students" [value]="user">{{user.username}}</ion-select-option>
+                </ion-select>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around" style="margin-top: 20px;">
+              <ion-col size="4">
+                <h1>User Card</h1>
+                <ion-row class="ion-justify-content-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col size="4">
+                    <img src="assets/tutorial/card.PNG" style="height: 400px;"/>
+                  </ion-col>
+                  <ion-col size="8">
+                    <p>The user card has the basic information about the current user. A welcome message, their profile
+                    picture, and for students a few of their awards.</p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="4">
+                <h1>Navigation</h1>
+                <ion-row class="ion-justify-content-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col size="4">
+                    <img src="assets/tutorial/options.PNG" style="height: 400px"/>
+                  </ion-col>
+                  <ion-col size="8">
+                    <p>Users can navigate to various pages with by selecting one of the options. (options vary for student and teacher)</p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around" style="margin-top: 20px;">
+              <ion-col size="10">
+                <h1>Teachers</h1>
+                <ion-row class="ion-justify-content-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col style="padding: 10px;">
+                    <h4>Teachers Page Descriptions:</h4>
+                    <ul>
+                      <li>
+                        <b>Classes:</b> As a teacher you will be directed here upon login. You are able to view your classes, groups,
+                        students, and reporting from this page.
+                      </li>
+                      <li>
+                        <b>Lessons:</b> You are able to browse all the lessons in the catalog as well as view and edit your lessons.
+                        You also have the ability to create new lessons.
+                      </li>
+                      <li>
+                        <b>Books:</b> In books you have the ability to browse and open any book in the ReadingPal catalog. We give access
+                        to teacher to be able to upload epubs to this catalog.
+                      </li>
+                      <li>
+                        <b>Awards:</b> Awards are central to incentivize leaning on ReadingPal. You have access to browse all public
+                        awards in the catalog as well as add your own awards.
+                      </li>
+                      <li>
+                        <b>Messages:</b> Messages is for communicating between teacher an student. Each message is in the context of
+                        a annotation. An annotation is a span of text from a reading in a book. Any lesson a teacher creates
+                        a student taking the lesson can ask questions within that lesson. These messages populate here.
+                      </li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around" style="margin-top: 20px;">
+              <ion-col size="10">
+                <h1>Students</h1>
+                <ion-row class="ion-justify-content-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col style="padding: 10px;">
+                    <h4>Students Page Descriptions:</h4>
+                    <ul>
+                      <li>
+                        <b>Home:</b> As a Student you will be directed here upon login. Home page is where all assignments
+                         will be displayed. This includes: current, past, and overdue assignments.
+                      </li>
+                      <li>
+                        <b>Lessons:</b> You are able to browse all the lessons in the catalog. You are able to open the lesson
+                        and complete the tasks.
+                      </li>
+                      <li>
+                        <b>Library:</b> In books you have the ability to browse and open any book in the ReadingPal catalog.
+                      </li>
+                      <li>
+                        <b>Reports:</b> In the reports page you will be able to look at various results from your use of ReadingPal.
+                      </li>
+                      <li>
+                        <b>Messages:</b> The messages page is designed for the student to be able to see and respond to messages
+                        created as questions to the teacher. Students are also able to see messages within the reader in the
+                        corresponding lesson.
+                      </li>
+                      <li>
+                        <b>Badges:</b> Badges contains a collections of the badges you have earned and allows you to browse
+                        all available badges.
+                      </li>
+                      <li>
+                        <b>Games:</b> Students can practice their vocabulary within the games sections.
+                      </li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around" style="margin: 20px 10px;">
+              <ion-col size="10">
+                <h1>Reader</h1>
+                <ion-row class="ion-justify-content-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col size="10" style="padding: 10px;">
+                    <img src="assets/tutorial/reader.PNG">
+                    <h4>Reader Basic Features</h4>
+                    <ul>
+                      <li>
+                        <p><b>Navigation: </b>Navigation consists of paging left and right by using the arrows on either
+                          side of the text. (See Table of contents for other options)</p>
+                      </li>
+                      <li>
+                        <p><b>Font Size: </b>User can change the size of the text to fit their comfort level.</p>
+                      </li>
+                      <li>
+                        <p><b>Font Family: </b>User can change the font to from a selection of fonts.</p>
+                      </li>
+                      <li>
+                        <p><b>Font Style: </b>User can change the font style from normal to <i>italic</i>.</p>
+                      </li>
+                      <li>
+                        <p><b>Font Weight: </b>User can change the font weight from normal to <b>bold</b>.</p>
+                      </li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center ion-align-items-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col size="2" style="padding: 10px;">
+                    <h4>Reader Annotations</h4>
+                    <img src="assets/tutorial/messages.PNG" style="width: 300px; margin: auto">
+                  </ion-col>
+                  <ion-col size="3" style="padding: 10px;">
+                    <ul>
+                      <li>
+                        <p><b>Annotate Text: </b>User can highlight passages. Add notes to these passages.</p>
+                      </li>
+                      <li>
+                        <p><b>Ask Questions: </b>Students have the ability to ask questions to their teacher about sections of text
+                          if they are in a reading from a lesson. They can do this within any Annotation.</p>
+                      </li>
+                      <li>
+                        <p><b>Public Notes: </b>Teachers can add notes to readings that students are able to see while taking a lesson. All
+                          notes not marked public are private by default.</p>
+                      </li>
+                    </ul>
+                  </ion-col>
+                  <ion-col size="2" style="padding: 10px;">
+                    <h4>Reader Settings</h4>
+                    <img src="assets/tutorial/settings.PNG" style="max-height: 350px; margin: auto">
+                  </ion-col>
+                  <ion-col size="3" style="padding: 10px;">
+                    <ul>
+                      <li>
+                        <p><b>Change reader settings </b>This is where the reader will set all desired reading settings for the
+                        the current book. Each book will have their own settings.</p>
+                      </li>
+                      <li><b>Dark Mode: </b> User can choose between light and dark mode.</li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center ion-align-items-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col size="2" style="padding: 10px;">
+                    <h4>Reader Table of Contents</h4>
+                    <img src="assets/tutorial/toc.PNG" style="max-height: 460px;width: 300px; margin: auto">
+                  </ion-col>
+                  <ion-col size="3" style="padding: 10px;">
+                    <ul>
+                      <li>
+                        <p><b>Table of Contents: </b>User can navigate by chapter.</p>
+                      </li>
+                    </ul>
+                  </ion-col>
+                  <ion-col size="2" style="padding: 10px;">
+                    <h4>Reader Notes</h4>
+                    <img src="assets/tutorial/notes.PNG" style="width: 300px; margin: auto">
+                  </ion-col>
+                  <ion-col size="3" style="padding: 10px;">
+                    <ul>
+                      <li>
+                        <p><b>Notes: </b>User can view their notes and if in a lesson their teachers notes. They are able to
+                        navigate to the notes. As well as hide information about the notes.</p>
+                      </li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center ion-align-items-center" style="background: var(--frosted); border-radius: 4px;">
+                  <ion-col size="5" style="padding: 10px;">
+                    <h4>Reader Quick Menu</h4>
+                    <img src="assets/tutorial/quick_menu.PNG" style=" max-widht: 300px;margin: auto">
+                  </ion-col>
+                  <ion-col size="5" style="padding: 10px;">
+                    <ul>
+                      <li>
+                        <p><b>Font size: </b>User can change font size</p>
+                      </li>
+                      <li>
+                        <p><b>Highlight Color: </b>User can select highlight color and update their highlight color palette.</p>
+                      </li>
+                      <li>
+                        <p><b>Auto Highlight: </b>All selections will be highlighted. Allows for quick highlighting</p>
+                      </li>
+                      <li>
+                        <p><b>Auto Delete Annotations: </b>All annotations tapped will be deleted. Allows for quick deletion.</p>
+                      </li>
+                    </ul>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

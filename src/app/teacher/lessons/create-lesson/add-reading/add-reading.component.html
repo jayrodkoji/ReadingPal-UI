@@ -1,0 +1,74 @@
+<ion-card style="height: 100%;">
+  <ion-grid style="height: 100%;padding: 0">
+    <ion-row style="background: var(--frosted)">
+      <ion-col>
+        <h3 style="padding: 10px;">Add Reading</h3>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-checkbox checked="false" disabled="true" style="margin: 10px;"
+                      [checked]="readingInfo.bookId && (readingInfo.chapter || (readingInfo.bookStart && readingInfo.bookEnd))"></ion-checkbox>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="readingInfo.bookId" disabled="true"  style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label style="max-width:90px;">Book:</ion-label>
+                  <ion-label *ngIf="readingInfo.bookId" style="max-width:70%;" [innerText]="getBookTitle()"></ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col size="auto" style="padding-top: 10px;">
+                <ion-button fill="clear" (click)="selectBook()">Select Book</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center" *ngIf="loadingToc && selectChapters" style="margin-top: 15px;">
+              <ion-col size="auto">
+                  <h4>Loading Chapters...</h4>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="loadingToc && selectChapters">
+              <ion-col>
+                <ion-progress-bar style="width: 100%;" type="indeterminate"></ion-progress-bar>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="!loadingToc && toc && selectChapters">
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="readingInfo.chapter" disabled="true"  style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label>Chapter</ion-label>
+                  <ion-select name="chapter" [(ngModel)]="readingInfo.chapter">
+                    <ion-select-option *ngFor="let chapter of toc">{{chapter.label}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="(readingInfo.bookStart && readingInfo.bookEnd)" disabled="true" style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label>Range:</ion-label>
+                  <ion-button fill="clear" *ngIf="!readingInfo.bookStart && !readingInfo.bookEnd" [disabled]="!readingInfo.bookId" (click)="selectChapters = true" (click)="getBookToc($event)">Select Chapter</ion-button>
+                  <p *ngIf="!readingInfo.bookStart && !readingInfo.bookEnd" style="margin: auto;">or</p>
+                  <ion-button fill="clear" *ngIf="!readingInfo.bookStart && !readingInfo.bookEnd" [disabled]="!readingInfo.bookId" (click)="openSelectRange()">Select Range</ion-button>
+                  <ion-button fill="clear" *ngIf="readingInfo.bookStart && readingInfo.bookEnd" (click)="readingInfo.bookStart = readingInfo.bookEnd = null">
+                    <ion-icon name="close-outline" style="font-size: 16px;"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>  
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

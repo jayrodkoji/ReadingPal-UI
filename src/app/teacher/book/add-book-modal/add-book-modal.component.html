@@ -1,0 +1,139 @@
+<div id="viewer" style="height: 0px;" ></div>
+<ion-grid style="height: 100%; padding-top: 0;">
+    <ion-row class="ion-justify-content-end">
+        <ion-col size="auto">
+            <ion-button fill="clear" (click)="closeModal();">
+                <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col style="padding-top: 0">
+            <ion-segment id="input-mode" value="load" (ionChange)="updateInputMode($event)">
+                <ion-segment-button value="load">
+                    <ion-label>Load</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="customize">
+                    <ion-label>Customize</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="inputMode === 'load'" style="height: 75%;">
+        <ion-col style="height: 100%;">
+            <div appDragDrop class="drop-zone"
+                 [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                 (onDragOverEv)="hasBaseDropZoneOver = true"
+                 (onDragLeaveEv)="hasBaseDropZoneOver = false;"
+                 (onFileDropped)="addedDropBook($event);">
+                <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="auto">
+                            <ion-icon name="cloud-upload-outline" style="font-size: 80px; color: grey"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="auto">
+                            Drag & Drop Epub here
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="auto">
+                            or
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="auto">
+                            <div class="file-input-container">
+                                <label>
+                                    <input type="file" ng2FileSelect [uploader]="uploader" single (change)="addedBrowseBook($event)"/>
+                                    Browse Files
+                                </label>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="inputMode === 'customize'" style="height: 446px;">
+        <ion-col style="padding-bottom: 0;">
+            <ion-grid>
+                <ion-row class="ion-align-items-center" style="margin-bottom: 10px;">
+                    <ion-col size="3" *ngIf="!newBook.base64Cover" alt="empty book" style="background: #f3f3f3; height: 200px;text-align: center;margin-left: 6px;border-radius: 4px;" (click)="browseEmptyImage()" class="image" class="container">
+                        <input type="file" accept="image/*" id="empty-upload" style="display:none" (change)="getImage($event)"/>
+                        <ion-icon name="book-outline" style="font-size:80px; padding-top: 60px" class="cover"></ion-icon>
+                        <div class="middle">
+                            <ion-icon name="add-circle" style="font-size:80px;"></ion-icon>
+                        </div>
+                    </ion-col>
+                    <ion-col *ngIf="newBook.base64Cover" size="3" (click)="browseExistingImage()" class="image" class="container">
+                        <input type="file" accept="image/*" id="exist-upload" style="display:none"  (change)="getImage($event)"/>
+                        <img [src]="getCover()" id="OpenExistUpload" style="max-height: 220px;" class="cover"/>
+                        <div class="middle">
+                            <div class="text">Change</div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <ion-grid>
+                            <ion-row class="ion-align-items-center">
+                                <ion-col>
+                                    <ion-label>Ebook: </ion-label>
+                                </ion-col>
+                                <ion-col size="10">
+                                    <input type="file" accept="application/epub+zip" id="book-input" style="display:none" (change)="getBook($event)"/>
+                                    <ion-input [value]="newBook.title" placeholder="Choose epub" [value]="bookPath" style="width: 100%; --background: #f3f3f3; border-radius: 4px;" (click)="browseBooks()">
+                                        <ion-button fill="clear">Browse Books</ion-button>
+                                    </ion-input>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-label>Title: </ion-label>
+                                </ion-col>
+                                <ion-col size="10">
+                                    <ion-input [value]="newBook.title" placeholder="Enter Title" style="width: 100%; --background: #f3f3f3; border-radius: 4px;"></ion-input>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-label>Author: </ion-label>
+                                </ion-col>
+                                <ion-col size="10">
+                                    <ion-input [value]="newBook.author" placeholder="Enter Author" style="width: 100%; --background: #f3f3f3; border-radius: 4px;"></ion-input>
+                                </ion-col>
+                                <ion-col size="2">
+                                    <ion-label>Level: </ion-label>
+                                </ion-col>
+                                <ion-col size="3">
+                                    <ion-input placeholder="0" style="width: 100%; --background: #f3f3f3; border-radius: 4px;"
+                                               type="number"
+                                               min="0"
+                                               [(ngModel)]="newBook.level"></ion-input>
+                                </ion-col>
+                                <ion-col size="7">
+                                    <ion-select placeholder="Custom" [(ngModel)]="newBook.level">
+                                        <ion-select-option *ngFor="let ind of indexes" [value]="getIndex(ind)">{{ind}}</ion-select-option>
+                                        <ion-select-option [value]="newBook.level == flesch ||
+                                                           newBook.level == fleschKincaid ||
+                                                           newBook.level == gunningFog ||
+                                                           newBook.level == ari ? 0 : newBook.level">Custom</ion-select-option>
+                                    </ion-select>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+                    <ion-col size="12">
+                        <ion-textarea [value]="newBook.shortDescription" placeholder="Enter Description..."
+                                      [(ngModel)]="newBook.shortDescription"
+                                      [rows]="6"
+                                      style="min-width: 100%; min-height: 165px; --background: #f3f3f3; border-radius: 4px;"></ion-textarea>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-end">
+        <ion-button fill="clear" (click)="saveBook(newBook)" [disabled]="!hasAllFields()">
+            Submit
+        </ion-button>
+    </ion-row>
+</ion-grid>

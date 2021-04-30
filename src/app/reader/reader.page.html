@@ -1,0 +1,101 @@
+<ion-toolbar class="no-border text-center"  style="--background: var(--frosted);height: 44px;" mode="ios">
+  <ion-title>
+    <img src="assets/logo/logo.svg" onerror="this.onerror=null; [src]='assets/logo/logo.png'" class="logo"
+         style="margin: auto;" (click)="goBack()">
+  </ion-title>
+  <ion-buttons slot="start">
+    <ion-button fill="clear"
+                *ngIf="teachersAnnotations && teacher"
+                [title]="(showTeacherAnnotations ? 'Hide' : 'Show') + ' My Teachers Annotations'"
+                [ngClass]="!showTeacherAnnotations && 'annotation'"
+                (click)="toggleTeacherAnnotationsView()" >
+      <ion-avatar style="width: 30px; height: 30px;">
+        <img [src]="getImage(teacher.profileimage)"
+             onerror="this.onerror=null;this.src='assets/icon/avatar.svg';"
+             style="width: 30px; height: 30px;">
+      </ion-avatar>
+    </ion-button>
+    <ion-button fill="clear" slot="start"
+                *ngIf="annotations && currentUser"
+                [title]="(showStudentAnnotations ? 'Hide' : 'Show') + ' My Annotations'"
+                [ngClass]="!showStudentAnnotations && 'annotation'"
+                (click)="toggleStudentAnnotationsView()">
+      <ion-avatar style="width: 30px; height: 30px;">
+        <img [src]="getImage(currentUser.profileimage)"
+             onerror="this.onerror=null;this.src='assets/icon/avatar.svg';"
+             style="width: 30px; height: 30px;">
+      </ion-avatar>
+    </ion-button>
+  </ion-buttons>
+  <ion-icon name="menu-outline" slot="primary"
+            *ngIf="!noBookSelected  && rendition"
+            style="height: 24px;padding: 5px"
+            (click)="openToc()">
+    <ion-menu-toggle contentId="spine"></ion-menu-toggle>
+  </ion-icon>
+  <ion-icon name="settings" slot="primary"
+            *ngIf="!noBookSelected && rendition" style="height: 22px;padding: 5px;"
+            (click)="openSettings()">
+    <ion-menu-toggle contentId="main"></ion-menu-toggle>
+  </ion-icon>
+</ion-toolbar>
+<ion-content style="height: 97vh">
+  <ion-grid style="height: 95vh; user-select: none;">
+    <ion-row style="height: 100%;" *ngIf="!noBookSelected">
+      <ion-col size="1" class="ion-align-self-center">
+        <ion-icon *ngIf="rendition && currentLocation && !currentLocation.atStart"
+                  name="chevron-back-outline" id="prev"
+                  style="color: var(--default-font-color)"
+                  (click)="prev()"></ion-icon>
+      </ion-col>
+      <ion-col size="10">
+        <ion-spinner name="crescent" class="spinner" *ngIf="!loaded"></ion-spinner>
+        <div id="viewer"></div>
+        <ion-icon name="remove-outline" class="menu-button"
+                  *ngIf="!isFloatMenuOpen && rendition"
+                  (click)="toggleFloatMenu()" style="color: var(--default-font-color)"></ion-icon>
+        <ion-button *ngIf="finishedSection" fill="clear" style="position: fixed; right: 10%; bottom: 3%;"
+                    (click)="finishedReading();">Finished Reading</ion-button>
+      </ion-col>
+      <ion-col size="1" class="ion-align-self-center">
+        <ion-icon *ngIf="rendition && currentLocation && !currentLocation.atEnd"
+                  name="chevron-forward-outline" id="next" style="color: var(--default-font-color)"
+                  (click)="next()"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height: 30%;" *ngIf="noBookSelected" class="ion-justify-content-center">
+      <ion-col size="12" class="ion-align-self-center">
+        <h1 *ngIf="!isLesson" style="text-align: center;">No book found...</h1>
+        <h1 *ngIf="isLesson" style="text-align: center;">No lesson found...</h1>
+      </ion-col>
+      <ion-col size="auto" class="ion-align-self-center">
+        <a href="/student/home">
+          <ion-button>Return to home</ion-button>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<app-table-of-contents
+        *ngIf="loaded && rendition && annotations"
+        [toc]="toc" [rendition]="rendition"
+        [isLesson]="isLesson"
+        [currentLocation]="currentLocation"
+        [currentUser]="currentUser"
+        [user]="teacher"
+        [guestAnnotations]="teachersAnnotations"
+        [annotations]="annotations"
+        [deleteAnnotationEvent]="deleteAnnotationEvent"
+        [navigateEvent]="navigateEvent"></app-table-of-contents>
+<app-settings
+        *ngIf="bookMeta && loaded && rendition"
+        [fontSize]="bookMeta.font_size"
+        [fontWeight]="bookMeta.font_weight"
+        [fontStyle]="bookMeta.font_style"
+        [fontFamily]="bookMeta.font_family"
+        (fontSizeChangeEvent)="setFontSize($event)"
+        (fontWeightChangeEvent)="setFontWeight($event)"
+        (fontStyleChangeEvent)="setFontStyle($event)"
+        (fontFamilyChangeEvent)="setFontFamily($event)" (themeChangeEvent)="changeTheme($event)"></app-settings>

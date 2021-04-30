@@ -1,0 +1,89 @@
+<ng-container *ngIf="group">
+  <ion-grid>
+    <ion-row class="ion-justify-content-end">
+      <ion-col size="auto">
+        <ion-button fill="clear" (click)="addGroup(null)">Create Group</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-container>
+
+<ng-container *ngIf="group && groups && groups.length > 0">
+  <ion-card *ngFor="let class of groups; let i = index" style="height: 100px; margin: 40px;" [ngStyle]="group && i == 0 && {'margin-top': '0px'}" (click)="groupOptionsPopover($event, class, i)">
+    <ion-grid style="height: 100%;">
+      <ion-row style="height: 100%;" class="ion-align-items-center">
+        <ion-col>
+          <div>
+            <h3 style="margin-left: 20px;">{{class.name}}</h3>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="class.students" size="7" size-xl="5" style="min-width: 150px;">
+          <app-student-avatars [slideOptions]="slideOptions" [students]="class.students"></app-student-avatars>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ng-container>
+
+<ng-container *ngIf="classes && !group">
+  <ion-card *ngFor="let class of classes; let i = index" style="height: 100px; margin: 40px;">
+    <ion-grid style="height: 100%;">
+      <ion-row style="height: 100%;" class="ion-align-items-center">
+        <ion-col>
+          <div>
+            <h3 style="margin-left: 20px;">{{class.name}}</h3>
+          </div>
+        </ion-col>
+        <ion-col size="7" size-xl="5" style="min-width: 150px;">
+          <app-student-avatars [slideOptions]="slideOptions" [students]="class.students"></app-student-avatars>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ng-container>
+
+<ng-container *ngIf="!classes">
+  <ion-card  *ngFor="let number of [0, 1, 2]"
+             style="height: 100px; margin: 40px;box-shadow: none; border: 2px solid #f5f3f3;">
+    <ion-grid style="height: 100%;">
+      <ion-row class="ion-align-items-center" style="height: 100%;padding-right: 20px; padding-left: 20px">
+        <ion-col>
+          <ion-skeleton-text animated style="height: 40px;width: 200px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="auto" *ngFor="let number of [0, 1, 2, 3]">
+          <ion-skeleton-text animated style="height: 70px; width: 70px; --border-radius: 100px"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ng-container>
+
+<ng-container *ngIf="!group && classes && classes.length == 0" >
+  <ion-grid style="margin-top: 64px;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto">
+        <ion-icon name="flask-outline" style="color:  #e3e3e3; font-size: 200px"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto">
+        <h3 style="color:  #e3e3e3; user-select: none">No classes created...</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-container>
+
+<ng-container *ngIf="group && groups && groups.length == 0">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto">
+        <ion-icon name="people-circle-outline" style="color: #e3e3e3; font-size: 200px"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="auto">
+        <h3 style="color: #e3e3e3; user-select: none">No groups created...</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-container>

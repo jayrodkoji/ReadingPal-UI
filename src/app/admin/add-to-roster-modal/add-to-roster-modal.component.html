@@ -1,0 +1,49 @@
+<ng-container>
+  <ion-content>
+    <ion-grid style="padding: 0">
+      <ion-row class="ion-align-items-center ion-justify-content-between"
+        style="background-color: var(--ion-color-primary); padding: 10px;">
+        <ion-col>
+          <h1 style="color: white; font-size: 40px;" class="modal-title">{{this.classroom.name}} Add Student</h1>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="dismiss()">
+            <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h3>All Students</h3>
+          <form>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-item lines="none">
+                    <ion-label>Student:</ion-label>
+                    <ion-select multiple="true" interface="popover" mode="ios" name="teacherCode"
+                                [disabled]="!potentialStudents"
+                                [placeholder]="potentialStudents ? 'Select students' : 'Loading Students...'"
+                                [(ngModel)]="studentsToAdd">
+                      <ion-select-option *ngFor="let user of this.potentialStudents; let i = index" [value]="user"><ion-icon name="group1"></ion-icon>{{user.username}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button fill="clear" (click)="addToRoster()">
+            Save
+          </ion-button>
+          <ion-button fill="clear" (click)="dismiss()">
+            Cancel
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ng-container>

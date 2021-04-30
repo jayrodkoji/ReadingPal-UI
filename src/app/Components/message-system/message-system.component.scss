@@ -1,0 +1,40 @@
+.chat-window {
+  max-height: calc(100% - 30px);
+  overflow-y: auto;
+  background: var(--frosted);
+  border-radius: 4px;
+}
+
+.guest-col {
+  background: white;
+  border-radius: 10px 10px 10px 4px;
+  margin: 10px 0 10px 10px;
+}
+
+.guest-message {
+  display: inline;
+  margin: 0;
+  padding: 10px;
+  color: grey;
+  resize: none;
+  min-width: auto;
+  max-width: 80%;
+  word-break: break-all;
+}
+
+.my-col {
+  background: var(--ion-color-primary);
+  border-radius: 10px 10px 4px 10px;
+  margin: 10px 10px 10px 0;
+}
+
+.my-message {
+  display: inline;
+  margin: 0;
+  color: white;
+  padding: 10px;
+  border: none;
+  min-width: auto;
+  max-width: 80%;
+  word-break: break-all;
+}

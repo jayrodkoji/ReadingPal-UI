@@ -1,0 +1,125 @@
+<!-- Spine -->
+<ion-menu side="end" menuId="spine" contentId="spine" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="segmentSelected">
+        <ion-segment-button value="toc" *ngIf="!isLesson" [class.selected-button]="segmentSelected === 'toc'">
+          <ion-icon name="list-outline" style="color: var(--default-font-color)"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="notes"  [class.selected-button]="segmentSelected === 'notes'">
+          <ion-icon name="create-outline" style="color: var(--default-font-color)"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+      <ion-icon name="chevron-forward-outline" slot="end" style="margin-right: 10px;font-size: 24px;color: var(--default-font-color)" (click)="close_menu()"></ion-icon>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid *ngIf="segmentSelected === 'notes'" style="padding: 0;max-height: 100px;width: 100%;">
+    <ion-row style="margin-bottom: 5px;margin-top: 5px;">
+      <ion-col style="padding: 0">
+        <ion-buttons class="ion-justify-content-around">
+          <ion-button *ngIf="user && guestAnnotations" expand="full" style="width: 50%; height: 40px"
+                      [disabled]="!showMyNotes"
+                      [ngClass]="!showMyNotes && 'selected-user'"
+                      [title]="(showMyNotes ? 'Show' : 'Showing') + ' Teachers notes'"
+                      (click)="showMyNotes = false" >
+            <ion-avatar style="width: 40px; height: 40px;padding: 5px;" [ngClass]="showMyNotes && 'annotation'">
+              <img [src]="getImage(user)"
+                   onerror="this.onerror=null;this.src='assets/icon/avatar.svg';"
+                   style="width: 30px; height: 30px;">
+            </ion-avatar>
+          </ion-button>
+          <ion-button slot="start" expand="full" style="width: 50%; height: 40px"
+                      [disabled]="showMyNotes"
+                      [ngClass]="showMyNotes && 'selected-user'"
+                      [title]="(!showMyNotes ? 'Show' : 'Showing') + ' My notes'"
+                      (click)="showMyNotes = true">
+            <ion-avatar style="width: 40px; height: 40px;padding: 5px;" [ngClass]="!showMyNotes && 'annotation'">
+              <img [src]="getImage(currentUser)"
+                   onerror="this.onerror=null;this.src='assets/icon/avatar.svg';"
+                   style="width: 30px; height: 30px;">
+            </ion-avatar>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <ion-row style="padding: 0">
+      <ion-col size="6"
+               *ngIf="showMyNotes && annotations.length > 0 || !showMyNotes && guestAnnotations.length > 0"
+               style="padding: 0; padding-bottom: 4px;">
+        <ion-button [fill]="'clear'"
+                    style="margin: 0; padding-right: 1px"
+                    expand="full"
+                    [innerText]="text ? 'Hide Text' : 'Show Text'"
+                    [ngClass]="text && 'selected-button'"
+                    (click)="text = !text"></ion-button>
+      </ion-col>
+      <ion-col size="6"
+               *ngIf="showMyNotes && annotations.length > 0 || !showMyNotes && guestAnnotations.length > 0"
+               style="padding: 0">
+        <ion-button [fill]="'clear'"
+                    style="margin: 0;padding-left: 1px;"
+                    expand="full"
+                    [innerText]="note ? 'Hide Notes' : 'Show Notes'"
+                    [ngClass]="note && 'selected-button'"
+                    (click)="note = !note"></ion-button>
+      </ion-col>
+      <ion-col *ngIf="showMyNotes && annotations.length == 0 || !showMyNotes && guestAnnotations.length == 0">
+        <h6 style="text-align: center">No notes...</h6>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-content scrollbar={{scrollbar}}>
+    <ion-grid style="padding: 0">
+      <ion-row>
+        <ion-col style="padding:0;">
+          <ion-list *ngIf="segmentSelected === 'toc'">
+            <ion-item button *ngFor="let content of toc; let i = index"
+                      [disabled]="i === selectedContent"
+                      [class.selected]="i === selectedContent"
+                      (click)="navigateSection(content, i)">{{content.label}}</ion-item>
+          </ion-list>
+          <ion-list *ngIf="segmentSelected === 'notes'">
+            <ion-grid style="padding:0; width: 100%;">
+              <ion-row style="padding:0;">
+                <ion-col style="padding:0;">
+                  <ion-item button *ngFor="let annotation of showMyNotes ? annotations : guestAnnotations; let i = index" (click)="presentAnnotationOptions($event, annotation)">
+                    <ion-grid>
+                      <ion-row class="ion-align-items-center ion-justify-content-between">
+                        <ion-col size="auto">
+                          <p style="margin: auto">{{i+1}}.</p>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row style="padding-left: 10px;">
+                        <ion-col>
+                          <ion-row *ngIf="text && annotation.text">
+                            <ion-col size="auto">
+                              <p style="font-weight: bold">Text: </p>
+                            </ion-col>
+                            <ion-col>
+                              {{ annotation.text }}
+                            </ion-col>
+                          </ion-row>
+                          <ion-row *ngIf="note && annotation.note">
+                            <ion-col  size="auto">
+                              <p style="font-weight: bold">Note: </p>
+                            </ion-col>
+                            <ion-col>
+                              {{ annotation.note }}
+                            </ion-col>
+                          </ion-row>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-menu>
+
+
+<ion-router-outlet id="spine"></ion-router-outlet>

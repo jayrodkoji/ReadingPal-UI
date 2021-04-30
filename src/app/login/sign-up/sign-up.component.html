@@ -1,0 +1,102 @@
+<ion-grid style="height: 100%;">
+  <ion-row class="ion-justify-content-center ion-align-items-end welcome" style="margin-top: min(10vh, 100px);">
+    <ion-col  size="10">
+      <ion-text>
+        <h1>Create Account.</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <!-- Signup Form -->
+  <ion-row class="ion-justify-content-center forum-row">
+    <ion-col size="12" size-md="10" size-lg="10" size-xl="8">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <ion-col size="12" size-md="10" size-lg="10" size-xl="8">
+          <ion-item [ngClass]="{ 'is-invalid': submitted && signupForm.controls.emailAddress.errors }">
+            <ion-input type="text"  class="input" placeholder="Email" name="email" formControlName="emailAddress"></ion-input>
+            <ion-icon name="alert-circle-outline" *ngIf="submitted && signupForm.controls.emailAddress.errors" style="color: var(--ion-color-primary);"></ion-icon>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <div *ngIf="submitted && signupForm.controls.emailAddress.errors">
+                <div *ngIf="signupForm.controls.emailAddress.errors.required || signupForm.controls.emailAddress.errors.email" style="color: var(--ion-color-primary)">Email is required</div>
+              </div>
+            </ion-col>          
+          </ion-row>
+          <ion-row>
+            <ion-col style="padding: 0 5px 0 0;">
+              <ion-item [ngClass]="{ 'is-invalid': submitted && signupForm.controls.firstName.errors }">
+                <ion-input type="text"  class="input" placeholder="First Name" name="firstName" formControlName="firstName"></ion-input>
+                <ion-icon name="alert-circle-outline" *ngIf="submitted && signupForm.controls.firstName.errors" style="color: var(--ion-color-primary);"></ion-icon>
+              </ion-item>
+              <ion-row >
+                <ion-col>
+                  <div *ngIf="submitted && signupForm.controls.firstName.errors">
+                    <div *ngIf="signupForm.controls.firstName.errors.required" style="color: var(--ion-color-primary)">First name is required</div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col style="padding: 0 0 0 5px;">
+              <ion-item [ngClass]="{ 'is-invalid': submitted && signupForm.controls.lastName.errors }">
+                <ion-input type="text" class="input" placeholder="Last Name" name="lastName" formControlName="lastName"></ion-input>
+                <ion-icon name="alert-circle-outline" *ngIf="submitted && signupForm.controls.lastName.errors" style="color: var(--ion-color-primary);"></ion-icon>
+              </ion-item>
+              <ion-row>
+                <ion-col>
+                  <div *ngIf="submitted && signupForm.controls.lastName.errors">
+                    <div *ngIf="signupForm.controls.lastName.errors.required" style="color: var(--ion-color-primary)">Last name is required</div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-item [ngClass]="{ 'is-invalid': submitted && signupForm.controls.username.errors }">
+            <ion-input type="text"  class="input" placeholder="Username" name="username" formControlName="username"></ion-input>
+            <ion-icon name="alert-circle-outline" *ngIf="submitted && signupForm.controls.username.errors" style="color: var(--ion-color-primary);"></ion-icon>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <div *ngIf="submitted && signupForm.controls.username.errors">
+                <div *ngIf="signupForm.controls.username.errors.required" style="color: var(--ion-color-primary)">Username is required</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-item [ngClass]="{ 'is-invalid': submitted && signupForm.controls.password.errors }">
+            <ion-input type="password" class="input" placeholder="Password" name="password" formControlName="password"></ion-input>
+            <ion-icon name="alert-circle-outline" *ngIf="submitted && signupForm.controls.password.errors" style="color: var(--ion-color-primary);"></ion-icon>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <div *ngIf="submitted && signupForm.controls.password.errors">
+                <div *ngIf="signupForm.controls.password.errors.required" style="color: var(--ion-color-primary)">Password is required</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-item [ngClass]="{ 'is-invalid': signupForm.errors && signupForm.errors.requireMatch}">
+            <ion-input type="password" class="input" placeholder="Confirm Password" name="passwordConfirmation" formControlName="passwordConfirmation"></ion-input>
+            <ion-icon name="alert-circle-outline" *ngIf="submitted && signupForm.controls.passwordConfirmation.errors || (signupForm.errors && signupForm.errors.requireMatch)" style="color: var(--ion-color-primary);"></ion-icon>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <div *ngIf="submitted && signupForm.controls.passwordConfirmation.errors">
+                <div *ngIf="signupForm.controls.passwordConfirmation.errors.required" style="color: var(--ion-color-primary)">Password Confirmation is required</div>
+              </div>
+              <div *ngIf="submitted && !signupForm.controls.passwordConfirmation.errors && signupForm.errors">
+                <div *ngIf="signupForm.errors.requireMatch" style="color: var(--ion-color-primary)">Passwords don't match</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-row class="ion-justify-content-center button-row">
+          <div class="form-actions">
+            <ion-button type="submit" expand="block" class="btn-custom" id="login-btn" (click)=onSubmit()>Sign Up</ion-button>
+            <p style="color:White">Already have an account? <a routerLink="../" routerDirection="root" class="underlineHover">Login here</a></p>
+          </div>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+

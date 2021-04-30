@@ -1,0 +1,13 @@
+#search {
+    max-width: 40%; 
+    --border-radius: 4px; 
+    --box-shadow: none; 
+    --background: var(--main-content-background);
+    margin-right: 5px;
+}
+
+hr.solid {
+    border-top: 1px solid var(--main-content-background);
+    width: 95%;
+    margin-top: 10px;
+}

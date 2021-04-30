@@ -1,0 +1,77 @@
+<ion-card  style="height: 100%;">
+  <ion-grid style="height: 100%; padding: 0">
+    <ion-row style="background: var(--frosted)">
+      <ion-col>
+        <h3 style="padding: 10px">Basic Information</h3>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-checkbox [checked]="basicInfo.lessonName && basicInfo.level" disabled="true"  style="margin:10px 10px;"></ion-checkbox>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 3%;">
+      <ion-col>
+        <form>
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="basicInfo.lessonName" disabled="true"  style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-item lines="none">
+                  <ion-label>Lesson Name:</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none" style="--background: var(--main-content-background);">
+                  <ion-input type="text" name="lessonName" placeholder="Enter lesson name..." [(ngModel)]="basicInfo.lessonName"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="basicInfo.studentIds" disabled="true"  style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label>Assigned Students:</ion-label>
+                  <ion-button fill="clear" (click)="presentStudentPicker()">Select students</ion-button>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="basicInfo.assignedDate" disabled="true"  style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label>Assigned Date:</ion-label>
+                  <dp-date-picker (onChange)="assignedDateChanged($event)"
+                                  [config]="datePickerConfig"
+                                  [mode]="'daytime'"
+                                  [theme]="'dp-main dp-material'"
+                                  [placeholder]="assignedDatePlaceholder()">
+                  </dp-date-picker>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="auto" style="display: flex;align-items: center;" >
+                <ion-checkbox [checked]="basicInfo.dueDate" disabled="true"  style="margin:  0;padding:0;"></ion-checkbox>
+              </ion-col>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label>Due Date:</ion-label>
+                  <dp-date-picker (onChange)="dueDateChanged($event)"
+                                  [config]="datePickerConfig"
+                                  [mode]="'daytime'"
+                                  [theme]="'dp-material dp-main'">
+                  </dp-date-picker>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

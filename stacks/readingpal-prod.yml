@@ -1,0 +1,11 @@
+version: "3.2"
+services:
+  readingpal-ui:
+    image: "registry.readingpal.com:5000/com.readingpal/readingpal-ui:${VERSIONTAG}"
+    ports:
+    - "9200:80"
+
+networks:
+  default:
+    external:
+      name: readingpal_net

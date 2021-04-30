@@ -1,0 +1,58 @@
+<ion-card style="position: absolute; bottom: 28px; margin-bottom: 0;width: 170px; height: 200px; border-radius: 4px 4px 0 0;">
+    <ion-grid style="width: 100%; height: 102%;">
+    <!--    <ion-row *ngIf="!openPicker" style="padding: 0">-->
+    <!--        <ion-col size="6" offset="6">-->
+    <!--            -->
+    <!--        </ion-col>-->
+    <!--    </ion-row>-->
+        <ion-row *ngIf="!openPicker" style="height: 100%;">
+            <ion-col size="3" style="height: 46px;" *ngFor="let color of defaultColors; let i = index" class="ion-text-center">
+                <ion-icon *ngIf="color.color === selectedColor && !deleteColors" name="ellipse-outline"
+                      [ngStyle]="colorHover == i ? {'color': color.color, 'font-size': '44px', 'opacity': '.7'} : {'color': color.color, 'font-size': '40px', 'margin-top': '3px'}"
+                      (mouseover)="colorHover = i"
+                      (mouseout)="colorHover = -1">
+                </ion-icon>
+                <ion-icon *ngIf="!color.color" name="add-circle"
+                      [ngStyle]="colorHover == i ? {'color': '#bfbfbf', 'font-size': '44px', 'opacity': '.7'} : {'color': 'rgba(197, 197, 196, 0.29)', 'font-size': '40px', 'margin-top': '3px'}"
+                      (mouseover)="colorHover = i"
+                      (mouseout)="colorHover = -1"
+                      (click)="setOpenPicker(i)"></ion-icon>
+                <ion-icon *ngIf="color.color && color.color !== selectedColor && !deleteColors" name="ellipse"
+                      [ngStyle]="colorHover == i ? {'color': color.color, 'font-size': '44px', 'opacity': '.7'} : {'color': color.color, 'font-size': '40px', 'margin-top': '3px'}"
+                      (mouseover)="colorHover = i"
+                      (mouseout)="colorHover = -1"
+                      (click)="changeComplete(color)"></ion-icon>
+                <ion-icon *ngIf="deleteColors && color.color" name="close-circle"
+                      [ngStyle]="colorHover == i ? {'color': color.color, 'font-size': '44px', 'opacity': '.7'} : {'color': color.color, 'font-size': '40px', 'margin-top': '3px'}"
+                      (mouseover)="colorHover = i"
+                      (mouseout)="colorHover = -1"
+                      (click)="deleteColor(i, color)"></ion-icon>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="openPicker">
+            <ion-col>
+                <color-sketch color="#fff" [presetColors]="empty" (onChangeComplete)="changeNewColorComplete($event)"></color-sketch>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-card>
+
+<ion-button *ngIf="!deleteColors && !openPicker" (click)="deleteColors = true"
+            style="position: absolute; bottom: -2px; left: 13px; right: 12px; max-height: 26px;
+            --border-radius: 0 0 4px 4px; --background-hover: #f6d4d0;
+            --background: white; --color: var(--ion-color-primary)">
+    <ion-icon style="font-size: 24px;" name="trash-outline"></ion-icon>
+</ion-button>
+<ion-button *ngIf="deleteColors" (click)="deleteColors = false"
+            style="position: absolute; bottom: -2px; left: 13px; right: 12px; max-height: 26px;
+            --border-radius: 0 0 4px 4px; --background-hover: var(--ion-color-primary);
+            --background: var(--ion-color-primary); --color: white">
+    <ion-icon name="trash"></ion-icon>
+</ion-button>
+<ion-button *ngIf="openPicker"
+            style="position: absolute; bottom: -2px; left: 13px; right: 12px; max-height: 26px;
+            --border-radius: 0 0 4px 4px; --background-hover: #f6d4d0;
+            --background: white; --color: var(--ion-color-primary)" (click)="addNewColor()">
+    Add Color
+</ion-button>
+

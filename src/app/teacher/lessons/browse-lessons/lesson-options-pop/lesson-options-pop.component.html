@@ -1,0 +1,33 @@
+<ion-grid style="padding: 0">
+  <ion-row *ngIf="!verifyDelete">
+      <ion-col [size]="colSize()" *ngIf="canDelete" style="padding: 0">
+        <ion-button fill="clear" style="color: var(--default-font-color);" (click)="onClickDelete()">
+          <ion-icon slot="icon-only" size="small" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col [size]="colSize()" *ngIf="canDelete" style="padding: 0">
+        <ion-button fill="clear" title="Edit" (click)="onClickEdit()">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col [size]="colSize()" style="padding: 0">
+        <ion-button fill="clear" title="Duplicate" (click)="onClickDuplicate()">
+          <ion-icon name="copy-outline"></ion-icon>
+          <span *ngIf="!canDelete">&nbsp; Make a copy</span>
+        </ion-button>
+      </ion-col>
+  </ion-row>
+  <ion-row *ngIf="verifyDelete">
+    <ion-col size="6" style="padding: 0">
+      <ion-button fill="clear" style="color: var(--default-font-color);" (click)="onDeleteYes()">
+        Delete
+      </ion-button>
+    </ion-col>
+    <ion-col size="6" style="padding: 0">
+      <ion-button fill="clear" style="color: var(--default-font-color);" (click)="onDeleteNo()">
+        Cancel
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+

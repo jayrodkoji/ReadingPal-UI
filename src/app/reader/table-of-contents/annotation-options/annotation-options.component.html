@@ -1,0 +1,16 @@
+<ion-grid style="padding: 0">
+  <ion-row style="padding: 0" class="ion-justify-content-between"  style="background: #f6f6f6">
+    <ion-col size="auto">
+      <ion-button fill="clear" expand="full" (click)="navigate()"><ion-icon name="navigate-circle-outline"></ion-icon></ion-button>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-button fill="clear" expand="full" (click)="showDelete = !showDelete"><ion-icon name="ellipsis-vertical-outline"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row [hidden]="!showDelete" class="ion-justify-content-end">
+    <ion-col size="auto">
+      <ion-button fill="clear" (click)="delete()"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+

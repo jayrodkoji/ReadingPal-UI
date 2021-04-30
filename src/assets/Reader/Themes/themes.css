@@ -1,0 +1,16 @@
+/* Themes */
+
+.dark {
+    background: #121212;
+    color: #f6f6f6;
+}
+
+.light {
+    background: #fff;
+    color: var(--default-font-color);
+}
+
+.tan {
+    background: #f6d7b8;
+    color: #ccc;
+}

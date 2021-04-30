@@ -1,0 +1,38 @@
+ion-toolbar {
+    height: 5%;
+    min-height: 40px;
+
+    .logo{
+        width: 150px;
+        margin: auto;
+    }
+}
+
+#content-grid {
+    height: 95%;
+
+    #assigned-reading-card {
+        #book-img {
+            max-height: 325px;
+            text-decoration: none;
+        }
+
+        #bood-img {
+            outline: none;
+        }
+
+        .card-grid {
+            height: 100%;
+            width: 100%;
+
+            img:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+
+    ion-card-header {
+        background-color: rgb(252, 252, 252);
+    }
+}
+

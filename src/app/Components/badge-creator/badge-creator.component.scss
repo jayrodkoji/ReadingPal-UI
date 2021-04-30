@@ -1,0 +1,52 @@
+.dismiss-btn {
+  --color: white;
+  margin-top: 6px;
+  --background-hover-opacity: 0.3;
+  --background-hover: white;
+}
+
+.badge-selected {
+  margin-top: 6px;
+  width: 90px;
+  height: 90px;
+  box-shadow: 0px 0px 15px #e3e3e3;
+}
+
+.badge-not-selected {
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+}
+
+.icon-col {
+  min-width: 100px;
+  min-height: 100px;
+  text-align: center;
+}
+
+.badge-not-selected:hover {
+  margin-top: 8px;
+  width: 85px;
+  height: 85px;
+  opacity: 80%;
+}
+
+.badge-icon:hover {
+  opacity: 80%;
+}
+
+ion-textarea, ion-input {
+  //text-align: center;
+  background: var(--frosted);
+  border-radius: 4px;
+}
+
+.submit-btn {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  --color: var(--ion-color-primary);
+  --border-radius: 0 0 4px 4px;
+  --background-hover-opacity: 0.1;
+  --background-hover: var(--ion-color-primary);
+}

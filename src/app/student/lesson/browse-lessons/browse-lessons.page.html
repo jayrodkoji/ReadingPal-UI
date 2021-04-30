@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<ion-content style="--background: var(--main-content-background); height: calc(100vh - 56px);">
+  <ion-grid style=" padding: 15px;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="main-col">
+        <ion-card style="min-height: calc(96vh - 56px); max-width: 1600px; min-width: 280px; margin: auto;">
+          <ion-grid style="padding: 0%;">
+            <ion-row style="background-color: var(--ion-color-primary);">
+              <ion-col style="align-self: center;">
+                <h1 style="margin-top: 10px; padding-left: 10px; color: white; font-size: 40px;">Lessons</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="padding: 0;">
+                <ion-toolbar style="--min-height: 40px;">
+                  <ion-searchbar id="search" placeholder="Filter Lessons"
+                                 style="padding: 0; --background: var(--frosted); --box-shadow: none; border-bottom: 2px solid #f3f3f3;"
+                                 (ionBlur)="search = false" [(ngModel)]="searchText"></ion-searchbar>
+                  <ion-item slot="end" lines="none" class="filters">
+                    <ion-select interface="popover" mode='ios' value="ascend" [(ngModel)]="orientation" (ionChange)="orderList()">
+                      <ion-select-option value="ascend">Ascending</ion-select-option>
+                      <ion-select-option value="descend">Descending</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-toolbar>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="12" *ngIf="!loaded">
+                <ion-progress-bar style="width: 100%;" type="indeterminate"></ion-progress-bar>
+              </ion-col>
+              <ion-col size="6" size-md="4" size-xl="3" *ngFor="let lesson of this.lessons | appLessonPipe: searchText ; let i = index">
+                <ion-card class="lesson-card" *ngIf="loaded" (click)="openLessonOverview(lesson)">
+                    <ion-grid style="padding: 0;">
+                      <ion-row>
+                        <ion-col size="auto" style="padding: 0;" >
+                          <img [src]="getCoverImage(lesson) || 'assets/icon/ellipse-loading.svg'" class="book-img"/>
+                        </ion-col>
+                        <ion-col>
+                          <ion-card-content style="height: 100%;">
+                            <ion-grid style="height: 100%; padding: 0%;">
+                              <ion-row style="height: 50%;">
+                                <ion-col>
+                                  <ion-card-title>{{lesson.title}}</ion-card-title>
+                                </ion-col>
+                              </ion-row>
+                            </ion-grid>
+                          </ion-card-content>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

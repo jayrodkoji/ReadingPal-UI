@@ -1,0 +1,22 @@
+<ion-card style="height: 100%;">
+  <ion-grid style="padding: 0">
+    <ion-row class="ion-justify-content-between" style="background: var(--frosted)">
+      <ion-col>
+        <h3 style="padding: 10px;">Add Quiz</h3>
+      </ion-col>
+<!--      <ion-col size="auto">-->
+<!--        <ion-button style="padding-top: 10px;" fill="clear" (click)=createQuiz()>Create New Quiz</ion-button>-->
+<!--      </ion-col>-->
+    </ion-row>
+    <ion-row *ngFor="let quiz of getQuizzes(); let i = index">
+      <ion-col size="10" offset="1">
+        <app-quiz-card [lessonId]="lessonId" [quizNum]="i"></app-quiz-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!lessonId">
+      <ion-col>
+        <h5 style="text-align: center;">Lesson error...</h5>
+      </ion-col>
+    </ion-row>    
+  </ion-grid>
+</ion-card>

@@ -1,0 +1,28 @@
+<ion-card style="width: 150px; height: 210px;" *ngIf="award" [ngClass]="{'selected-badge': isSelected}">
+  <ion-grid style="height: 210px; padding: 0px;">
+    <ion-row class="ion-justify-content-end" style="height: 5%;">
+      <ion-col size="auto" style="padding: 0">
+        <ion-button *ngIf="delete && owner"  fill="clear" size="small" style="padding: 0; font-size:12px;" (click)="deleteAward(award.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" style="max-height: 110px;">
+      <ion-col size="auto" style="max-height: 120px;">
+        <ion-avatar style="height: 80px; width: 80px;">
+          <img [src]="getIconImage(award)" style="height: 100%;width: 100%; object-fit: cover"/>
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" style="max-height: 30px;">
+      <ion-col size="auto">
+        <ion-label style="font-weight: bold">{{award.name}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center"  style="height: 69px;">
+      <ion-col size="11" style="max-height: 69px;">
+        <p class="message">{{award.description}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

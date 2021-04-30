@@ -1,0 +1,96 @@
+<ion-content fullscreen style="--background: var(--main-content-background); height: 96%;">
+  <ion-grid style="height: 99%;">
+    <ion-row style="min-height: 100%;">
+      <ion-col style="min-height: 100%;">
+        <ion-card style="min-height: 100%;">
+          <ion-grid style="padding: 0;">
+            <ion-row class="ion-justify-content-between" style="background-color: var(--ion-color-primary);">
+              <ion-col class="ion-align-self-center" size="11" style="align-self: center;">
+                <h1 style="margin-top: 10px; padding-left: 10px;color: white; font-size: 40px;">Customize Game</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size-xs="12" size-lg="6" offset-xs="0" offset-lg="3" class="inner-col">
+                <ion-card>
+                  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+                    <ion-grid>
+
+                      <ion-row>
+                        <ion-col>
+                          <ion-item lines="none">
+                            <ion-label>Game type</ion-label>
+                            <!--<ion-select interface="popover" mode="ios" placeholder="Select One" formControlName="inputType">
+                              <ion-select-option value="multipleChoice">Multiple choice</ion-select-option>
+                              <ion-select-option value="typing">Typing</ion-select-option>
+                            </ion-select>-->
+                            <ion-button
+                                    [ngClass]="gameTypeButtonClass('multipleChoice')"
+                                    (click)="gameTypeButtonClick('multipleChoice')"
+                            >Multiple Choice</ion-button>
+                            <ion-button
+                                    [ngClass]="gameTypeButtonClass('typing')"
+                                    (click)="gameTypeButtonClick('typing')"
+                            >Typed Response</ion-button>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-col>
+                          <ion-item lines="none">
+                            <ion-label>Lesson</ion-label>
+                            <ion-select
+                                    interface="popover"
+                                    mode="ios"
+                                    [placeholder]="placeholder()"
+                                    [compareWith]="lessonCompareWith"
+                                    formControlName="lessonId">
+                              <ng-container *ngFor="let lesson of this.lessons">
+                                <ion-select-option value="{{lesson.id}}">{{lesson.title}}</ion-select-option>
+                              </ng-container>
+                            </ion-select>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+
+                      <ion-row>
+                        <ion-col>
+                          <ion-button (click)="submit()" [disabled]="!isValid()">Play</ion-button>
+                        </ion-col>
+                      </ion-row>
+
+                      <!--<ion-row>
+                        <ion-col offset="3" size="6">
+                          <ion-item>
+                            <ion-label>Input type</ion-label>
+                            <ion-select formControlName="inputType">
+                              <ion-select-option value="multipleChoice">Multiple choice</ion-select-option>
+                              <ion-select-option value="typing">Typing</ion-select-option>
+                            </ion-select>
+                            <ion-label>Lesson</ion-label>
+                            <ion-select formControlName="lessonId">
+                              <ng-container *ngFor="let lesson of this.lessons">
+                                <ion-select-option value="{{lesson.id}}">{{lesson.title}}</ion-select-option>
+                              </ng-container>
+                            </ion-select>
+                          </ion-item>
+
+
+
+                          <ion-button (click)="submit()">Play</ion-button>
+                        </ion-col>
+                      </ion-row>-->
+                    </ion-grid>
+                  </form>
+                </ion-card>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+

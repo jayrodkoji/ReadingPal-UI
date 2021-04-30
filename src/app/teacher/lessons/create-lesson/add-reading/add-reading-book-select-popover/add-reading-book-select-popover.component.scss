@@ -1,0 +1,8 @@
+.selected{
+  --background: var(--ion-color-primary);
+  color: white;
+}
+
+.not-selected:hover {
+  --background: rgba(238, 58, 35, 0.1);
+}

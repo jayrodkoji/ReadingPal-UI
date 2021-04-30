@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<ion-content style="--background: var(--main-content-background); height: calc(100vh - 56px);">
+  <ion-grid style="padding: 15px;">
+    <ion-row>
+      <ion-col style="padding-bottom: 0">
+        <!-- <div>
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div> -->
+        <ion-button class="ion-no-margin classes-button" [disabled]="isReport" [class.selected]="currentTab === 'classes'"
+          [class.default]="currentTab !== 'classes'" (click)="currentTab = 'classes'">
+          Classes
+        </ion-button>
+        <ion-button class="ion-no-margin groups-button" [disabled]="isReport" [class.selected]="currentTab === 'groups'"
+          [class.default]="currentTab !== 'groups'" (click)="currentTab = 'groups'">
+          Groups
+        </ion-button>
+        <ion-button class="ion-no-margin students-button" [class.selected]="currentTab === 'students'"
+          [class.default]="currentTab !== 'students'" (click)="currentTab = 'students'">
+          Students
+        </ion-button>
+      </ion-col>
+      <ion-col size="auto" class="ion-justify-self-end" style="padding-bottom: 0">
+        <ion-button class="ion-no-margin report-button" [class.selected]="isReport" [class.default]="!isReport"
+          (click)="isReport = !isReport; currentTab = 'students'">
+          Reports
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="padding-top: 0">
+        <ion-card style="min-height: calc(94vh - 56px); margin: 0; border-radius: 0 0 4px 4px;">
+          <!--Classes-->
+          <app-classes-card *ngIf="currentTab === 'classes' && !isReport" [classes]="classes" [groups]="null" [users]="users" [group]="false"></app-classes-card>
+          <!--Group-->
+          <app-classes-card  *ngIf="currentTab === 'groups' && !isReport" [classes]="classes" [groups]="allReadingGroups" [users]="users" [group]="true"></app-classes-card>
+          <!--Students-->
+          <app-students *ngIf="currentTab === 'students' && !isReport" [classes]="classes"></app-students>
+          <!--Reports-->
+          <app-reports *ngIf="isReport" [classes]="classes" [currentTab]="currentTab"></app-reports>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

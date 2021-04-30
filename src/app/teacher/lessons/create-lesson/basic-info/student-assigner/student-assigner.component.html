@@ -1,0 +1,138 @@
+<ion-content>
+  <ion-grid style="width: 100%; height: 100%; padding: 0;">
+    <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding-left: 10px;">
+      <ion-col>
+        <h1 style="color: white; font-size: 40px;" class="modal-title">Add Students</h1>
+      </ion-col>
+      <ion-col size="auto" >
+        <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="modalController.dismiss()">
+          <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height: calc(100% - 70px)">
+      <ion-col style="padding: 0; height: 100%;">
+        <ion-grid style="padding: 0; height: 100%">
+            <ion-row>
+              <ion-col style="padding: 0">
+                <ion-segment value="classes" (ionChange)="setTab($event)">
+                  <ion-segment-button value="classes">
+                    <ion-label>Classes</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="groups">
+                    <ion-label>Groups</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="students">
+                    <ion-label>Students</ion-label>
+                  </ion-segment-button>
+                </ion-segment>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="tab === 'classes'" style="height: calc(100% - 92px);">
+              <ion-col style="height: 100%">
+                <ion-list *ngIf="classes" lines="none" style="max-height: calc(100%); overflow: auto">
+                  <ion-item *ngFor="let class of classes; let i = index">
+                    <app-assign-class-card [class]="class" (studentsChanged)="handleStudentsAltered($event)" style="width: 100%;"></app-assign-class-card>
+                  </ion-item>
+                </ion-list>
+
+                <ng-container *ngIf="!classes" >
+                  <ion-card  *ngFor="let number of [0, 1, 2]"
+                             style="height: 100px; margin: 40px;box-shadow: none; border: 2px solid #f5f3f3;">
+                    <ion-grid style="height: 100%;">
+                      <ion-row class="ion-align-items-center" style="height: 100%;padding-right: 20px; padding-left: 20px">
+                        <ion-col>
+                          <ion-skeleton-text animated style="height: 40px;width: 200px;"></ion-skeleton-text>
+                        </ion-col>
+                        <ion-col size="auto" *ngFor="let number of [0, 1, 2, 3]">
+                          <ion-skeleton-text animated style="height: 70px; width: 70px; --border-radius: 100px"></ion-skeleton-text>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+
+
+            <ion-row *ngIf="tab === 'groups'" class="ion-justify-content-end">
+              <ion-col size="auto">
+                <ion-button fill="clear" (click)="addGroup()">Create Group</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="tab === 'groups'" style="height: calc(100% - 146px);">
+              <ion-col style="padding: 0; height: 100%">
+                <ion-list *ngIf="groups" lines="none" style="max-height: 100%; overflow: auto">
+                  <ion-item *ngFor="let group of groups; let i = index">
+                    <app-assign-group-card [group]="group" (studentsChanged)="handleStudentsAltered($event)" style="width: 100%;"></app-assign-group-card>
+                  </ion-item>
+                </ion-list>
+
+                <ng-container *ngIf="!groups">
+                  <ion-card  *ngFor="let number of [0, 1, 2]"
+                             style="height: 100px; margin: 40px;box-shadow: none; border: 2px solid #f5f3f3;">
+                    <ion-grid style="height: 100%;">
+                      <ion-row class="ion-align-items-center" style="height: 100%;padding-right: 20px; padding-left: 20px">
+                        <ion-col>
+                          <ion-skeleton-text animated style="height: 40px;width: 200px;"></ion-skeleton-text>
+                        </ion-col>
+                        <ion-col size="auto" *ngFor="let number of [0, 1, 2, 3]">
+                          <ion-skeleton-text animated style="height: 70px; width: 70px; --border-radius: 100px"></ion-skeleton-text>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="tab === 'students'" class="ion-justify-content-center"
+                     style="background: var(--frosted);height: calc(100% - 93px);">
+              <ion-grid style="height: 100%">
+                <ion-row>
+                  <ion-col style="text-align: start">
+                    <ion-button fill="clear" [disabled]="(students.length == 0)" (click)="addStudents([])">Deselect All</ion-button>
+                  </ion-col>
+                  <ion-col style="text-align: end">
+                    <ion-button fill="clear" [disabled]="userDatas.length == students.length" (click)="addStudents(userDatas)">Select All</ion-button>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center" style="height: calc(100% - 54px); overflow: auto">
+                  <ion-col size="10">
+                    <ion-list lines="none">
+                        <ion-item *ngFor="let student of userDatas" style="--background-hover: var(--ion-color-primary)">
+                          <ion-avatar><ion-img [src]="getImage(student.profileimage)"></ion-img></ion-avatar>
+                          <ion-label style="padding-left: 10px;">{{student.firstName}} {{student.lastName}}</ion-label>
+                          <ion-checkbox slot="start" [checked]="isInList(student)" (ionChange)="addSingleStudent($event, student)"></ion-checkbox>
+                        </ion-item>
+                    </ion-list>
+
+                    <ng-container *ngIf="!students">
+                      <ion-card  *ngFor="let number of [0, 1, 2]"
+                                 style="height: 100px; margin: 40px;box-shadow: none; border: 2px solid #f5f3f3;">
+                        <ion-grid style="height: 100%;">
+                          <ion-row class="ion-align-items-center" style="height: 100%;padding-right: 20px; padding-left: 20px">
+                            <ion-col>
+                              <ion-skeleton-text animated style="height: 40px;width: 200px;"></ion-skeleton-text>
+                            </ion-col>
+                            <ion-col size="auto" *ngFor="let number of [0, 1, 2, 3]">
+                              <ion-skeleton-text animated style="height: 70px; width: 70px; --border-radius: 100px"></ion-skeleton-text>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-card>
+                    </ng-container>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+            <ion-row>
+              <ion-col style="padding: 0">
+                <ion-button fill="clear" expand="full" (click)="submit()">Submit</ion-button>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

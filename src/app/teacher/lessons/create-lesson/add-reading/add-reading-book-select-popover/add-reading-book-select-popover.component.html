@@ -1,0 +1,34 @@
+<ion-grid style="padding: 0; height: 100%">
+  <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding-left: 10px;">
+    <ion-col>
+      <h1 style="color: white; font-size: 40px;" class="modal-title">Select Book</h1>
+    </ion-col>
+    <ion-col size="auto" >
+      <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="modalController.dismiss()">
+        <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-align-items-top" style="padding-top: 0">
+    <ion-col style="padding-right: 0; padding-top: 0; padding-left: 0;">
+      <ion-searchbar placeholder="Filter by @title, @author, or @level" [(ngModel)]="searchText"
+                     style="padding: 0; --box-shadow: none; --background: var(--frosted)"></ion-searchbar>
+    </ion-col>
+  </ion-row>
+  <ion-row style="height:calc(100% - 156px)">
+    <ion-col style="padding: 0; height: 100%">
+      <ion-list style="height: 100%; overflow: auto; padding-top: 5px">
+        <ion-item button *ngFor="let book of books | appBookSearchPipe: searchText; let i = index"
+                  [ngClass]="selectedInd == i ? 'selected': 'not-selected'"
+                  (click)="selectedInd = i; selectedBookId = book.id">
+          <ion-label>{{book.title}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col style="padding: 0">
+      <ion-button [disabled]="selectedInd == -1" fill="clear" expand="full" (click)="dismiss()">Submit</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,51 @@
+<ion-grid (click)="onClick()" style="width: 100%; height: 100%">
+  <!--<ion-row *ngIf="stage === 1" style="margin-top: 40%">-->
+  <span>
+  <ion-row #stage1>
+    <ion-col class="award-congratulations" size="12">
+      Congratulations!
+    </ion-col>
+  </ion-row>
+  </span>
+
+  <!--<ng-container #stage2 *ngIf="stage === 2">-->
+  <ng-container>
+    <span #stage2>
+
+    <ion-row>
+      <ion-col style="text-align: center" size="12">
+        You've earned a badge!
+      </ion-col>
+    </ion-row>
+
+    <ng-container *ngIf="badge">
+      <ion-row>
+        <ion-col offset="4" size="4">
+          <img [src]="badge.icon" />
+        </ion-col>
+        <ion-col size="4"></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="text-align: center" size="12">
+          {{badge.name}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="text-align: center" offset="1" size="10">
+          {{badge.description}}
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="onDismiss()">
+          Dismiss
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    </span>
+  </ng-container>
+</ion-grid>

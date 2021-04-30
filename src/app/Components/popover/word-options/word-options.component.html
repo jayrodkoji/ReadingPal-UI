@@ -1,0 +1,107 @@
+<ion-grid style="width: 100%;">
+  <ion-row *ngIf="user">
+    <ion-col>
+      <ion-avatar style="position: relative; float: right; top: 30px; z-index: 5; height: 50px; width: 50px;">
+        <img [src]="ownsNote && getImage(currentUser) || !ownsNote && getImage(user)"
+             onerror="this.onerror=null;this.src='assets/icon/avatar.svg';"
+             style="height: 50px; width: 50px;">
+      </ion-avatar>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-align-items-center ion-justify-content-center" style="width: 95%;">
+    <ion-col size="12">
+      <ion-card style="width: 100%; margin: 0;">
+        <ion-grid style="padding: 0;">
+          <ion-row style="background-color: rgb(250, 250, 250);justify-content: space-evenly;">
+            <ion-col size="auto" style="padding: 0">
+              <ion-button fill="clear"
+                          [title]="ownsNote && 'highlight' || !ownsNote && 'Copy Note'"
+                          (click)="editHighlight()">
+                <ion-icon *ngIf="ownsNote" style="font-size: 30px; padding-top: 6px;" title="auto highlight" src="assets/Reader/highlighter.svg"
+                          [ngStyle]="(highlighted && {'fill': highlightColor}) || (!highlighted && {'fill': '#212121'})"></ion-icon>
+                <ion-icon *ngIf="!ownsNote" style="font-size: 30px; padding-top: 6px;" name="copy-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col  size="auto" style="padding: 0">
+              <ion-button fill="clear" [disabled]="!ownsNote"
+                          (click)="this.showNote = !this.showNote;">
+                <ion-icon *ngIf="highlighted" name="create-outline"
+                          [ngClass]="(showNote && 'selected-button') || !showNote && 'deselected-button'"
+                          style="font-size: 30px;"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="auto" style="padding: 0" *ngIf="teacher && user">
+              <ion-button fill="clear"
+                          [disabled]="!ownsNote"
+                          [title]="'Ask ' + user.username + ' a question' "
+                          (click)="askQuestion = !askQuestion">
+                <ion-icon *ngIf="highlighted"
+                          [src]="'assets/Reader/student_question.svg'"
+                          [ngClass]="(askQuestion && 'selected-button') || !askQuestion && 'deselected-button'"
+                          style="font-size: 36px;padding-top: 4px"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!hasDefinition && defLoading">
+            <ion-col>
+              <ion-progress-bar type="indeterminate"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="hasDefinition && !defLoading">
+            <ion-col>
+              <dictionary [definitions]="data.definition" class="word-options"></dictionary>
+            </ion-col>
+          </ion-row>
+          <div [hidden]="!showNote">
+            <ion-row>
+              <ion-col>
+                <h6>Make a note</h6>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <textarea rows="5"
+                          [disabled]="!ownsNote"
+                          style="background: #f8f8f8; border-radius: 4px;border: none; width: 322px; min-height: 100px;"
+                          placeholder="Enter Note..." name="note" autocomplete="on" autocorrect="on" inputmode="text"
+                          [(ngModel)]="this.data.note"></textarea>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="ownsNote" class="ion-justify-content-between ion-align-items-center">
+              <ion-col size="auto">
+                <ion-item button="false" lines="none" style="--background-hover: var(--ion-color-primary)">
+                  <ion-checkbox title="Make note public" value="data.public_access" [(ngModel)]="data.public_access"></ion-checkbox>
+                  <ion-label style="margin-left: 10px; color: var(--default-font-color);">Public</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button fill="clear" expand="full" style="margin: auto; height: 54px;"
+                            [disabled]="!this.data.note"
+                            (click)="updateAnnotation();">
+                  Save Note
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div [hidden]="(!askQuestion || !highlighted)">
+            <hr style="background: var(--frosted); margin-top: 0; margin-bottom: 0">
+            <ion-row>
+              <ion-col>
+                <h6>Ask {{this.teacher}} a question</h6>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="messageData">
+              <ion-col style="max-height: 250px;">
+                <app-message-system *ngIf="isStudent"
+                                    [messageData]="messageData"
+                                    (hasMessages)="handleHasMessage()"
+                                    [viewer]="isStudent ? 'ROLE_STUDENT' : 'ROLE_TEACHER'"
+                                    style="width: 100%; height: 100%"></app-message-system>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-grid>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

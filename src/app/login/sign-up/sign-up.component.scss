@@ -1,0 +1,143 @@
+/* BASIC */
+* {
+    font-family: Segoe UI; 
+  }
+  
+  h1 {
+    font-size: min(13vw, 130px);
+    text-align: center;
+    font-weight: bold;
+    color: #fcfcfc;
+  }
+  
+  .underlineHover {
+    color: #92badd;
+    display:inline-block;
+    text-decoration: none;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  
+  .underlineHover:hover {
+    text-decoration: none;
+  }
+  
+  
+  /* STRUCTURE */
+  .logo{
+    padding-left: 10px
+  }
+  
+  ion-content{
+    --background:  linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assets/books.jpg) no-repeat center center / cover;
+  
+    ion-grid {
+      width: 100%;
+      height: 100%;
+  
+      .welcome {
+        height:20%;
+      
+        ion-text {
+          width: 100%;
+          height: 100%;
+        } 
+      }
+  
+      .forum-row {
+        height: 80%;
+        padding-top: 5%;
+  
+        .input {
+          --background: #fcfcfc;
+          border-radius: 4px;
+        }
+      }
+  
+      .button-row {
+        height: 30%;
+        margin-top: 5%;
+  
+        .btn-custom {
+          font-weight: bold;
+          font-size: 1.2em;
+          color: #fcfcfc;
+        }
+  
+        #login-btn {
+          --background: #78BC61;
+        }
+      
+        #register-btn {
+          --background:#589CE1;
+          margin-top: 3vh;
+        }
+      }
+    }
+  }
+  
+  ion-item {
+    border-radius: 4px;
+  }
+    
+
+  .is-invalid {
+    --border-color: var(--ion-color-primary);
+  }
+
+  /* ANIMATIONS */
+  
+  .underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #fcfcfc;
+    content: "";
+    transition: width 0.2s;
+  }
+  
+  .underlineHover:hover {
+    color: #fcfcfc;
+  }
+  
+  .underlineHover:hover:after{
+    width: 100%;
+  }
+
+.underlineHover {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.underlineHover:hover {
+  text-decoration: none;
+  }
+  
+
+  /* ANIMATIONS */
+
+  .underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #fcfcfc;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #fcfcfc;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
+}
+  
+  

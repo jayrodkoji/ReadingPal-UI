@@ -1,0 +1,8 @@
+<ion-slides [options]=slideOptions>
+  <ion-slide *ngFor="let student of users">
+    <ion-avatar>
+      <ion-img [src]="student.image || 'assets/icon/ellipse-loading.svg'" [title]="student.username"></ion-img>
+    </ion-avatar>
+  </ion-slide>
+</ion-slides>
+

@@ -1,0 +1,266 @@
+<ng-container *ngIf="currentTab === 'students'">
+  <ion-card style="margin: 20px;">
+    <ion-card-header style="background-color: var(--ion-color-primary);">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col class="ion-no-padding">
+                    <h2 style="margin-left: 20px; color: white"
+                        [innerText]="'Reports: ' + ((currentSelectedClass === 'all') ? 'All' : currentSelectedClass.classData.name)"></h2>
+                </ion-col>
+                <ion-col size="auto" class="ion-no-padding">
+                    <ion-button fill="clear" style="position: absolute; right: 10px; margin-bottom: 10px;" (click)="printReport()">
+                        <ion-icon name="print-outline" style="color: white; font-size: 32px;"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card-header>
+      <ion-grid class="ion-no-padding">
+          <ion-row>
+              <ion-col class="ion-no-padding">
+                  <ion-segment [(ngModel)]="currentSelectedClass" (ionChange)="handleClassSection($event)">
+                      <ion-segment-button value="all">All</ion-segment-button>
+                      <ion-segment-button *ngFor="let myclass of this.allClasses; let i = index" [value]="myclass">{{myclass.classData.name}}</ion-segment-button>
+                  </ion-segment>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <div class="container-fluid">
+              <div class="row">
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-white text-dark mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Active Students<br />{{this.activeStudents}}/{{this.allstudents}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-dark stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-dark"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-success text-white mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Completed Lessons<br />{{this.completedLessons}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-white stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-white"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-danger text-white mb-4">
+                          <div class="card-body" style="text-align: center;  min-height: 82px;">Grade Average<br />{{this.gradeAvg | number:'0.0-1'}}%</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-white stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-white"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-secondary text-white mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Reading WPM AVG<br />{{this.wpmAvg | number:'0.0-1'}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-white stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-white"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-primary text-white mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Time Spent Reading<br />{{this.timeSpent | number:'0.0-1'}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-white stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-white"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-info text-white mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Average Reading Level<br />{{this.avereageReadingLevel  | number:'0.0-1'}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-white stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-white"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-light text-dark mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Lessons +80%<br />{{this.lessonsAboveEighty  | number:'0.0-1'}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-dark stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-dark"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-warning text-white mb-4">
+                          <div class="card-body" style="text-align: center; min-height: 82px;">Highest Streak<br />{{this.highestStreak}}</div>
+<!--                                  <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                                      <a class="small text-white stretched-link" href="/dashboard">View Details</a>-->
+<!--                                      <div class="small text-white"><i class="fa fa-angle-right"></i></div>-->
+<!--                                  </div>-->
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" size-xl="6">
+              <ion-card style="box-shadow: none; border: var(--frosted) 2px solid;">
+                  <ion-card-header style="background: var(--frosted)">
+                      <h3>Students Reading Grades</h3>
+                  </ion-card-header>
+                  <canvas baseChart
+                          [datasets]="barChartData"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptions"
+                          [plugins]="barChartPlugins"
+                          [legend]="barChartLegend"
+                          [chartType]="barChartType">
+                  </canvas>
+              </ion-card>
+          </ion-col>
+            <ion-col size="12" size-xl="6">
+                <ion-card style="box-shadow: none; border: var(--frosted) 2px solid;">
+                    <ion-card-header style="background: var(--frosted)">
+                        <h3>Number Of Lessons Completed</h3>
+                    </ion-card-header>
+                    <canvas baseChart
+                            [data]="pieChartData"
+                            [labels]="pieChartLabels"
+                            [chartType]="pieChartType"
+                            [options]="pieChartOptions"
+                            [plugins]="pieChartPlugins"
+                            [colors]="pieChartColors"
+                            [legend]="pieChartLegend">
+                    </canvas>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+          <ion-row>
+              <ion-col size="12">
+                  <ion-card style="box-shadow: none; border: var(--frosted) 2px solid;">
+                      <ion-card-header style="background: var(--frosted)">
+                          <h3>Lesson Analytics</h3>
+                      </ion-card-header>
+                      <ion-grid>
+                          <ion-row>
+                              <ion-col>
+                                  <canvas baseChart style="max-height: 400px"
+                                          [datasets]="lineChartData"
+                                          [labels]="lineChartLabels"
+                                          [options]="lineChartOptions"
+                                          [colors]="lineChartColors"
+                                          [legend]="lineChartLegend"
+                                          [chartType]="lineChartType"
+                                          [plugins]="lineChartPlugins"></canvas>
+                              </ion-col>
+                          </ion-row>
+                      </ion-grid>
+                  </ion-card>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+
+<ng-container *ngIf="currentTab === 'classes'">
+<ion-card *ngFor="let class of classStats; let i = index" style="margin: 40px;">
+  <ion-card-header style="background: var(--ion-color-primary)">
+    <h3 style="margin-left: 20px; color: white">{{class.clss.name}}</h3>
+  </ion-card-header>
+  <ion-card-content style="padding: 0">
+    <ion-grid style="height: 100%; padding: 0">
+      <ion-row style="height: 100%;" class="ion-align-items-center">
+        <ion-col style="padding: 0">
+          <h1 class="table-title">Lessons</h1>
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Book Title</th>
+              <th>Book Chapter</th>
+              <th>Quiz Title</th>
+              <th>Level</th>
+              <th>Badge Title</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="allLessons">
+            <tr *ngFor="let lesson of allLessons; let l = index">
+              <td>{{l+1}}</td>
+              <td>{{lesson.lessonData.title}}</td>
+              <td *ngIf="lesson.bookData.title">{{lesson.bookData.title}}</td>
+              <td *ngIf="!lesson.bookData.title">No book title</td>
+              <td *ngIf="lesson.lessonData.chapter">{{lesson.lessonData.chapter}}</td>
+              <td *ngIf="lesson.lessonData.start_page">Pages: {{lesson.lessonData.start_page}} - {{lesson.lessonData.end_page}}</td>
+              <td>Quiz Here</td>
+              <td>{{lesson.lessonData.level}}</td>
+              <td>Badge Id: {{lesson.lessonData.badgeId}}</td>
+            </tbody>
+          </table>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height: 100%;" class="ion-align-items-center">
+        <ion-col  style="padding: 0">
+          <h1 class="table-title">Quizzes</h1>
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Lesson Title</th>
+              <th>Type</th>
+              <th># of Questions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>Quiz A</td>
+              <td>Lesson A</td>
+              <td>Vocabulary</td>
+              <td>5</td>
+            </tbody>
+            <!-- <tbody>
+              <tr *ngFor="let quiz of this.allQuizzes; let l = index">
+                <td>{{l+1}}</td>
+                <td>{{quiz}}</td>
+                <td>{{quiz.lesson}}</td>
+                <td>{{quiz.type}}</td>
+                <td>{{quiz.questions}}</td>
+            </tbody> -->
+          </table>
+        </ion-col>
+      </ion-row>
+      <ion-row style="height: 100%;" class="ion-align-items-center">
+        <ion-col  style="padding: 0">
+          <h1 class="table-title">Students</h1>
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Usernname</th>
+              <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of class.studentStats; let s = index">
+              <td>{{s+1}}</td>
+              <td>{{student.userName}}</td>
+              <td>{{student.firstName}} {{student.lastName}}</td>
+            </tbody>
+          </table>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+      </ion-card-content>
+      </ion-card>
+    </ng-container>
+

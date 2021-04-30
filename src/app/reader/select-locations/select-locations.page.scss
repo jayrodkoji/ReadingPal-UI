@@ -1,0 +1,119 @@
+#buttons{
+    position: fixed;
+    width: 100%;
+    top: 50%;
+}
+
+.highlight-color {
+    font-size: 8px;
+}
+
+ion-content {
+    height: 95%;
+    z-index: 4;
+}
+
+ion-toolbar {
+    height: 5%;
+    min-height: 40px;
+}
+
+#viewer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    max-width: 1250px;
+    overflow: hidden;
+}
+
+.spinner {
+    height: 40px;
+    width: 40px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#prev {
+    color: #212121;
+    float: right;
+}
+
+#next {
+    color: #212121;
+    float: left;
+}
+
+.logo{
+    width: 150px;
+}
+
+.options-card {
+    position: fixed;
+    opacity: .95;
+    width: 45%;
+    max-width: 550px;
+    bottom: 10%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    --color: #EBEBEB;
+}
+
+ion-icon {
+    color: #212121;
+    height: 30px;
+    width: 30px;
+}
+
+.word-speed {
+    height: 20px;
+    width: 20px;
+    padding-bottom: 2px;
+}
+
+.text-increase {
+    font-size: 25px;
+    width: 45px;
+    height: 45px;
+}
+.text-decrease {
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    padding-bottom: 2px;
+}
+
+.stop {
+    height: 40px;
+    width: 40px;
+}
+
+ion-icon:hover {
+    opacity: .7;
+}
+
+.my-custom-menu {
+    --width: 45%;
+    --max-width: 400px;
+}
+
+.menu-button {
+    position: fixed;
+    width: 50px;
+    height: 40px;
+    bottom: 10px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    color: #212121;
+}
+

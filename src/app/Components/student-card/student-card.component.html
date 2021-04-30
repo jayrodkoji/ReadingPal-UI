@@ -1,0 +1,30 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<img [src]="dynamicStyle" style="position: fixed;height: 50%;object-fit: cover;">
+<ion-grid class="card">
+  <ion-row class="ion-justify-content-center" *ngIf="userRole && firstName">
+    <ion-col size="any">
+      <h3 class="welcome" style="padding: 0px;margin: 0;">Welcome</h3>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center" *ngIf="userRole && firstName">
+    <ion-col size="any">
+      <p *ngIf="userRole == 'ROLE_TEACHER'" class="welcome">Teacher {{firstName}}</p>
+      <p *ngIf="userRole == 'ROLE_STUDENT'" class="welcome">Student {{firstName}}</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="avatar-row ion-justify-content-center">
+    <ion-col size="6" size-sm="7" size-md="8" class="avatar-col ion-align-items-center">
+      <ion-avatar>
+        <img [src]="student_avatar">
+      </ion-avatar>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center" *ngIf="badges">
+    <ion-col size="10" size-md="11" size-lg="12" style="max-width: min(100%, 230px);">
+      <app-top-badges [badges]="badges"></app-top-badges>
+    </ion-col>
+  </ion-row>
+</ion-grid>

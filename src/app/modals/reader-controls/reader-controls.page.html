@@ -1,0 +1,22 @@
+
+<ion-grid style="height: 100%; padding: 0;user-select: none;background-color: var(--frosted)">
+  <ion-row style="height: 100%; width: 90%; margin: auto;" class="ion-justify-content-between">
+    <ion-col size="auto" class="ion-align-self-center" style="text-align: center;user-select: none;width: 90px;">
+      <div>
+        <ion-icon src="assets/decrease_size.svg" style="fill: var(--dark-font)" class="text-decrease" *ngIf="readerMeta.font_size > 60" (click)=changeFontSize(0)></ion-icon>
+        <ion-icon src="assets/decrease_size.svg" style="fill: var(--dark-font)" class="text-decrease-disabled" *ngIf="readerMeta.font_size <= 60"></ion-icon>
+        <ion-icon src="assets/increase_size.svg" style="fill: var(--dark-font)" class="text-increase" *ngIf="readerMeta.font_size < 200" (click)=changeFontSize(1)></ion-icon>
+        <ion-icon src="assets/increase_size.svg" style="fill: var(--dark-font)" class="text-increase-disabled" *ngIf="readerMeta.font_size >= 200"></ion-icon>
+      </div>
+    </ion-col>
+    <ion-col size="auto" class="ion-align-self-center" style="text-align: center;min-width: 70px;">
+      <ion-icon name="ellipse" class="highlight-color" style="font-size: 34px; margin-bottom: 2px" [ngStyle]="{'color': readerMeta.last_highlight_color}" (click)="setHighlightColor($event)"></ion-icon>
+    </ion-col>
+    <ion-col size="auto" class="ion-align-self-center" style="text-align: center;min-width: 75px;">
+      <ion-icon style="width: 33px;height: 33px; vertical-align: middle; margin-top: 4px;" title="auto highlight" src="assets/Reader/highlighter.svg" [ngStyle]="autoHighlight && {'fill': readerMeta.last_highlight_color}" (click)="toggleAutoHighlight()"></ion-icon>
+    </ion-col>
+    <ion-col size="auto" class="ion-align-self-center" style="text-align: center;min-width: 70px;">
+      <ion-icon style="width: 30px;height: 30px; vertical-align: middle;margin-bottom: 5px; margin-right: 5px" title="delete annotation" src="assets/Reader/eraser.svg" [ngStyle]="autoDelete && {'fill': 'var(--ion-color-primary)'}" (click)="toggleAutoDelete()"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>

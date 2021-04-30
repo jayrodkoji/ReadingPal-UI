@@ -1,0 +1,38 @@
+<ion-card style="min-height: 84px;">
+  <ion-grid style="padding: 0">
+    <ion-row style="height: 100%; background: var(--frosted)" class="ion-align-items-center">
+      <ion-col>
+        <div>
+          <h3 style="margin-left: 20px; user-select: none">{{group.name}}</h3>
+        </div>
+      </ion-col>
+      <ion-col *ngIf="students" size="7" size-xl="5" style="min-width: 150px;">
+        <app-student-avatars [slideOptions]="slideOptions" [students]="students"></app-student-avatars>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="students" class="ion-align-items-center ion-justify-content-between">
+      <ion-col size="auto">
+        <ion-button fill="clear" [disabled]="studentsToAdd.length == students.length" (click)="addStudents(students)">Select All</ion-button>
+        <ion-button fill="clear" [disabled]="(studentsToAdd.length == 0)" (click)="addStudents([])">Deselect All</ion-button>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button fill="clear" (click)="selected = !selected">
+          <ion-icon [name]="selected ?'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="selected">
+      <ion-col>
+        <hr style="margin: 5px 0;">
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="selected">
+      <ion-col size="6" *ngFor="let student of students">
+        <ion-item>
+          <ion-label>{{student.firstName}} {{student.lastName}}</ion-label>
+          <ion-checkbox slot="start" [checked]="isInList(student)" (ionChange)="addSingleStudent($event, student)"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

@@ -1,0 +1,51 @@
+.highlight {
+    --background: #EE3A23;
+    --color: white;
+    outline: none;
+}
+
+ion-icon {
+    color: #212121;
+}
+
+ion-icon:hover {
+    opacity: .7;
+}
+
+.selected {
+    --color: #fff;
+    --background: var(--ion-color-primary)
+}
+
+.item-disabled {
+    opacity: 1;
+}
+
+.selected-button {
+    --color: var(--ion-color-primary);
+    --background: rgba(245, 58, 58, 0.05);
+    --background-hover: rgba(245, 58, 58, 0.05);
+    --border-bottom: 3px var(--ion-color-primary);
+    border-bottom: 2px solid var(--ion-color-primary);
+}
+
+.selected-user {
+    --background: rgba(245, 58, 58, 0.05);
+}
+
+.not-selected-user {
+    --background-hover: rgba(245, 58, 58, 0.05);
+}
+
+.annotation {
+    filter: grayscale(100%);
+    opacity: 0.3;
+}
+
+.annotation:hover {
+    filter: grayscale(0%);
+}
+
+.button-disabled{
+    opacity: 1;
+}

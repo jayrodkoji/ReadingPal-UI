@@ -1,0 +1,99 @@
+#buttons{
+    position: fixed;
+    width: 100%;
+    top: 50%;
+}
+
+.highlight-color {
+    font-size: 8px;
+    vertical-align: middle;
+}
+
+.options-card {
+    position: fixed;
+    opacity: .95;
+    width: 45%;
+    max-width: 550px;
+    bottom: 10%;
+    right: 0;
+    left: 0;
+    margin: auto;
+    --color: #EBEBEB;
+}
+
+ion-icon {
+    color: #212121;
+    height: 30px;
+    width: 30px;
+}
+
+.word-speed {
+    height: 20px;
+    width: 20px;
+    padding-bottom: 2px;
+}
+
+.text-increase {
+    font-size: 25px;
+    width: 45px;
+    height: 45px;
+}
+
+.text-increase:hover {
+    opacity: .7;
+}
+
+.text-decrease {
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    padding-bottom: 2px;
+}
+
+.text-decrease:hover {
+    opacity: .7;
+}
+
+.stop {
+    height: 40px;
+    width: 40px;
+}
+
+.text-decrease-disabled {
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    padding-bottom: 2px;
+    opacity: .3;
+}
+
+.text-decrease-disabled:hover {
+    opacity: .3;
+}
+
+.text-increase-disabled {
+    font-size: 25px;
+    width: 45px;
+    height: 45px;
+    opacity: .3;
+}
+
+.text-increase-disabled:hover {
+    opacity: .3;
+}
+
+.my-custom-menu {
+    --width: 45%;
+    --max-width: 400px;
+}
+
+.menu-button {
+    position: fixed;
+    width: 50px;
+    height: 40px;
+    bottom: 10px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    color: #212121;
+}

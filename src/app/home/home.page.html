@@ -1,0 +1,225 @@
+
+<ion-content [fullscreen]="true">
+  <div>
+    <div class="bg-img">
+      <div class="header-container">
+        <a href="#" class="header-title margin-bottom-md"><img src="../../assets/white_logo.png"></a> -->
+        <div class="header-cta-container">
+          <ion-button fill="clear" style="--background-hover-opacity: .2; --background-hover: white; color: white" (click)="presentLoginModal()">Login</ion-button>
+        </div>
+        <div class="header-cta-container">
+          <ion-button fill="clear" style="--background-hover-opacity: .2; --background-hover: white; color: white"
+                      routerLink="/team" routerDirection="root">Team</ion-button>
+        </div>
+        <div class="header-cta-container">
+          <ion-button fill="clear" style="--background-hover-opacity: .2; --background-hover: white; color: white"
+                      routerLink="/tutorial" routerDirection="root">Tutorial</ion-button>
+        </div>
+      </div>
+      <div class="container text-center">
+        <h1 class="hero-header">Bridging the Reading Gap</h1>
+
+        <p class="col-8 col-10-sm text-center margin-top-lg padding-bottom-xlg center-block text-white" style="margin-bottom: 10%; font-size: 20px;">Reading Pal is an online platform for teaching reading in an interactive, modern manner. </p>
+      </div>
+    </div>
+    <div style="height:40px;"></div>
+    <!--<div class="container col-12 why margin-bottom-xlg padding-bottom-lg" id="learn-more">
+      <div class="row text-center">
+        <ion-slides pager="true" [options]="{speed: 400}">
+          <ion-slide>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="auto">
+                  <h3>For Teachers</h3>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="col-4 col-12-sm text-center">
+                    <img src="https://farm5.staticflickr.com/4751/24960508607_4d45f8abcc_o.png">
+                    <h3>Boost Efficiency</h3>
+                    <p class="text-grey center-block">Our integrated lesson builder makes it a breeze to build lessons out of other components.</p>
+                  </div>
+                  <div class="col-4 col-12-sm text-center">
+                    <img src="https://farm5.staticflickr.com/4666/28052002329_5d40672846_o.png">
+                    <h3>Improve Accuracy</h3>
+                    <p class="text-grey center-block">Our proven process will have a high impact on your work effectiveness. Simply put - succeed more often and make fewer mistakes.</p>
+                  </div>
+                  <div class="col-4 col-12-sm text-center">
+                    <img src="https://farm5.staticflickr.com/4672/39798770352_ff85c9b4c5_o.png">
+                    <h3>Drive Growth</h3>
+                    <p class="text-grey center-block">Together we increase your work output. You will be able do more with less so you can focus on key areas to drive the highest level of growth.</p>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-slide>
+          <ion-slide>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="auto">
+                  <h3>For Students</h3>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div class="col-4 col-12-sm text-center">
+                    <img src="https://farm5.staticflickr.com/4751/24960508607_4d45f8abcc_o.png">
+                    <h3>Boost Efficiency</h3>
+                    <p class="text-grey center-block">We help you work in a well-organized and competent manner, enabling you to make the best use of your time and resources.</p>
+                  </div>
+                  <div class="col-4 col-12-sm text-center">
+                    <img src="https://farm5.staticflickr.com/4666/28052002329_5d40672846_o.png">
+                    <h3>Improve Accuracy</h3>
+                    <p class="text-grey center-block">Our proven process will have a high impact on your work effectiveness. Simply put - succeed more often and make fewer mistakes.</p>
+                  </div>
+                  <div class="col-4 col-12-sm text-center">
+                    <img src="https://farm5.staticflickr.com/4672/39798770352_ff85c9b4c5_o.png">
+                    <h3>Drive Growth</h3>
+                    <p class="text-grey center-block">Together we increase your work output. You will be able do more with less so you can focus on key areas to drive the highest level of growth.</p>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </div>-->
+    <ion-grid class="ion-no-padding">
+      <ion-row style="padding: 10px">
+        <ion-col offset-sm="0" size-sm="12" offset-lg="3" size-lg="6">
+          <h2 style="text-align: center">
+            Reading Pal is the ideal environment for reading teachers and students.
+          </h2>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-bottom: 20px; padding: 5px">
+        <ion-col offset-sm="0" size-sm="12" offset-lg="3" size-lg="6">
+          <p style="text-align: center; font-size: 20px">
+            By putting reading education on the web, teachers can constantly track their students' progress.
+            Our platform also rewards students with badges and experience points as they work through material and practice reading.
+          </p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="bg-lightestgray" style="padding: 25px 20px;">
+        <ion-col offset-sm="0" size-xs="12" size-sm="12" size-md="6">
+          <ion-card>
+            <ion-slides pager="true" [options]="{speed: 400}">
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/ereader-1.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/ereader-2.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/ereader-3.png" />
+              </ion-slide>
+            </ion-slides>
+          </ion-card>
+        </ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="5" style="padding-left: 24px">
+          <ion-grid style="height: 100%;">
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="auto">
+                <h2>Our e-reader is built for everyone</h2>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center" style="margin-top: 10px;">
+              <ion-col size="8">
+                <p style="font-size: 20px;">
+                  Reading Pal's integrated e-reader is packed with customization features, ensuring every student can comfortably read the assigned materials.
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-around" style="padding: 25px 20px;">
+        <ion-col size-xs="12" size-sm="12" size-md="5">
+          <ion-grid style="height: 100%;">
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="auto">
+                <h2>Teachers can easily create lessons</h2>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center" style="margin-top: 10px;">
+              <ion-col size="8">
+                <p style="font-size: 20px;">
+                  Not only can teachers create lessons from scratch, they can also copy other lessons or import specific components directly from the lesson builder.
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+        <ion-col offset-sm="0" size-xs="12" size-sm="12" size-md="6">
+          <ion-card>
+            <ion-slides pager="true" [options]="{speed: 400}">
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/lesson-creator-1.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/lesson-creator-2.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/lesson-creator-3.png" />
+              </ion-slide>
+            </ion-slides>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="bg-lightestgray padding-bottom-lg" style="padding: 25px 20px;">
+        <ion-col offset-sm="0" size-xs="12" size-sm="12" size-md="6">
+          <ion-card>
+            <ion-slides pager="true" [options]="{speed: 400, slideToClickedSlide: true}">
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/student-1.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/student-2.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/student-3.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/student-4.png" />
+              </ion-slide>
+              <ion-slide>
+                <img draggable="false" ondragstart="return false;" class="img-responsive center-block" src="../../assets/home/student-5.png" />
+              </ion-slide>
+            </ion-slides>
+          </ion-card>
+        </ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="5" style="padding-left: 24px">
+          <ion-grid style="height: 100%;">
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="auto">
+                <h2>Students are rewarded for their effort</h2>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center" style="margin-top: 10px;">
+              <ion-col size="8">
+                <p style="font-size: 20px;">
+                  Reading Pal's quiz environment looks clean and rewards students with badges their teachers create.
+                </p>
+                <p style="font-size: 20px;">
+                  We also have a vocabulary game that gives students experience points based on how well they do.
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div id="footer" class="full-width bg-darkestgray padding-top-lg padding-bottom-lg">
+      <div class="container col-12 text-gray">
+        <p style="text-align: center">Copyright 2021 Reading Pal</p>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

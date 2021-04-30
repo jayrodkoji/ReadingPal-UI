@@ -1,0 +1,20 @@
+ion-select {
+  position: absolute;
+  right: 0;
+}
+
+.filters {
+  min-width: 135px;
+  --min-height: 42px;
+  border-left: 1px solid #f3f3f3;
+  --background-hover: var(--ion-color-primary);
+}
+
+.lesson-card {
+  min-height: 90%;
+}
+
+.lesson-card:hover {
+  opacity: .9;
+  box-shadow: 1px 1px 5px grey;
+}
