@@ -11,7 +11,7 @@ import { User } from 'src/app/_models/user';
   providedIn: 'root'
 })
 export class AccountServices {
-  private baseUrl: string = environment.gatewayBaseUrl;
+  private baseUrl: string = environment.DevApiGateway;
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
@@ -24,7 +24,7 @@ export class AccountServices {
   }
 
   login(username: string, password: string) {
-    return this.http.get(this.baseUrl + `/users/basicauth`,
+    return this.http.get(this.baseUrl + '/users/basicauth',
     { headers: { authorization: 'Basic ' + window.btoa(username  + ":" + password) }})
     .pipe(
       map((user: any) => {

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountServices } from 'src/app/Providers/account/account.services';
-import {ModalController} from "@ionic/angular";
+import { ModalController } from "@ionic/angular";
 
 @Component({
   selector: 'app-login',
