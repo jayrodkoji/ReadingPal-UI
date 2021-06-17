@@ -9,10 +9,10 @@ import { BOOKS } from '../../../tempData/mock-books';
 import { GetBooksService } from '../../../Providers/books/get-books.service';
 import { BookInfo } from '../../../model/book-info';
 import { LessonService } from '../../../Providers/lesson-services/lesson.service';
-import { ImageUtils } from 'src/app/rp-utils/image-utils';
+import { ImageUtils } from 'src/app/utils/image-utils';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VocabularyServicesService } from "../../../Providers/vocabulary-services/vocabulary-services.service";
-import { VocabDefinitionComponent } from "../../../Components/popover/vocab/vocab-definition/vocab-definition.component";
+import { VocabDefinitionComponent } from "../../../shared/popover/vocab/vocab-definition/vocab-definition.component";
 import { PopoverController } from "@ionic/angular";
 import {BadgeControllerService} from '../../../Providers/badges/badge-controller.service';
 import {BadgeData} from "../../../Providers/badges/badge-data";
@@ -222,27 +222,4 @@ export class LessonOverviewPage implements OnInit {
         );
     }
   }
-
-  playVocabGame() {
-    const navigationExtras: NavigationExtras = {
-      replaceUrl: false,
-      state: {
-        lessonId: this.lessonId
-      }
-    };
-    this.router.navigate(['/student/game'], navigationExtras);
-  }
-
-  // TODO: Reimplement
-  /*get quizOverviewsVocabulary(): QuizOverview[] {
-    return (this.quizOverviews && this.quizOverviews.vocabulary) ? this.quizOverviews.vocabulary : [];
-  }
-
-  get quizOverviewsComprehension(): QuizOverview[] {
-    return (this.quizOverviews && this.quizOverviews.comprehension) ? this.quizOverviews.comprehension : [];
-  }
-
-  get quizOverviewsComprehensive(): QuizOverview[] {
-    return (this.quizOverviews && this.quizOverviews.comprehensive) ? this.quizOverviews.comprehensive : [];
-  }*/
 }

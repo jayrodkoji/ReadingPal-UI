@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TeacherPageRoutingModule } from './teacher-routing.module';
 import { TeacherPage } from './teacher.page';
-import { SharedModuleModule } from "../shared-module/shared-module.module";
+import { SharedModule } from "../shared/shared.module";
 import { LessonOptionsPopComponent } from './lessons/browse-lessons/lesson-options-pop/lesson-options-pop.component';
 
 @NgModule({
@@ -13,7 +13,7 @@ import { LessonOptionsPopComponent } from './lessons/browse-lessons/lesson-optio
     FormsModule,
     IonicModule,
     TeacherPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [
     TeacherPage,

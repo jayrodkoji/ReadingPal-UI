@@ -7,8 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LessonPageRoutingModule } from './lesson-routing.module';
 
 import { LessonPage } from './lesson.page';
-import { RatingComponent } from 'src/app/Components/rating/rating.component';
-import {SharedModuleModule} from "../../shared-module/shared-module.module";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -17,7 +16,7 @@ import {SharedModuleModule} from "../../shared-module/shared-module.module";
     FormsModule,
     IonicModule,
     LessonPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [LessonPage]
 })

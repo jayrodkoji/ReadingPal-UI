@@ -5,7 +5,7 @@ import {GroupControllerService} from '../../../../../Providers/group-controller/
 import {ModalController} from '@ionic/angular';
 import {BehaviorSubject, forkJoin} from 'rxjs';
 import {UsersService} from '../../../../../Providers/user-controller/users.service';
-import {ImageUtils} from "../../../../../rp-utils/image-utils";
+import {ImageUtils} from "../../../../../utils/image-utils";
 import {DomSanitizer} from "@angular/platform-browser";
 import {AddGroupModalComponent} from "../../../../../modals/groups/add-group-modal/add-group-modal.component";
 

@@ -5,7 +5,6 @@ import { CompletedLessonService } from 'src/app/Providers/completed-lesson/compl
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { ExperienceControllerService } from 'src/app/Providers/experience-controller/experience-controller.service';
-import { ExperienceLevel } from 'src/app/Components/experience-bar/experience-bar.component';
 
 @Component({
   selector: 'app-reports',

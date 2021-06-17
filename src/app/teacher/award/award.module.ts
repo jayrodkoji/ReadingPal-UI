@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { AwardPageRoutingModule } from './award-routing.module';
 
 import { AwardPage } from './award.page';
-import {BadgeCreatorComponent} from '../../Components/badge-creator/badge-creator.component';
-import {SharedModuleModule} from "../../shared-module/shared-module.module";
+import {BadgeCreatorComponent} from '../../shared/badge-creator/badge-creator.component';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import {SharedModuleModule} from "../../shared-module/shared-module.module";
     FormsModule,
     IonicModule,
     AwardPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [
     AwardPage,

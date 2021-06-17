@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
 import { UsersModel } from 'src/app/Providers/user-controller/model/users-model'
-import { ImageUtils } from 'src/app/rp-utils/image-utils';
+import { ImageUtils } from 'src/app/utils/image-utils';
 
 @Component({
   selector: 'app-add-user-modal',

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
-import {SharedModuleModule} from '../../shared-module/shared-module.module';
+import {SharedModule} from '../../shared/shared.module';
 import {AssignmentListViewComponent} from './assignment-list-view/assignment-list-view.component';
 
 
@@ -14,7 +14,7 @@ import {AssignmentListViewComponent} from './assignment-list-view/assignment-lis
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [
     HomePage,

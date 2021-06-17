@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { BadgeCreatorComponent } from 'src/app/Components/badge-creator/badge-creator.component';
-import {BadgeRowComponent} from '../../../../Components/badge-row/badge-row.component';
+import { BadgeCreatorComponent } from 'src/app/shared/badge-creator/badge-creator.component';
+import {BadgeRowComponent} from '../../../../shared/badge-row/badge-row.component';
 
 @Component({
   selector: 'app-award',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { BadgeCreatorComponent } from 'src/app/Components/badge-creator/badge-creator.component';
+import { BadgeCreatorComponent } from 'src/app/shared/badge-creator/badge-creator.component';
 import { BadgeControllerService } from 'src/app/Providers/badges/badge-controller.service';
 import { BadgeData } from 'src/app/Providers/badges/badge-data';
 

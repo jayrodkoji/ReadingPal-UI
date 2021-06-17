@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LibraryPageRoutingModule } from './library-routing.module';
 
 import { LibraryPage } from './library.page';
-import {SharedModuleModule} from "../shared-module/shared-module.module";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import {SharedModuleModule} from "../shared-module/shared-module.module";
     FormsModule,
     IonicModule,
     LibraryPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [LibraryPage]
 })

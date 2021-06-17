@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BadgesPageRoutingModule } from './badges-routing.module';
 
 import { BadgesPage } from './badges.page';
-import {SharedModuleModule} from '../../shared-module/shared-module.module';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import {SharedModuleModule} from '../../shared-module/shared-module.module';
     FormsModule,
     IonicModule,
     BadgesPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [BadgesPage]
 })

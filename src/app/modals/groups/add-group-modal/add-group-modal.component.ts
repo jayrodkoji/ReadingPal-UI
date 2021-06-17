@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from "@ionic/angular";
-import {ImageUtils} from "../../../rp-utils/image-utils";
+import {ImageUtils} from "../../../utils/image-utils";
 import {DomSanitizer} from "@angular/platform-browser";
 import {GroupControllerService} from "../../../Providers/group-controller/group-controller.service";
 

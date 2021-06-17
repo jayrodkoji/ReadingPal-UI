@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {BadgeData, BadgeIcon} from './badge-data';
-import {ImageUtils} from '../../rp-utils/image-utils';
+import {ImageUtils} from '../../utils/image-utils';
 import {LessonPostData} from "../lesson-services/lesson-services-models/lesson-post-data";
 import {LessonArray, LessonData} from "../lesson-services/lesson-services-models/lesson-data";
 

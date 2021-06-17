@@ -1,4 +1,4 @@
-import {ImageUtils} from "../../rp-utils/image-utils";
+import {ImageUtils} from "../../utils/image-utils";
 import {Role} from "../user-controller/model/users-model";
 
 export class StudentData

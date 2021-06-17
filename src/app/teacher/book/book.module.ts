@@ -11,7 +11,7 @@ import {AddBookModalComponent} from "./add-book-modal/add-book-modal.component";
 import {FileUploadModule} from "ng2-file-upload";
 import {DragDropDirectiveDirective} from "../../Directives/drag-drop-directive.directive";
 import {NgxFileDropModule} from "ngx-file-drop";
-import {SharedModuleModule} from "../../shared-module/shared-module.module";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import {SharedModuleModule} from "../../shared-module/shared-module.module";
     BookPageRoutingModule,
     FileUploadModule,
     NgxFileDropModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [BookPage, AddBookModalComponent, DragDropDirectiveDirective]
 })

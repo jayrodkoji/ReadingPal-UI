@@ -8,7 +8,7 @@ import { TeamPageRoutingModule } from './team-routing.module';
 
 import { TeamPage } from './team.page';
 import {TeamCardComponent} from "./team-card/team-card.component";
-import {SharedModuleModule} from "../shared-module/shared-module.module";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import {SharedModuleModule} from "../shared-module/shared-module.module";
     FormsModule,
     IonicModule,
     TeamPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [TeamPage, TeamCardComponent]
 })

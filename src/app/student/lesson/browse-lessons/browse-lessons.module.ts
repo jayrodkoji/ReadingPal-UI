@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BrowseLessonsPageRoutingModule } from './browse-lessons-routing.module';
 
 import { BrowseLessonsPage } from './browse-lessons.page';
-import {SharedModuleModule} from "../../../shared-module/shared-module.module";
+import {SharedModule} from "../../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import {SharedModuleModule} from "../../../shared-module/shared-module.module";
     FormsModule,
     IonicModule,
     BrowseLessonsPageRoutingModule,
-    SharedModuleModule
+    SharedModule
   ],
   declarations: [BrowseLessonsPage]
 })

@@ -1,4 +1,4 @@
-import {ImageUtils} from "../../../rp-utils/image-utils";
+import {ImageUtils} from "../../../utils/image-utils";
 
 export class UsersModel
 {

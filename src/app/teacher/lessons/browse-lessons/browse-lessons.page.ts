@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LessonArray, LessonData} from '../../../Providers/lesson-services/lesson-services-models/lesson-data';
-import {ImageUtils} from '../../../rp-utils/image-utils';
+import {ImageUtils} from '../../../utils/image-utils';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ModalController, PopoverController} from '@ionic/angular';
 import { LessonService } from 'src/app/Providers/lesson-services/lesson.service';

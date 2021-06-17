@@ -4,7 +4,7 @@ import { Location } from '@angular/common'
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { WordOptionsComponent } from '../Components/popover/word-options/word-options.component';
+import { WordOptionsComponent } from '../shared/popover/word-options/word-options.component';
 import { ImageModalPage } from '../modals/image-modal/image-modal.page';
 import { ReaderControlsPage } from '../modals/reader-controls/reader-controls.page';
 import { UsersService } from "../Providers/user-controller/users.service";
@@ -12,7 +12,7 @@ import { ReaderMetaService } from "../Providers/reader-meta/reader-meta.service"
 import { AnnotationData } from "../Providers/reader-meta/model/annotationData";
 import { Contents, EpubCFI } from 'epubjs';
 import { User } from "../_models/user";
-import { ImageUtils } from "../rp-utils/image-utils";
+import { ImageUtils } from "../utils/image-utils";
 import { DomSanitizer } from "@angular/platform-browser";
 import {FinishedReadingComponent} from "./finished-reading/finished-reading.component";
 import {LessonData} from "../Providers/lesson-services/lesson-services-models/lesson-data";

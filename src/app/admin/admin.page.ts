@@ -12,7 +12,7 @@ import { UserRole } from '../content-dto/UserRole';
 import { ClassControllerService } from '../Providers/class-controller/class-controller.service';
 import { ClassData, newClassData } from '../Providers/class-controller/class-data'
 import { UsersModel } from '../Providers/user-controller/model/users-model';
-import { ImageUtils } from '../rp-utils/image-utils';
+import { ImageUtils } from '../utils/image-utils';
 import { AddClassModalComponent } from './add-class-modal/add-class-modal/add-class-modal.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 import { ClassRosterModalComponent } from './class-roster-modal/class-roster-modal.component';

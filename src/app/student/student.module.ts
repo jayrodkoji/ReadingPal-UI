@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { StudentPageRoutingModule } from './student-routing.module';
 import { StudentPage } from './student.page';
-import {SharedModuleModule} from "../shared-module/shared-module.module";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import {SharedModuleModule} from "../shared-module/shared-module.module";
     FormsModule,
     IonicModule,
     StudentPageRoutingModule,
-    SharedModuleModule,
+    SharedModule,
   ],
   declarations: [
     StudentPage,

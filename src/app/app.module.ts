@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RpUtilsModule } from './rp-utils/rp-utils.module';
+import { RpUtilsModule } from './utils/rp-utils.module';
 
 // import {NgxEchartsModule} from 'ngx-echarts';
 import { ChartsModule } from 'ng2-charts';

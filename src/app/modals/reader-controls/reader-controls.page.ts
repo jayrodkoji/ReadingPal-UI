@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { ColorSelectPage } from 'src/app/Components/popover/color-select/color-select.page';
+import { ColorSelectPage } from 'src/app/shared/popover/color-select/color-select.page';
 import { PopoverController } from '@ionic/angular';
-import {ReaderMetaService} from "../../Providers/reader-meta/reader-meta.service";
-import {audit} from "rxjs/operators";
 
 @Component({
   selector: 'app-reader-controls',

@@ -1,20 +1,19 @@
-import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import { QuizQuestion} from '../Providers/quiz-controller/quiz-data';
-import {CompletedLessonService} from '../Providers/completed-lesson/completed-lesson.service';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { QuizQuestion } from '../Providers/quiz-controller/quiz-data';
+import { CompletedLessonService } from '../Providers/completed-lesson/completed-lesson.service';
 import {
   CompletedChoiceData,
   CompletedLessonData, CompletedLessonResult,
   CompletedQuestionData
 } from '../Providers/completed-lesson/Model/completed-lesson-data';
-import {ModalController, NavController} from '@ionic/angular';
-import {QuizControllerService} from '../Providers/quiz-controller/quiz-controller.service';
-import {Observable, Subject} from 'rxjs';
-import {QuizQuestionComponent} from './quiz-question/quiz-question.component';
-import {BadgeControllerService} from '../Providers/badges/badge-controller.service';
-import {LessonControllerService} from '../Providers/teacher/lesson-controller.service';
-import {LessonData} from '../Providers/lesson-services/lesson-services-models/lesson-data';
-import {AwardReceivedComponent} from '../Components/award-received/award-received.component';
+import { ModalController, NavController } from '@ionic/angular';
+import { QuizControllerService } from '../Providers/quiz-controller/quiz-controller.service';
+import { Observable, Subject } from 'rxjs';
+import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
+import { BadgeControllerService } from '../Providers/badges/badge-controller.service';
+import { LessonControllerService } from '../Providers/teacher/lesson-controller.service';;
+import { AwardReceivedComponent } from '../shared/award-received/award-received.component';
 
 @Component({
   selector: 'app-quiz',

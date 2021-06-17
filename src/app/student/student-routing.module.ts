@@ -33,16 +33,12 @@ const routes: Routes = [
       },
       {
         path: 'messages',
-        loadChildren: () => import('../Components/messages/messages.module').then(m => m.MessagesPageModule)
+        loadChildren: () => import('../shared/messages/messages.module').then(m => m.MessagesPageModule)
       },
       {
         path: 'badges',
         loadChildren: () => import('./badges/badges.module').then( m => m.BadgesPageModule)
       },
-      {
-        path: 'games',
-        loadChildren: () => import('./game/game.module').then(m => m.GamePageModule)
-      }
     ]
   },
   {

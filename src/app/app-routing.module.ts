@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'color-select',
-    loadChildren: () => import('./Components/popover/color-select/color-select.module').then( m => m.ColorSelectPageModule)
+    loadChildren: () => import('./shared/popover/color-select/color-select.module').then( m => m.ColorSelectPageModule)
   },
   {
     path: 'image-modal',
@@ -54,12 +54,8 @@ const routes: Routes = [
     loadChildren: () => import('./library/library.module').then( m => m.LibraryPageModule)
   },
   {
-    path: 'game',
-    loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
-  },
-  {
     path: 'bad-login',
-    loadChildren: () => import('./bad-login/bad-login.module').then( m => m.BadLoginPageModule)
+    loadChildren: () => import('./errors/bad-login/bad-login.module').then( m => m.BadLoginPageModule)
   },
   {
     path: 'team',

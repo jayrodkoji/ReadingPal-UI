@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BadgeData } from 'src/app/Providers/badges/badge-data';
-import { ImageUtils } from 'src/app/rp-utils/image-utils';
+import { ImageUtils } from 'src/app/utils/image-utils';
 import { BadgeControllerService } from "../../../Providers/badges/badge-controller.service";
 import { Output, EventEmitter } from '@angular/core';
 

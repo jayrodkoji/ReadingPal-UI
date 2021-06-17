@@ -4,7 +4,7 @@ import { BOOKS } from 'src/app/tempData/mock-books';
 import {StudentService} from '../../Providers/student-controller/student.service';
 import {LessonService} from '../../Providers/lesson-services/lesson.service';
 import {BehaviorSubject, forkJoin, Observable, Subject} from 'rxjs';
-import {ImageUtils} from '../../rp-utils/image-utils';
+import {ImageUtils} from '../../utils/image-utils';
 import {GetBooksService} from '../../Providers/books/get-books.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import * as dayjs from 'dayjs';

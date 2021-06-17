@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { GetBooksService } from 'src/app/Providers/books/get-books.service';
 import { LessonArray, LessonData } from 'src/app/Providers/lesson-services/lesson-services-models/lesson-data';
 import { LessonService } from 'src/app/Providers/lesson-services/lesson.service';
-import { ImageUtils } from 'src/app/rp-utils/image-utils';
+import { ImageUtils } from 'src/app/utils/image-utils';
 
 @Component({
   selector: 'app-browse-lessons',

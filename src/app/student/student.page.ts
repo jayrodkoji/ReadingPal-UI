@@ -16,8 +16,7 @@ export class StudentPage implements OnInit {
     { title: 'library', url: '/student/library' },
     { title: 'reports', url: '/student/reports' },
     { title: 'messages', url: '/student/messages' },
-    { title: 'badges', url: '/student/badges' },
-    { title: 'games', url: '/student/games' }
+    { title: 'badges', url: '/student/badges' }
   ];
 
   public selectedTitle: string;

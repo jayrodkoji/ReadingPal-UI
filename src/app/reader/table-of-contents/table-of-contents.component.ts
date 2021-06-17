@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MenuController, PopoverController} from '@ionic/angular';
 import {AnnotationOptionsComponent} from "./annotation-options/annotation-options.component";
-import {ImageUtils} from "../../rp-utils/image-utils";
+import {ImageUtils} from "../../utils/image-utils";
 import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({

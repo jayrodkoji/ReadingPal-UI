@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
 import { ClassControllerService } from 'src/app/Providers/class-controller/class-controller.service';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
-import { ImageUtils } from 'src/app/rp-utils/image-utils';
+import { ImageUtils } from 'src/app/utils/image-utils';
 import { ClassData, newClassData } from '../../../Providers/class-controller/class-data'
 
 @Component({
