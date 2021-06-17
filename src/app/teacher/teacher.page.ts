@@ -41,14 +41,8 @@ export class TeacherPage implements OnInit {
     private router: Router,
 ) { }
 
-  ngOnInit() {
-    const uRole = localStorage.getItem('logedInRole');
-    console.log(uRole);
-    if (uRole !== 'ROLE_TEACHER') {
-      this.router.navigate(['../bad-login'], { replaceUrl: true });
-    }
-
-  }
+  ngOnInit() {}
+  
   openCustom() {
     this.menu.enable(true, 'first');
     this.menu.open('first');

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundPage } from '../errors/page-not-found/page-not-found.page';
 
 import { StudentPage } from './student.page';
 
@@ -19,7 +20,7 @@ const routes: Routes = [
         loadChildren: () => import('../student/home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'lesson',
+        path: 'lessons',
         loadChildren: () => import('./lesson/lesson.module').then( m => m.LessonPageModule)
       },
       {
@@ -39,36 +40,15 @@ const routes: Routes = [
         loadChildren: () => import('./badges/badges.module').then( m => m.BadgesPageModule)
       },
       {
-        path: 'game',
+        path: 'games',
         loadChildren: () => import('./game/game.module').then(m => m.GamePageModule)
       }
     ]
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'lesson',
-    loadChildren: () => import('./lesson/lesson.module').then( m => m.LessonPageModule)
-  },
-  {
-    path: 'classes',
-    loadChildren: () => import('./classes/classes.module').then( m => m.ClassesPageModule)
-  },
-  {
-    path: 'reports',
-    loadChildren: () => import('./reports/reports.module').then( m => m.ReportsPageModule)
-  },
-  {
-    path: 'game',
-    loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
+    path: '**',
+    component: PageNotFoundPage
   }
-
-
-
-
-
 ];
 
 @NgModule({

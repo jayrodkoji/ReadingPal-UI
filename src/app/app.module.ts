@@ -31,7 +31,6 @@ import { ChartsModule } from 'ng2-charts';
     AppRoutingModule,
     RpUtilsModule,
     ChartsModule
-    // NgxEchartsModule
   ],
   providers: [
     StatusBar,

@@ -1,4 +1,4 @@
-<ion-split-pane when="md" contentId="main">
+<!-- <ion-split-pane when="md" contentId="main">
   <ion-menu class="side-pane" contentId="main" type="overlay">
     <ion-header class='card ion-no-border' style="border:none;">
       <div style="height:100%; padding: 0px;">
@@ -31,4 +31,5 @@
   </ion-menu>
 
   <ion-router-outlet id="main"></ion-router-outlet>
-</ion-split-pane>
+</ion-split-pane> -->
+<app-side-menu [pages]='this.studentPages'></app-side-menu>
