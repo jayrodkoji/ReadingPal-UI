@@ -76,7 +76,7 @@ import { RouterModule } from '@angular/router';
         GroupOptionsPopoverComponent,
         UserCardComponent,
         TopBadgesComponent,
-        SplitPaneComponent
+        SplitPaneComponent,
     ]
 })
 export class SharedModule { }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ColorSelectPage } from 'src/app/shared/popover/color-select/color-select.page';
 import { PopoverController } from '@ionic/angular';
 
@@ -21,7 +21,7 @@ export class ReaderControlsPage implements OnInit {
   guide_speed = 63;
 
   constructor(
-      private popoverController: PopoverController,
+    private popoverController: PopoverController,
   ) { }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class ReaderControlsPage implements OnInit {
     this.autoHighlightEvent.emit(this.autoHighlight)
     this.autoDeleteEvent.emit(this.autoDelete)
   }
-  
+
   async setHighlightColor(ev: Event) {
     const popover = await this.popoverController.create({
       component: ColorSelectPage,

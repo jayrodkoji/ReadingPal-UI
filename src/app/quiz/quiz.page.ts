@@ -12,8 +12,9 @@ import { QuizControllerService } from '../Providers/quiz-controller/quiz-control
 import { Observable, Subject } from 'rxjs';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { BadgeControllerService } from '../Providers/badges/badge-controller.service';
-import { LessonControllerService } from '../Providers/teacher/lesson-controller.service';;
+import { LessonControllerService } from '../Providers/teacher/lesson-controller.service';
 import { AwardReceivedComponent } from '../shared/award-received/award-received.component';
+;
 
 @Component({
   selector: 'app-quiz',

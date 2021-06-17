@@ -8,13 +8,15 @@ import { QuizPageRoutingModule } from './quiz-routing.module';
 
 import { QuizPage } from './quiz.page';
 import {QuizQuestionComponent} from './quiz-question/quiz-question.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    QuizPageRoutingModule
+    QuizPageRoutingModule,
+    SharedModule
   ],
   declarations: [QuizPage, QuizQuestionComponent]
 })

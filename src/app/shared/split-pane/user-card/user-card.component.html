@@ -15,10 +15,10 @@
       <p *ngIf="userRole == 'ROLE_STUDENT'" class="welcome">Student {{firstName}}</p>
     </ion-col>
   </ion-row>
-  <ion-row class="avatar-row ion-justify-content-center">
+  <ion-row class="avatar-row ion-justify-content-center" >
     <ion-col size="6" size-sm="7" size-md="8" class="avatar-col ion-align-items-center">
       <ion-avatar>
-        <img [src]="student_avatar">
+        <img [src]="student_avatar" (error)="student_avatar = 'assets/user/default-avatar.png'" style="height: 120px; width: 120px;">
       </ion-avatar>
     </ion-col>
   </ion-row>
