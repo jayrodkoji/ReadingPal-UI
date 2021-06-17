@@ -1,12 +1,8 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<img [src]="dynamicStyle" style="position: fixed;height: 50%;object-fit: cover;">
+<img [src]="dynamicStyle" (error)="dynamicStyle = 'assets/default-banner.jpg'" style="position: fixed;height: 50%;object-fit: cover;">
 <ion-grid class="card">
-  <ion-row class="ion-justify-content-center" *ngIf="userRole && firstName">
+  <ion-row class="ion-justify-content-center">
     <ion-col size="any">
-      <h3 class="welcome" style="padding: 0px;margin: 0;">Welcome</h3>
+      <h2 class="welcome">Welcome</h2>
     </ion-col>
   </ion-row>
   <ion-row class="ion-justify-content-center" *ngIf="userRole && firstName">

@@ -48,7 +48,7 @@ export class UserCardComponent implements OnInit {
           this.dynamicStyle = 'data:image/png;base64,'
             + (this.sanitizer.bypassSecurityTrustResourceUrl(data['backgroundimage']) as any).changingThisBreaksApplicationSecurity;
         } else {
-          this.dynamicStyle = 'url(../../../assets/Banner.jpg)';
+          this.dynamicStyle = 'url(../../../assets/default-banner.jpg)';
         }
       });
 
