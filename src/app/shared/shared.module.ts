@@ -23,6 +23,7 @@ import { UserCardComponent } from "./split-pane/user-card/user-card.component";
 import { TopBadgesComponent } from "./top-badges/top-badges.component";
 import { SplitPaneComponent } from './split-pane/split-pane.component';
 import { RouterModule } from '@angular/router';
+import { UserPreferencesComponent } from './split-pane/user-card/user-preferences/user-preferences.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RouterModule } from '@angular/router';
         GroupOptionsPopoverComponent,
         UserCardComponent,
         TopBadgesComponent, 
-        SplitPaneComponent
+        SplitPaneComponent,
+        UserPreferencesComponent
     ],
     imports: [
         CommonModule,
@@ -77,6 +79,7 @@ import { RouterModule } from '@angular/router';
         UserCardComponent,
         TopBadgesComponent,
         SplitPaneComponent,
+        UserPreferencesComponent
     ]
 })
 export class SharedModule { }
