@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BADGES } from '../../tempData/badges'
 import { StudentService } from '../../Providers/student-controller/student.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -8,11 +7,11 @@ import { Router } from '@angular/router';
 import {BadgeControllerService} from '../../Providers/badges/badge-controller.service';
 
 @Component({
-  selector: 'app-student-card',
-  templateUrl: './student-card.component.html',
-  styleUrls: ['./student-card.component.scss'],
+  selector: 'app-user-card',
+  templateUrl: './user-card.component.html',
+  styleUrls: ['./user-card.component.scss'],
 })
-export class StudentCardComponent implements OnInit {
+export class UserCardComponent implements OnInit {
   student_avatar;
   dynamicStyle;
   badges: any[];

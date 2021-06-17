@@ -19,7 +19,7 @@ import { AddReadingBookSelectPopoverComponent } from "../teacher/lessons/create-
 import { FormsModule } from "@angular/forms";
 import { AddGroupModalComponent } from "../modals/groups/add-group-modal/add-group-modal.component";
 import { GroupOptionsPopoverComponent } from "../teacher/classes/group-options-popover/group-options-popover.component";
-import { StudentCardComponent } from "../Components/student-card/student-card.component";
+import { UserCardComponent } from "../Components/user-card/user-card.component";
 import { TopBadgesComponent } from "../Components/top-badges/top-badges.component";
 import { SideMenuComponent } from '../Components/side-menu/side-menu.component';
 import { RouterModule } from '@angular/router';
@@ -45,7 +45,7 @@ import { RouterModule } from '@angular/router';
         AddReadingBookSelectPopoverComponent,
         AddGroupModalComponent,
         GroupOptionsPopoverComponent,
-        StudentCardComponent,
+        UserCardComponent,
         TopBadgesComponent, 
         SideMenuComponent
     ],
@@ -74,7 +74,7 @@ import { RouterModule } from '@angular/router';
         AddReadingBookSelectPopoverComponent,
         AddGroupModalComponent,
         GroupOptionsPopoverComponent,
-        StudentCardComponent,
+        UserCardComponent,
         TopBadgesComponent,
         SideMenuComponent
     ]

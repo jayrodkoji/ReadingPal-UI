@@ -2,19 +2,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { StudentCardComponent } from './student-card.component';
+import { UserCardComponent } from './user-card.component';
 
 describe('StudentCardComponent', () => {
-  let component: StudentCardComponent;
-  let fixture: ComponentFixture<StudentCardComponent>;
+  let component: UserCardComponent;
+  let fixture: ComponentFixture<UserCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentCardComponent ],
+      declarations: [ UserCardComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StudentCardComponent);
+    fixture = TestBed.createComponent(UserCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
