@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import {BadgeControllerService} from '../../../Providers/badges/badge-controller.service';
+import { ModalController } from '@ionic/angular';
+import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 
 @Component({
   selector: 'app-user-card',
@@ -21,11 +23,10 @@ export class UserCardComponent implements OnInit {
 
   data: any
   constructor(
-    private dataService: StudentService,
     private sanitizer: DomSanitizer,
     private http: HttpClient,
-    private router: Router,
-    private badgeController: BadgeControllerService) { }
+    private badgeController: BadgeControllerService,
+    public modalController: ModalController) { }
 
 
   ngOnInit() {
@@ -56,5 +57,12 @@ export class UserCardComponent implements OnInit {
       .subscribe(res => {
         this.badges = res;
       });
+  }
+
+  async showUserPreferences() {
+    const modal = await this.modalController.create({
+      component: UserPreferencesComponent,
+    });
+    return await modal.present();
   }
 }

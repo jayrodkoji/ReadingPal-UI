@@ -2,10 +2,6 @@
     font-family: Segoe UI; 
 }
 
-.logo{
-    width: 150px;
-}
-
 .card {
     height: 50%;
     width: 100%;
@@ -52,5 +48,12 @@ ion-menu ion-item ion-label {
         --border: 1px solid rgba(199, 199, 199, 0.185);
         --side-max-width: 200px; 
         --side-min-width: 200px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .card {
+        height: 40%;
+        width: 100%;
     }
 }

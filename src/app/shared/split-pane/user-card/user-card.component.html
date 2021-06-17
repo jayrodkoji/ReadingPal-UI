@@ -1,5 +1,5 @@
 <ion-grid class="card">
-  <img [src]="dynamicStyle" (error)="dynamicStyle = 'assets/default-banner.jpg'" style="position: fixed; height: 50%; object-fit: cover;">
+  <img [src]="dynamicStyle" (error)="dynamicStyle = 'assets/Banners/confetti.jpg'" class="banner-img">
   <ion-row class="ion-justify-content-center">
     <ion-col size="any">
       <h2 class="welcome">Welcome</h2>
@@ -12,9 +12,9 @@
     </ion-col>
   </ion-row>
   <ion-row class="avatar-row ion-justify-content-center" >
-    <ion-col size="6" size-sm="7" size-md="8" class="avatar-col ion-align-items-center">
-      <ion-avatar>
-        <img [src]="student_avatar" (error)="student_avatar = 'assets/user/default-avatar.png'" style="height: 120px; width: 120px;">
+    <ion-col class="avatar-col ion-align-items-center">
+      <ion-avatar (click)="showUserPreferences()">
+        <img [src]="student_avatar" (error)="student_avatar = 'assets/user/default-avatar.png'" class="avatar-image">
       </ion-avatar>
     </ion-col>
   </ion-row>
