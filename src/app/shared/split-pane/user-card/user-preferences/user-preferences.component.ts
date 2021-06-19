@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { ImageUtils } from 'src/app/utils/image-utils';
 import { User } from 'src/app/_models/user';
+
+const AVATAR_MAX_BYTES = 200000;
 
 @Component({
   selector: 'app-user-preferences',
@@ -13,29 +16,39 @@ export class UserPreferencesComponent implements OnInit {
   uploadedBadgeIconUrl: string;
   uploadedBadgeIcon: string;
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   handleAvatarFileSelect(event) {
-    const files = event.target.files;
-    const file = files[0];
+    const files = event.target.files
+    const file = files[0]
 
+    console.log(file)
     if (files && file) {
-      ImageUtils.readImageFileData(file,
+      if (file.size <= AVATAR_MAX_BYTES){
+        ImageUtils.readImageFileData(file,
           str => {
-            this.uploadedBadgeIcon = str;
+            this.uploadedBadgeIcon = str
           });
-
-      ImageUtils.readImageFileURL(file,
+  
+        ImageUtils.readImageFileURL(file,
           imgUrl => {
-            this.uploadedBadgeIconUrl = imgUrl;
+            this.uploadedBadgeIconUrl = imgUrl
           });
+      } else {
+        alert(`File is too large (${file.size}). Must be under 200KB.`)
+      }
+      
     }
   }
 
   saveSettings() {
     alert("Settings saved.")
+  }
+
+  dismiss() {
+    this.modalCtrl.dismiss()
   }
 
 }
