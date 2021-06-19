@@ -62,7 +62,7 @@ export class UserCardComponent implements OnInit {
   async showUserPreferences() {
     const modal = await this.modalController.create({
       component: UserPreferencesComponent,
-      backdropDismiss: false
+      backdropDismiss: false,
     });
     return await modal.present();
   }

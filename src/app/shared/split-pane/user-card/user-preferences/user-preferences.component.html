@@ -11,9 +11,10 @@
   </ion-row>
   <ion-row style="height: calc(600px - 56px)">
     <ion-col size="4" style="padding: 0">
-      <img src="{{ user?.backgroundimage || 'assets/Banners/confetti.jpg'}}" style="object-fit: cover; height: calc(600px - 56px);"/>
+      <img src="{{ user?.backgroundimage || 'assets/Banners/confetti.jpg'}}"  style="object-fit: cover; height: calc(600px - 56px);" (click)="bannerFileInput.click()"/>
+      <input id="file-upload" type="file" #bannerFileInput style="display: none" (change)="handleAvatarFileSelect($event)"/>
       <ion-avatar class="badge-icon" style="width: 120px; height: 120px; margin-top: 15px; position: relative; bottom: 510px; margin: auto" (click)="fileInput.click()">
-        <img src="{{ uploadedBadgeIconUrl || 'assets/user/default-avatar.png'}}">
+        <img src="{{ uploadedAvatarIconUrl || 'assets/user/default-avatar.png'}}">
         <input id="file-upload" type="file" #fileInput style="display: none" (change)="handleAvatarFileSelect($event)"/>
       </ion-avatar>
     </ion-col>

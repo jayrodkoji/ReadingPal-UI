@@ -15,6 +15,7 @@ import { RpUtilsModule } from './utils/rp-utils.module';
 
 // import {NgxEchartsModule} from 'ngx-echarts';
 import { ChartsModule } from 'ng2-charts';
+import { ToasterService } from './shared/toastr.service';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule
   ],
   providers: [
+    ToasterService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
