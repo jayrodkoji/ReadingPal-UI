@@ -55,19 +55,19 @@ export class UserPreferencesComponent implements OnInit {
 
     console.log(file)
     if (files && file) {
-      if (file.size <= BANNER_MAX_BYTES){
-        ImageUtils.readImageFileData(file,
-          str => {
-            this.uploadedBannerIcon = str
-          });
-  
-        ImageUtils.readImageFileURL(file,
-          imgUrl => {
-            this.uploadedBannerIconUrl = imgUrl
-          });
-      } else {
-        this.toastr.error(`Must be under ${BANNER_MAX_BYTES/1000}KB.`, `File Too Large (${file.size/1000}KB)`)
-      }
+      // if (file.size <= BANNER_MAX_BYTES){
+      ImageUtils.readImageFileData(file,
+        str => {
+          this.uploadedBannerIcon = str
+        });
+
+      ImageUtils.readImageFileURL(file,
+        imgUrl => {
+          this.uploadedBannerIconUrl = imgUrl
+        });
+      // } else {
+      //   this.toastr.error(`Must be under ${BANNER_MAX_BYTES/1000}KB.`, `File Too Large (${file.size/1000}KB)`)
+      // }
       
     }
   }

@@ -1,4 +1,4 @@
-<ion-grid style="padding: 0;">
+<ion-grid style="padding: 0; background-color: var(--main-content-background);" >
   <ion-row style="padding: 0; background-color: var(--ion-color-primary);">
     <ion-col>
       <h3 style="color: white; margin: 10px;">User Settings</h3>
@@ -11,37 +11,40 @@
   </ion-row>
   <ion-row style="height: calc(600px - 56px)">
     <ion-col size="4" style="padding: 0">
-      <img src="{{ user?.backgroundimage || 'assets/Banners/confetti.jpg'}}"  style="object-fit: cover; height: calc(600px - 56px);" (click)="bannerFileInput.click()"/>
-      <input id="file-upload" type="file" #bannerFileInput style="display: none" (change)="handleAvatarFileSelect($event)"/>
+      <div class="container">
+        <img src="{{ uploadedBannerIconUrl || 'assets/Banners/confetti.jpg'}}" class="image" style="object-fit: cover; height: calc(600px - 56px);"/>
+        <div class="middle">
+          <div class="text" (click)="bannerFileInput.click()">Update</div>
+        </div>
+      </div>
+      <input id="file-upload" type="file" #bannerFileInput style="display: none" (change)="handleBannerFileSelect($event)"/>
       <ion-avatar class="badge-icon" style="width: 120px; height: 120px; margin-top: 15px; position: relative; bottom: 510px; margin: auto" (click)="fileInput.click()">
         <img src="{{ uploadedAvatarIconUrl || 'assets/user/default-avatar.png'}}">
         <input id="file-upload" type="file" #fileInput style="display: none" (change)="handleAvatarFileSelect($event)"/>
       </ion-avatar>
     </ion-col>
-    <ion-col>
-      <form (ngSubmit)="saveSettings()">
-        <ion-item>
-          <ion-label>First Name:</ion-label>
-          <ion-input name="firstName"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Last Name:</ion-label>
-          <ion-input name="LastName"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Username:</ion-label>
-          <ion-input name="username"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Email:</ion-label>
-          <ion-input name="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Password:</ion-label>
-          <ion-input name="password"></ion-input>
-        </ion-item>
-        <ion-button type="submit" style="float: right;">Save</ion-button>
-      </form>
+    <ion-col offset=".5" size="7" style="padding-top: 20px;">
+      <ion-row>
+        <ion-col>
+          <form (ngSubmit)="saveSettings()">
+            <p class="label">First Name</p>
+            <ion-input name="firstName" class="input"></ion-input>
+            <p class="label">Last Name</p>
+            <ion-input name="LastName" class="input"></ion-input>
+            <p class="label">Username</p>
+            <ion-input name="username" class="input"></ion-input>
+            <p class="label">Email</p>
+            <ion-input name="email" class="input"></ion-input>
+            <p class="label">Password</p>
+            <ion-input name="password" class="input"></ion-input>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row style="position: fixed; left: 0; bottom: 0; right: 0;">
+        <ion-col style=" padding: 0;">
+          <ion-button type="submit" expand="full" style="margin: 0;l">Save</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-col>
   </ion-row>
 </ion-grid>

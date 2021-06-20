@@ -1,0 +1,52 @@
+.label {
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.input {
+    background-color: white; 
+    border-radius: 4px; 
+    --padding-top: 2px;
+    --padding-bottom: 2px;
+    --padding-end: 10px;
+    margin-bottom: 10px;
+}
+
+.badge-icon:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.container {
+    padding: 0;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+  }
+  
+  .container:hover .image {
+    transition: .5s ease-in-out;
+    opacity: 0.7;
+  }
+  
+  .container:hover .middle {
+    opacity: 1;
+  }
+  
+  .text {
+    background-color: white;
+    color: var(--ion-color-primary);
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 32px;
+    cursor: pointer;
+  }
