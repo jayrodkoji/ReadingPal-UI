@@ -107,19 +107,19 @@ export class StudentService {
    * Get a student with user fields as well
    * @param username: Student username
    */
-  getStudentAsUserByUsername(username: string): StudentAsUserData {
-    this.getStudentByUsername(username).subscribe((res) => {
-      if(res){
-        this.userService.getUser(username).subscribe((result: StudentAsUserData) => {
-          if(result){
-            let student = res;
-            student.readingLevel = res.reading_level;
-            student.grade = res.grade;
-          }
-        })
-      }
-    })
+  // getStudentAsUserByUsername(username: string): StudentAsUserData {
+  //   this.getStudentByUsername(username).subscribe((res) => {
+  //     if(res){
+  //       this.userService.getUser(UserId).subscribe((result: StudentAsUserData) => {
+  //         if(result){
+  //           let student = res;
+  //           student.readingLevel = res.reading_level;
+  //           student.grade = res.grade;
+  //         }
+  //       })
+  //     }
+  //   })
 
-    return
-  }
+  //   return
+  // }
 }

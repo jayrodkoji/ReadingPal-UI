@@ -3,11 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 const baseUrl = 'http://192.241.200.45:8004';
 const DevApiGateway= 'http://localhost:4041'
+const UserServiceURL= 'http://localhost:3001'
 // const baseUrl = 'http://localhost:8080';
 export const environment = {
   production: false,
   gatewayBaseUrl: baseUrl,
-  DevApiGateway: DevApiGateway
+  DevApiGateway: DevApiGateway,
+  UserServiceURL: UserServiceURL
 };
 
 

@@ -77,11 +77,12 @@ export class MessagesPage implements OnInit {
 
 
         // get all information about each message
-        this.messages.forEach((message) => {
-            this.setUserImage(this.currentUserRole == 'ROLE_STUDENT' ? message.teacher_username : message.student_username );
-            this.getBookInfo(message.book_id);
-            this.getAnnotations(message.annotation_id);
-        })
+        // TODO: change to use userId
+        // this.messages.forEach((message) => {
+        //     this.setUserImage(this.currentUserRole == 'ROLE_STUDENT' ? message.teacher_username : message.student_username );
+        //     this.getBookInfo(message.book_id);
+        //     this.getAnnotations(message.annotation_id);
+        // })
 
         // apply search filter
         this.filterMessages()
@@ -135,16 +136,17 @@ export class MessagesPage implements OnInit {
         return ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(this.book.base64Cover));
     }
 
-    setUserImage(guest_Username: string) {
-        if (!this.guestImage.has(guest_Username)) {
-            this.guestImage.set(guest_Username, null);
-            this.userService.getUser(guest_Username).subscribe((res) => {
-                if (res) {
-                    this.guestImage.set(guest_Username, res.profileimage);
-                }
-            })
-        }
-    }
+    // Todo: change to use userId
+    // setUserImage(guest_Username: string) {
+    //     if (!this.guestImage.has(guest_Username)) {
+    //         this.guestImage.set(guest_Username, null);
+    //         this.userService.getUser(guest_Username).subscribe((res) => {
+    //             if (res) {
+    //                 this.guestImage.set(guest_Username, res.profileimage);
+    //             }
+    //         })
+    //     }
+    // }
 
     getImage(img: any) {
         if (img)

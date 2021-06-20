@@ -137,7 +137,8 @@ export class ReaderPage implements OnInit {
         if (this.bookId === this.lesson.bookId.toString()) {
           this.setReaderMeta();
           this.setupEventSubscriptions();
-          this.getTeacherUser(res.creator);
+          // TODO: change to use userId
+          // this.getTeacherUser(res.creator);
         } else {
           this.noBookSelected = true;
         }
@@ -151,63 +152,64 @@ export class ReaderPage implements OnInit {
    */
   setReaderMeta() {
     let username = localStorage.getItem('logedInUsername')
+    // TODO: change to use userId
+    // this.userService.getUser(username).subscribe((res) => {
+    //   this.currentUser = res;
+    //   this.isStudent = res.roles[0].type === 'ROLE_STUDENT'
 
-    this.userService.getUser(username).subscribe((res) => {
-      this.currentUser = res;
-      this.isStudent = res.roles[0].type === 'ROLE_STUDENT'
+    //   if(this.currentUser) {
+    //     this.readerMetaService.getReaderMeta(this.currentUser.username, this.bookId)
+    //         .subscribe((res) => {
+    //           if (res) {
+    //             this.bookMeta = res;
 
-      if(this.currentUser) {
-        this.readerMetaService.getReaderMeta(this.currentUser.username, this.bookId)
-            .subscribe((res) => {
-              if (res) {
-                this.bookMeta = res;
+    //             if(this.bookMeta.last_highlight_color)
+    //               this.highlightColor = this.bookMeta.last_highlight_color;
+    //             else
+    //               this.highlightColor = HIGHLIGHTYELLOW + ALPHA;
 
-                if(this.bookMeta.last_highlight_color)
-                  this.highlightColor = this.bookMeta.last_highlight_color;
-                else
-                  this.highlightColor = HIGHLIGHTYELLOW + ALPHA;
-
-                this.openBook();
-              } else {
-                this.readerMetaService.addReaderMeta({
-                  id: null,
-                  username: this.currentUser.username,
-                  book_id: this.bookId,
-                  highlight_color_id: -1,
-                  highlights_id: -1,
-                  notes_id: -1,
-                  font_family: 'Arial',
-                  font_size: 100,
-                  font_weight: "normal",
-                  font_style: "normal",
-                  last_location: "",
-                  last_highlight_color: "#EE3A23",
-                }).subscribe((res) => {
-                  if(res) {
-                    this.bookMeta = res;
-                    this.highlightColor = this.bookMeta.last_highlight_color;
-                    this.openBook();
-                  } else {
-                    this.noBookSelected = true;
-                  }
-                })
-              }
-            })
-      }
-    });
+    //             this.openBook();
+    //           } else {
+    //             this.readerMetaService.addReaderMeta({
+    //               id: null,
+    //               username: this.currentUser.username,
+    //               book_id: this.bookId,
+    //               highlight_color_id: -1,
+    //               highlights_id: -1,
+    //               notes_id: -1,
+    //               font_family: 'Arial',
+    //               font_size: 100,
+    //               font_weight: "normal",
+    //               font_style: "normal",
+    //               last_location: "",
+    //               last_highlight_color: "#EE3A23",
+    //             }).subscribe((res) => {
+    //               if(res) {
+    //                 this.bookMeta = res;
+    //                 this.highlightColor = this.bookMeta.last_highlight_color;
+    //                 this.openBook();
+    //               } else {
+    //                 this.noBookSelected = true;
+    //               }
+    //             })
+    //           }
+    //         })
+    //   }
+    // });
   }
 
   /**
    * Gets teach/creator
    * @param username: typically creator of lesson
    */
-  getTeacherUser(username: string){
-    this.userService.getUser(username).subscribe((res) => {
-      if(res){
-        this.teacher = res;
-      }
-    })
-  }
+  // TODO: change to use userId
+  // getTeacherUser(username: string){
+  //   this.userService.getUser(username).subscribe((res) => {
+  //     if(res){
+  //       this.teacher = res;
+  //     }
+  //   })
+  // }
 
   /**
    * Initializes all subscriptions from children

@@ -21,7 +21,7 @@ export class UsersService {
    */
   public addUser(data: UsersModel): Observable<any> {
     return this.http.post(
-        environment.gatewayBaseUrl + '/users/addUser', data)
+        environment.UserServiceURL + '/users/addUser', data)
   }
 
   /**
@@ -29,7 +29,7 @@ export class UsersService {
    */
   public updateUser(data: UsersModel): Observable<any> {
     return this.http.post(
-        environment.gatewayBaseUrl + '/users/updateUser', data)
+        environment.UserServiceURL + '/users/updateUser', data)
   }
 
   /**
@@ -39,16 +39,14 @@ export class UsersService {
     let params = new HttpParams().set('username', username);
 
     return this.http.delete(
-        environment.gatewayBaseUrl + '/users/deleteUser', { params })
+        environment.UserServiceURL + '/users/deleteUser', { params })
   }
 
   /**
    * Get User
    */
-  public getUser(username: string): Observable<any> {
-    let params = new HttpParams().set('username',  username);
-
-    return this.http.get(environment.gatewayBaseUrl + '/users/getUser', { params })
+  public getUser(userId: number): Observable<any> {
+    return this.http.get(`${environment.UserServiceURL}/users/${userId}`)
   }
 
   /**
@@ -56,7 +54,7 @@ export class UsersService {
    */
   public getUserRoles(): Observable<any> {
     this.http.get(
-        environment.gatewayBaseUrl + '/users/getUserRoles')
+        environment.UserServiceURL + '/users/getUserRoles')
         .subscribe((res: Array<any>) => {
           const roles = res.map(obj => new Role(obj));
           this.rolesListSubject.next(roles);
@@ -69,7 +67,7 @@ export class UsersService {
    * Get Users
    */
   public getUsers(): Observable<any> {
-    this.http.get(environment.gatewayBaseUrl + '/users/getUsers')
+    this.http.get(environment.UserServiceURL + '/users/getUsers')
         .subscribe((res: Array<any>) => {
           const teachers = res.map(obj => new UsersModel(obj));
           this.usersListSubject.next(teachers);
@@ -82,7 +80,7 @@ export class UsersService {
    * Get Teachers
    */
   public getTeachers(): Observable<any> {
-    this.http.get(environment.gatewayBaseUrl + '/users/getTeachers')
+    this.http.get(environment.UserServiceURL + '/users/getTeachers')
         .subscribe((res: Array<any>) => {
           const teachers = res.map(obj => new UsersModel(obj));
           this.teachersListSubject.next(teachers);
@@ -96,7 +94,7 @@ export class UsersService {
    */
   public updatePassword(username: string, password: string): Observable<any> {
     return this.http.post(
-        environment.gatewayBaseUrl + '/users/updateUserPassword', { newPassword: password, userName: username} );
+        environment.UserServiceURL + '/users/updateUserPassword', { newPassword: password, userName: username} );
   }
 
   /**
