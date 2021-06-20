@@ -36,13 +36,16 @@
             <p class="label">Email</p>
             <ion-input name="email" class="input"></ion-input>
             <p class="label">Password</p>
-            <ion-input name="password" class="input"></ion-input>
+            <app-show-hide-password>
+              <ion-input type="password" name="password" class="input"></ion-input>
+            </app-show-hide-password>
+            <a><p class="password-reset">Reset Password</p></a>
           </form>
         </ion-col>
       </ion-row>
       <ion-row style="position: fixed; left: 0; bottom: 0; right: 0;">
         <ion-col style=" padding: 0;">
-          <ion-button type="submit" expand="full" style="margin: 0;l">Save</ion-button>
+          <ion-button type="submit" expand="full" color="primary" style="margin: 0;">Save</ion-button>
         </ion-col>
       </ion-row>
     </ion-col>
