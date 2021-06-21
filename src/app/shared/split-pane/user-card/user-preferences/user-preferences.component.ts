@@ -15,6 +15,7 @@ const BANNER_MAX_BYTES = 400000;
 export class UserPreferencesComponent implements OnInit {
   @Input() user: User
   tempUser: User;
+  settingPassword = false;
   uploadedAvatarIconUrl: string;
   uploadedAvatarIcon: string;
   uploadedBannerIconUrl: string;
@@ -72,8 +73,21 @@ export class UserPreferencesComponent implements OnInit {
     }
   }
 
+  resetPassword(){
+    this.settingPassword = true
+  }
+
+  savePassword() {
+    this.settingPassword = false
+  }
+
+  cancelChangePassword() {
+    this.settingPassword = false;
+  }
+
   saveSettings() {
     alert("Settings saved.")
+    this.dismiss()
   }
 
   dismiss() {
