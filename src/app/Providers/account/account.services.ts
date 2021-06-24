@@ -11,7 +11,7 @@ import { User } from 'src/app/_models/user';
   providedIn: 'root'
 })
 export class AccountServices {
-  private baseUrl: string = environment.DevApiGateway;
+  private baseUrl: string = environment.graphqlApiGateway;
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 

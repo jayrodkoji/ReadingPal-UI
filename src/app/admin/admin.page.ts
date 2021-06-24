@@ -2,20 +2,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { TimeoutError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ISchool } from '../content-dto/ISchool';
 import { IUser } from '../content-dto/IUser';
-import { UserRole } from '../content-dto/UserRole';
 import { ClassControllerService } from '../Providers/class-controller/class-controller.service';
-import { ClassData, newClassData } from '../Providers/class-controller/class-data'
+import { ClassData } from '../Providers/class-controller/class-data'
 import { UsersModel } from '../Providers/user-controller/model/users-model';
+import { UsersService } from '../Providers/user-controller/users.service';
 import { ImageUtils } from '../utils/image-utils';
 import { AddClassModalComponent } from './add-class-modal/add-class-modal/add-class-modal.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 import { ClassRosterModalComponent } from './class-roster-modal/class-roster-modal.component';
+import { gql } from 'apollo-angular';
 
 
 export class FullClassData {
@@ -102,19 +101,16 @@ export class AdminPage implements OnInit {
 
   userRole = 'Choose Role';
   newUser = true;
-  constructor(private router: Router, private http: HttpClient, private sanitizer: DomSanitizer, private classController: ClassControllerService, private modalController: ModalController) { }
+  constructor(
+    private http: HttpClient,
+    private sanitizer: DomSanitizer,
+    private usersService: UsersService,
+    private classController: ClassControllerService,
+    private modalController: ModalController
+  ) { }
 
   ngOnInit() {
-
-    const uRole = localStorage.getItem('logedInRole');
-    console.log(uRole);
-    if (uRole !== 'ROLE_ADMIN') {
-      this.router.navigate(['../bad-login'], { replaceUrl: true });
-    }
-
-    // this.getAllSchools();
     this.getAllUsers();
-    // this.getAllClasses();
   }
 
   clearSchool() {
@@ -207,7 +203,7 @@ export class AdminPage implements OnInit {
 
               studentData.push(inputStudentData);
             });
-            
+
 
 
             var newClass: any = {
@@ -301,29 +297,26 @@ export class AdminPage implements OnInit {
 
   getAllUsers(): any {
     this.allUsers = [];
-    this.http.get(this.baseUrl + '/users/getUsers?username=' + localStorage.getItem('logedInUsername'))
-      .subscribe((result) => {
-        var anyResult = result as any;
-        anyResult.forEach(element => {
-          element.role = this.http.get(
-            environment.gatewayBaseUrl + '/users/getUser?username=' + element.username).subscribe(response => {
-              element.role = (response['roles'][0]['type']).slice(5, 13).toLowerCase();
-              element.role = element.role.charAt(0).toUpperCase() + element.role.slice(1);
-            });
-          if (element.profileimage !== null) {
-            element.profileimage = 'data:image/png;base64,'
-              + (this.sanitizer.bypassSecurityTrustResourceUrl(element.profileimage) as any).changingThisBreaksApplicationSecurity;
-          }
-          if (element.backgroundimage !== null) {
-            element.backgroundimage = 'data:image/png;base64,'
-              + ((this.sanitizer.bypassSecurityTrustResourceUrl(element.backgroundimage) as any).changingThisBreaksApplicationSecurity);
-          }
 
-          this.allUsers.push(element)
+    const GET_USERS = gql`
+      query GetUsers {
+        users {
+          _id
+          firstName
+          lastName
+          username
+          email
+          avatar
+        }
+      }
+    `;
 
-        });
-        this.getAllClasses()
-      });
+    this.usersService.getUsers(GET_USERS)
+      .subscribe(result => {
+        if (result) {
+          this.allUsers = result;
+        }
+      })
   }
 
   runErrorMessage(message, reload?) {

@@ -108,15 +108,15 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let user of this.allUsers; let i = index">
+                  <tr *ngFor="let user of allUsers; let i = index">
                     <td scope="row">{{i+1}}</td>
-                    <td><a href="#"><img *ngIf="user.profileimage != null" height="40" width="40"
-                                         [src]="user.profileimage" class="avatar"> {{user.username}}</a></td>
+                    <td><a href="#"><img *ngIf="user.avatar != null" height="40" width="40"
+                                         [src]="user.avatar" class="avatar"> {{user.username}}</a></td>
                     <td>{{user.firstName}} {{user.lastName}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.role}}</td>
-                    <td class="col-xs-1"> <img *ngIf="user.backgroundimage != null" width="30"
-                                               [src]="user.backgroundimage">
+                    <td class="col-xs-1"> <img *ngIf="user.backgroundImage != null" width="30"
+                                               [src]="user.backgroundImage">
                     </td>
                     <td>
                       <ion-button fill="clear" style="color: var(--default-font-color);"
