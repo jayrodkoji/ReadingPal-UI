@@ -281,17 +281,15 @@ export class AdminPage implements OnInit {
   deleteUser(user, index) {
     const confirmation = confirm('Are You Sure?');
     if (confirmation) {
-      this.http.delete(this.baseUrl + '/users/deleteUser?userName=' + user.username, {
-      }).subscribe((result) => {
-      }, error => {
-        console.log(error);
-      });
-      const removeIndex = this.allUsers.map((item) => item.username).indexOf(user.username);
-      if (removeIndex !== -1) {
-        this.allUsers.splice(removeIndex, 1);
-      } else {
-        this.getAllUsers();
-      }
+      this.usersService.deleteUser(user._id).subscribe(res => {
+        if(res && res.success){
+          this.allUsers.forEach((usr, ind) => {
+            if (usr._id === user._id){
+              this.allUsers.splice(ind, 1);
+            }
+          })
+        }
+      })
     }
   }
 

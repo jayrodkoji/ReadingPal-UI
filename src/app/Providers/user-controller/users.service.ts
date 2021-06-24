@@ -3,7 +3,9 @@ import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { UsersModel, Role } from "./model/users-model";
-import { Apollo } from 'apollo-angular';
+import { Apollo, gql } from 'apollo-angular';
+import { SubjectSubscriber } from 'rxjs/internal/Subject';
+import { __Directive } from 'graphql';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +41,21 @@ export class UsersService {
   /**
    * Delete User
    */
-  public deleteUser(username: string): Observable<any> {
-    let params = new HttpParams().set('username', username);
+  public deleteUser(_id: string): Observable<any> {
+    const DELETE_USER = gql`
+      mutation DeleteUser($_id: String!) {
+        deleteUser(_id: $_id) {
+          success
+        }
+      }
+    `;
 
-    return this.http.delete(
-        environment.graphqlApiGateway + '/users/deleteUser', { params })
+    return this.apollo.mutate({
+      mutation: DELETE_USER,
+      variables: {
+        _id: _id
+      }
+    })
   }
 
   /**

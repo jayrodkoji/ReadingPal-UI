@@ -17,8 +17,8 @@ export class UsersModel {
     this.username = data.username;
     this.email = data.email;
     this.password = data.password;
-    this.avatar = ImageUtils.convertDBImage(data.profileimage);
-    this.backgroundImage = ImageUtils.convertDBImage(data.backgroundimage);
+    this.avatar = ImageUtils.convertDBImage(data.avatar);
+    this.backgroundImage = ImageUtils.convertDBImage(data.backgroundImage);
     this.roles = data.roles;
   }
 }
