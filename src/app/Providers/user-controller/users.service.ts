@@ -29,11 +29,59 @@ export class UsersService {
   }
 
   /**
+   * Get Users
+   */
+   public getUsers(query: any): Observable<any> {
+    this.apollo.watchQuery<any>({
+      query: query
+    })
+      .valueChanges
+      .subscribe(({ data }) => {
+        this.users$.next(data.users)
+      });
+
+    return this.users$.asObservable();
+  }
+
+  /**
+   * Get User
+   */
+  public getUser(query: any) {
+    this.apollo.watchQuery<any>({
+      query: query
+    })
+      .valueChanges
+      .subscribe(({ data }) => {
+        return data
+      });
+  }
+
+  /**
    * Update User
    */
-  public updateUser(data: User): Observable<any> {
-    return this.http.post(
-        environment.graphqlApiGateway + '/users/updateUser', data)
+  //TODO: update to return new list of users
+  public updateUser(_id: String, userUpdate: User): Observable<any> {
+    const Update_User = gql`
+      mutation updateUser($_id: String!, $userUpdate: UserUpdate) {
+        updateUser(_id: $_id, userUpdate: $userUpdate) {
+          success
+        }
+      }
+    `;
+
+    this.apollo.mutate({
+      mutation: Update_User,
+      variables: {
+        _id: _id,
+        userUpdate: userUpdate
+      }
+    }).subscribe((res: any) => {
+      if(res?.data?.update?.success){
+       console.log('success')
+      }
+    })
+
+    return this.users$.asObservable();
   }
 
   /**
@@ -64,29 +112,6 @@ export class UsersService {
     return this.users$.asObservable();
   }
 
-  /**
-   * Get Users
-   */
-   public getUsers(query: any): Observable<any> {
-    this.apollo.watchQuery<any>({
-      query: query
-    })
-      .valueChanges
-      .subscribe(({ data }) => {
-        this.users$.next(data.users)
-      });
-
-    return this.users$.asObservable();
-  }
-
-  /**
-   * Get User
-   */
-  public getUser(userId: number): Observable<any> {
-    return null;
-
-    // return this.http.get(`${environment.graphqlApiGateway}/users/`)
-  }
 
   /**
    * Get Teachers
