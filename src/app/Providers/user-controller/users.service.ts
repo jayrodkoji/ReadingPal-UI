@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { BehaviorSubject, Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import { UsersModel, Role } from "./model/users-model";
+import { User } from "./model/users-model";
 import { Apollo, gql } from 'apollo-angular';
-import { SubjectSubscriber } from 'rxjs/internal/Subject';
 import { __Directive } from 'graphql';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private teachersListSubject: BehaviorSubject<UsersModel[]> = new BehaviorSubject<UsersModel[]>(null);
-  private rolesListSubject: BehaviorSubject<Role[]> = new BehaviorSubject<Role[]>(null);
-  private usersListSubject: BehaviorSubject<UsersModel[]> = new BehaviorSubject<UsersModel[]>(null);
-  
+  private teachersListSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+  private users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+  User
   loading: boolean;
 
   constructor(
@@ -25,7 +23,7 @@ export class UsersService {
   /**
    * Create User
    */
-  public addUser(data: UsersModel): Observable<any> {
+  public addUser(data: User): Observable<any> {
     return this.http.post(
         environment.graphqlApiGateway + '/users', data)
   }
@@ -33,7 +31,7 @@ export class UsersService {
   /**
    * Update User
    */
-  public updateUser(data: UsersModel): Observable<any> {
+  public updateUser(data: User): Observable<any> {
     return this.http.post(
         environment.graphqlApiGateway + '/users/updateUser', data)
   }
@@ -50,12 +48,20 @@ export class UsersService {
       }
     `;
 
-    return this.apollo.mutate({
+    this.apollo.mutate({
       mutation: DELETE_USER,
       variables: {
         _id: _id
       }
+    }).subscribe((res: any) => {
+      if(res?.data?.deleteUser?.success){
+        this.users$.next(
+          this.users$.getValue().filter(user => user._id !== _id)
+        )
+      }
     })
+
+    return this.users$.asObservable();
   }
 
   /**
@@ -67,10 +73,10 @@ export class UsersService {
     })
       .valueChanges
       .subscribe(({ data }) => {
-        this.usersListSubject.next(data.users)
+        this.users$.next(data.users)
       });
 
-    return this.usersListSubject.asObservable();
+    return this.users$.asObservable();
   }
 
   /**
@@ -83,26 +89,12 @@ export class UsersService {
   }
 
   /**
-   * Get User Roles
-   */
-  public getUserRoles(): Observable<any> {
-    this.http.get(
-        environment.graphqlApiGateway + '/users/getUserRoles')
-        .subscribe((res: Array<any>) => {
-          const roles = res.map(obj => new Role(obj));
-          this.rolesListSubject.next(roles);
-    })
-
-    return this.rolesListSubject.asObservable();
-  }
-
-  /**
    * Get Teachers
    */
   public getTeachers(): Observable<any> {
     this.http.get(environment.graphqlApiGateway + '/users/getTeachers')
         .subscribe((res: Array<any>) => {
-          const teachers = res.map(obj => new UsersModel(obj));
+          const teachers = res.map(obj => new User(obj));
           this.teachersListSubject.next(teachers);
         })
 

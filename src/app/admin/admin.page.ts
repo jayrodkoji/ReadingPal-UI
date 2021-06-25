@@ -1,14 +1,12 @@
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { ISchool } from '../content-dto/ISchool';
-import { IUser } from '../content-dto/IUser';
 import { ClassControllerService } from '../Providers/class-controller/class-controller.service';
 import { ClassData } from '../Providers/class-controller/class-data'
-import { UsersModel } from '../Providers/user-controller/model/users-model';
+import { User } from '../Providers/user-controller/model/users-model';
 import { UsersService } from '../Providers/user-controller/users.service';
 import { ImageUtils } from '../utils/image-utils';
 import { AddClassModalComponent } from './add-class-modal/add-class-modal/add-class-modal.component';
@@ -29,49 +27,7 @@ export class FullClassData {
 })
 export class AdminPage implements OnInit {
   private baseUrl: string = environment.gatewayBaseUrl;
-  school = {
-    id: 0,
-    name: '',
-    teacher_code: '',
-    student_code: ''
-  };
-
-  roles = {
-    id: 'string',
-    type: 'string'
-  };
-
-  user = {
-    username: '',
-    firstName: '',
-    lastName: '',
-    roles: [],
-    password: '',
-    profileimage: '',
-    backgroundimage: '',
-    email: ''
-  };
-
-  classroom = {
-    id: 0,
-    grade: '',
-    name: '',
-    teacherUserName: '',
-    students: []
-  };
-
-  roster = {
-
-  };
-
-  student = {
-    id: 0,
-    username: '',
-    grade: '',
-    reading_level: null,
-    starting_level: null,
-  };
-
+  user: User
 
   showAddSchoolModel = false;
   showAddUserModel = false;
@@ -80,7 +36,6 @@ export class AdminPage implements OnInit {
   showAddStudentModel = false;
 
 
-  allSchools: ISchool[];
   allUsers: any[];
   allRoles: any[];
   allClasses: FullClassData[];
@@ -102,7 +57,6 @@ export class AdminPage implements OnInit {
   userRole = 'Choose Role';
   newUser = true;
   constructor(
-    private http: HttpClient,
     private sanitizer: DomSanitizer,
     private usersService: UsersService,
     private classController: ClassControllerService,
@@ -113,24 +67,12 @@ export class AdminPage implements OnInit {
     this.getAllUsers();
   }
 
-  clearSchool() {
-    this.school = {
-      id: 0,
-      name: '',
-      teacher_code: '',
-      student_code: ''
-    };
-  }
-
   clearUser() {
     this.user = {
       username: '',
       firstName: '',
       lastName: '',
-      roles: [],
       password: '',
-      profileimage: '',
-      backgroundimage: '',
       email: ''
     };
     this.userImageFileName = 'Choose a file';
@@ -138,87 +80,76 @@ export class AdminPage implements OnInit {
     this.newUser = true;
   }
 
-  clearClass() {
-    this.classroom = {
-      id: 0,
-      grade: '',
-      name: '',
-      teacherUserName: '',
-      students: []
-    };
-  }
+  // async onClassCreate() {
+  //   const modal = await this.modalController.create({
+  //     component: AddClassModalComponent,
+  //     cssClass: 'add-class-modal',
+  //     componentProps: {
+  //       allUsers: this.allUsers,
+  //       inputClass: this.classroom
+  //     }
+  //   });
+  //   await modal.present();
+  // }
 
+  // async onRosterCreate() {
+  //   const modal = await this.modalController.create({
+  //     component: ClassRosterModalComponent,
+  //     componentProps: {
+  //       classroom: this.classroom,
+  //       allStudentsInClass: this.allStudentsInClass,
+  //       allUsers: this.allUsers
+  //     }
+  //   });
+  //   await modal.present();
+  //   await modal.onDidDismiss().then(data => {
+  //     this.classroom.students = data.data;
+  //   })
+  // }
 
-  async onClassCreate() {
-    const modal = await this.modalController.create({
-      component: AddClassModalComponent,
-      cssClass: 'add-class-modal',
-      componentProps: {
-        allUsers: this.allUsers,
-        inputClass: this.classroom
-      }
-    });
-    await modal.present();
-  }
+  // deleteClass(classroom, index) {
+  //   const confirmation = confirm('Are You Sure?');
+  //   if (confirmation) {
+  //     this.classController.deleteClass({ 'id': classroom.classData.id }).subscribe((result) => {
+  //       const removeIndex = this.allClasses.map((item) => item.classData.id).indexOf(classroom.classData.id);
+  //       if (removeIndex !== -1) {
+  //         this.allClasses.splice(removeIndex, 1);
+  //       } else {
+  //         // this.getAllSchools();
+  //       }
+  //     });
+  //   }
+  // }
 
-  async onRosterCreate() {
-    const modal = await this.modalController.create({
-      component: ClassRosterModalComponent,
-      componentProps: {
-        classroom: this.classroom,
-        allStudentsInClass: this.allStudentsInClass,
-        allUsers: this.allUsers
-      }
-    });
-    await modal.present();
-    await modal.onDidDismiss().then(data => {
-      this.classroom.students = data.data;
-    })
-  }
+  // getAllClasses() {
+  //   this.allClasses = [];
+  //   this.classController.getAllClasses()
+  //     .subscribe(res => {
+  //       if (res !== null && this.allUsers) {
+  //         var anyResult = res as any;
+  //         anyResult.forEach(inputClass => {
+  //           var studentData: User[] = [];
+  //           inputClass.students.forEach(inputStudent => {
+  //             var inputStudentData = this.allUsers.find(x => x.username === inputStudent.username);
 
-  deleteClass(classroom, index) {
-    const confirmation = confirm('Are You Sure?');
-    if (confirmation) {
-      this.classController.deleteClass({ 'id': classroom.classData.id }).subscribe((result) => {
-        const removeIndex = this.allClasses.map((item) => item.classData.id).indexOf(classroom.classData.id);
-        if (removeIndex !== -1) {
-          this.allClasses.splice(removeIndex, 1);
-        } else {
-          // this.getAllSchools();
-        }
-      });
-    }
-  }
-
-  getAllClasses() {
-    this.allClasses = [];
-    this.classController.getAllClasses()
-      .subscribe(res => {
-        if (res !== null && this.allUsers) {
-          var anyResult = res as any;
-          anyResult.forEach(inputClass => {
-            var studentData: UsersModel[] = [];
-            inputClass.students.forEach(inputStudent => {
-              var inputStudentData = this.allUsers.find(x => x.username === inputStudent.username);
-
-              studentData.push(inputStudentData);
-            });
+  //             studentData.push(inputStudentData);
+  //           });
 
 
 
-            var newClass: any = {
-              classData: inputClass,
-              students: studentData
-            };
-            if (newClass.classData.teacher.profileimage !== null) {
-              newClass.classData.teacher.profileimage = ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(newClass.classData.teacher.profileimage));
-            }
-            this.allClasses.push(newClass)
-          });
+  //           var newClass: any = {
+  //             classData: inputClass,
+  //             students: studentData
+  //           };
+  //           if (newClass.classData.teacher.profileimage !== null) {
+  //             newClass.classData.teacher.profileimage = ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(newClass.classData.teacher.profileimage));
+  //           }
+  //           this.allClasses.push(newClass)
+  //         });
 
-        }
-      });
-  }
+  //       }
+  //     });
+  // }
 
   onOptionsSelected(sel) {
     this.userRole = sel.options[sel.selectedIndex].text;
@@ -243,27 +174,23 @@ export class AdminPage implements OnInit {
   //   this.showAddSchoolModel = true;
   // }
 
-  setClass(thisClassroom) {
-    this.classroom = thisClassroom;
-  }
+  // setClass(thisClassroom) {
+  //   this.classroom = thisClassroom;
+  // }
 
-  setRoster(thisClass) {
-    this.classroom = thisClass;
-    this.allStudentsInClass = this.classroom.students;
-    this.onRosterCreate();
-  }
+  // setRoster(thisClass) {
+  //   this.classroom = thisClass;
+  //   this.allStudentsInClass = this.classroom.students;
+  //   this.onRosterCreate();
+  // }
 
   setAddStudent(thisClass) {
     this.showAddStudentModel = true;
   }
 
-  setUser(thisUser: IUser) {
+  setUser(thisUser: User) {
     this.user = thisUser;
     this.newUser = false;
-  }
-
-  setStudent(thisStudent: any) {
-    this.student = thisStudent;
   }
 
   async onUserCreate() {
@@ -278,18 +205,11 @@ export class AdminPage implements OnInit {
     await modal.present();
   }
 
-  deleteUser(user, index) {
-    const confirmation = confirm('Are You Sure?');
+  deleteUser(user) {
+    const confirmation = confirm(`Are you sure you want to remove ${user.username}?`);
+
     if (confirmation) {
-      this.usersService.deleteUser(user._id).subscribe(res => {
-        if(res && res.success){
-          this.allUsers.forEach((usr, ind) => {
-            if (usr._id === user._id){
-              this.allUsers.splice(ind, 1);
-            }
-          })
-        }
-      })
+      this.usersService.deleteUser(user._id)
     }
   }
 
@@ -340,35 +260,35 @@ export class AdminPage implements OnInit {
     }, 300);
   }
 
-  handleFileSelectUserImage(evt) {
-    const files = evt.target.files;
-    const file = files[0];
-    if (files && file) {
-      const reader = new FileReader();
-      reader.onload = this.handleReaderLoadedUserImage.bind(this);
-      reader.readAsBinaryString(file);
-      this.userImageFileName = file.name;
-    }
-  }
+  // handleFileSelectUserImage(evt) {
+  //   const files = evt.target.files;
+  //   const file = files[0];
+  //   if (files && file) {
+  //     const reader = new FileReader();
+  //     reader.onload = this.handleReaderLoadedUserImage.bind(this);
+  //     reader.readAsBinaryString(file);
+  //     this.userImageFileName = file.name;
+  //   }
+  // }
 
-  handleReaderLoadedUserImage(readerEvt) {
-    const binaryString = readerEvt.target.result;
-    this.user.profileimage = btoa(binaryString);
-  }
+  // handleReaderLoadedUserImage(readerEvt) {
+  //   const binaryString = readerEvt.target.result;
+  //   this.user.profileimage = btoa(binaryString);
+  // }
 
-  handleFileSelectBackgroundimage(evt) {
-    const files = evt.target.files;
-    const file = files[0];
-    if (files && file) {
-      const reader = new FileReader();
-      reader.onload = this.handleReaderLoadedBackgroundimage.bind(this);
-      reader.readAsBinaryString(file);
-      this.backgroundimageFileName = file.name;
-    }
-  }
+  // handleFileSelectBackgroundimage(evt) {
+  //   const files = evt.target.files;
+  //   const file = files[0];
+  //   if (files && file) {
+  //     const reader = new FileReader();
+  //     reader.onload = this.handleReaderLoadedBackgroundimage.bind(this);
+  //     reader.readAsBinaryString(file);
+  //     this.backgroundimageFileName = file.name;
+  //   }
+  // }
 
-  handleReaderLoadedBackgroundimage(readerEvt) {
-    const binaryString = readerEvt.target.result;
-    this.user.backgroundimage = btoa(binaryString);
-  }
+  // handleReaderLoadedBackgroundimage(readerEvt) {
+  //   const binaryString = readerEvt.target.result;
+  //   this.user.backgroundimage = btoa(binaryString);
+  // }
 }

@@ -12,13 +12,15 @@ import {AddClassModalComponent} from "./add-class-modal/add-class-modal/add-clas
 import { AddToRosterModalComponent } from './add-to-roster-modal/add-to-roster-modal.component';
 import { ClassRosterModalComponent } from './class-roster-modal/class-roster-modal.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdminPageRoutingModule
+    AdminPageRoutingModule,
+    SharedModule
   ],
   declarations: [AdminPage, AddClassModalComponent, AddToRosterModalComponent, ClassRosterModalComponent, AddUserModalComponent]
 })

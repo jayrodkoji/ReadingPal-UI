@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { DomSanitizer } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
-import { UsersModel } from 'src/app/Providers/user-controller/model/users-model'
+import { User } from 'src/app/Providers/user-controller/model/users-model'
 import { ImageUtils } from 'src/app/utils/image-utils';
+import { ImageService } from 'src/app/Providers/image-controller/image.service';
 
 @Component({
   selector: 'app-add-user-modal',
@@ -19,18 +17,15 @@ export class AddUserModalComponent implements OnInit {
   @Input() newUser;
 
   user = {
-    backgroundimage: '',
     email: '',
     firstName: '',
     lastName: '',
-    profileimage: '',
     username: '',
     password: '',
-    roles: [{
-      type: '',
-      id: ''
-    }]
   };
+
+  userAvatar: File;
+  userBanner = '';
 
   role = {
     type: '',
@@ -41,7 +36,10 @@ export class AddUserModalComponent implements OnInit {
   isError = false;
   customErrorMessage = '';
 
-  constructor(private modalController: ModalController, private http: HttpClient, private sanitizer: DomSanitizer, private userController: UsersService) { }
+  constructor(
+    private modalController: ModalController, 
+    private userService: UsersService,
+    private imageService: ImageService) { }
 
   dismiss() {
     this.modalController.dismiss({
@@ -51,7 +49,15 @@ export class AddUserModalComponent implements OnInit {
 
 
   saveUser(user, role) {
-    console.log(user);
+    //TODO: implement image upload
+    // if(this.userAvatar){
+    //   this.uploadAvatar();
+    // }
+
+    // if(this.userBanner){
+    //   this.uploadBanner();
+    // }
+
     user.roles[0].type = role.type;
     if (user.username === '' || user.username === undefined) {
       this.runErrorMessage('Please Enter A Username');
@@ -62,30 +68,18 @@ export class AddUserModalComponent implements OnInit {
       this.runErrorMessage('Please Select A User Role');
       // } else if (!parseInt(this.student.reading_level) && this.userRole === 'Student') {
       //   this.runErrorMessage('Please Enter A Valid Reading Level');
-    } else {
-      // If this user is a student
-      if (user.roles[0].type === 'Student') {
-        user.roles[0].id = 'b45660ac-64a7-4cb0-88a6-d366ade8b9b4';
-        user.roles[0].type = 'ROLE_STUDENT';
-      } else if (user.roles[0].type === 'Admin') {
-        user.roles[0].id = 'f60c5c3d-f079-4ad3-98a5-04c61ae39c60';
-        user.roles[0].type = 'ROLE_ADMIN';
-      } else if (user.roles[0].type === 'Teacher') {
-        user.roles[0].id = '8a2bb385-d1ff-434a-8453-49e6d45ea7e0';
-        user.roles[0].type = 'ROLE_TEACHER';
-      }
 
       // Add the user to the database
-      const new_user = new UsersModel(user)
+      const new_user = new User(user)
       if (this.inputFlag === true) {
-        this.userController.addUser(new_user).subscribe((result: any) => {
+        this.userService.addUser(new_user).subscribe((result: any) => {
 
         });
       }
       // Update the user in the database
       else {
         console.log("new user", new_user)
-        this.userController.updateUser(new_user).subscribe((result: any) => {
+        this.userService.updateUser(new_user).subscribe((result: any) => {
 
         });
       }
@@ -94,19 +88,36 @@ export class AddUserModalComponent implements OnInit {
     }
   }
 
-  handleIconFileSelectProfile(event) {
-    const files = event.target.files;
-    const file = files[0];
-
-    console.log(file);
-
-    if (files && file) {
-      ImageUtils.readImageFileData(file,
-        str => {
-          this.user.profileimage = ImageUtils.convertToDBImage(str);
-        });
+  avatarSelected(ev){
+    if(ev.target.value){
+      this.userAvatar = <File>ev.target.files[0];
     }
   }
+  
+  uploadAvatar() {
+    let fd = new FormData();
+    
+    fd.append('avatar', this.userAvatar, this.userAvatar.name);
+    this.imageService.uploadAvatar(fd);
+  }
+
+  uploadBanner() {
+    throw new Error('Method not implemented.');
+  }
+
+  // handleIconFileSelectProfile(event) {
+  //   const files = event.target.files;
+  //   const file = files[0];
+
+  //   console.log(file);
+
+  //   if (files && file) {
+  //     ImageUtils.readImageFileData(file,
+  //       str => {
+  //         this.userAvatar = ImageUtils.convertToDBImage(str);
+  //       });
+  //   }
+  // }
 
   handleIconFileSelectBackground(event) {
     const files = event.target.files;
@@ -117,7 +128,7 @@ export class AddUserModalComponent implements OnInit {
     if (files && file) {
       ImageUtils.readImageFileData(file,
         str => {
-          this.user.backgroundimage = ImageUtils.convertToDBImage(str);
+          this.userBanner = ImageUtils.convertToDBImage(str);
         });
     }
   }

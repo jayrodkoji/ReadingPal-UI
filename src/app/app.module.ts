@@ -21,6 +21,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
+import { ImageService } from './Providers/image-controller/image.service';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     ToasterService,
+    ImageService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

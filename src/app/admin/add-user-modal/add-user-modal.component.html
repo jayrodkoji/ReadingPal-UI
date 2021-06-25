@@ -91,7 +91,7 @@
                 </ion-col>
                 <ion-col size="7">
                   <ion-item lines="none" style="--background: var(--main-content-background);">
-                    <ion-input type="file" name="userimage" (change)="handleIconFileSelectProfile($event)"></ion-input>
+                    <ion-input type="file" name="userimage" (input)="avatarSelected($event)"></ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>

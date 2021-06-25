@@ -1,17 +1,4 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      <a href="/home">
-        <ion-img src="../../assets/logo/logo.svg" onerror="this.onerror=null; [src]='../../assets/logo/logo.png'"
-          class="logo"></ion-img>
-      </a>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header></app-header> 
 
 <ion-content style="min-height:50px; max-height: calc(100vh - 56px); --background: var(--main-content-background)">
   <ion-grid style="margin:15px;">
@@ -25,10 +12,10 @@
                 <h3 style="padding-left: 10px; color: white; font-size: 40px;">Class Management</h3>
               </ion-col>
               <ion-col size="auto">
-                <ion-button style="--background: white; padding-right: 10px; --color: var(--ion-color-primary);" fill="clear"
+                <!-- <ion-button style="--background: white; padding-right: 10px; --color: var(--ion-color-primary);" fill="clear"
                             (click)="clearClass(); onClassCreate();">
                   Add New Class
-                </ion-button>
+                </ion-button> -->
               </ion-col>
             </ion-row>
             <ion-row>
@@ -49,23 +36,22 @@
                     <td scope="row">{{i+1}}</td>
                     <td>
                       <a href="#">
-                        <img *ngIf="user.profileimage != null" height="40" width="40"
-                             [src]="class.classData.teacher.profileimage" class="avatar">
+                        <img height="40" width="40"
+                             [src]="class.classData.teacher.profileimage || 'assets/user/default-avatar.png'" class="avatar">
                         {{class.classData.teacher.username}}</a>
                     </td>
                     <td>{{class.classData.name}}</td>
                     <td>{{class.classData.grade}}</td>
                     <td>
-                      <ion-button fill="clear" style="color: var(--default-font-color);" (click)="setRoster(class)">
+                      <ion-button fill="clear" style="color: var(--default-font-color);">
                         <ion-icon slot="icon-only" size="small" name="people-outline"></ion-icon>
                       </ion-button>
                     </td>
                     <td>
-                      <ion-button fill="clear" style="color: var(--default-font-color);" (click)="setClass(class); onClassCreate();">
+                      <ion-button fill="clear" style="color: var(--default-font-color);">
                         <ion-icon slot="icon-only" size="small" name="settings-outline"></ion-icon>
                       </ion-button>
-                      <ion-button fill="clear" style="color: var(--default-font-color);"
-                                  (click)="deleteClass(class, i);">
+                      <ion-button fill="clear" style="color: var(--default-font-color);">
                         <ion-icon slot="icon-only" size="small" name="trash-outline"></ion-icon>
                       </ion-button>
                     </td>
@@ -102,7 +88,6 @@
                     <th>Username</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Role</th>
                     <th>Image</th>
                     <th>Actions</th>
                   </tr>
@@ -110,20 +95,21 @@
                   <tbody>
                   <tr *ngFor="let user of allUsers; let i = index">
                     <td scope="row">{{i+1}}</td>
-                    <td><a href="#"><img *ngIf="user.avatar != null" height="40" width="40"
-                                         [src]="user.avatar" class="avatar"> {{user.username}}</a></td>
+                    <td>
+                      <a href="#"><img height="40" width="40"src="assets/user/default-avatar.png" class="avatar">
+                        {{user.username}}
+                      </a>
+                    </td>
                     <td>{{user.firstName}} {{user.lastName}}</td>
                     <td>{{user.email}}</td>
-                    <td>{{user.role}}</td>
-                    <td class="col-xs-1"> <img *ngIf="user.backgroundImage != null" width="30"
-                                               [src]="user.backgroundImage">
+                    <td class="col-xs-1"> <img width="30" src="assets/Banners/guitar.jpg">
                     </td>
                     <td>
                       <ion-button fill="clear" style="color: var(--default-font-color);"
                                   (click)="setUser(user); onUserCreate();">
                         <ion-icon slot="icon-only" size="small" name="settings-outline"></ion-icon>
                       </ion-button>
-                      <ion-button fill="clear" style="color: var(--default-font-color);" (click)="deleteUser(user, i);">
+                      <ion-button fill="clear" style="color: var(--default-font-color);" (click)="deleteUser(user);">
                         <ion-icon slot="icon-only" size="small" name="trash-outline"></ion-icon>
                       </ion-button>
                     </td>
