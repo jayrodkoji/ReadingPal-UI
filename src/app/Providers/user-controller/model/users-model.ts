@@ -4,7 +4,6 @@ export class User {
   public lastName: string;
   public username: string;
   public email: string;
-  public password: string;
 
   // data: Object from the server's user GET request
   constructor(data) {
@@ -12,6 +11,5 @@ export class User {
     this.lastName = data.lastName;
     this.username = data.username;
     this.email = data.email;
-    this.password = data.password;
   }
 }
