@@ -23,31 +23,31 @@ export class StudentsComponent implements OnInit {
     this.editInd = -1;
     this.editClass = '';
 
-    if(this.classes)
-      this.addStudentNames();
+    // if(this.classes)
+      // this.addStudentNames();
   }
 
   /**
    * Add student first and last name to student object
    */
-  addStudentNames() {
-    this.classes.forEach((cl) => {
-      cl.students.forEach((student) => {
-        this.userService.getUser(student.username)
-            .subscribe((res => {
-              if(res){
-                student.firstName = res.firstName;
-                student.lastName = res.lastName;
-                student.email = res.email;
-                student.password = null;
-                student.user = res;
-              }
+  // addStudentNames() {
+  //   this.classes.forEach((cl) => {
+  //     cl.students.forEach((student) => {
+  //       this.userService.getUser(student.username)
+  //           .subscribe((res => {
+  //             if(res){
+  //               student.firstName = res.firstName;
+  //               student.lastName = res.lastName;
+  //               student.email = res.email;
+  //               student.password = null;
+  //               student.user = res;
+  //             }
 
-              this.isLoading = false;
-            }))
-      })
-    })
-  }
+  //             this.isLoading = false;
+  //           }))
+  //     })
+  //   })
+  // }
 
   /**
    * Send changes to student and user
@@ -81,8 +81,8 @@ export class StudentsComponent implements OnInit {
    */
   private submitUserChanges(student) {
     student.user.username = student.username;
-    this.userService.updateUser(student.user).subscribe(() => {
-    })
+    // this.userService.updateUser(student.user).subscribe(() => {
+    // })
   }
 
   /**

@@ -8,6 +8,7 @@ import { ClassControllerService } from 'src/app/Providers/class-controller/class
 import {GroupControllerService} from "../../Providers/group-controller/group-controller.service";
 import {BehaviorSubject, forkJoin} from "rxjs";
 import {UsersService} from "../../Providers/user-controller/users.service";
+import { User } from 'src/app/Providers/user-controller/model/users-model';
 
 export class FullLessonData {
   lessonData: LessonData;
@@ -31,7 +32,7 @@ export class ClassesPage implements OnInit {
   currentTab: string = "classes";
   isReport: boolean = false;
   allReadingGroups;
-  users = [];
+  users: User[] = [];
 
   classes: ClassData[];
 
@@ -64,17 +65,14 @@ export class ClassesPage implements OnInit {
 
           this.users = this.users.filter((st, index, self) =>
               index === self.findIndex((t) => (
-                  t.id === st.id
+                  t._id === st._id
               )));
 
           this.users.forEach(usr => {
-            this.userController.getUser(usr.username).subscribe((res)=> {
-              if(res) {
-                usr.firstName = res.firstName
-                usr.lastName = res.lastName
-                usr.profileimage = res.profileimage
-              }
-            })
+            const user = this.userController.getUser(usr.username);
+            if( user ) {
+              usr = user;
+            }
           })
 
           this.getReadingGroups()

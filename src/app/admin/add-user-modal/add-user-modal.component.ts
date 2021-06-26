@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
-import { User } from 'src/app/Providers/user-controller/model/users-model'
+import { UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model'
 import { ImageUtils } from 'src/app/utils/image-utils';
 import { ImageService } from 'src/app/Providers/image-controller/image.service';
+import { gql } from 'apollo-angular';
 
 @Component({
   selector: 'app-add-user-modal',
@@ -17,27 +18,21 @@ export class AddUserModalComponent implements OnInit {
   @Input() newUser;
 
   user = {
+    _id: '',
     email: '',
     firstName: '',
     lastName: '',
     username: '',
-    password: '',
   };
 
-  userAvatar: File;
+  profilePic: File;
   userBanner = '';
-
-  role = {
-    type: '',
-    id: ''
-  }
-
 
   isError = false;
   customErrorMessage = '';
 
   constructor(
-    private modalController: ModalController, 
+    private modalController: ModalController,
     private userService: UsersService,
     private imageService: ImageService) { }
 
@@ -48,56 +43,39 @@ export class AddUserModalComponent implements OnInit {
   }
 
 
-  saveUser(user, role) {
-    //TODO: implement image upload
-    // if(this.userAvatar){
-    //   this.uploadAvatar();
-    // }
-
-    // if(this.userBanner){
-    //   this.uploadBanner();
-    // }
-
-    user.roles[0].type = role.type;
-    if (user.username === '' || user.username === undefined) {
-      this.runErrorMessage('Please Enter A Username');
-    } else if ((user.password === '' || user.password === undefined) && this.inputFlag != 0) {
-      this.runErrorMessage('Please Enter A Password');
-    } else if (user.roles[0].type === 'Choose Role') {
-      // If you dont select a user role show message and dont do anything
-      this.runErrorMessage('Please Select A User Role');
-      // } else if (!parseInt(this.student.reading_level) && this.userRole === 'Student') {
-      //   this.runErrorMessage('Please Enter A Valid Reading Level');
-
-      // Add the user to the database
+  saveUser(user) {
+    // Add the user to the database
+    if (this.inputFlag === true) {
       const new_user = new User(user)
-      if (this.inputFlag === true) {
-        this.userService.addUser(new_user).subscribe((result: any) => {
+      this.userService.addUser(new_user).subscribe((result: any) => {
 
-        });
-      }
-      // Update the user in the database
-      else {
-        console.log("new user", new_user)
-        this.userService.updateUser(new_user).subscribe((result: any) => {
+      });
+    }
+    // Update the user in the database
+    else {
+      let updateUser = new UpdateUser(user);
+      this.userService.updateUser(user._id, updateUser).subscribe((res: any) => {
+        if (res?.data?.updateUser?.success) {
+          console.log('Update User Success')
+        } else {
+          console.log("Update User Failure")
+        }
+      })
+    }
 
-        });
-      }
-      
-      this.dismiss()
+    this.dismiss()
+  }
+
+  avatarSelected(ev) {
+    if (ev.target.value) {
+      this.profilePic = <File>ev.target.files[0];
     }
   }
 
-  avatarSelected(ev){
-    if(ev.target.value){
-      this.userAvatar = <File>ev.target.files[0];
-    }
-  }
-  
   uploadAvatar() {
     let fd = new FormData();
-    
-    fd.append('avatar', this.userAvatar, this.userAvatar.name);
+
+    fd.append('avatar', this.profilePic, this.profilePic.name);
     this.imageService.uploadAvatar(fd);
   }
 
@@ -133,36 +111,33 @@ export class AddUserModalComponent implements OnInit {
     }
   }
 
-    runErrorMessage(message, reload ?) {
-      this.isError = false;
-      this.customErrorMessage = '';
-      const killId = setTimeout(() => {
-        for (let i = killId as any; i > 0; i--) { clearInterval(i); }
-        if (this.isError === false) {
+  runErrorMessage(message, reload?) {
+    this.isError = false;
+    this.customErrorMessage = '';
+    const killId = setTimeout(() => {
+      for (let i = killId as any; i > 0; i--) { clearInterval(i); }
+      if (this.isError === false) {
+        this.isError = false;
+        this.customErrorMessage = '';
+        if (message) {
+          this.isError = true;
+          this.customErrorMessage = message;
+        }
+        if (reload) {
+          // do reload or redirect to where the user is supposed to be.
+        }
+        setTimeout(() => {
           this.isError = false;
           this.customErrorMessage = '';
-          if (message) {
-            this.isError = true;
-            this.customErrorMessage = message;
-          }
-          if (reload) {
-            // do reload or redirect to where the user is supposed to be.
-          }
-          setTimeout(() => {
-            this.isError = false;
-            this.customErrorMessage = '';
-          }, 4000);
-        }
-      }, 300);
-    }
-
-    ngOnInit() {
-      if (this.inputFlag === false) {
-        this.user.firstName = this.inputUser.firstName;
-        this.user.lastName = this.inputUser.lastName;
-        this.user.email = this.inputUser.email;
-        this.user.username = this.inputUser.username;
+        }, 4000);
       }
-    }
-
+    }, 300);
   }
+
+  ngOnInit() {
+    if (this.inputFlag === false) {
+      this.user = this.inputUser;
+    }
+  }
+
+}

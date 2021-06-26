@@ -28,15 +28,15 @@ export class AssignClassCardComponent implements OnInit {
   }
 
   getUsers() {
-    for (let student of this.class.students) {
-      this.usersController.getUser(student.username).subscribe(res => {
-        if(res){
-          student.firstName = res.firstName;
-          student.lastName = res.lastName;
-          student.class = this.class.id
-        }
-      })
-    }
+    // for (let student of this.class.students) {
+    //   this.usersController.getUser(student.username).subscribe(res => {
+    //     if(res){
+    //       student.firstName = res.firstName;
+    //       student.lastName = res.lastName;
+    //       student.class = this.class.id
+    //     }
+    //   })
+    // }
   }
 
   studentsAltered() {

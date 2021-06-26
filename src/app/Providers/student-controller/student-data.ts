@@ -1,5 +1,4 @@
 import {ImageUtils} from "../../utils/image-utils";
-import {Role} from "../user-controller/model/users-model";
 
 export class StudentData
 {
@@ -27,7 +26,6 @@ export class StudentAsUserData
     public profileImage: string;
     public username: string;
     public grade: string;
-    public roles: Role;
 
     // data: Object from the server's user GET request
     constructor(data) {
@@ -39,6 +37,5 @@ export class StudentAsUserData
         this.profileImage = ImageUtils.convertDBImage(data.profileimage);
         this.username = data.username;
         this.grade = data.grade;
-        this.roles = data.roles;
     }
 }

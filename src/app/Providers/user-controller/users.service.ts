@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import { User } from "./model/users-model";
+import { UpdateUser, User } from "./model/users-model";
 import { Apollo, gql } from 'apollo-angular';
 import { __Directive } from 'graphql';
 
@@ -12,6 +12,7 @@ import { __Directive } from 'graphql';
 export class UsersService {
   private teachersListSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
   private users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
+
   User
   loading: boolean;
 
@@ -37,7 +38,8 @@ export class UsersService {
     })
       .valueChanges
       .subscribe(({ data }) => {
-        this.users$.next(data.users)
+        let users = data.users.map(user => new User(user));
+        this.users$.next(users)
       });
 
     return this.users$.asObservable();
@@ -46,7 +48,7 @@ export class UsersService {
   /**
    * Get User
    */
-  public getUser(query: any) {
+  public getUser(query: any): User {
     this.apollo.watchQuery<any>({
       query: query
     })
@@ -54,13 +56,14 @@ export class UsersService {
       .subscribe(({ data }) => {
         return data
       });
+
+    return null
   }
 
   /**
    * Update User
    */
-  //TODO: update to return new list of users
-  public updateUser(_id: String, userUpdate: User): Observable<any> {
+  public updateUser(_id: String, userUpdate: UpdateUser): Observable<any> {
     const Update_User = gql`
       mutation updateUser($_id: String!, $userUpdate: UserUpdate) {
         updateUser(_id: $_id, userUpdate: $userUpdate) {
@@ -69,19 +72,13 @@ export class UsersService {
       }
     `;
 
-    this.apollo.mutate({
+    return this.apollo.mutate({
       mutation: Update_User,
       variables: {
         _id: _id,
         userUpdate: userUpdate
       }
-    }).subscribe((res: any) => {
-      if(res?.data?.update?.success){
-       console.log('success')
-      }
     })
-
-    return this.users$.asObservable();
   }
 
   /**

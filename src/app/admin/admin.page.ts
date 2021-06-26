@@ -1,4 +1,3 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -72,9 +71,9 @@ export class AdminPage implements OnInit {
       username: '',
       firstName: '',
       lastName: '',
-      password: '',
       email: ''
     };
+
     this.userImageFileName = 'Choose a file';
     this.backgroundimageFileName = 'Choose a file';
     this.newUser = true;
@@ -224,7 +223,6 @@ export class AdminPage implements OnInit {
           lastName
           username
           email
-          avatar
         }
       }
     `;

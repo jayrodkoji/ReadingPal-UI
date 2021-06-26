@@ -46,13 +46,13 @@ export class AssignGroupCardComponent implements OnInit {
         })
 
         for (let student of this.students) {
-          this.usersController.getUser(student.username).subscribe(result => {
-            if(result){
-              student.firstName = result.firstName;
-              student.lastName = result.lastName;
-              student.class = this.group.class_id
-            }
-          })
+          // this.usersController.getUser(student.username).subscribe(result => {
+          //   if(result){
+          //     student.firstName = result.firstName;
+          //     student.lastName = result.lastName;
+          //     student.class = this.group.class_id
+          //   }
+          // })
         }
       }
     })
