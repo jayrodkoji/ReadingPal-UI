@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import { UpdateUser, User } from "./model/users-model";
+import { NewUser, UpdateUser, User } from "./model/users-model";
 import { Apollo, gql } from 'apollo-angular';
 import { __Directive } from 'graphql';
 
@@ -24,9 +24,33 @@ export class UsersService {
   /**
    * Create User
    */
-  public addUser(data: User): Observable<any> {
-    return this.http.post(
-        environment.graphqlApiGateway + '/users', data)
+  public addUser(user: NewUser): Observable<any> {
+    const ADD_USER = gql`
+      mutation addUser($userInput: UserInput) {
+        addUser(userInput: $userInput) {
+          _id
+          firstName
+          lastName
+          username
+          email
+        }
+      }
+    `;
+
+    this.apollo.mutate({
+      mutation: ADD_USER,
+      variables: {
+        userInput: user
+      }
+    }).subscribe((res: any) => {
+      if(res?.data?.addUser){
+        let users = this.users$.getValue();
+        users.push(res.data.addUser)
+        this.users$.next(users)
+      }
+    })
+
+    return this.users$.asObservable();
   }
 
   /**

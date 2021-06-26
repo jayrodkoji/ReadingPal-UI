@@ -29,3 +29,18 @@ export class UpdateUser {
     this.email = data.email;
   }
 }
+
+export class NewUser {
+  public firstName!: string;
+  public lastName!: string;
+  public username!: string;
+  public email!: string;
+
+  // data: Object from the server's user GET request
+  constructor(data) {
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.username = data.username;
+    this.email = data.email;
+  }
+}

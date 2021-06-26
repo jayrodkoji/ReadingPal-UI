@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
-import { UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model'
+import { NewUser, UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model'
 import { ImageUtils } from 'src/app/utils/image-utils';
 import { ImageService } from 'src/app/Providers/image-controller/image.service';
 import { gql } from 'apollo-angular';
@@ -46,7 +46,8 @@ export class AddUserModalComponent implements OnInit {
   saveUser(user) {
     // Add the user to the database
     if (this.inputFlag === true) {
-      const new_user = new User(user)
+      const new_user = new NewUser(user)
+      console.log(new_user)
       this.userService.addUser(new_user).subscribe((result: any) => {
 
       });
