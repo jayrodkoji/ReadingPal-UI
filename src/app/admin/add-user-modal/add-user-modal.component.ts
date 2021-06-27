@@ -47,7 +47,6 @@ export class AddUserModalComponent implements OnInit {
     // Add the user to the database
     if (this.inputFlag === true) {
       const new_user = new NewUser(user)
-      console.log(new_user)
       this.userService.addUser(new_user).subscribe((result: any) => {
 
       });

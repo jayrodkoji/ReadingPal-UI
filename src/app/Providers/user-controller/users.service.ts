@@ -26,8 +26,8 @@ export class UsersService {
    */
   public addUser(user: NewUser): Observable<any> {
     const ADD_USER = gql`
-      mutation addUser($userInput: UserInput) {
-        addUser(userInput: $userInput) {
+      mutation addUser($newUser: NewUser) {
+        addUser(newUser: $newUser) {
           _id
           firstName
           lastName
@@ -40,7 +40,7 @@ export class UsersService {
     this.apollo.mutate({
       mutation: ADD_USER,
       variables: {
-        userInput: user
+        newUser: user
       }
     }).subscribe((res: any) => {
       if(res?.data?.addUser){
@@ -154,8 +154,4 @@ export class UsersService {
     return this.http.post(
         environment.graphqlApiGateway + '/users/updateUserPassword', { newPassword: password, userName: username} );
   }
-
-  /**
-   * TODO: Basic Auth
-   */
 }
