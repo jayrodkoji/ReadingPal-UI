@@ -27,7 +27,7 @@ export class AdminPage implements OnInit {
       component: AddUserModalComponent,
       cssClass: 'add-user-modal',
       componentProps: {
-        inputUser: null,
+        user: null,
         isNewUser: true,
       }
     });
@@ -39,7 +39,7 @@ export class AdminPage implements OnInit {
       component: AddUserModalComponent,
       cssClass: 'add-user-modal',
       componentProps: {
-        inputUser: user,
+        user: user,
         isNewUser: false,
       }
     });

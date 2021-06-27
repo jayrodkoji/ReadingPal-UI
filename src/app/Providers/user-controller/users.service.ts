@@ -4,7 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { NewUser, UpdateUser, User } from "./model/users-model";
 import { Apollo, gql } from 'apollo-angular';
-import { __Directive } from 'graphql';
+import { subscribe, __Directive } from 'graphql';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -37,20 +38,23 @@ export class UsersService {
       }
     `;
 
-    this.apollo.mutate({
-      mutation: ADD_USER,
-      variables: {
-        newUser: user
-      }
-    }).subscribe((res: any) => {
-      if (res?.data?.addUser) {
-        let users = this.users$.getValue();
-        users.push(res.data.addUser)
-        this.users$.next(users)
-      }
+    return new Observable(subscriber => {
+      this.apollo.mutate({
+        mutation: ADD_USER,
+        variables: {
+          newUser: user
+        }
+      }).subscribe((res: any) => {
+        if (res?.data?.addUser) {
+          let users = this.users$.getValue();
+          users.push(res.data.addUser)
+          this.users$.next(users)
+          subscriber.next({ success: true })
+        } else {
+          subscriber.next({ success: true })
+        }
+      }, _ => { subscriber.next({ success: false }) })
     })
-
-    return this.users$.asObservable();
   }
 
   /**
@@ -112,7 +116,7 @@ export class UsersService {
         } else {
           subscriber.next({ success: false })
         }
-      })
+      }, _ => { subscriber.next({ success: false }) })
     })
   }
 

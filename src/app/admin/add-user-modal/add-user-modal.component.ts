@@ -10,9 +10,8 @@ import { User } from 'src/app/_models/user';
   styleUrls: ['./add-user-modal.component.scss'],
 })
 export class AddUserModalComponent implements OnInit {
-  @Input() inputUser: User
+  @Input() user: User
   @Input() isNewUser: Boolean
-  user: User
 
   constructor(
     private modalController: ModalController,
@@ -20,19 +19,21 @@ export class AddUserModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.isNewUser) {
-      this.user = { ...this.inputUser }
-    } else {
+    if (!this.user)
       this.user = new User()
-    }
   }
 
   saveUser(user) {
     // Add the user to the database
     if (this.isNewUser === true) {
       const new_user = new NewUser(user)
-      this.userService.addUser(new_user).subscribe((result: any) => {
-
+      this.userService.addUser(new_user).subscribe((res: any) => {
+        if (res?.success) {
+          console.log('Create User Success')
+          this.dismiss({ user: this.user })
+        } else {
+          console.log("Create User Failure")
+        }
       })
     }
     // Update the user in the database
@@ -50,7 +51,6 @@ export class AddUserModalComponent implements OnInit {
   }
 
   cancelUserEdit() {
-    this.user = { ...this.inputUser }
     this.dismiss({})
   }
 
