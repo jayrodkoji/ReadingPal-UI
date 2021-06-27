@@ -1,12 +1,15 @@
 <ng-container>
   <ion-content>
     <ion-grid style="width: 100%; height: 100%; padding: 0;">
-      <ion-row class="ion-align-items-center ion-justify-content-between" style="background-color: var(--ion-color-primary); padding: 0 0 10px 10px;">
+      <ion-row class="ion-align-items-center ion-justify-content-between"
+        style="background-color: var(--ion-color-primary); padding: 0 0 10px 10px;">
         <ion-col>
-          <h1 style="color: white; font-size: 40px;" class="modal-title" [innerText]="(inputFlag == 0 ? 'Edit' : 'Add') + ' User'"></h1>
+          <h1 style="color: white; font-size: 40px;" class="modal-title"
+            [innerText]="(!isNewUser ? 'Edit' : 'Add') + ' User'"></h1>
         </ion-col>
         <ion-col size="auto">
-          <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;" (click)="dismiss()">
+          <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;"
+            (click)="cancelUserEdit()">
             <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -18,33 +21,20 @@
               <ion-row class="ion-align-items-center">
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label class="input-title"> Username:</ion-label>
+                    <ion-label class="input-title">Username:</ion-label>
                   </ion-item>
                 </ion-col>
                 <ion-col size="7">
                   <ion-item lines="none" style="--background: var(--main-content-background);">
-                    <ion-input type="text" name="username" placeholder="Enter username..." [(ngModel)]="user.username">
+                    <ion-input type="text" name="username" placeholder="Enter username..." [(ngModel)]="this.user.username">
                     </ion-input>
                   </ion-item>
                 </ion-col>
               </ion-row>
-              <!-- <ion-row class="ion-align-items-center">
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label> password:</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="7">
-                  <ion-item lines="none" style="--background: var(--main-content-background);">
-                    <ion-input type="text" name="Password" placeholder="Enter password..." [(ngModel)]="user.password">
-                    </ion-input>
-                  </ion-item>
-                </ion-col>
-              </ion-row> -->
               <ion-row class="ion-align-items-center">
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label class="input-title"> First Name:</ion-label>
+                    <ion-label class="input-title">First Name:</ion-label>
                   </ion-item>
                 </ion-col>
                 <ion-col size="7">
@@ -57,7 +47,7 @@
               <ion-row class="ion-align-items-center">
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label class="input-title"> Last Name:</ion-label>
+                    <ion-label class="input-title">Last Name:</ion-label>
                   </ion-item>
                 </ion-col>
                 <ion-col size="7">
@@ -70,7 +60,7 @@
               <ion-row class="ion-align-items-center">
                 <ion-col>
                   <ion-item lines="none">
-                    <ion-label class="input-title"> Email:</ion-label>
+                    <ion-label class="input-title">Email:</ion-label>
                   </ion-item>
                 </ion-col>
                 <ion-col size="7">
@@ -80,42 +70,13 @@
                   </ion-item>
                 </ion-col>
               </ion-row>
-
-              <!-- <ion-row class="ion-align-items-center">
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label> User Image:</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="7">
-                  <ion-item lines="none" style="--background: var(--main-content-background);">
-                    <ion-input type="file" name="userimage" (input)="avatarSelected($event)"></ion-input>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-
-              <ion-row class="ion-align-items-center">
-                <ion-col>
-                  <ion-item lines="none">
-                    <ion-label> Background Image:</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="7">
-                  <ion-item lines="none" style="--background: var(--main-content-background);">
-                    <ion-input type="file" name="userback" placeholder="Enter User Image..."
-                    (change)="handleIconFileSelectBackground($event)"></ion-input>
-                  </ion-item>
-                </ion-col>
-              </ion-row> -->
             </ion-grid>
           </form>
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-end" style="height: 54px;">
         <ion-col size="auto">
-          <ion-button fill="clear" (click)="saveUser(user)">
-            Save
-          </ion-button>
+          <ion-button fill="clear" (click)="saveUser(user)">Save</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -17,8 +17,8 @@ export class UsersService {
   loading: boolean;
 
   constructor(
-      private http: HttpClient,
-      private apollo: Apollo
+    private http: HttpClient,
+    private apollo: Apollo
   ) { }
 
   /**
@@ -43,7 +43,7 @@ export class UsersService {
         newUser: user
       }
     }).subscribe((res: any) => {
-      if(res?.data?.addUser){
+      if (res?.data?.addUser) {
         let users = this.users$.getValue();
         users.push(res.data.addUser)
         this.users$.next(users)
@@ -56,7 +56,7 @@ export class UsersService {
   /**
    * Get Users
    */
-   public getUsers(query: any): Observable<any> {
+  public getUsers(query: any): Observable<any> {
     this.apollo.watchQuery<any>({
       query: query
     })
@@ -87,7 +87,7 @@ export class UsersService {
   /**
    * Update User
    */
-  public updateUser(_id: String, userUpdate: UpdateUser): Observable<any> {
+  public updateUser(_id: string, userUpdate: UpdateUser): Observable<any> {
     const Update_User = gql`
       mutation updateUser($_id: String!, $userUpdate: UserUpdate) {
         updateUser(_id: $_id, userUpdate: $userUpdate) {
@@ -96,12 +96,23 @@ export class UsersService {
       }
     `;
 
-    return this.apollo.mutate({
-      mutation: Update_User,
-      variables: {
-        _id: _id,
-        userUpdate: userUpdate
-      }
+    return new Observable(subscriber => {
+      this.apollo.mutate({
+        mutation: Update_User,
+        variables: {
+          _id: _id,
+          userUpdate: userUpdate
+        }
+      }).subscribe((res: any) => {
+        if (res?.data?.updateUser?.success) {
+          let user: User = Object.assign(this.users$.getValue().filter(usr => _id === usr._id)[0], userUpdate)
+          let allUsers = this.users$.getValue().filter(usr => _id !== usr._id);
+          allUsers.push(user)
+          subscriber.next({ success: true })
+        } else {
+          subscriber.next({ success: false })
+        }
+      })
     })
   }
 
@@ -123,7 +134,7 @@ export class UsersService {
         _id: _id
       }
     }).subscribe((res: any) => {
-      if(res?.data?.deleteUser?.success){
+      if (res?.data?.deleteUser?.success) {
         this.users$.next(
           this.users$.getValue().filter(user => user._id !== _id)
         )
@@ -139,10 +150,10 @@ export class UsersService {
    */
   public getTeachers(): Observable<any> {
     this.http.get(environment.graphqlApiGateway + '/users/getTeachers')
-        .subscribe((res: Array<any>) => {
-          const teachers = res.map(obj => new User(obj));
-          this.teachersListSubject.next(teachers);
-        })
+      .subscribe((res: Array<any>) => {
+        const teachers = res.map(obj => new User(obj));
+        this.teachersListSubject.next(teachers);
+      })
 
     return this.teachersListSubject.asObservable();
   }
@@ -152,6 +163,6 @@ export class UsersService {
    */
   public updatePassword(username: string, password: string): Observable<any> {
     return this.http.post(
-        environment.graphqlApiGateway + '/users/updateUserPassword', { newPassword: password, userName: username} );
+      environment.graphqlApiGateway + '/users/updateUserPassword', { newPassword: password, userName: username });
   }
 }
