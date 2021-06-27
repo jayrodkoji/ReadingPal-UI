@@ -4,8 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { NewUser, UpdateUser, User } from "./model/users-model";
 import { Apollo, gql } from 'apollo-angular';
-import { subscribe, __Directive } from 'graphql';
-import { error } from 'console';
+import { __Directive } from 'graphql';
 
 @Injectable({
   providedIn: 'root'
