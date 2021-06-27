@@ -2,7 +2,7 @@
   <ion-content>
     <ion-grid style="width: 100%; height: 100%; padding: 0;">
       <ion-row class="ion-align-items-center ion-justify-content-between"
-        style="background-color: var(--ion-color-primary); padding: 0 0 10px 10px;">
+        style="background-color: var(--ion-color-primary); padding-left: 10px;">
         <ion-col>
           <h1 style="color: white; font-size: 40px;" class="modal-title"
             [innerText]="(!isNewUser ? 'Edit' : 'Add') + ' User'"></h1>
@@ -75,6 +75,9 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-end" style="height: 54px;">
+        <ion-col *ngIf="!isNewUser">
+          <ion-button fill="clear" color="primary" (click)="deleteUser(user);">Delete User</ion-button>
+        </ion-col>
         <ion-col size="auto">
           <ion-button fill="clear" (click)="saveUser(user)">Save</ion-button>
         </ion-col>

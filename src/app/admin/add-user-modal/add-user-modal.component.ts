@@ -15,7 +15,7 @@ export class AddUserModalComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private userService: UsersService
+    private usersService: UsersService
   ) { }
 
   ngOnInit() {
@@ -27,10 +27,10 @@ export class AddUserModalComponent implements OnInit {
     // Add the user to the database
     if (this.isNewUser === true) {
       const new_user = new NewUser(user)
-      this.userService.addUser(new_user).subscribe((res: any) => {
+      this.usersService.addUser(new_user).subscribe((res: any) => {
         if (res?.success) {
           console.log('Create User Success')
-          this.dismiss({ user: this.user })
+          this.dismiss()
         } else {
           console.log("Create User Failure")
         }
@@ -39,10 +39,10 @@ export class AddUserModalComponent implements OnInit {
     // Update the user in the database
     else {
       let updateUser = new UpdateUser(user)
-      this.userService.updateUser(user._id, updateUser).subscribe(res => {
+      this.usersService.updateUser(user._id, updateUser).subscribe(res => {
         if (res?.success) {
           console.log('Update User Success')
-          this.dismiss({ user: this.user })
+          this.dismiss()
         } else {
           console.log("Update User Failure")
         }
@@ -50,11 +50,26 @@ export class AddUserModalComponent implements OnInit {
     }
   }
 
-  cancelUserEdit() {
-    this.dismiss({})
+  deleteUser(user) {
+    const confirmation = confirm(`Are you sure you want to remove ${user.username}?`);
+
+    if (confirmation) {
+      this.usersService.deleteUser(user._id).subscribe(res => {
+        if(res?.success){
+          console.log("Delete user success")
+          this.dismiss()
+        } else {
+          console.log("Delete user failure")
+        }
+      })
+    }
   }
 
-  dismiss(data) {
-    this.modalController.dismiss(data)
+  cancelUserEdit() {
+    this.dismiss()
+  }
+
+  dismiss() {
+    this.modalController.dismiss()
   }
 }

@@ -70,7 +70,7 @@
             <ion-row class="ion-align-items-center ion-justify-content-between"
               style="background-color: var(--ion-color-primary);">
               <ion-col style="margin: 5px;">
-                <h3 style="padding-left: 10px; color: white; font-size: 40px;">User Management</h3>
+                <h3 style="padding-left: 10px; color: white; font-size: 40px; margin-top: 10px">User Management</h3>
               </ion-col>
               <ion-col size="auto">
                 <ion-button style="--background: white; padding-right: 10px; --color: var(--ion-color-primary);"
@@ -89,7 +89,7 @@
                       <th>Username</th>
                       <th>Email</th>
                       <th>Image</th>
-                      <th>Actions</th>
+                      <th>Edit</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -107,9 +107,6 @@
                       <td>
                         <ion-button fill="clear" style="color: var(--default-font-color);" (click)="onUserEdit(user);">
                           <ion-icon slot="icon-only" size="small" name="settings-outline"></ion-icon>
-                        </ion-button>
-                        <ion-button fill="clear" style="color: var(--default-font-color);" (click)="deleteUser(user);">
-                          <ion-icon slot="icon-only" size="small" name="trash-outline"></ion-icon>
                         </ion-button>
                       </td>
                   </tbody>

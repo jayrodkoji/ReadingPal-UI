@@ -131,22 +131,24 @@ export class UsersService {
       }
     `;
 
-    this.apollo.mutate({
-      mutation: DELETE_USER,
-      variables: {
-        _id: _id
-      }
-    }).subscribe((res: any) => {
-      if (res?.data?.deleteUser?.success) {
-        this.users$.next(
-          this.users$.getValue().filter(user => user._id !== _id)
-        )
-      }
+    return new Observable(subscriber => {
+      this.apollo.mutate({
+        mutation: DELETE_USER,
+        variables: {
+          _id: _id
+        }
+      }).subscribe((res: any) => {
+        if (res?.data?.deleteUser?.success) {
+          this.users$.next(
+            this.users$.getValue().filter(user => user._id !== _id)
+          )
+          subscriber.next(res.data.deleteUser)
+        } else {
+          subscriber.next({ success: false })
+        }
+      }, _ => subscriber.next({ success: false }))
     })
-
-    return this.users$.asObservable();
   }
-
 
   /**
    * Get Teachers

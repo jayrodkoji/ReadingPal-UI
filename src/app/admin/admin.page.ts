@@ -50,14 +50,6 @@ export class AdminPage implements OnInit {
     console.log()
   }
 
-  deleteUser(user) {
-    const confirmation = confirm(`Are you sure you want to remove ${user.username}?`);
-
-    if (confirmation) {
-      this.usersService.deleteUser(user._id)
-    }
-  }
-
   getAllUsers() {
     this.allUsers = [];
 
