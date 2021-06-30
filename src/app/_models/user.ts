@@ -6,7 +6,7 @@ export class User {
     m_dt: string;
     m_user: string;
     password: string;
-    profileimage: string;
+    profileImageKey: string;
     s_dt: string;
     s_user: string;
     username: string;

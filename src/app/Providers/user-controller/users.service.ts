@@ -6,6 +6,9 @@ import { NewUser, UpdateUser, User } from "./model/users-model";
 import { Apollo, gql } from 'apollo-angular';
 import { __Directive } from 'graphql';
 
+const USER_API_PATH = 'users'
+const GET_PROFILE_IMAGE_PATH = 'ProfilePic'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,6 +36,7 @@ export class UsersService {
           lastName
           username
           email
+          profileImageKey
         }
       }
     `;
@@ -149,6 +153,34 @@ export class UsersService {
       }, _ => subscriber.next({ success: false }))
     })
   }
+
+
+  /**
+   * Upload Profile Image
+   * @param image 
+   */
+  public updateProfileImage(image: FormData) {
+    return this.http.post(`http://localhost:3000/api/${USER_API_PATH}/uploadProfileImage`, image)
+  }
+
+  /**
+   * Get Profile Image
+   * Used for single use (not intended for use when image is needed more than once)
+   * @param key: s3 key 
+   */
+   public getProfileImage(key) {
+    return `http://localhost:3000/api/${USER_API_PATH}/${GET_PROFILE_IMAGE_PATH}/${key}`;
+  }
+
+  /**
+   * Download Profile Image
+   * Used for saving image (intended for use when image is needed more than once, ie. logged in user)
+   * @param image 
+   */
+   public downloadProfileImage(key) {
+    return null
+  }
+
 
   /**
    * Get Teachers

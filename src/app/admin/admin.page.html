@@ -96,9 +96,10 @@
                     <tr *ngFor="let user of allUsers; let i = index">
                       <td scope="row">{{i+1}}</td>
                       <td>
-                        <img height="40" width="40" src="assets/user/default-avatar.png" class="avatar">
-                        <ion-label class="form-text">{{user.firstName | titlecase}} {{user.lastName | titlecase}}
-                        </ion-label>
+                        <ion-avatar class="avatar">
+                          <img height="40" width="40" [src]="(user.profileImageKey) ? ('http://localhost:3000/api/users/ProfilePic/' + user.profileImageKey) : 'assets/user/default-avatar.png'">
+                        </ion-avatar>
+                        <ion-label class="form-text">{{user.firstName | titlecase}} {{user.lastName | titlecase}}</ion-label>
                       </td>
                       <td>{{user.username | titlecase}}</td>
                       <td>{{user.email}}</td>

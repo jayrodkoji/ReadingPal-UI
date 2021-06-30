@@ -61,6 +61,7 @@ export class AdminPage implements OnInit {
           lastName
           username
           email
+          profileImageKey
         }
       }
     `;

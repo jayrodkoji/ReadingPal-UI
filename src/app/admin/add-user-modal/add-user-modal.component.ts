@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
-import { NewUser, UpdateUser } from 'src/app/Providers/user-controller/model/users-model'
-import { User } from 'src/app/_models/user';
+import { NewUser, UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model'
 
 @Component({
   selector: 'app-add-user-modal',
@@ -12,6 +11,9 @@ import { User } from 'src/app/_models/user';
 export class AddUserModalComponent implements OnInit {
   @Input() user: User
   @Input() isNewUser: Boolean
+  profileImg: File;
+  profileImageURL
+  newImageKey
 
   constructor(
     private modalController: ModalController,
@@ -20,10 +22,14 @@ export class AddUserModalComponent implements OnInit {
 
   ngOnInit() {
     if (!this.user)
-      this.user = new User()
+      this.user = new User({})
+
+    this.getProfileImage()
   }
 
   saveUser(user) {
+    this.submitPhoto();
+    
     // Add the user to the database
     if (this.isNewUser === true) {
       const new_user = new NewUser(user)
@@ -68,6 +74,29 @@ export class AddUserModalComponent implements OnInit {
   cancelUserEdit() {
     this.dismiss()
   }
+
+  profileImgSelect(ev) {
+    if(ev.target.value){
+      this.profileImg = <File>ev.target.files[0];
+    }
+  }
+
+  getProfileImage() {
+    if(this.user.profileImageKey)
+      this.profileImageURL = this.usersService.getProfileImage(this.user.profileImageKey)
+  }
+
+  submitPhoto() {
+    if(this.profileImg) {
+      let fd = new FormData()
+      fd.append('profileImg', this.profileImg)
+      this.usersService.updateProfileImage(fd).subscribe(res => {
+        console.log(res)
+        // this.user.profileImageKey = res;
+      })
+    }
+  }
+
 
   dismiss() {
     this.modalController.dismiss()
