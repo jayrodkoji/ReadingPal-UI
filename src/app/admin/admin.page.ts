@@ -38,6 +38,7 @@ export class AdminPage implements OnInit {
     const modal = await this.modalController.create({
       component: AddUserModalComponent,
       cssClass: 'add-user-modal',
+      backdropDismiss: false,
       componentProps: {
         user: user,
         isNewUser: false,

@@ -126,7 +126,7 @@ export class UsersService {
   /**
    * Delete User
    */
-  public deleteUser(_id: string): Observable<any> {
+  public deleteUserData(_id: string): Observable<any> {
     const DELETE_USER = gql`
       mutation DeleteUser($_id: String!) {
         deleteUser(_id: $_id) {

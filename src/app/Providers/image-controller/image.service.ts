@@ -18,8 +18,8 @@ export class ImageService {
    * Upload Profile Image
    * @param image 
    */
-   public updateProfileImage(image: FormData) {
-    return this.http.post(`${USERS_API_URL}${USER_API_PATH}/uploadProfilePic`, image)
+  public updateProfileImage(image: FormData, key) {
+    return this.http.post(`${USERS_API_URL}${USER_API_PATH}/uploadProfilePic/${key}`, image)
   }
 
   /**
@@ -27,7 +27,7 @@ export class ImageService {
    * Used for single use (not intended for use when image is needed more than once)
    * @param key: s3 key 
    */
-   public getProfileImage(key) {
+  public getProfileImage(key) {
     return `${USERS_API_URL}${USER_API_PATH}/ProfilePic/${key}`;
   }
 
@@ -36,7 +36,11 @@ export class ImageService {
    * Used for saving image (intended for use when image is needed more than once, ie. logged in user)
    * @param image 
    */
-   public downloadProfileImage(key) {
+  public downloadProfileImage(key) {
     return null
+  }
+
+  public deleteUserImages(profileImageKey) {
+    return this.http.delete(`${USERS_API_URL}${USER_API_PATH}/deleteProfilePic/${profileImageKey}`)
   }
 }

@@ -14,6 +14,7 @@ export class AddUserModalComponent implements OnInit {
   @Input() isNewUser: Boolean
   profileImg: File;
   profileImageURL
+  currentProfileImg
   newImageKey
 
   constructor(
@@ -29,21 +30,6 @@ export class AddUserModalComponent implements OnInit {
     this.getProfileImage()
   }
 
-  deleteUser(user) {
-    const confirmation = confirm(`Are you sure you want to remove ${user.username}?`);
-
-    if (confirmation) {
-      this.usersService.deleteUser(user._id).subscribe(res => {
-        if (res?.success) {
-          console.log("Delete user success")
-          this.dismiss()
-        } else {
-          console.log("Delete user failure")
-        }
-      })
-    }
-  }
-
   cancelUserEdit() {
     this.dismiss()
   }
@@ -51,19 +37,30 @@ export class AddUserModalComponent implements OnInit {
   profileImgSelect(ev) {
     if (ev.target.value) {
       this.profileImg = <File>ev.target.files[0];
+
+      // Used to show image before submitting
+      const reader = new FileReader()
+      reader.onload = () => {
+        this.currentProfileImg = reader.result as string;
+      }
+
+      reader.readAsDataURL(this.profileImg)
     }
   }
 
   getProfileImage() {
     if (this.user.profileImageKey)
-      this.profileImageURL = this.imageService.getProfileImage(this.user.profileImageKey)
+      this.currentProfileImg = this.profileImageURL = this.imageService.getProfileImage(this.user.profileImageKey)
   }
 
   saveUser(user) {
     this.submitPhoto(user)
       .subscribe((res: any) => {
         if (res.imageKey) {
+          console.log(res.imageKey)
           this.user.profileImageKey = res.imageKey
+
+          this.getProfileImage()
           this.saveUserData(user)
         } else {
           alert("Error adding photo")
@@ -73,9 +70,10 @@ export class AddUserModalComponent implements OnInit {
 
   submitPhoto(user) {
     if (this.profileImg) {
+      let key = user.profileImageKey ? user.profileImageKey : 'new'
       let fd = new FormData()
       fd.append('profileImg', this.profileImg)
-      return this.imageService.updateProfileImage(fd)
+      return this.imageService.updateProfileImage(fd, key)
     }
   }
 
@@ -102,6 +100,25 @@ export class AddUserModalComponent implements OnInit {
         } else {
           console.log("Update User Failure")
         }
+      })
+    }
+  }
+
+  deleteUser(user) {
+    const confirmation = confirm(`Are you sure you want to remove ${user.username}?`);
+
+    if (confirmation) {
+      this.usersService.deleteUserData(user._id).subscribe(res => {
+        if (res?.success) {
+          console.log("Delete user success")
+          this.dismiss()
+        } else {
+          console.log("Delete user failure")
+        }
+      })
+
+      this.imageService.deleteUserImages(user.profileImageKey).subscribe(res => {
+        console.log(res)
       })
     }
   }

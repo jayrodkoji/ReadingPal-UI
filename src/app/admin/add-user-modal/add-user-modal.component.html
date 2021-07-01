@@ -21,8 +21,8 @@
               <ion-row>
                 <ion-col>
                   <ion-avatar style="width: 120px; height: 120px; margin: 15px auto;" (click)="fileInput.click()">
-                    <img [src]="profileImageURL || 'assets/user/default-avatar.png'">
-                    <input id="file-upload" type="file" #fileInput style="display: none" (change)="profileImgSelect($event)"/>
+                    <img [src]="currentProfileImg || 'assets/user/default-avatar.png'">
+                    <input id="file-upload" accept="image/*" type="file" #fileInput style="display: none" (change)="profileImgSelect($event)"/>
                   </ion-avatar>
                 </ion-col>
               </ion-row>
