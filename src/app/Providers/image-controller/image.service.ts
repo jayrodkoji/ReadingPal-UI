@@ -28,7 +28,7 @@ export class ImageService {
    * @param key: s3 key 
    */
    public getProfileImage(key) {
-    return `${USERS_API_URL}${USER_API_PATH}$/ProfilePic${key}`;
+    return `${USERS_API_URL}${USER_API_PATH}/ProfilePic/${key}`;
   }
 
   /**
