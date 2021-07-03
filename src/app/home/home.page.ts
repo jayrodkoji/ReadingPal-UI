@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import {ModalController} from "@ionic/angular";
-import {LoginComponent} from "../login/login/login.component";
+import { AuthService } from '@auth0/auth0-angular';
+import { ModalController } from "@ionic/angular";
+import { LoginComponent } from "../login/login/login.component";
 
 @Component({
   selector: 'app-home',
@@ -11,19 +11,9 @@ import {LoginComponent} from "../login/login/login.component";
 export class HomePage {
 
   constructor(
-      private router: Router,
-      private route: ActivatedRoute,
-      private loginModalController: ModalController,
-      ) {}
-
-  tryReader() {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        bookURL: "assets/books/The_Adventures_of_Tom_Sawyer_by_Mark_Twain.epub"
-      }
-    };
-    this.router.navigate(['reader'], navigationExtras);
-  }
+    private loginModalController: ModalController,
+    public auth: AuthService
+  ) { }
 
   async presentLoginModal() {
     const modal = await this.loginModalController.create({

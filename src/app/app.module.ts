@@ -23,6 +23,7 @@ import { InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 import { ImageService } from './Providers/image-controller/image.service';
 
+import { AuthModule } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,12 @@ import { ImageService } from './Providers/image-controller/image.service';
     AppRoutingModule,
     RpUtilsModule,
     ChartsModule,
-    GraphQLModule
+    GraphQLModule,
+     // Import the module into the application, with configuration
+     AuthModule.forRoot({
+      domain: 'reading-pal.us.auth0.com',
+      clientId: '8IUEIIpjpqY74hTMJI2LRuR3FN4uz0ca'
+    }),
   ],
   providers: [
     ToasterService,

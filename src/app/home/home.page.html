@@ -5,7 +5,7 @@
       <div class="header-container">
         <a href="#" class="header-title margin-bottom-md"><img src="../../assets/white_logo.png"></a> -->
         <div class="header-cta-container">
-          <ion-button fill="clear" style="--background-hover-opacity: .2; --background-hover: white; color: white" (click)="presentLoginModal()">Login</ion-button>
+          <ion-button fill="clear" style="--background-hover-opacity: .2; --background-hover: white; color: white" (click)="auth.loginWithRedirect()">Login</ion-button>
         </div>
         <div class="header-cta-container">
           <ion-button fill="clear" style="--background-hover-opacity: .2; --background-hover: white; color: white"
@@ -23,68 +23,6 @@
       </div>
     </div>
     <div style="height:40px;"></div>
-    <!--<div class="container col-12 why margin-bottom-xlg padding-bottom-lg" id="learn-more">
-      <div class="row text-center">
-        <ion-slides pager="true" [options]="{speed: 400}">
-          <ion-slide>
-            <ion-grid>
-              <ion-row class="ion-justify-content-center">
-                <ion-col size="auto">
-                  <h3>For Teachers</h3>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <div class="col-4 col-12-sm text-center">
-                    <img src="https://farm5.staticflickr.com/4751/24960508607_4d45f8abcc_o.png">
-                    <h3>Boost Efficiency</h3>
-                    <p class="text-grey center-block">Our integrated lesson builder makes it a breeze to build lessons out of other components.</p>
-                  </div>
-                  <div class="col-4 col-12-sm text-center">
-                    <img src="https://farm5.staticflickr.com/4666/28052002329_5d40672846_o.png">
-                    <h3>Improve Accuracy</h3>
-                    <p class="text-grey center-block">Our proven process will have a high impact on your work effectiveness. Simply put - succeed more often and make fewer mistakes.</p>
-                  </div>
-                  <div class="col-4 col-12-sm text-center">
-                    <img src="https://farm5.staticflickr.com/4672/39798770352_ff85c9b4c5_o.png">
-                    <h3>Drive Growth</h3>
-                    <p class="text-grey center-block">Together we increase your work output. You will be able do more with less so you can focus on key areas to drive the highest level of growth.</p>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-slide>
-          <ion-slide>
-            <ion-grid>
-              <ion-row class="ion-justify-content-center">
-                <ion-col size="auto">
-                  <h3>For Students</h3>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <div class="col-4 col-12-sm text-center">
-                    <img src="https://farm5.staticflickr.com/4751/24960508607_4d45f8abcc_o.png">
-                    <h3>Boost Efficiency</h3>
-                    <p class="text-grey center-block">We help you work in a well-organized and competent manner, enabling you to make the best use of your time and resources.</p>
-                  </div>
-                  <div class="col-4 col-12-sm text-center">
-                    <img src="https://farm5.staticflickr.com/4666/28052002329_5d40672846_o.png">
-                    <h3>Improve Accuracy</h3>
-                    <p class="text-grey center-block">Our proven process will have a high impact on your work effectiveness. Simply put - succeed more often and make fewer mistakes.</p>
-                  </div>
-                  <div class="col-4 col-12-sm text-center">
-                    <img src="https://farm5.staticflickr.com/4672/39798770352_ff85c9b4c5_o.png">
-                    <h3>Drive Growth</h3>
-                    <p class="text-grey center-block">Together we increase your work output. You will be able do more with less so you can focus on key areas to drive the highest level of growth.</p>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-slide>
-        </ion-slides>
-      </div>
-    </div>-->
     <ion-grid class="ion-no-padding">
       <ion-row style="padding: 10px">
         <ion-col offset-sm="0" size-sm="12" offset-lg="3" size-lg="6">

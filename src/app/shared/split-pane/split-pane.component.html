@@ -21,7 +21,7 @@
           <ion-col size="12" class="ion-align-self-end">
             <ion-row class="log-out ion-justify-content-center">
               <ion-col size="auto"style="text-align: center;">
-                <ion-button fill="clear" (click)="logOut()">Log Out</ion-button>
+                <ion-button fill="clear" (click)="auth.logout({ returnTo: document.location.origin })">Log Out</ion-button>
               </ion-col>
             </ion-row>
           </ion-col>
