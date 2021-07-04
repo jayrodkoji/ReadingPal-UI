@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ValueSansProvider } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
 import { NewUser, UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model'
@@ -12,10 +12,9 @@ import { ImageService } from 'src/app/Providers/image-controller/image.service';
 export class AddUserModalComponent implements OnInit {
   @Input() user: User
   @Input() isNewUser: Boolean
-  profileImg: File;
-  profileImageURL
-  currentProfileImg
-  newImageKey
+  profileImgFile: File
+  profileImageURL: string
+  currentProfileImg: string
 
   constructor(
     private modalController: ModalController,
@@ -27,16 +26,16 @@ export class AddUserModalComponent implements OnInit {
     if (!this.user)
       this.user = new User({})
 
-    this.getProfileImage()
+    this.getProfileImageURL()
   }
 
-  cancelUserEdit() {
-    this.dismiss()
-  }
-
-  profileImgSelect(ev) {
+  /**
+   * Callback for profileImg input event
+   * @param ev: Upload event
+   */
+  profileImgSelect(ev): void {
     if (ev.target.value) {
-      this.profileImg = <File>ev.target.files[0];
+      this.profileImgFile = <File>ev.target.files[0];
 
       // Used to show image before submitting
       const reader = new FileReader()
@@ -44,85 +43,109 @@ export class AddUserModalComponent implements OnInit {
         this.currentProfileImg = reader.result as string;
       }
 
-      reader.readAsDataURL(this.profileImg)
+      reader.readAsDataURL(this.profileImgFile)
     }
   }
 
-  getProfileImage() {
-    if (this.user.profileImageKey)
-      this.currentProfileImg = this.profileImageURL = this.imageService.getProfileImage(this.user.profileImageKey)
-  }
-
-  saveUser(user) {
-    this.submitPhoto(user)
+  /**
+   * Save user data. 
+   * Saves data even on image upload failure
+   * @param user: user to be saved
+   */
+  saveUser(user: User) {
+    this.uploadPhoto(user)
       .subscribe((res: any) => {
         if (res.imageKey) {
-          console.log(res.imageKey)
           this.user.profileImageKey = res.imageKey
-
-          this.getProfileImage()
-          this.saveUserData(user)
+          this.getProfileImageURL()
         } else {
           alert("Error adding photo")
         }
+
+        this.saveUserData(user)
       });
   }
 
-  submitPhoto(user) {
-    if (this.profileImg) {
+  /**
+   * Uploads profileImg to s3 
+   * @param user: user data used in case of update to photo
+   * @returns: profileImage key
+   */
+  uploadPhoto(user) {
+    if (this.profileImgFile) {
       let key = user.profileImageKey ? user.profileImageKey : 'new'
       let fd = new FormData()
-      fd.append('profileImg', this.profileImg)
+      fd.append('profileImg', this.profileImgFile)
       return this.imageService.updateProfileImage(fd, key)
     }
   }
 
-  saveUserData(user) {
+  /**
+   * Gets profileImg url
+   */
+  getProfileImageURL(): void {
+    if (this.user.profileImageKey)
+      this.currentProfileImg = this.profileImageURL = this.imageService.getProfileImage(this.user.profileImageKey)
+  }
+
+  /**
+   * Save user data to database
+   * @param user: User to be saved
+   */
+  saveUserData(user: User): void {
     // Add the user to the database
     if (this.isNewUser === true) {
       const new_user = new NewUser(user)
       this.usersService.addUser(new_user).subscribe((res: any) => {
-        if (res?.success) {
-          console.log('Create User Success')
-          this.dismiss()
-        } else {
-          console.log("Create User Failure")
-        }
+        this.printResultSuccess(res, "Add User")
       })
     }
     // Update the user in the database
     else {
       let updateUser = new UpdateUser(user)
       this.usersService.updateUser(user._id, updateUser).subscribe(res => {
-        if (res?.success) {
-          console.log('Update User Success')
-          this.dismiss()
-        } else {
-          console.log("Update User Failure")
-        }
+        this.printResultSuccess(res, "Update User Data")
       })
     }
   }
 
-  deleteUser(user) {
+  /**
+   * Deletes all user data and photos
+   * User deleteUserData, or deleteUserImages for specific deletions
+   * @param user: user to be deleted
+   */
+  deleteAllUserData(user) {
     const confirmation = confirm(`Are you sure you want to remove ${user.username}?`);
 
     if (confirmation) {
       this.usersService.deleteUserData(user._id).subscribe(res => {
-        if (res?.success) {
-          console.log("Delete user success")
-          this.dismiss()
-        } else {
-          console.log("Delete user failure")
-        }
+        this.printResultSuccess(res, "Delete User Data")
       })
 
-      this.imageService.deleteUserImages(user.profileImageKey).subscribe(res => {
-        console.log(res)
+      this.imageService.deleteUserImages(user.profileImageKey).subscribe((res: any) => {
+        this.printResultSuccess(res, "Delete ProfileImg")
       })
     }
   }
 
+  /**
+   * 
+   * @param res: results from service call
+   * @param message: Message to be appended to 'Success: ' or 'Failure: ' string
+   */
+  printResultSuccess(res: any, message: string) {
+    if (res?.success) {
+      console.log("Success: " + message)
+      this.dismiss()
+    } else {
+      console.log("Failure: " + message)
+      alert("Failure to: " + message)
+    }
+  }
+
+  /**
+   * Dismiss modal
+   */
   dismiss() {
     this.modalController.dismiss()
   }

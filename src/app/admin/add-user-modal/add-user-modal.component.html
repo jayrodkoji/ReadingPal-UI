@@ -9,7 +9,7 @@
         </ion-col>
         <ion-col size="auto">
           <ion-button fill="clear" style="color: white; --background-hover: white; --background-hover-opacity: 0.2;"
-            (click)="cancelUserEdit()">
+            (click)="dismiss()">
             <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -84,7 +84,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-end" style="height: 54px;">
         <ion-col *ngIf="!isNewUser">
-          <ion-button fill="clear" color="primary" (click)="deleteUser(user);">Delete User</ion-button>
+          <ion-button fill="clear" color="primary" (click)="deleteAllUserData(user);">Delete User</ion-button>
         </ion-col>
         <ion-col size="auto">
           <ion-button fill="clear" (click)="saveUser(user)">Save</ion-button>
