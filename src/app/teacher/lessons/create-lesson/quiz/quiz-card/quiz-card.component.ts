@@ -59,8 +59,9 @@ export class QuizCardComponent implements OnInit {
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
-    if(data)
+    if (data) {
       this.questionPosts.push(data);
+    }
   }
 
   getAlpha(i){

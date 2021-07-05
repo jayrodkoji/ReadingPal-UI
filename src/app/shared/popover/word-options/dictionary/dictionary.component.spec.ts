@@ -17,7 +17,7 @@ describe('DictionaryComponent', () => {
 
     fixture = TestBed.createComponent(DictionaryComponent);
     component = fixture.componentInstance;
-    //fixture.detectChanges();  // causes 'should create' test to fail. Move to other tests when needed.
+    // fixture.detectChanges();  // causes 'should create' test to fail. Move to other tests when needed.
   }));
 
   it('should create', () => {

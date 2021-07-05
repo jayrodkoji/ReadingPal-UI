@@ -32,6 +32,6 @@ export class LessonCreatorService {
   public delete(data: any): Observable<any> {
     return this.http.delete(
       environment.gatewayBaseUrl + '/lessons/delete-lesson',
-      {params: {id:data.id}});
+      {params: {id: data.id}});
   }
 }

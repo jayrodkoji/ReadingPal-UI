@@ -26,7 +26,7 @@ export class StudentPickerComponent implements OnInit {
   }
 
   constructor(
-    //private controlContainer: ControlContainer,
+    // private controlContainer: ControlContainer,
     private modalController: ModalController,
     private fb: FormBuilder
   ) { }

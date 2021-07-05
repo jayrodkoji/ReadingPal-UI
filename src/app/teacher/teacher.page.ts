@@ -42,13 +42,13 @@ export class TeacherPage implements OnInit {
 ) { }
 
   ngOnInit() {}
-  
+
   openCustom() {
     this.menu.enable(true, 'first');
     this.menu.open('first');
   }
 
-  updateSelection (pageName: string) {
+  updateSelection(pageName: string) {
     this.selectedTitle = pageName;
   }
 }

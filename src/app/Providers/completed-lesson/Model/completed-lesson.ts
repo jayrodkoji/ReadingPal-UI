@@ -45,7 +45,7 @@ export class SavedLessonData {
     public wordsRead: number;
     public wpm: number;
 
-    constructor (data) {
+    constructor(data) {
         this.amountCorrect = data.amountCorrect;
         this.id = data.id;
         this.score = data.score;

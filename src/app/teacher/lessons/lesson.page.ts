@@ -9,12 +9,12 @@ import {  NavController } from '@ionic/angular';
 })
 export class LessonPage implements OnInit {
 
-  constructor(private navCtrl: NavController,) { }
+  constructor(private navCtrl: NavController, ) { }
 
   ngOnInit() {
   }
 
   goBack() {
-    this.navCtrl.back()
+    this.navCtrl.back();
   }
 }

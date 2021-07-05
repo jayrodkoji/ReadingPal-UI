@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup;
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -17,12 +17,12 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
     this.forgotPasswordForm = this.formBuilder.group({
       email: ['', Validators.required]
-    })
+    });
   }
 
   onSubmit() {
-    this.submitted = true
-    console.log("send email link");
+    this.submitted = true;
+    console.log('send email link');
   }
 
 }

@@ -1,4 +1,4 @@
-import {Directive, HostBinding, HostListener, Output, EventEmitter} from '@angular/core';
+import {Directive, HostListener, Output, EventEmitter} from '@angular/core';
 
 @Directive({
   selector: '[appDragDrop]'
@@ -8,28 +8,28 @@ export class DragDropDirectiveDirective {
   @Output() onDragOverEv: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDragLeaveEv: EventEmitter<any> = new EventEmitter<any>();
 
-  //Dragover listener
+  // Dragover listener
   @HostListener('dragover', ['$event']) onDragOver(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.onDragOverEv.emit();
   }
 
-  //Dragleave listener
+  // Dragleave listener
   @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     this.onDragLeaveEv.emit();
   }
 
-  //Drop listener
+  // Drop listener
   @HostListener('drop', ['$event']) public ondrop(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    let files = evt.dataTransfer.files;
+    const files = evt.dataTransfer.files;
     if (files.length > 0) {
       this.onDragLeaveEv.emit();
-      this.onFileDropped.emit(files)
+      this.onFileDropped.emit(files);
     }
   }
 

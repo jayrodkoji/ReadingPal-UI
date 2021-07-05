@@ -32,8 +32,8 @@ export class addStudentToClassData {
     public studentUsername: string;
 
     constructor(data) {
-        this.classId = data.id
-        this.studentUsername = data.studentUsername
+        this.classId = data.id;
+        this.studentUsername = data.studentUsername;
     }
 
 }

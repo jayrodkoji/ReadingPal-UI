@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import {StudentAsUserData, StudentData} from './student-data';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {UsersService} from "../user-controller/users.service";
+import {UsersService} from '../user-controller/users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,54 +22,54 @@ export class StudentService {
    */
   public addStudent(data: StudentData): Observable<any> {
     return this.http.post(
-        environment.gatewayBaseUrl + '/students/addStudent', data)
+        environment.gatewayBaseUrl + '/students/addStudent', data);
   }
 
   /**
    * Update Student
    */
   public updateStudent(data: StudentData): Observable<any> {
-    console.log(data)
+    console.log(data);
     return this.http.post(
-        environment.gatewayBaseUrl + '/students/updateStudent', data)
+        environment.gatewayBaseUrl + '/students/updateStudent', data);
   }
 
   /**
    * Delete Student by ID
    */
   public deleteStudentByID(id: number): Observable<any> {
-    let params = new HttpParams().set('id', id.toString());
+    const params = new HttpParams().set('id', id.toString());
 
     return this.http.delete(
-        environment.gatewayBaseUrl + '/students/deleteStudent', { params })
+        environment.gatewayBaseUrl + '/students/deleteStudent', { params });
   }
 
   /**
    * Delete Student by username
    */
   public deleteStudentByUsername(username: string): Observable<any> {
-    let params = new HttpParams().set('userName', username);
+    const params = new HttpParams().set('userName', username);
 
     return this.http.delete(
-        environment.gatewayBaseUrl + '/students/deleteStudentWithName', { params })
+        environment.gatewayBaseUrl + '/students/deleteStudentWithName', { params });
   }
 
   /**
    * Get Student by ID
    */
   public getStudentByID(id: number): Observable<any> {
-    let params = new HttpParams().set('id',  id.toString());
+    const params = new HttpParams().set('id',  id.toString());
 
-    return this.http.get(environment.gatewayBaseUrl + '/students/getStudent', { params })
+    return this.http.get(environment.gatewayBaseUrl + '/students/getStudent', { params });
   }
 
   /**
    * Get Student by username
    */
   public getStudentByUsername(username: string): Observable<any> {
-    let params = new HttpParams().set('userName',  username);
+    const params = new HttpParams().set('userName',  username);
 
-    return this.http.get(environment.gatewayBaseUrl + '/students/getStudentByUserName', { params })
+    return this.http.get(environment.gatewayBaseUrl + '/students/getStudentByUserName', { params });
   }
 
   /**
@@ -80,7 +80,7 @@ export class StudentService {
         .subscribe((res: Array<any>) => {
           const students = res.map(obj => new StudentData(obj));
           this.studentsDataSubject.next(students);
-        })
+        });
 
     return this.studentsDataSubject.asObservable();
   }
@@ -89,18 +89,18 @@ export class StudentService {
    * Get Student info by ID
    */
   public getStudentInfoByID(id: number): Observable<any> {
-    let params = new HttpParams().set('id',  id.toString());
+    const params = new HttpParams().set('id',  id.toString());
 
-    return this.http.get(environment.gatewayBaseUrl + '/students/student-info-by-id', { params })
+    return this.http.get(environment.gatewayBaseUrl + '/students/student-info-by-id', { params });
   }
 
   /**
    * Get Student info by username
    */
   public getStudentInfo(username: string): Observable<any> {
-    let params = new HttpParams().set('studentUserName ',  username);
+    const params = new HttpParams().set('studentUserName ',  username);
 
-    return this.http.get(environment.gatewayBaseUrl + '/students/student-info', { params })
+    return this.http.get(environment.gatewayBaseUrl + '/students/student-info', { params });
   }
 
   /**

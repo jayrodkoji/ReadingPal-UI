@@ -5,9 +5,9 @@ import { BadgeData } from 'src/app/Providers/badges/badge-data';
 import {ClassArray, ClassData} from 'src/app/Providers/class-controller/class-data';
 import { CompletedLessonArray } from 'src/app/Providers/completed-lesson/Model/completed-lesson';
 import { ClassControllerService } from 'src/app/Providers/class-controller/class-controller.service';
-import {GroupControllerService} from "../../Providers/group-controller/group-controller.service";
-import {BehaviorSubject, forkJoin} from "rxjs";
-import {UsersService} from "../../Providers/user-controller/users.service";
+import {GroupControllerService} from '../../Providers/group-controller/group-controller.service';
+import {BehaviorSubject, forkJoin} from 'rxjs';
+import {UsersService} from '../../Providers/user-controller/users.service';
 import { User } from 'src/app/Providers/user-controller/model/users-model';
 
 export class FullLessonData {
@@ -28,9 +28,9 @@ export class FullClassData {
   styleUrls: ['./classes.page.scss'],
 })
 export class ClassesPage implements OnInit {
-  teacher: string
-  currentTab: string = "classes";
-  isReport: boolean = false;
+  teacher: string;
+  currentTab = 'classes';
+  isReport = false;
   allReadingGroups;
   users: User[] = [];
 
@@ -52,7 +52,7 @@ export class ClassesPage implements OnInit {
    * API call to get all classes for teacher
    */
   getClasses() {
-    this.ClassController.getClassesWithTeacherName({'uName': this.teacher})
+    this.ClassController.getClassesWithTeacherName({uName: this.teacher})
       .subscribe((result: ClassArray) => {
         if (result) {
           this.classes = result;
@@ -60,8 +60,8 @@ export class ClassesPage implements OnInit {
           this.classes.forEach(clss => {
             clss.students.forEach(st => {
               this.users.push(st);
-            })
-          })
+            });
+          });
 
           this.users = this.users.filter((st, index, self) =>
               index === self.findIndex((t) => (
@@ -70,12 +70,12 @@ export class ClassesPage implements OnInit {
 
           this.users.forEach(usr => {
             const user = this.userController.getUser(usr.username);
-            if( user ) {
+            if ( user ) {
               usr = user;
             }
-          })
+          });
 
-          this.getReadingGroups()
+          this.getReadingGroups();
         }
       });
   }
@@ -84,7 +84,7 @@ export class ClassesPage implements OnInit {
     this.allReadingGroups = [];
     this.classes.forEach(clss => {
       this.groupController.getGroupsByClassId(clss.id).subscribe(groups => {
-        if(groups) {
+        if (groups) {
           this.allReadingGroups = this.allReadingGroups.concat(groups);
           forkJoin(this.allReadingGroups.map(
               g => {
@@ -93,29 +93,30 @@ export class ClassesPage implements OnInit {
                     .subscribe(arr => {
                       g.students = arr;
 
-                      let newStudents = []
+                      const newStudents = [];
 
                       g.students.forEach(st => {
                         this.users.forEach((us: any) => {
-                          if(us.id == st)
-                            newStudents.push(us)
-                        })
-                      })
-                      g.students = newStudents
+                          if (us.id == st) {
+                            newStudents.push(us);
+                          }
+                        });
+                      });
+                      g.students = newStudents;
                       subject.complete();
                     });
                 return subject.asObservable();
               }
-          ))
+          ));
         }
       });
-    })
+    });
   }
 
   chartTester() {
-    var Chart = require('chart.js');
-    var ctx = document.getElementById('myChart');
-    var readingChart = new Chart(ctx, {
+    const Chart = require('chart.js');
+    const ctx = document.getElementById('myChart');
+    const readingChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['totalTimeSpentReading', 'totalWordsRead', 'totalWordsRead80Plus'],

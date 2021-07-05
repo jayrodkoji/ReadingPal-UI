@@ -8,7 +8,7 @@ import { QuizQuestion } from 'src/app/Providers/quiz-controller/quiz-data';
 })
 export class StudentQuizCardPage implements OnInit {
   @Input() quiz: QuizQuestion[];
-  
+
   constructor() { }
 
   ngOnInit() {

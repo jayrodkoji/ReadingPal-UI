@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { ClassControllerService } from 'src/app/Providers/class-controller/class-controller.service';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
 import { ImageUtils } from 'src/app/utils/image-utils';
-import { ClassData, newClassData } from '../../../Providers/class-controller/class-data'
+import { ClassData, newClassData } from '../../../Providers/class-controller/class-data';
 
 @Component({
   selector: 'app-add-class-modal',
@@ -12,7 +12,7 @@ import { ClassData, newClassData } from '../../../Providers/class-controller/cla
   styleUrls: ['./add-class-modal.component.scss'],
 })
 export class AddClassModalComponent implements OnInit {
-  
+
   @Input() inputClass;
 
   classroom = {
@@ -29,7 +29,7 @@ export class AddClassModalComponent implements OnInit {
 
   dismiss() {
     this.modalController.dismiss({
-      'dismissed': true
+      dismissed: true
     });
   }
 
@@ -59,19 +59,19 @@ export class AddClassModalComponent implements OnInit {
 
   editClass(classroom) {
 
-    var new_students: any[] = [];
+    const new_students: any[] = [];
     this.inputClass.students.forEach(student => {
       new_students.push(student.username);
     });
 
 
-    var updatedClassData = {
+    const updatedClassData = {
       grade: classroom.grade,
       id: classroom.id,
       name: classroom.name,
       studentsUserNames: new_students,
       teacherUserName: classroom.teacherUserName
-    }
+    };
     this.classController.updateClass(updatedClassData).subscribe((result) => {
 
     });
@@ -79,7 +79,7 @@ export class AddClassModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     if (this.inputClass.id !== 0)
     {
       this.classroom.id = this.inputClass.classData.id;
@@ -88,7 +88,7 @@ export class AddClassModalComponent implements OnInit {
       this.classroom.grade = this.inputClass.classData.grade;
     }
     this.getPotentialTeachers();
-    
+
   }
 
 }

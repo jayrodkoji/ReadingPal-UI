@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
-import { NewUser, UpdateUser, User } from "./model/users-model";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { NewUser, UpdateUser, User } from './model/users-model';
 import { Apollo, gql } from 'apollo-angular';
 import { __Directive } from 'graphql';
 
-const USER_API_PATH = 'users'
-const GET_PROFILE_IMAGE_PATH = 'ProfilePic'
+const USER_API_PATH = 'users';
+const GET_PROFILE_IMAGE_PATH = 'ProfilePic';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class UsersService {
   private teachersListSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
   private users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(null);
 
-  User
+  User;
   loading: boolean;
 
   constructor(
@@ -49,15 +49,15 @@ export class UsersService {
         }
       }).subscribe((res: any) => {
         if (res?.data?.addUser) {
-          let users = this.users$.getValue();
-          users.push(res.data.addUser)
-          this.users$.next(users)
-          subscriber.next({ success: true })
+          const users = this.users$.getValue();
+          users.push(res.data.addUser);
+          this.users$.next(users);
+          subscriber.next({ success: true });
         } else {
-          subscriber.next({ success: true })
+          subscriber.next({ success: true });
         }
-      }, _ => { subscriber.next({ success: false }) })
-    })
+      }, _ => { subscriber.next({ success: false }); });
+    });
   }
 
   /**
@@ -65,12 +65,12 @@ export class UsersService {
    */
   public getUsers(query: any): Observable<any> {
     this.apollo.watchQuery<any>({
-      query: query
+      query
     })
       .valueChanges
       .subscribe(({ data }) => {
-        let users = data.users.map(user => new User(user));
-        this.users$.next(users)
+        const users = data.users.map(user => new User(user));
+        this.users$.next(users);
       });
 
     return this.users$.asObservable();
@@ -81,14 +81,14 @@ export class UsersService {
    */
   public getUser(query: any): User {
     this.apollo.watchQuery<any>({
-      query: query
+      query
     })
       .valueChanges
       .subscribe(({ data }) => {
-        return data
+        return data;
       });
 
-    return null
+    return null;
   }
 
   /**
@@ -107,20 +107,20 @@ export class UsersService {
       this.apollo.mutate({
         mutation: Update_User,
         variables: {
-          _id: _id,
-          userUpdate: userUpdate
+          _id,
+          userUpdate
         }
       }).subscribe((res: any) => {
         if (res?.data?.updateUser?.success) {
-          let user: User = Object.assign(this.users$.getValue().filter(usr => _id === usr._id)[0], userUpdate)
-          let allUsers = this.users$.getValue().filter(usr => _id !== usr._id);
-          allUsers.push(user)
-          subscriber.next({ success: true })
+          const user: User = Object.assign(this.users$.getValue().filter(usr => _id === usr._id)[0], userUpdate);
+          const allUsers = this.users$.getValue().filter(usr => _id !== usr._id);
+          allUsers.push(user);
+          subscriber.next({ success: true });
         } else {
-          subscriber.next({ success: false })
+          subscriber.next({ success: false });
         }
-      }, _ => { subscriber.next({ success: false }) })
-    })
+      }, _ => { subscriber.next({ success: false }); });
+    });
   }
 
   /**
@@ -139,19 +139,19 @@ export class UsersService {
       this.apollo.mutate({
         mutation: DELETE_USER,
         variables: {
-          _id: _id
+          _id
         }
       }).subscribe((res: any) => {
         if (res?.data?.deleteUser?.success) {
           this.users$.next(
             this.users$.getValue().filter(user => user._id !== _id)
-          )
-          subscriber.next(res.data.deleteUser)
+          );
+          subscriber.next(res.data.deleteUser);
         } else {
-          subscriber.next({ success: false })
+          subscriber.next({ success: false });
         }
-      }, _ => subscriber.next({ success: false }))
-    })
+      }, _ => subscriber.next({ success: false }));
+    });
   }
 
   /**
@@ -162,7 +162,7 @@ export class UsersService {
       .subscribe((res: Array<any>) => {
         const teachers = res.map(obj => new User(obj));
         this.teachersListSubject.next(teachers);
-      })
+      });
 
     return this.teachersListSubject.asObservable();
   }

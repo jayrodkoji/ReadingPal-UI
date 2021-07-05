@@ -13,7 +13,7 @@ export class ImageModalPage implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.url = this.sanitizer.bypassSecurityTrustUrl(this.src)
+    this.url = this.sanitizer.bypassSecurityTrustUrl(this.src);
   }
 
 }

@@ -13,8 +13,8 @@ import { LessonPostData } from './lesson-services-models/lesson-post-data';
 export class LessonService {
   lessonsSubject: BehaviorSubject<LessonArray>;
   studentLessonsSubject: BehaviorSubject<LessonArray>;
-  lessonSubject: BehaviorSubject<LessonData>
-  
+  lessonSubject: BehaviorSubject<LessonData>;
+
   constructor(private http: HttpClient) { }
 
   /**
@@ -24,7 +24,7 @@ export class LessonService {
     const username = localStorage.getItem('logedInUsername');
     const params = new HttpParams().set('name', username);
 
-    console.log(data)
+    console.log(data);
 
     return this.http.post(
       environment.gatewayBaseUrl + '/lessons/add-lesson',
@@ -132,8 +132,8 @@ export class LessonService {
   }
 
   /**
-   * Delete a lesson by id 
-   * @param data 
+   * Delete a lesson by id
+   * @param data
    */
   public deleteLesson(data: any): Observable<any> {
     if (!this.lessonsSubject) {
@@ -156,7 +156,7 @@ export class LessonService {
 
   /**
    * Get individual lesson by id
-   * 
+   *
    * @param id lesson id requesting
    */
   getLessonById(id: string): Observable<LessonData> {
@@ -165,7 +165,7 @@ export class LessonService {
     }
 
     const params = new HttpParams()
-      .set('lessonID', id)
+      .set('lessonID', id);
 
     return this.http.get<LessonData>(environment.gatewayBaseUrl + '/lessons/get-lesson', { params })
       .pipe(
@@ -176,7 +176,7 @@ export class LessonService {
 
   /**
    * Get all lessons in catalogue
-   * 
+   *
    */
   getLessons(): Observable<LessonArray> {
     if (!this.lessonsSubject) {
@@ -197,8 +197,8 @@ export class LessonService {
 
   /**
    * Get lessons for student by id
-   * 
-   * @param studentId 
+   *
+   * @param studentId
    */
   getLessonByStudentId(studentId: number): Observable<LessonData[]> {
     if (!this.studentLessonsSubject) {
@@ -206,7 +206,7 @@ export class LessonService {
     }
 
     const params = new HttpParams()
-      .set('studentId', studentId.toString())
+      .set('studentId', studentId.toString());
     this.http.get(
       environment.gatewayBaseUrl + '/lessons/get-lessons-for-student', { params })
       .subscribe(
@@ -221,7 +221,7 @@ export class LessonService {
 
   /**
    * Update lesson by passing lesson data. Lesson will be matched by id on backend.
-   * 
+   *
    * @param data lesson object
    */
   public updateLesson(data): Observable<any> {
@@ -245,12 +245,12 @@ export class LessonService {
 
   /**
    * Update if lesson is viewable by student or others
-   * 
+   *
    * TODO: May need to update to have viewable by student seperate from others (catalogue)
-   * 
-   * @param lessonId 
-   * @param username 
-   * @param isViewable 
+   *
+   * @param lessonId
+   * @param username
+   * @param isViewable
    */
   public updateVisibility(lessonId: number, username: string, isViewable: number): Observable<any> {
     if (!this.lessonSubject) {
@@ -274,26 +274,26 @@ export class LessonService {
 
   /**
    * Allow updating lesson presentation order.
-   * 
+   *
    * @param seqNum What position lesson can be presented in
-   * @param lessonId 
+   * @param lessonId
    */
   public updateSequence(seqNum: number, lessonId: number): Observable<any> {
     const params = new HttpParams()
       .set('desiredSequenceNumber', seqNum.toString())
-      .set('lessonId', lessonId.toString())
-      
+      .set('lessonId', lessonId.toString());
+
 
     return this.http.put(
       environment.gatewayBaseUrl + '/lessons/update-visibility', { params }
-    )
+    );
   }
 
   /**
    * Will be error handling
-   * 
-   * @param operation 
-   * @param result 
+   *
+   * @param operation
+   * @param result
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

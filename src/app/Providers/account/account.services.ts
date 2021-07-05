@@ -25,12 +25,12 @@ export class AccountServices {
 
   login(username: string, password: string) {
     return this.http.get(this.baseUrl + '/users/basicauth',
-    { headers: { authorization: 'Basic ' + window.btoa(username  + ":" + password) }})
+    { headers: { authorization: 'Basic ' + window.btoa(username  + ':' + password) }})
     .pipe(
       map((user: any) => {
         // get user from response
-        var role = user.principal.userRoles[0];
-        user = user.principal.user
+        const role = user.principal.userRoles[0];
+        user = user.principal.user;
         user.role = role;
         this.userSubject.next(user);
         return user;

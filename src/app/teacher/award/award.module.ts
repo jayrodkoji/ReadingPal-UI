@@ -8,7 +8,7 @@ import { AwardPageRoutingModule } from './award-routing.module';
 
 import { AwardPage } from './award.page';
 import {BadgeCreatorComponent} from '../../shared/badge-creator/badge-creator.component';
-import {SharedModule} from "../../shared/shared.module";
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   imports: [

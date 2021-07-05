@@ -17,7 +17,7 @@ import { QuizCardComponent } from './quiz/quiz-card/quiz-card.component';
 import { SelectLocationsPage } from 'src/app/reader/select-locations/select-locations.page';
 import {ClassesPageModule} from '../../classes/classes.module';
 import {LessonOverviewPageModule} from '../../../student/lesson/lesson-overview/lesson-overview.module';
-import {SharedModule} from "../../../shared/shared.module";
+import {SharedModule} from '../../../shared/shared.module';
 import {StudentPickerComponent} from './student-picker/student-picker.component';
 import {GroupPickerComponent} from './group-picker/group-picker.component';
 import {StudentAssignerComponent} from './basic-info/student-assigner/student-assigner.component';

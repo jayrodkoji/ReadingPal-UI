@@ -20,7 +20,7 @@ export class BookSearchPipeComponent implements PipeTransform {
 
     searchText = searchText.toLocaleLowerCase();
 
-    let filter = searchText.split(' ')[0];
+    const filter = searchText.split(' ')[0];
 
     switch (filter) {
       case ('@title'):
@@ -37,8 +37,9 @@ export class BookSearchPipeComponent implements PipeTransform {
         });
 
       default:
-        if (searchText[0] === '@')
+        if (searchText[0] === '@') {
           return items;
+        }
 
         return items.filter(it => {
           return it.title.toLocaleLowerCase().includes(searchText);

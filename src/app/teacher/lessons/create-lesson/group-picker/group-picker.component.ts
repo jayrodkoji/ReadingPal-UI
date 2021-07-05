@@ -32,7 +32,7 @@ export class GroupPickerComponent implements OnInit {
   }
 
   constructor(
-    //private controlContainer: ControlContainer,
+    // private controlContainer: ControlContainer,
     private modalController: ModalController,
     private fb: FormBuilder,
     private groupController: GroupControllerService
@@ -40,7 +40,7 @@ export class GroupPickerComponent implements OnInit {
 
   ngOnInit() {
     const groupIds = this.form.controls.groupIds as FormArray;
-    //this.form = this.controlContainer.control as FormGroup;
+    // this.form = this.controlContainer.control as FormGroup;
     this.innerForm = this.fb.group({
       /*groups: this.fb.array(this.groups.map(
         g => this.fb.group({

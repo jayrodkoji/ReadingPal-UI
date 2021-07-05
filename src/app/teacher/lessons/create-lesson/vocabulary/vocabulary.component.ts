@@ -13,7 +13,7 @@ import {VocabCatalogComponent} from './vocab-catalog/vocab-catalog.component';
 export class VocabularyComponent implements OnInit {
   wordForm: FormGroup;
   words: string[] = [];
-  deleteWords: boolean = false;
+  deleteWords = false;
 
   @Input()
   set initialWords(words: string[]) {
@@ -26,7 +26,7 @@ export class VocabularyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalController: ModalController) {
     this.wordForm = this.formBuilder.group({
-      word: ["", Validators.required]
+      word: ['', Validators.required]
     });
    }
 

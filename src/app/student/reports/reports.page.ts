@@ -29,7 +29,7 @@ export class ReportsPage implements AfterViewInit {
     const username = localStorage.getItem('logedInUsername');
     this.http.get(
       environment.gatewayBaseUrl + '/students/student-info?studentUserName=' + username).subscribe((res) => {
-        this.completedLessonController.getStatsForStudent({ 'id': res['id'] }).subscribe((statsRes) => {
+        this.completedLessonController.getStatsForStudent({ id: res.id }).subscribe((statsRes) => {
           if (statsRes !== null) {
 
             this.experienceController.getUserPoints(username).subscribe((expResult) => {
@@ -46,13 +46,13 @@ export class ReportsPage implements AfterViewInit {
   }
 
   chartBuilder() {
-    var Chart = require('chart.js');
+    const Chart = require('chart.js');
 
-    var ctx = document.getElementById('lessonsChart');
+    let ctx = document.getElementById('lessonsChart');
 
 
 
-    var lessonChart = new Chart(ctx, {
+    const lessonChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: [],
@@ -93,8 +93,8 @@ export class ReportsPage implements AfterViewInit {
     });
 
 
-    var ctx = document.getElementById('readingsChart');
-    var readingChart = new Chart(ctx, {
+    const ctx = document.getElementById('readingsChart');
+    const readingChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: [],
@@ -139,16 +139,16 @@ export class ReportsPage implements AfterViewInit {
 
 
   printReport() {
-    const printContent = document.getElementById("ReportCard");
+    const printContent = document.getElementById('ReportCard');
     const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
     WindowPrt.document.write('<link rel="stylesheet" type="text/scss" href="classes-card.page.scss">');
     WindowPrt.document.write(printContent.innerHTML);
 
-    var canvas = document.getElementById("lessonsChart") as HTMLCanvasElement;
+    let canvas = document.getElementById('lessonsChart') as HTMLCanvasElement;
 
     WindowPrt.document.write('<br><img style="width: 100%;" src="' + canvas.toDataURL() + '"/>');
 
-    canvas = document.getElementById("readingsChart") as HTMLCanvasElement;
+    canvas = document.getElementById('readingsChart') as HTMLCanvasElement;
 
     WindowPrt.document.write('<br><img style="width: 100%;" src="' + canvas.toDataURL() + '"/>');
 

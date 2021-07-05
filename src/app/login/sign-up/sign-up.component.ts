@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 })
 export class SignUpComponent implements OnInit {
   signupForm: FormGroup;
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,12 +22,12 @@ export class SignUpComponent implements OnInit {
       password: ['', Validators.required],
       passwordConfirmation: ['', Validators.required],
       username: ['', Validators.required],
-    }, { validator: this.passwordComparisonValidator})
+    }, { validator: this.passwordComparisonValidator});
   }
- 
+
   passwordComparisonValidator: ValidatorFn = (fg: FormGroup) => {
-    var password = fg.controls['password'];
-    var passwordConfirmation = fg.controls['passwordConfirmation'];
+    const password = fg.controls.password;
+    const passwordConfirmation = fg.controls.passwordConfirmation;
 
     return password && passwordConfirmation && password.value === passwordConfirmation.value ? null : { requireMatch: true };
   }
@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.signupForm.invalid) {
-      console.log("invalid", this.signupForm)
+      console.log('invalid', this.signupForm);
       return;
     }
    }

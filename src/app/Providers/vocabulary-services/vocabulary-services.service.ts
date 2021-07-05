@@ -25,7 +25,7 @@ export class VocabularyServicesService {
     const username = localStorage.getItem('logedInUsername');
     const params = new HttpParams().set('username', username);
 
-    console.log(data)
+    console.log(data);
     this.http.post(
       environment.gatewayBaseUrl + '/vocabulary/add-scores',
       data,
@@ -34,7 +34,7 @@ export class VocabularyServicesService {
         this.scoresSubject.next(scores);
       });
 
-      return this.scoresSubject.asObservable();
+    return this.scoresSubject.asObservable();
   }
 
 
@@ -58,7 +58,7 @@ export class VocabularyServicesService {
 
     return this.vocabSubject.asObservable();
   }
-  
+
   /**
    * Decrement scores
    */
@@ -102,7 +102,7 @@ export class VocabularyServicesService {
         this.scoresSubject.next(scores);
       });
 
-      return this.scoresSubject.asObservable();
+    return this.scoresSubject.asObservable();
   }
 
   /**
@@ -121,9 +121,9 @@ export class VocabularyServicesService {
         this.vocabSubject.next(res);
       });
 
-      return this.vocabSubject.asObservable();
+    return this.vocabSubject.asObservable();
   }
-  
+
   public getVocabDirect(lessonId: string) {
     const params = new HttpParams().set('lessonId', lessonId);
     return this.http.get(

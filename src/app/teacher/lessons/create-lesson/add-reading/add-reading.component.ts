@@ -6,7 +6,7 @@ import { Book } from 'epubjs';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { SelectLocationsPage } from 'src/app/reader/select-locations/select-locations.page';
 import { ChapterSelectPopoverPage } from './chapter-select-popover/chapter-select-popover.page';
-import {AddReadingBookSelectPopoverComponent} from "./add-reading-book-select-popover/add-reading-book-select-popover.component";
+import {AddReadingBookSelectPopoverComponent} from './add-reading-book-select-popover/add-reading-book-select-popover.component';
 
 @Component({
   selector: 'app-add-reading',
@@ -14,20 +14,6 @@ import {AddReadingBookSelectPopoverComponent} from "./add-reading-book-select-po
   styleUrls: ['./add-reading.component.scss'],
 })
 export class AddReadingComponent implements OnInit {
-  readingInfo = new LessonDataReadingInfo();
-  book: Book;
-  loadingToc: boolean = false;
-  selectChapters: boolean = false;
-  toc: any;
-
-  bookInfos: BookInfo[];
-  bookSelected: boolean = false;
-  selectRange: boolean;
-
-
-  public form = {
-    Reader: { val: 'bookId', isChecked: true },
-  };
 
 
   constructor(
@@ -39,23 +25,42 @@ export class AddReadingComponent implements OnInit {
     this.readingInfo.wordCount = 0;
   }
 
-  ngOnInit() {
-    this.getBooksService.getBooksInfo().subscribe(
-      bookInfos => {
-        if (bookInfos) {
-          this.bookInfos = bookInfos;
-          console.log(this.bookInfos)
-        }
-      }
-    );
-  }
-
   @Input()
   set initialReadingInfo(readingInfo: LessonDataReadingInfo) {
     if (readingInfo !== undefined) {
       this.readingInfo = readingInfo;
       this.bookSelected = true;
     }
+  }
+  readingInfo = new LessonDataReadingInfo();
+  book: Book;
+  loadingToc = false;
+  selectChapters = false;
+  toc: any;
+
+  bookInfos: BookInfo[];
+  bookSelected = false;
+  selectRange: boolean;
+
+
+  public form = {
+    Reader: { val: 'bookId', isChecked: true },
+  };
+
+  selectReadingPopoverOptions: any = {
+    header: 'Select Reading',
+    cssClass: 'select'
+  };
+
+  ngOnInit() {
+    this.getBooksService.getBooksInfo().subscribe(
+      bookInfos => {
+        if (bookInfos) {
+          this.bookInfos = bookInfos;
+          console.log(this.bookInfos);
+        }
+      }
+    );
   }
 
   bookCompareWith(b1, b2) {
@@ -85,17 +90,14 @@ export class AddReadingComponent implements OnInit {
     await popover.onDidDismiss().then((res) => {
       this.readingInfo.bookStart = res.data.startLoc.href;
 
-      if(res.data.endLoc)
+      if (res.data.endLoc) {
         this.readingInfo.bookEnd = res.data.endLoc.href;
-      else
+      }
+      else {
         this.readingInfo.bookEnd = 'end';
-    })
+      }
+    });
   }
-
-  selectReadingPopoverOptions: any = {
-    header: 'Select Reading',
-    cssClass: 'select'
-  };
 
   openSelectRange(){
     this.selectRange = true;
@@ -114,9 +116,9 @@ export class AddReadingComponent implements OnInit {
     await modal.present();
 
     return modal.onDidDismiss().then((res: any) => {
-      console.log(res.data.submit)
+      console.log(res.data.submit);
 
-      if(res.data.submit){
+      if (res.data.submit){
         this.readingInfo.bookStart = res.data.startLoc;
         this.readingInfo.bookEnd = res.data.endLoc;
       }
@@ -149,16 +151,16 @@ export class AddReadingComponent implements OnInit {
       if (res.data) {
         this.readingInfo.bookId = res.data;
       }
-    })
+    });
   }
 
   getBookTitle() {
-    let index = -1
+    let index = -1;
     this.bookInfos.forEach((book, ind) => {
       if (book.id == this.readingInfo.bookId){
         index = ind;
       }
-    })
+    });
 
     return this.bookInfos[index].title;
   }

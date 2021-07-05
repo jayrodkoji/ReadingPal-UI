@@ -5,7 +5,7 @@ export class Score {
     lastPracticed: string;
     score: string;
     studentUsername: string;
-    wordId: number; 
+    wordId: number;
 
     constructor(data) {
         this.id = data.id;

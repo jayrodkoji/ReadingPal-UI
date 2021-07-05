@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountServices } from 'src/app/Providers/account/account.services';
-import { ModalController } from "@ionic/angular";
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
-    })
+    });
   }
 
   handleLogin(){
@@ -34,13 +34,13 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    
-    this.loading= true;
+
+    this.loading = true;
     this.accountServices.login(this.loginForm.controls.username.value, this.loginForm.controls.password.value)
     .pipe(first())
     .subscribe(
       data => {
-        console.log(data)
+        console.log(data);
 
         localStorage.setItem('logedInUsername', data.username);
         localStorage.setItem('logedInRole', data.role);
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         this.modalCtrl.dismiss();
       },
       error => {
-        console.log("error",error);
+        console.log('error', error);
         this.loading = false;
       });
   }

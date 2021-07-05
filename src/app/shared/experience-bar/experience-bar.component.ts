@@ -36,8 +36,8 @@ export class ExperienceBarComponent implements OnInit {
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
-    //console.log(this.initialValue);
-    //console.log(this.modalController);
+    // console.log(this.initialValue);
+    // console.log(this.modalController);
     this.currentLevel = new ExperienceLevel(this.initialValue);
     this.relativeThreshold = this.currentLevel.nextRelativeThreshold();
 
@@ -66,8 +66,8 @@ export class ExperienceBarComponent implements OnInit {
           const w = rect.width;
           const h = rect.height;
 
-          //const tEnd =
-          //const fillDuration = this.expEarned / this.
+          // const tEnd =
+          // const fillDuration = this.expEarned / this.
 
           const delta = Math.round(this.expEarned * Math.min(
             1.0,
@@ -85,7 +85,7 @@ export class ExperienceBarComponent implements OnInit {
 
           ctx.fillStyle = rs.getPropertyValue('--ion-color-primary');
           ctx.fillRect(0, 0, ratio * w, h);
-          //console.log(ratio * w + ' ' + ratio + ' ' + w);
+          // console.log(ratio * w + ' ' + ratio + ' ' + w);
         }
       }
       else if (this.stage === 2) {

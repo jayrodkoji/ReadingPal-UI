@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LessonPageRoutingModule } from './lesson-routing.module';
 
 import { LessonPage } from './lesson.page';
-import {SharedModule} from "../../shared/shared.module";
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({

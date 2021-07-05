@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MenuController, PopoverController} from '@ionic/angular';
-import {AnnotationOptionsComponent} from "./annotation-options/annotation-options.component";
-import {ImageUtils} from "../../utils/image-utils";
-import {DomSanitizer} from "@angular/platform-browser";
+import {AnnotationOptionsComponent} from './annotation-options/annotation-options.component';
+import {ImageUtils} from '../../utils/image-utils';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-table-of-contents',
@@ -25,11 +25,11 @@ export class TableOfContentsComponent implements OnInit, OnChanges {
   selectedContent = 0;
   selectedBookmark: number;
   segmentSelected: string;
-  text: boolean = true;
-  note: boolean = true;
+  text = true;
+  note = true;
 
-  scrollbar = "::-webkit-scrollbar {width: 5px;}::-webkit-scrollbar-track {background: #fff;}::-webkit-scrollbar-track:hover {background: #f7f7f7;}::-webkit-scrollbar-thumb {background: #ccc;}::-webkit-scrollbar-thumb:hover { background: #888}.inner-scroll {scrollbar-width: thin}"
-  showMyNotes: boolean = true;
+  scrollbar = '::-webkit-scrollbar {width: 5px;}::-webkit-scrollbar-track {background: #fff;}::-webkit-scrollbar-track:hover {background: #f7f7f7;}::-webkit-scrollbar-thumb {background: #ccc;}::-webkit-scrollbar-thumb:hover { background: #888}.inner-scroll {scrollbar-width: thin}';
+  showMyNotes = true;
 
 
   constructor(
@@ -43,12 +43,12 @@ export class TableOfContentsComponent implements OnInit, OnChanges {
   }
 
   getSelectedContent() {
-    if(this.toc && this.currentLocation){
+    if (this.toc && this.currentLocation){
       this.toc.forEach((content, index) => {
-        if(content.href === this.currentLocation.start.href){
+        if (content.href === this.currentLocation.start.href){
           this.selectedContent = index;
         }
-      })
+      });
     }
   }
 
@@ -75,20 +75,20 @@ export class TableOfContentsComponent implements OnInit, OnChanges {
     });
     await popover.present();
 
-    return await popover.onDidDismiss().then((res:any) => {
-      if(res.data){
-        if(res.data.delete){
-          this.deleteAnnotationEvent.emit(annotation)
+    return await popover.onDidDismiss().then((res: any) => {
+      if (res.data){
+        if (res.data.delete){
+          this.deleteAnnotationEvent.emit(annotation);
         } else if (res.data.navigate){
-          this.navigateEvent.emit(annotation)
+          this.navigateEvent.emit(annotation);
         }
       }
-    })
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.currentLocation && changes.currentLocation.currentValue) {
-      this.currentLocation = changes.currentLocation.currentValue
+    if (changes.currentLocation && changes.currentLocation.currentValue) {
+      this.currentLocation = changes.currentLocation.currentValue;
       this.getSelectedContent();
     }
   }

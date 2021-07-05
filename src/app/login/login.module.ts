@@ -16,7 +16,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule, 
+    LoginPageRoutingModule,
     ReactiveFormsModule,
   ],
   declarations: [

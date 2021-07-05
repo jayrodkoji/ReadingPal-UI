@@ -14,7 +14,7 @@ export class CompletedLessonService {
   addRating(data: any): Observable<string> {
     return this.http.post(this.buildUrl('addRating'), data) as Observable<string>;
   }
-  
+
   getLastStreak(data: any): Observable<number> {
     const params = new HttpParams()
     .set('id', data.id);

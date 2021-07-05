@@ -4,10 +4,10 @@ import { environment } from '../../../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { IBook } from './IBook';
 import { Router } from '@angular/router';
-import {ModalController} from "@ionic/angular";
-import {AddBookModalComponent} from "./add-book-modal/add-book-modal.component";
-import {GetBooksService} from "../../Providers/books/get-books.service";
-import {ImageModalPage} from "../../modals/image-modal/image-modal.page";
+import {ModalController} from '@ionic/angular';
+import {AddBookModalComponent} from './add-book-modal/add-book-modal.component';
+import {GetBooksService} from '../../Providers/books/get-books.service';
+import {ImageModalPage} from '../../modals/image-modal/image-modal.page';
 
 @Component({
   selector: 'app-book',
@@ -30,14 +30,14 @@ export class BookPage implements OnInit {
   imageFileName = 'Choose File';
   epubFileName = 'Choose File';
   searchText = '';
-  grid: boolean = true;
-  loaded: boolean = false;
+  grid = true;
+  loaded = false;
 
-  constructor(private http: HttpClient, 
-    private sanitizer: DomSanitizer,
-    private route: Router,
-    private modalController: ModalController,
-    private bookService: GetBooksService
+  constructor(private http: HttpClient,
+              private sanitizer: DomSanitizer,
+              private route: Router,
+              private modalController: ModalController,
+              private bookService: GetBooksService
   ) { }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class BookPage implements OnInit {
     (data: IBook[]) => {
       if (data){
         this.allBooks = data;
-        this.allBooks = this.getAscend()
+        this.allBooks = this.getAscend();
         this.loaded = true;
       }
     });
@@ -113,7 +113,7 @@ export class BookPage implements OnInit {
 
   setBook(thisBook: any) {
     this.book = thisBook;
-    let res = this.presentAddBookModal();
+    const res = this.presentAddBookModal();
   }
 
   clearBook() {
@@ -144,11 +144,11 @@ export class BookPage implements OnInit {
   }
 
   goToBook(book){
-    this.route.navigate(["/reader/" + book.id])
+    this.route.navigate(['/reader/' + book.id]);
   }
 
   addBook() {
-    let res = this.presentAddBookModal();
+    const res = this.presentAddBookModal();
   }
 
   async presentAddBookModal() {
@@ -173,7 +173,7 @@ export class BookPage implements OnInit {
       component: ImageModalPage,
       cssClass: 'book-cover-modal',
       componentProps: {
-        src: src
+        src
       }
     });
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BOOKS } from '../tempData/mock-books';
-import {IBook} from "../teacher/book/IBook";
-import {GetBooksService} from "../Providers/books/get-books.service";
+import {IBook} from '../teacher/book/IBook';
+import {GetBooksService} from '../Providers/books/get-books.service';
 
 @Component({
   selector: 'app-library',
@@ -11,7 +11,7 @@ import {GetBooksService} from "../Providers/books/get-books.service";
 })
 export class LibraryPage implements OnInit {
   book = BOOKS;
-  grid: boolean = true;
+  grid = true;
   searchText = '';
 
   allBooks: IBook[];
@@ -30,7 +30,7 @@ export class LibraryPage implements OnInit {
         (data: IBook[]) => {
           if (data){
             this.allBooks = data;
-            this.allBooks = this.getAscend()
+            this.allBooks = this.getAscend();
           }
         });
   }
@@ -40,7 +40,7 @@ export class LibraryPage implements OnInit {
   }
 
   goToBook(book){
-    this.route.navigate(["/reader/" + book.id])
+    this.route.navigate(['/reader/' + book.id]);
   }
 
   counter(i: number) {

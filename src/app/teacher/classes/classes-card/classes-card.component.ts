@@ -1,8 +1,8 @@
 import {Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ModalController, PopoverController} from "@ionic/angular";
-import {AddGroupModalComponent} from "../../../modals/groups/add-group-modal/add-group-modal.component";
-import {GroupOptionsPopoverComponent} from "../group-options-popover/group-options-popover.component";
-import {GroupControllerService} from "../../../Providers/group-controller/group-controller.service";
+import {ModalController, PopoverController} from '@ionic/angular';
+import {AddGroupModalComponent} from '../../../modals/groups/add-group-modal/add-group-modal.component';
+import {GroupOptionsPopoverComponent} from '../group-options-popover/group-options-popover.component';
+import {GroupControllerService} from '../../../Providers/group-controller/group-controller.service';
 
 const XS = 581;
 const SM = 890;
@@ -18,7 +18,7 @@ export class ClassesCardComponent implements OnInit, OnChanges {
   @Input() groups;
   @Input() group;
   @Input() users;
-  classesLoading: boolean = true;
+  classesLoading = true;
   numStudentsDisplayed: number;
   slideOptions: any;
 
@@ -71,10 +71,10 @@ export class ClassesCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.classes) {
+    if (changes.classes) {
       this.classes = changes.classes.currentValue;
     }
-    if(changes.groups) {
+    if (changes.groups) {
       this.groups = changes.groups.currentValue;
     }
   }
@@ -93,9 +93,9 @@ export class ClassesCardComponent implements OnInit, OnChanges {
     });
     await modal.present();
 
-    let { data } = await modal.onDidDismiss();
+    const { data } = await modal.onDidDismiss();
 
-    if(data) {
+    if (data) {
       this.groups.push(data.group);
     }
   }
@@ -107,7 +107,7 @@ export class ClassesCardComponent implements OnInit, OnChanges {
       event: ev,
       mode: 'ios',
       componentProps: {
-        group: group,
+        group,
       }
     });
     await popover.present();
@@ -123,7 +123,7 @@ export class ClassesCardComponent implements OnInit, OnChanges {
   }
 
   async onClickDelete(index, group) {
-    this.groups.splice(index,1);
+    this.groups.splice(index, 1);
     this.groupController.deleteGroup(group.class_id, group.id)
         .subscribe(() => {});
   }

@@ -1,11 +1,11 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {MessagesService} from "../../Providers/messages-controller/messages.service";
-import {Message} from "../../Providers/messages-controller/model/message";
-import {ReaderMetaService} from "../../Providers/reader-meta/reader-meta.service";
-import {GetBooksService} from "../../Providers/books/get-books.service";
-import {ImageUtils} from "../../utils/image-utils";
-import {DomSanitizer} from "@angular/platform-browser";
-import {UsersService} from "../../Providers/user-controller/users.service";
+import {MessagesService} from '../../Providers/messages-controller/messages.service';
+import {Message} from '../../Providers/messages-controller/model/message';
+import {ReaderMetaService} from '../../Providers/reader-meta/reader-meta.service';
+import {GetBooksService} from '../../Providers/books/get-books.service';
+import {ImageUtils} from '../../utils/image-utils';
+import {DomSanitizer} from '@angular/platform-browser';
+import {UsersService} from '../../Providers/user-controller/users.service';
 
 @Component({
     selector: 'app-messages',
@@ -27,7 +27,7 @@ export class MessagesPage implements OnInit {
     lesson: any;
     book: any;
     filter: string;
-    searchFilter: string = '@username';
+    searchFilter = '@username';
     searchText: any = '';
 
     constructor(
@@ -40,17 +40,17 @@ export class MessagesPage implements OnInit {
     }
 
     ngOnInit() {
-        this.currentUserRole = localStorage.getItem('logedInRole')
-        this.currentUserRead = this.currentUserRole === 'ROLE_STUDENT' ? 'student_read' : 'teacher_read'
+        this.currentUserRole = localStorage.getItem('logedInRole');
+        this.currentUserRead = this.currentUserRole === 'ROLE_STUDENT' ? 'student_read' : 'teacher_read';
         this.filter = this.currentUserRead;
 
         this.getCurrentUserMessages();
     }
 
     getCurrentUserMessages() {
-        this.messages = []
+        this.messages = [];
 
-        if(this.currentUserRole === 'ROLE_STUDENT') {
+        if (this.currentUserRole === 'ROLE_STUDENT') {
             this.msgService.getStudentsMessages(localStorage.getItem('logedInUsername'))
                 .subscribe((res) => {
                     if (res) {
@@ -72,7 +72,7 @@ export class MessagesPage implements OnInit {
         // get only last message of thread and sort by unread
         this.messages = Array.from(new Set(messages.sort((a, b) => b.time_stamp - a.time_stamp).map(a => a.annotation_id)))
             .map(annotation_id => {
-                return messages.find(a => a.annotation_id === annotation_id)
+                return messages.find(a => a.annotation_id === annotation_id);
             }).sort((a, b) => (a === b ? 0 : a ? -1 : 1));
 
 
@@ -85,7 +85,7 @@ export class MessagesPage implements OnInit {
         // })
 
         // apply search filter
-        this.filterMessages()
+        this.filterMessages();
 
         // finally group objects
         this.groupedObject = this.groupBy(this.filteredMessages, this.filter);
@@ -104,14 +104,14 @@ export class MessagesPage implements OnInit {
     }
 
     groupBy(objectArray, property) {
-        return objectArray.reduce(function (acc, obj) {
-            let key = obj[property]
+        return objectArray.reduce(function(acc, obj) {
+            const key = obj[property];
             if (!acc[key]) {
-                acc[key] = []
+                acc[key] = [];
             }
-            acc[key].push(obj)
-            return acc
-        }, {})
+            acc[key].push(obj);
+            return acc;
+        }, {});
     }
 
     setupCurrentMessage(message: Message) {
@@ -126,10 +126,11 @@ export class MessagesPage implements OnInit {
     }
 
     private getBook(book_id: number) {
-        if(!this.bookInfo.has(book_id.toString())){
-            this.getBookInfo(book_id)
-        } else
+        if (!this.bookInfo.has(book_id.toString())){
+            this.getBookInfo(book_id);
+        } else {
             this.book = this.bookInfo.get(book_id.toString());
+        }
     }
 
     getBookImage() {
@@ -149,8 +150,9 @@ export class MessagesPage implements OnInit {
     // }
 
     getImage(img: any) {
-        if (img)
+        if (img) {
             return ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(img));
+        }
     }
 
     setFilter(f) {
@@ -161,22 +163,22 @@ export class MessagesPage implements OnInit {
 
     getSearchFilter() {
         this.filterMessages();
-        this.groupedObject = this.groupBy(this.filteredMessages, this.filter)
+        this.groupedObject = this.groupBy(this.filteredMessages, this.filter);
     }
 
     private getBookInfo(book_id: number) {
-        if(!this.bookInfo.has(book_id.toString())) {
+        if (!this.bookInfo.has(book_id.toString())) {
             this.bookService.getBook(book_id).subscribe((res) => {
                 if (res) {
                     this.bookInfo.set(book_id.toString(), res);
-                    this.book = this.bookInfo.get(book_id.toString())
+                    this.book = this.bookInfo.get(book_id.toString());
                 }
             });
         }
     }
 
     private getAnnotations(annotation_id: string) {
-        if(!this.annotations.has(annotation_id)) {
+        if (!this.annotations.has(annotation_id)) {
             this.annotations.set(annotation_id, null);
             this.readerMetaService.getAnnotationById(annotation_id).subscribe((res) => {
                 if (res) {
@@ -208,7 +210,7 @@ export class MessagesPage implements OnInit {
     updateMessage(message) {
         this.allMessages.forEach((msg) => {
             if (msg.annotation_id == message.annotation_id && message.id != msg.id) {
-                if(this.currentUserRead === 'student_read'){
+                if (this.currentUserRead === 'student_read'){
                     msg.student_read = message.student_read;
                 } else {
                     msg.teacher_read = message.teacher_read;
@@ -216,7 +218,7 @@ export class MessagesPage implements OnInit {
 
                 this.msgService.updateMessage(msg).subscribe();
             }
-        })
+        });
 
         this.msgService.updateMessage(message).subscribe((res) => {
 
@@ -224,8 +226,8 @@ export class MessagesPage implements OnInit {
     }
 
     markUnread(message: any) {
-        let ind = this.messages.findIndex(element => element.id == message.id);
-        if(this.currentUserRead === 'student_read'){
+        const ind = this.messages.findIndex(element => element.id == message.id);
+        if (this.currentUserRead === 'student_read'){
             this.messages[ind].student_read = false;
         } else {
             this.messages[ind].teacher_read = false;
@@ -248,12 +250,12 @@ export class MessagesPage implements OnInit {
      * @param value
      */
     groupSorted(value) {
-        let sortedGroups = value.sort((a, b) => (a.student_read === b.student_read) ? 0 : a.student_read ? 1 : -1)
+        let sortedGroups = value.sort((a, b) => (a.student_read === b.student_read) ? 0 : a.student_read ? 1 : -1);
 
-        if(this.currentUserRead === 'teacher_read'){
-            sortedGroups = value.sort((a, b) => (a.teacher_read === b.teacher_read) ? 0 : a.teacher_read ? 1 : -1)
+        if (this.currentUserRead === 'teacher_read'){
+            sortedGroups = value.sort((a, b) => (a.teacher_read === b.teacher_read) ? 0 : a.teacher_read ? 1 : -1);
         }
 
-        return sortedGroups
+        return sortedGroups;
     }
 }

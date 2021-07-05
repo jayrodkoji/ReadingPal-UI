@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BadgeData } from 'src/app/Providers/badges/badge-data';
 import { ImageUtils } from 'src/app/utils/image-utils';
-import { BadgeControllerService } from "../../../Providers/badges/badge-controller.service";
+import { BadgeControllerService } from '../../../Providers/badges/badge-controller.service';
 import { Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -28,20 +28,20 @@ export class AwardCardComponent implements OnInit {
 
   getIconImage(data: any) {
 
-    if(data){
+    if (data){
       return ImageUtils.decodeDBImage(this.sanitizer, data.icon);
     }
 
     // We need to have default image for failure
-    alert("Could not load image icon")
-    return null;  
+    alert('Could not load image icon');
+    return null;
   }
 
   deleteAward(id) {
     console.log(id);
 
     this.badgeService.deleteBadgeIcon(id).subscribe(res => {
-      console.log("delete", res)
+      console.log('delete', res);
       this.awardDeleted.emit();
     });
   }

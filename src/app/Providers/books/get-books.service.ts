@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BookInfo } from '../../model/book-info';
-import { Book } from "./books-service-models/book";
-import {BadgeData} from "../badges/badge-data";
-import {DomSanitizer} from "@angular/platform-browser";
+import { Book } from './books-service-models/book';
+import {BadgeData} from '../badges/badge-data';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class GetBooksService {
 
   constructor(
     private http: HttpClient,
-    private sanitizer: DomSanitizer,) {
+    private sanitizer: DomSanitizer, ) {
   }
 
   /**
@@ -27,8 +27,8 @@ export class GetBooksService {
       environment.gatewayBaseUrl + '/books/addBook',
       data).subscribe(
       (result: Book) => {
-        console.log(result)
-        if(result) {
+        console.log(result);
+        if (result) {
           result.base64Cover = 'data:image/png;base64,'
               + (this.sanitizer.bypassSecurityTrustResourceUrl(result.base64Cover) as any).changingThisBreaksApplicationSecurity;
           this.bookSubject.getValue().push(result);
@@ -36,7 +36,7 @@ export class GetBooksService {
         }
       });
 
-      return this.bookSubject.asObservable();
+    return this.bookSubject.asObservable();
   }
 
   /**
@@ -63,7 +63,7 @@ export class GetBooksService {
     return this.http.delete(
         environment.gatewayBaseUrl + '/books/deleteBook',
         { params }
-    )
+    );
   }
 
   /**
@@ -77,7 +77,7 @@ export class GetBooksService {
    */
   public getBase64(file: any): Observable<any> {
     const params = new HttpParams()
-        .set('file', file)
+        .set('file', file);
 
     return this.http.get(environment.gatewayBaseUrl + '/books/get-base64', { params });
   }
@@ -141,7 +141,7 @@ export class GetBooksService {
    */
   public getBook(bookId) {
     return this.http.get(
-      environment.gatewayBaseUrl + '/books/getBook?id=' + bookId)
+      environment.gatewayBaseUrl + '/books/getBook?id=' + bookId);
   }
 
   /**
@@ -154,7 +154,7 @@ export class GetBooksService {
     this.http.get(
         environment.gatewayBaseUrl + '/books/getBooks').subscribe(
         (result: Book[]) => {
-          let bookList = result.map(o => o as Book)
+          const bookList = result.map(o => o as Book);
           bookList.forEach(element => {
             if (element.base64Cover !== null) {
               element.base64Cover = 'data:image/png;base64,'
@@ -176,7 +176,7 @@ export class GetBooksService {
    */
   public getBookWithEBook(bookId) {
     return this.http.get(
-        environment.gatewayBaseUrl + '/books/getBookWithEBook?id=' + bookId)
+        environment.gatewayBaseUrl + '/books/getBookWithEBook?id=' + bookId);
   }
 
   /**

@@ -64,7 +64,7 @@ export class BadgeCreatorComponent implements OnInit {
       this.badgeCreatorService.createWithFilename(
         this.badgeName,
         this.badgeDescription,
-        this.badgeIconPaths[this.badgeIndex])
+        this.badgeIconPaths[this.badgeIndex]);
 
       this.modalController.dismiss();
     }

@@ -21,7 +21,7 @@ export class UserCardComponent implements OnInit {
   userRole: any;
   firstName: any;
 
-  data: any
+  data: any;
   constructor(
     private sanitizer: DomSanitizer,
     private http: HttpClient,
@@ -33,21 +33,21 @@ export class UserCardComponent implements OnInit {
     const username = localStorage.getItem('logedInUsername');
     this.http.get(
       environment.gatewayBaseUrl + '/users/getUser?username=' + username).subscribe(data => {
-        this.userRole = data['roles'][0].type;
-        this.firstName = data['firstName'];
+        this.userRole = data.roles[0].type;
+        this.firstName = data.firstName;
 
-        if (data !== null && data['profileimage'] !== null) {
+        if (data !== null && data.profileimage !== null) {
           this.student_avatar = 'data:image/png;base64,'
-            + (this.sanitizer.bypassSecurityTrustResourceUrl(data['profileimage']) as any).changingThisBreaksApplicationSecurity;
+            + (this.sanitizer.bypassSecurityTrustResourceUrl(data.profileimage) as any).changingThisBreaksApplicationSecurity;
         }
         else {
           this.student_avatar =
             '../../assets/user.png';
         }
 
-        if (data !== null && data['backgroundimage'] !== null) {
+        if (data !== null && data.backgroundimage !== null) {
           this.dynamicStyle = 'data:image/png;base64,'
-            + (this.sanitizer.bypassSecurityTrustResourceUrl(data['backgroundimage']) as any).changingThisBreaksApplicationSecurity;
+            + (this.sanitizer.bypassSecurityTrustResourceUrl(data.backgroundimage) as any).changingThisBreaksApplicationSecurity;
         } else {
           this.dynamicStyle = 'url(../../../assets/default-banner.jpg)';
         }

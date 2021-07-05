@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { ModalController } from "@ionic/angular";
-import { LoginComponent } from "../login/login/login.component";
+import { ModalController } from '@ionic/angular';
+import { LoginComponent } from '../login/login/login.component';
 
 @Component({
   selector: 'app-home',

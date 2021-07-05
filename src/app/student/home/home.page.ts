@@ -11,7 +11,7 @@ import * as dayjs from 'dayjs';
 import * as RelativeTime from 'dayjs/plugin/relativeTime';
 import * as Duration from 'dayjs/plugin/duration';
 import {AssignmentListViewComponent} from './assignment-list-view/assignment-list-view.component';
-import {CompletedLessonService} from "../../Providers/completed-lesson/completed-lesson.service";
+import {CompletedLessonService} from '../../Providers/completed-lesson/completed-lesson.service';
 
 const XS = 530;
 const SM = 642;
@@ -39,7 +39,7 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('overdueAssignments') overdueAssignmentsRef: AssignmentListViewComponent;
   @ViewChild('dueAssignments') dueAssignmentsRef: AssignmentListViewComponent;
   @ViewChild('completedAssignments') completedAssignmentsRef: AssignmentListViewComponent;
-  
+
   constructor(
     private studentController: StudentService,
     private lessonController: LessonService,
@@ -98,7 +98,7 @@ export class HomePage implements OnInit, AfterViewInit {
       }
     }
 
-    console.log(this.lessonAssignments)
+    console.log(this.lessonAssignments);
 
     this.overdueAssignmentsRef.lessonAssignments = this.lessonAssignments.slice(0, dueIndex);
     this.overdueLessons = this.assignedLessons.slice(0, dueIndex);
@@ -167,7 +167,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   navLessonOverview() {
-    console.log("navigate to lesson overview");
+    console.log('navigate to lesson overview');
   }
 
   setNumStudentsDisplayed(windowWidth){
@@ -188,11 +188,11 @@ export class HomePage implements OnInit, AfterViewInit {
         this.numStudentsDisplayed = 7;
       }
 
-      this.slideOptions = { 
-        slidesPerView: this.numStudentsDisplayed, 
-        zoom: false, 
-        grabCursor: true 
-      }
+      this.slideOptions = {
+        slidesPerView: this.numStudentsDisplayed,
+        zoom: false,
+        grabCursor: true
+      };
     }
   }
 

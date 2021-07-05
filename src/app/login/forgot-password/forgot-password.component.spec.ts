@@ -13,7 +13,7 @@ describe('ForgotPasswordComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ForgotPasswordComponent ],
       imports: [
-        IonicModule.forRoot(), 
+        IonicModule.forRoot(),
         ReactiveFormsModule,
         RouterTestingModule]
     }).compileComponents();

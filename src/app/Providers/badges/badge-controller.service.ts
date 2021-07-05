@@ -4,8 +4,8 @@ import {environment} from '../../../environments/environment';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {BadgeData, BadgeIcon} from './badge-data';
 import {ImageUtils} from '../../utils/image-utils';
-import {LessonPostData} from "../lesson-services/lesson-services-models/lesson-post-data";
-import {LessonArray, LessonData} from "../lesson-services/lesson-services-models/lesson-data";
+import {LessonPostData} from '../lesson-services/lesson-services-models/lesson-post-data';
+import {LessonArray, LessonData} from '../lesson-services/lesson-services-models/lesson-data';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class BadgeControllerService {
         const username = localStorage.getItem('logedInUsername');
         const params = new HttpParams().set('username', username);
 
-        console.log(data)
+        console.log(data);
 
         this.http.post(
             environment.gatewayBaseUrl + '/badges/add-badge-icon',
@@ -37,8 +37,8 @@ export class BadgeControllerService {
                 this.badgeDataSubject.getValue().push(new BadgeData(res));
                 this.badgeDataSubject.next(this.badgeDataSubject.getValue());
 
-                this.CreatorsbadgeDataSubject.getValue().push(new BadgeData(res))
-                this.CreatorsbadgeDataSubject.next(this.CreatorsbadgeDataSubject.getValue())
+                this.CreatorsbadgeDataSubject.getValue().push(new BadgeData(res));
+                this.CreatorsbadgeDataSubject.next(this.CreatorsbadgeDataSubject.getValue());
             });
 
         return this.badgeDataSubject.asObservable();
@@ -55,7 +55,7 @@ export class BadgeControllerService {
         return this.http.delete(
             environment.gatewayBaseUrl + '/badges/delete-badge-icon',
             { params }
-        )
+        );
     }
 
     /**
@@ -92,12 +92,12 @@ export class BadgeControllerService {
     public getUsersBadges(username: string): Observable<any> {
         const params = new HttpParams().set('username', username);
 
-        console.log(username)
+        console.log(username);
         this.http.get(
             environment.gatewayBaseUrl + '/badges/get-users-badges',
             { params })
             .subscribe((res: Array<any>) => {
-                console.log(res)
+                console.log(res);
                 const badge = res.map(obj => new BadgeData(obj));
                 this.UsersbadgeDataSubject.next(badge);
             });
@@ -169,7 +169,7 @@ export class BadgeControllerService {
         return this.http.delete(
             environment.gatewayBaseUrl + '/badges/take-badge',
             { params }
-        )
+        );
     }
 
   public getBadgeIcons(): Observable<BadgeIcon[]> {
@@ -189,7 +189,7 @@ export class BadgeControllerService {
         icon: badgeIcon,
         name: badgeName,
         description: badgeDescription
-    }))
+    }));
   }
 
   public createWithFilename(

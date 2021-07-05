@@ -13,16 +13,16 @@ export class AwardPage implements OnInit {
   public badgeDataList: BadgeData[];
   creatorsBadgeList: BadgeData[];
   rPBadgeList: BadgeData[];
-  deleteAward: boolean = false;
+  deleteAward = false;
 
   slideOpts = {
     slidesPerView: 'auto',
-  }
+  };
 
   communitySlideOpts = {
     slidesPerView: 'auto',
     slidesPerColumn: 2
-  }
+  };
 
   constructor(
     private badgeCreatorService: BadgeControllerService,
@@ -43,11 +43,12 @@ export class AwardPage implements OnInit {
    * Creator in this case is logged-in user
    */
   getBadgesByCreator() {
-    console.log("get badges creator")
+    console.log('get badges creator');
     this.badgeCreatorService.getCreatorsBadges(localStorage.getItem('logedInUsername')).subscribe(
         result => {
-          if(result && result.length > 0)
+          if (result && result.length > 0) {
             this.creatorsBadgeList = result;
+          }
         }
     );
   }
@@ -59,8 +60,9 @@ export class AwardPage implements OnInit {
   private getRPBadges() {
     this.badgeCreatorService.getRPBadges().subscribe(
         result => {
-          if(result && result.length > 0)
+          if (result && result.length > 0) {
             this.rPBadgeList = result;
+          }
         }
     );
   }
@@ -71,7 +73,7 @@ export class AwardPage implements OnInit {
   getAllBadges() {
     this.badgeCreatorService.getBadges().subscribe(
         result => {
-          console.log(result)
+          console.log(result);
           this.badgeDataList = result;
         }
     );
@@ -81,7 +83,7 @@ export class AwardPage implements OnInit {
    * Present award creation modal
    */
   createAward() {
-    let res = this.awardCreationModal();
+    const res = this.awardCreationModal();
   }
 
 
@@ -102,6 +104,6 @@ export class AwardPage implements OnInit {
    * @param badgeData: existing badge data
    */
   updateAward(badgeData: BadgeData) {
-    console.log(badgeData)
+    console.log(badgeData);
   }
 }

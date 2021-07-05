@@ -10,7 +10,7 @@ import { AddUserModalComponent } from './add-user-modal/add-user-modal.component
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  user: User
+  user: User;
   allUsers: User[];
 
   constructor(
@@ -40,7 +40,7 @@ export class AdminPage implements OnInit {
       cssClass: 'add-user-modal',
       backdropDismiss: false,
       componentProps: {
-        user: user,
+        user,
         isNewUser: false,
       }
     });
@@ -48,7 +48,7 @@ export class AdminPage implements OnInit {
   }
 
   handleUpdate() {
-    console.log()
+    console.log();
   }
 
   getAllUsers() {
@@ -72,6 +72,6 @@ export class AdminPage implements OnInit {
         if (result) {
           this.allUsers = result;
         }
-      })
+      });
   }
 }

@@ -23,14 +23,14 @@ import {BadgeControllerService} from '../../../Providers/badges/badge-controller
 })
 export class CreateLessonPage implements OnInit {
   forms = ['basics', 'reading', 'vocabulary', 'quiz', 'award'];
-  studentView: boolean = false;
-  publishing: boolean = false;
-  addAward: boolean = false;
-  addVocabulary: boolean = false;
-  addQuiz: boolean = false;
-  hasRequirements: boolean = false;
+  studentView = false;
+  publishing = false;
+  addAward = false;
+  addVocabulary = false;
+  addQuiz = false;
+  hasRequirements = false;
 
-  flashColor = "default-color"
+  flashColor = 'default-color';
 
   lesson: LessonData;
   initialReadingInfo: LessonDataReadingInfo;
@@ -80,7 +80,7 @@ export class CreateLessonPage implements OnInit {
 
         if (state.isEdit !== undefined) {
           this.isEdit = state.isEdit;
-          //console.log({isEdit: this.isEdit});
+          // console.log({isEdit: this.isEdit});
         }
       }
     }
@@ -111,7 +111,7 @@ export class CreateLessonPage implements OnInit {
           if (questions) {
             // TODO: Figure out if this needs to be deep copied or not.
             this.initialQuizzes = [questions];
-            //console.log({initialQuizzes: this.initialQuizzes});
+            // console.log({initialQuizzes: this.initialQuizzes});
             this.addQuiz = true;
             this.cdr.detectChanges();
           }
@@ -166,7 +166,7 @@ export class CreateLessonPage implements OnInit {
       () => {
         this.createQuestions()
           .subscribe(() => {
-            //console.log('publishQuestions.complete()');
+            // console.log('publishQuestions.complete()');
             res.next([]);
             res.complete();
           });
@@ -194,7 +194,7 @@ export class CreateLessonPage implements OnInit {
       () => {
         this.createVocab()
           .subscribe(() => {
-            //console.log('publishVocab.complete()');
+            // console.log('publishVocab.complete()');
             res.next(null);
             res.complete();
           });
@@ -203,7 +203,7 @@ export class CreateLessonPage implements OnInit {
 
     if (this.isEdit) {
       // TODO: Use deleteVocab.
-      //console.log('publishVocab.complete()');
+      // console.log('publishVocab.complete()');
       const res2 = new BehaviorSubject(null);
       res2.complete();
       return res2.asObservable();
@@ -224,7 +224,7 @@ export class CreateLessonPage implements OnInit {
         available_until_date: this.basicInfoComponent.basicInfo.dueDate,
         due_date: this.basicInfoComponent.basicInfo.dueDate,
         lesson_id: this.lessonId,
-        //student_ids: this.basicInfoComponent.basicInfo.studentIds.map(o => o.toString())
+        // student_ids: this.basicInfoComponent.basicInfo.studentIds.map(o => o.toString())
         student_ids: this.basicInfoComponent.basicInfo.studentIds
       });
     }
@@ -319,7 +319,7 @@ export class CreateLessonPage implements OnInit {
 
   deleteQuestions(): Observable<any> {
     const quiz = this.initialQuizzes[0] as any[];
-    //console.log({quiz});
+    // console.log({quiz});
     if (quiz.length === 0) {
       return new BehaviorSubject(null).asObservable();
     }

@@ -35,7 +35,7 @@ export class ReaderControlsPage implements OnInit {
     this.selectedColorChange.subscribe(meta => {
       if (meta) {
         this.readerMeta = meta;
-        this.colorSelectEvent.emit(this.readerMeta)
+        this.colorSelectEvent.emit(this.readerMeta);
       }
     });
   }
@@ -53,16 +53,16 @@ export class ReaderControlsPage implements OnInit {
     this.autoHighlight = !this.autoHighlight;
     this.autoDelete = this.autoHighlight ? false : this.autoDelete;
 
-    this.autoHighlightEvent.emit(this.autoHighlight)
-    this.autoDeleteEvent.emit(this.autoDelete)
+    this.autoHighlightEvent.emit(this.autoHighlight);
+    this.autoDeleteEvent.emit(this.autoDelete);
   }
 
   toggleAutoDelete() {
     this.autoDelete = !this.autoDelete;
     this.autoHighlight = this.autoDelete ? false : this.autoHighlight;
 
-    this.autoHighlightEvent.emit(this.autoHighlight)
-    this.autoDeleteEvent.emit(this.autoDelete)
+    this.autoHighlightEvent.emit(this.autoHighlight);
+    this.autoDeleteEvent.emit(this.autoDelete);
   }
 
   async setHighlightColor(ev: Event) {

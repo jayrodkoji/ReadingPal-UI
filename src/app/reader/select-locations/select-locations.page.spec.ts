@@ -2,8 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { SelectLocationsPage } from './select-locations.page';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {UrlSerializer} from "@angular/router";
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {UrlSerializer} from '@angular/router';
 
 describe('SelectLocationsPage', () => {
   let component: SelectLocationsPage;

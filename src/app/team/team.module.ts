@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { TeamPageRoutingModule } from './team-routing.module';
 
 import { TeamPage } from './team.page';
-import {TeamCardComponent} from "./team-card/team-card.component";
-import {SharedModule} from "../shared/shared.module";
+import {TeamCardComponent} from './team-card/team-card.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports: [

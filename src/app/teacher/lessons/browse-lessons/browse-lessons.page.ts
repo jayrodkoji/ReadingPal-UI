@@ -6,7 +6,7 @@ import {ModalController, PopoverController} from '@ionic/angular';
 import { LessonService } from 'src/app/Providers/lesson-services/lesson.service';
 import { GetBooksService } from 'src/app/Providers/books/get-books.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {LessonOptionsPopComponent} from "./lesson-options-pop/lesson-options-pop.component";
+import {LessonOptionsPopComponent} from './lesson-options-pop/lesson-options-pop.component';
 
 
 
@@ -17,15 +17,15 @@ import {LessonOptionsPopComponent} from "./lesson-options-pop/lesson-options-pop
 })
 export class BrowseLessonsPage implements OnInit {
   lessons: LessonArray;
-  loaded: boolean = false;
-  search: boolean = false;
-  lessonCreatorFilter: string = 'my';
+  loaded = false;
+  search = false;
+  lessonCreatorFilter = 'my';
   creator: string;
-  hasLessons: boolean = false;
+  hasLessons = false;
 
   covers: Map<any, any>;
   books: Map<any, any>;
-  orientation = "ascend";
+  orientation = 'ascend';
 
   verifyDeleteIndex = -1;
 
@@ -80,9 +80,9 @@ export class BrowseLessonsPage implements OnInit {
   }
 
   orderList() {
-    if(this.orientation === "ascend") {
+    if (this.orientation === 'ascend') {
       this.lessons = this.getAscend();
-    } else if (this.orientation === "descend"){
+    } else if (this.orientation === 'descend'){
 
       this.lessons = this.getDescend();
     }
@@ -105,7 +105,7 @@ export class BrowseLessonsPage implements OnInit {
   }
 
   getRating() {
-    let val = 4; //Math.floor((Math.random() * 5) + 3)
+    const val = 4; // Math.floor((Math.random() * 5) + 3)
     return val > 5 ? 5 : val;
   }
 
@@ -123,7 +123,7 @@ export class BrowseLessonsPage implements OnInit {
       replaceUrl: false,
       relativeTo: this.route,
       state: {
-        lesson: lesson,
+        lesson,
         isEdit: true
       }
     };
@@ -136,7 +136,7 @@ export class BrowseLessonsPage implements OnInit {
       replaceUrl: false,
       relativeTo: this.route,
       state: {
-        lesson: lesson
+        lesson
       }
     };
     this.router.navigate(['../../../create-lesson'], navigationExtras);
@@ -161,7 +161,7 @@ export class BrowseLessonsPage implements OnInit {
       event: ev,
       mode: 'ios',
       componentProps: {
-        lesson: lesson,
+        lesson,
         canDelete: lesson.creator === this.creator
       }
     });
@@ -177,7 +177,7 @@ export class BrowseLessonsPage implements OnInit {
           replaceUrl: false,
           relativeTo: this.route,
           state: {
-            lesson: lesson,
+            lesson,
             isEdit: data.isEdit
           }
         };
@@ -189,10 +189,10 @@ export class BrowseLessonsPage implements OnInit {
 
   private checkHasLessons() {
     this.lessons.forEach(lesson => {
-      if(lesson.creator === this.creator){
+      if (lesson.creator === this.creator){
         this.hasLessons = true;
       }
-    })
+    });
 
     return this.hasLessons;
   }

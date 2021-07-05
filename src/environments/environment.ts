@@ -7,7 +7,7 @@ const graphqlApiGateway = 'http://localhost:4000';
 export const environment = {
   production: false,
   gatewayBaseUrl: baseUrl,
-  graphqlApiGateway: graphqlApiGateway,
+  graphqlApiGateway,
 };
 
 

@@ -1,10 +1,10 @@
-import { Awards } from "./Awards";
-import { Quiz } from "./Quiz";
-import { Reading } from "./Reading";
-import { Vocabulary } from "./Vocabulary";
+import { Awards } from './Awards';
+import { Quiz } from './Quiz';
+import { Reading } from './Reading';
+import { Vocabulary } from './Vocabulary';
 
 export interface ConceptBlock {
-    id: number,
+    id: number;
     reading: Reading;
     quiz: Quiz;
     vocab: Vocabulary;

@@ -14,10 +14,10 @@ import { ImageUtils } from 'src/app/utils/image-utils';
 })
 export class BrowseLessonsPage implements OnInit {
   lessons: LessonArray;
-  loaded: boolean = false;
-  search: boolean = false;
+  loaded = false;
+  search = false;
   searchText = '';
-  orientation = "ascend"
+  orientation = 'ascend';
 
   covers: Map<any, any>;
 
@@ -35,11 +35,11 @@ export class BrowseLessonsPage implements OnInit {
     this.lessonController.getLessons().subscribe(
       result => {
         if (result !== null) {
-          this.lessons = result
-          this.lessons = this.getAscend()
+          this.lessons = result;
+          this.lessons = this.getAscend();
           this.loaded = true;
 
-          for (let lesson of this.lessons){
+          for (const lesson of this.lessons){
             this.setBookCover(lesson);
           }
 
@@ -65,9 +65,9 @@ export class BrowseLessonsPage implements OnInit {
   }
 
   orderList() {
-    if(this.orientation === "ascend") {
+    if (this.orientation === 'ascend') {
       this.lessons = this.getAscend();
-    } else if (this.orientation === "descend"){
+    } else if (this.orientation === 'descend'){
 
       this.lessons = this.getDescend();
     }
@@ -82,18 +82,18 @@ export class BrowseLessonsPage implements OnInit {
   }
 
   getRating() {
-    return 5
+    return 5;
   }
 
   displayLesson() {
-    console.log("displayed")
+    console.log('displayed');
   }
 
   openLessonOverview(lesson) {
-    this.router.navigate(["/student/lesson/lesson-overview/" + lesson.id])
+    this.router.navigate(['/student/lesson/lesson-overview/' + lesson.id]);
   }
 
   alertImageLoad() {
-    alert("image loaded")
+    alert('image loaded');
   }
 }

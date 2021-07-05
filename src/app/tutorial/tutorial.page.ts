@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TEACHERS, STUDENTS } from './data/users'
-import {first} from "rxjs/operators";
-import {AccountServices} from "../Providers/account/account.services";
-import {Router} from "@angular/router";
+import { TEACHERS, STUDENTS } from './data/users';
+import {first} from 'rxjs/operators';
+import {AccountServices} from '../Providers/account/account.services';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tutorial',

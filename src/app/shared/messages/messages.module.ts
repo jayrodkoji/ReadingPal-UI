@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { MessagesPageRoutingModule } from './messages-routing.module';
 
 import { MessagesPage } from './messages.page';
-import {ReaderPageModule} from "../../reader/reader.module";
-import {SharedModule} from "../../shared/shared.module";
+import {ReaderPageModule} from '../../reader/reader.module';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   imports: [

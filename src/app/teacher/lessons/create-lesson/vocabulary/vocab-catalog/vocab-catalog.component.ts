@@ -27,7 +27,7 @@ export class VocabCatalogComponent implements OnInit {
           forkJoin(lessons.map(
             lesson => this.vocabController.getVocabDirect(lesson.id.toString())
           )).subscribe(vocab => {
-            this.lessons = lessons.filter((l, i) => vocab[i].length > 0).sort((a,b) => a.title.localeCompare(b.title));
+            this.lessons = lessons.filter((l, i) => vocab[i].length > 0).sort((a, b) => a.title.localeCompare(b.title));
             this.vocab = vocab.filter(q => q.length > 0);
           });
         }

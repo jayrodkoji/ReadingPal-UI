@@ -1,4 +1,4 @@
 export interface Awards {
-    id: number,
-    badge: number
+    id: number;
+    badge: number;
 }

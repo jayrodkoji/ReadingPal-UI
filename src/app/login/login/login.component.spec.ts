@@ -13,8 +13,8 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      imports: [IonicModule.forRoot(), 
-        ReactiveFormsModule, 
+      imports: [IonicModule.forRoot(),
+        ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule
       ]

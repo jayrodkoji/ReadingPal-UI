@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {DomSanitizer} from "@angular/platform-browser";
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {DomSanitizer} from '@angular/platform-browser';
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-student-avatars',
@@ -14,7 +14,7 @@ export class StudentAvatarsComponent implements OnInit {
   users: {
     username: string;
     image: string;
-  }[] = []
+  }[] = [];
 
   constructor(
       private sanitizer: DomSanitizer,
@@ -22,23 +22,23 @@ export class StudentAvatarsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if(!this.slideOptions){
-      this.slideOptions = null
+    if (!this.slideOptions){
+      this.slideOptions = null;
     }
 
     this.getUsers();
   }
 
   getUsers() {
-    for (let student of this.students) {
+    for (const student of this.students) {
       this.http.get(
-          environment.gatewayBaseUrl + '/users/getUser?username=' + student['username']).subscribe(data => {
+          environment.gatewayBaseUrl + '/users/getUser?username=' + student.username).subscribe(data => {
 
-        let image = data['profileimage'] ? 'data:image/png;base64,'
-            + (this.sanitizer.bypassSecurityTrustResourceUrl(data['profileimage']) as any).changingThisBreaksApplicationSecurity
+        const image = data.profileimage ? 'data:image/png;base64,'
+            + (this.sanitizer.bypassSecurityTrustResourceUrl(data.profileimage) as any).changingThisBreaksApplicationSecurity
             : '../../assets/user.png';
 
-        this.users.push({username: data['username'], image});
+        this.users.push({username: data.username, image});
       });
     }
   }

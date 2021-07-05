@@ -4,7 +4,7 @@ export class User {
   public lastName: string;
   public username: string;
   public email: string;
-  public profileImageKey: string
+  public profileImageKey: string;
 
   // data: Object from the server's user GET request
   constructor(data) {
@@ -47,6 +47,6 @@ export class NewUser {
     this.lastName = data.lastName;
     this.username = data.username;
     this.email = data.email;
-    this.profileImageKey = data.profileImageKey ? data.profileImageKey: '';
+    this.profileImageKey = data.profileImageKey ? data.profileImageKey : '';
   }
 }

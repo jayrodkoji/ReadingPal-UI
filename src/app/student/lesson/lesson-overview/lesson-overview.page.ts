@@ -11,11 +11,11 @@ import { BookInfo } from '../../../model/book-info';
 import { LessonService } from '../../../Providers/lesson-services/lesson.service';
 import { ImageUtils } from 'src/app/utils/image-utils';
 import { DomSanitizer } from '@angular/platform-browser';
-import { VocabularyServicesService } from "../../../Providers/vocabulary-services/vocabulary-services.service";
-import { VocabDefinitionComponent } from "../../../shared/popover/vocab/vocab-definition/vocab-definition.component";
-import { PopoverController } from "@ionic/angular";
+import { VocabularyServicesService } from '../../../Providers/vocabulary-services/vocabulary-services.service';
+import { VocabDefinitionComponent } from '../../../shared/popover/vocab/vocab-definition/vocab-definition.component';
+import { PopoverController } from '@ionic/angular';
 import {BadgeControllerService} from '../../../Providers/badges/badge-controller.service';
-import {BadgeData} from "../../../Providers/badges/badge-data";
+import {BadgeData} from '../../../Providers/badges/badge-data';
 
 const XS = 530;
 const SM = 642;
@@ -46,10 +46,10 @@ export class LessonOverviewPage implements OnInit {
   quiz: QuizQuestion[];
   lesson: LessonData;
 
-  cover: any
+  cover: any;
 
-  noSelectedLesson: boolean = true;
-  noBook: boolean = false;
+  noSelectedLesson = true;
+  noBook = false;
   badge: BadgeData;
 
   constructor(
@@ -64,7 +64,7 @@ export class LessonOverviewPage implements OnInit {
     public badgeCreatorService: BadgeControllerService) { }
 
   ngOnInit() {
-    if(!this.lesson){
+    if (!this.lesson){
       this.getLesson();
     }
   }
@@ -72,7 +72,7 @@ export class LessonOverviewPage implements OnInit {
   getLesson() {
     this.lessonId = this.route.snapshot.paramMap.get('id');
 
-    if(this.lessonId){
+    if (this.lessonId){
       // Get current lesson from database
       this.lessonController.getLessonById(this.lessonId).subscribe((result: LessonData) => {
         this.lesson = new LessonData(result);
@@ -91,30 +91,30 @@ export class LessonOverviewPage implements OnInit {
   }
 
   getBookInfo(ls: LessonData) {
-    if(ls.bookId){
+    if (ls.bookId){
       this.bookService.getBookInfo(ls.bookId).subscribe((res: BookInfo) => {
         if (res){
           this.bookInfo = res;
         }
       });
     } else {
-      console.error("No book Identified");
+      console.error('No book Identified');
       this.noBook = true;
     }
   }
 
   setBookCover(ls) {
-    if(ls.bookId){
+    if (ls.bookId){
       this.bookService.getBook(ls.bookId).subscribe((res: any) => {
         if (res){
           this.cover = ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(res.base64Cover));
         }
       });
     } else {
-      console.error("No book Identified");
+      console.error('No book Identified');
       this.noBook = true;
     }
-    
+
   }
 
   getCoverImage() {
@@ -122,20 +122,20 @@ export class LessonOverviewPage implements OnInit {
   }
 
   getQuiz() {
-    if(this.lessonId){
+    if (this.lessonId){
       this.quizController.getQuestionsRequest(this.lessonId).subscribe((res: QuizQuestion[]) => {
         this.quiz = res;
 
-        console.log("quiz", res)
-      })   
+        console.log('quiz', res);
+      });
     }
   }
 
   getVocabulary() {
-    if(this.lessonId) {
+    if (this.lessonId) {
       this.vocabController.getVocab(this.lessonId).subscribe((res: string[]) => {
         this.words = res.map(x => x.toLowerCase());
-      })
+      });
     }
   }
 
@@ -169,12 +169,12 @@ export class LessonOverviewPage implements OnInit {
   }
 
   openBook(){
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       queryParams: {
-        "lessonId": this.lessonId,
+        lessonId: this.lessonId,
       }
     };
-    this.router.navigate(["../reader/" + this.lesson.bookId], navigationExtras);
+    this.router.navigate(['../reader/' + this.lesson.bookId], navigationExtras);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -205,7 +205,7 @@ export class LessonOverviewPage implements OnInit {
       component: VocabDefinitionComponent,
       event: e,
       mode: 'ios',
-      componentProps: { word: word },
+      componentProps: { word },
       cssClass: 'vocab-definition'
     });
     return await popover.present();

@@ -1,4 +1,4 @@
-import {ImageUtils} from "../../utils/image-utils";
+import {ImageUtils} from '../../utils/image-utils';
 
 export class StudentData
 {

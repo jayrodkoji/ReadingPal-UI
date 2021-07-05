@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ValueSansProvider } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UsersService } from 'src/app/Providers/user-controller/users.service';
-import { NewUser, UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model'
+import { NewUser, UpdateUser, User } from 'src/app/Providers/user-controller/model/users-model';
 import { ImageService } from 'src/app/Providers/image-controller/image.service';
 
 @Component({
@@ -10,11 +10,11 @@ import { ImageService } from 'src/app/Providers/image-controller/image.service';
   styleUrls: ['./add-user-modal.component.scss'],
 })
 export class AddUserModalComponent implements OnInit {
-  @Input() user: User
-  @Input() isNewUser: Boolean
-  profileImgFile: File
-  profileImageURL: string
-  currentProfileImg: string
+  @Input() user: User;
+  @Input() isNewUser: Boolean;
+  profileImgFile: File;
+  profileImageURL: string;
+  currentProfileImg: string;
 
   constructor(
     private modalController: ModalController,
@@ -23,10 +23,11 @@ export class AddUserModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.user)
-      this.user = new User({})
+    if (!this.user) {
+      this.user = new User({});
+    }
 
-    this.getProfileImageURL()
+    this.getProfileImageURL();
   }
 
   /**
@@ -35,20 +36,20 @@ export class AddUserModalComponent implements OnInit {
    */
   profileImgSelect(ev): void {
     if (ev.target.value) {
-      this.profileImgFile = <File>ev.target.files[0];
+      this.profileImgFile = (ev.target.files[0] as File);
 
       // Used to show image before submitting
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = () => {
         this.currentProfileImg = reader.result as string;
-      }
+      };
 
-      reader.readAsDataURL(this.profileImgFile)
+      reader.readAsDataURL(this.profileImgFile);
     }
   }
 
   /**
-   * Save user data. 
+   * Save user data.
    * Saves data even on image upload failure
    * @param user: user to be saved
    */
@@ -56,27 +57,27 @@ export class AddUserModalComponent implements OnInit {
     this.uploadPhoto(user)
       .subscribe((res: any) => {
         if (res.imageKey) {
-          this.user.profileImageKey = res.imageKey
-          this.getProfileImageURL()
+          this.user.profileImageKey = res.imageKey;
+          this.getProfileImageURL();
         } else {
-          alert("Error adding photo")
+          alert('Error adding photo');
         }
 
-        this.saveUserData(user)
+        this.saveUserData(user);
       });
   }
 
   /**
-   * Uploads profileImg to s3 
+   * Uploads profileImg to s3
    * @param user: user data used in case of update to photo
    * @returns: profileImage key
    */
   uploadPhoto(user) {
     if (this.profileImgFile) {
-      let key = user.profileImageKey ? user.profileImageKey : 'new'
-      let fd = new FormData()
-      fd.append('profileImg', this.profileImgFile)
-      return this.imageService.updateProfileImage(fd, key)
+      const key = user.profileImageKey ? user.profileImageKey : 'new';
+      const fd = new FormData();
+      fd.append('profileImg', this.profileImgFile);
+      return this.imageService.updateProfileImage(fd, key);
     }
   }
 
@@ -84,8 +85,9 @@ export class AddUserModalComponent implements OnInit {
    * Gets profileImg url
    */
   getProfileImageURL(): void {
-    if (this.user.profileImageKey)
-      this.currentProfileImg = this.profileImageURL = this.imageService.getProfileImage(this.user.profileImageKey)
+    if (this.user.profileImageKey) {
+      this.currentProfileImg = this.profileImageURL = this.imageService.getProfileImage(this.user.profileImageKey);
+    }
   }
 
   /**
@@ -95,17 +97,17 @@ export class AddUserModalComponent implements OnInit {
   saveUserData(user: User): void {
     // Add the user to the database
     if (this.isNewUser === true) {
-      const new_user = new NewUser(user)
+      const new_user = new NewUser(user);
       this.usersService.addUser(new_user).subscribe((res: any) => {
-        this.printResultSuccess(res, "Add User")
-      })
+        this.printResultSuccess(res, 'Add User');
+      });
     }
     // Update the user in the database
     else {
-      let updateUser = new UpdateUser(user)
+      const updateUser = new UpdateUser(user);
       this.usersService.updateUser(user._id, updateUser).subscribe(res => {
-        this.printResultSuccess(res, "Update User Data")
-      })
+        this.printResultSuccess(res, 'Update User Data');
+      });
     }
   }
 
@@ -119,27 +121,27 @@ export class AddUserModalComponent implements OnInit {
 
     if (confirmation) {
       this.usersService.deleteUserData(user._id).subscribe(res => {
-        this.printResultSuccess(res, "Delete User Data")
-      })
+        this.printResultSuccess(res, 'Delete User Data');
+      });
 
       this.imageService.deleteUserImages(user.profileImageKey).subscribe((res: any) => {
-        this.printResultSuccess(res, "Delete ProfileImg")
-      })
+        this.printResultSuccess(res, 'Delete ProfileImg');
+      });
     }
   }
 
   /**
-   * 
+   *
    * @param res: results from service call
    * @param message: Message to be appended to 'Success: ' or 'Failure: ' string
    */
   printResultSuccess(res: any, message: string) {
     if (res?.success) {
-      console.log("Success: " + message)
-      this.dismiss()
+      console.log('Success: ' + message);
+      this.dismiss();
     } else {
-      console.log("Failure: " + message)
-      alert("Failure to: " + message)
+      console.log('Failure: ' + message);
+      alert('Failure to: ' + message);
     }
   }
 
@@ -147,6 +149,6 @@ export class AddUserModalComponent implements OnInit {
    * Dismiss modal
    */
   dismiss() {
-    this.modalController.dismiss()
+    this.modalController.dismiss();
   }
 }

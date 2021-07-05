@@ -21,10 +21,10 @@ export class RatingComponent implements OnInit {
 
   getColor(index: number) {
     if (this.isAboveRating(index)){
-      return "#E0E0E0"; // Grey
+      return '#E0E0E0'; // Grey
     }
-    
-    return "#FFCA28"; // Yellow
+
+    return '#FFCA28'; // Yellow
   }
 
   isAboveRating(index: number): boolean {

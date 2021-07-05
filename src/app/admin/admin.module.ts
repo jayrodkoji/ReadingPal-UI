@@ -8,7 +8,7 @@ import { AdminPageRoutingModule } from './admin-routing.module';
 
 import { AdminPage } from './admin.page';
 
-import {AddClassModalComponent} from "./add-class-modal/add-class-modal/add-class-modal.component";
+import {AddClassModalComponent} from './add-class-modal/add-class-modal/add-class-modal.component';
 import { AddToRosterModalComponent } from './add-to-roster-modal/add-to-roster-modal.component';
 import { ClassRosterModalComponent } from './class-roster-modal/class-roster-modal.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';

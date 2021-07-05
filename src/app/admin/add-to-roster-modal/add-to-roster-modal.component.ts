@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import { ModalController } from '@ionic/angular';
 import { ClassControllerService } from 'src/app/Providers/class-controller/class-controller.service';
 import { StudentService } from 'src/app/Providers/student-controller/student.service';
-import {UsersService} from "../../Providers/user-controller/users.service";
+import {UsersService} from '../../Providers/user-controller/users.service';
 
 @Component({
   selector: 'app-add-to-roster-modal',
@@ -21,16 +21,16 @@ export class AddToRosterModalComponent implements OnInit, OnChanges {
   @Input() potentialStudents;
 
   studentsToAdd: any[] = [];
-  classId
+  classId;
 
   addToRoster() {
-    console.log("studentsToAdd", this.studentsToAdd)
+    console.log('studentsToAdd', this.studentsToAdd);
     this.studentsToAdd.forEach((user) => {
       this.classController.addStudentToClass({studentUsername: user.username, classId: this.classId}).subscribe();
     });
 
-    let data = [...new Set(this.allStudentsInClass.concat(this.studentsToAdd))]
-    this.modalController.dismiss(data)
+    const data = [...new Set(this.allStudentsInClass.concat(this.studentsToAdd))];
+    this.modalController.dismiss(data);
   }
 
   dismiss() {
@@ -42,6 +42,6 @@ export class AddToRosterModalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+    console.log(changes);
   }
 }

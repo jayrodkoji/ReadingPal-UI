@@ -32,14 +32,14 @@ export class BasicInfoComponent implements OnInit {
       this.basicInfo.lessonName = lesson.title;
       this.basicInfo.level = lesson.level;
       // TODO: Implement once we have GET API for lesson assignment from lesson ID
-      //this.basicInfo.assignedDate = state.lesson.title;
-      //this.basicInfo.dueDate = state.lesson.title;
+      // this.basicInfo.assignedDate = state.lesson.title;
+      // this.basicInfo.dueDate = state.lesson.title;
     }
   }
 
   // TODO: Fix up
   isComplete() {
-    return this.basicInfo.lessonName !== undefined;// && this.basicInfo.level !== undefined;
+    return this.basicInfo.lessonName !== undefined; // && this.basicInfo.level !== undefined;
   }
 
   /*updateAssignedDate(event) {
@@ -53,7 +53,7 @@ export class BasicInfoComponent implements OnInit {
     });
     modal.onDidDismiss()
       .then(data => {
-        console.log(data)
+        console.log(data);
         this.basicInfo.studentIds = data.data;
       });
     await modal.present();
@@ -83,7 +83,7 @@ export class BasicInfoComponent implements OnInit {
 export class LessonDataBasicInfo
 {
   public lessonName: string;
-  public level = "1";
+  public level = '1';
   public assignedDate: string;
   public dueDate: string;
   public studentIds: number[];

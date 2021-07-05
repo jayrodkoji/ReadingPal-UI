@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { MessagesService } from "../Providers/messages-controller/messages.service";
+import { MessagesService } from '../Providers/messages-controller/messages.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class StudentPage implements OnInit {
   ];
 
   public selectedTitle: string;
-  public numUnread: number = 0;
+  public numUnread = 0;
 
   constructor(
     private menu: MenuController,
@@ -32,7 +32,7 @@ export class StudentPage implements OnInit {
     this.getMessages();
 
     // check for new messages every 5 minutes
-    setInterval(() => { this.getMessages() }, 300000);
+    setInterval(() => { this.getMessages(); }, 300000);
   }
 
   openCustom() {
@@ -59,9 +59,9 @@ export class StudentPage implements OnInit {
         if (res) {
           this.numUnread = Array.from(new Set(res.sort((a, b) => b.time_stamp - a.time_stamp).map(a => a.annotation_id)))
             .map(annotation_id => {
-              return res.find(a => a.annotation_id === annotation_id)
+              return res.find(a => a.annotation_id === annotation_id);
             }).filter((obj) => obj.student_read == false).length;
         }
-      })
+      });
   }
 }

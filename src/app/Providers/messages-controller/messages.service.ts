@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Message} from "./model/message";
-import {BookInfo} from "../../model/book-info";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Message} from './model/message';
+import {BookInfo} from '../../model/book-info';
 
 @Injectable({
   providedIn: 'root'
@@ -40,11 +40,11 @@ export class MessagesService {
    */
   getTeachersMessages(teacher_username: string): Observable<any> {
     const params = new HttpParams()
-        .set('teacher_username', teacher_username)
+        .set('teacher_username', teacher_username);
 
     this.http.get(this.buildUrl('get-teacher-messages'), { params })
         .subscribe((result: Array<Message>) => {
-              if(result) {
+              if (result) {
                   this.messages.next(result);
               }
           });
@@ -59,14 +59,14 @@ export class MessagesService {
      */
     getStudentsMessages(student_username: string): Observable<any> {
         const params = new HttpParams()
-            .set('student_username', student_username)
+            .set('student_username', student_username);
 
         this.http.get(this.buildUrl('get-students-messages'), { params })
             .subscribe((res: Array<Message>) => {
-                if(res) {
+                if (res) {
                     this.messages.next(res);
                 }
-            })
+            });
 
         return this.messages.asObservable();
     }
@@ -77,9 +77,9 @@ export class MessagesService {
    */
   getResolvedTeachersMessages(teacher_username: string): Observable<any> {
     const params = new HttpParams()
-        .set('teacher_username', teacher_username)
+        .set('teacher_username', teacher_username);
 
-    return this.http.get(this.buildUrl('get-resolved-teacher-messages'), { params })
+    return this.http.get(this.buildUrl('get-resolved-teacher-messages'), { params });
 
   }
 
@@ -89,9 +89,9 @@ export class MessagesService {
    */
   getUnresolvedTeachersMessages(teacher_username: string): Observable<any> {
     const params = new HttpParams()
-        .set('teacher_username', teacher_username)
+        .set('teacher_username', teacher_username);
 
-    return this.http.get(this.buildUrl('get-unresolved-teacher-messages'), { params })
+    return this.http.get(this.buildUrl('get-unresolved-teacher-messages'), { params });
   }
 
     /**
@@ -102,10 +102,10 @@ export class MessagesService {
   updateMessage(message: Message): Observable<any>{
     this.http.post(this.buildUrl('update-message'), message)
         .subscribe((res: Message) => {
-            if(res) {
-                let msgLst = this.messages.getValue()
-                if(msgLst) {
-                    let index = msgLst.findIndex(msg => msg.id === message.id)
+            if (res) {
+                const msgLst = this.messages.getValue();
+                if (msgLst) {
+                    const index = msgLst.findIndex(msg => msg.id === message.id);
                     msgLst[index] = message;
                     this.messages.next(msgLst);
                 } else {
@@ -114,7 +114,7 @@ export class MessagesService {
             }
         });
 
-        return this.messages.asObservable();
+    return this.messages.asObservable();
     }
 
 

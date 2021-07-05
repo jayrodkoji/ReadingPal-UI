@@ -34,17 +34,17 @@ export class SelectLocationsPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.rendition = '';
     this.segmentSelected = 'toc';
-    
-    if(this.bookId){
-      this.openBook()
+
+    if (this.bookId){
+      this.openBook();
     } else {
     }
 
-    const select:any = document.querySelector('.custom-options');
+    const select: any = document.querySelector('.custom-options');
     select.interfaceOptions = {
       cssClass: 'select-lesson-navigation'
     };
-    
+
   }
 
   ngOnDestroy(): void {
@@ -62,7 +62,7 @@ export class SelectLocationsPage implements OnInit, OnDestroy {
       });
 
       this.setListeners();
-    }); 
+    });
   }
 
   /**
@@ -74,35 +74,37 @@ export class SelectLocationsPage implements OnInit, OnDestroy {
       this.beginRendering(this.getToc(toc));
     });
 
-    this.rendition.on("rendered", () => {
-      
+    this.rendition.on('rendered', () => {
+
       this.currentLocation = this.rendition.currentLocation();
 
-      this.loaded=true;
+      this.loaded = true;
     });
   }
 
   setStartLocation(){
-    let tempLoc = this.rendition.currentLocation().start.cfi;
-    if(tempLoc && this.endLoc){
+    const tempLoc = this.rendition.currentLocation().start.cfi;
+    if (tempLoc && this.endLoc){
       if (this.rendition.epubcfi.compare(tempLoc, this.endLoc) > 0) {
-        alert("Start location must be before end location.")
+        alert('Start location must be before end location.');
         this.startLoc = null;
-      } else 
+      } else {
         this.startLoc = tempLoc;
+      }
     } else if (tempLoc) {
       this.startLoc  = tempLoc;
     }
   }
 
   setEndLocation(){
-    let tempLoc = this.rendition.currentLocation().end.cfi;;
-    if(tempLoc && this.startLoc){
+    const tempLoc = this.rendition.currentLocation().end.cfi;
+    if (tempLoc && this.startLoc){
       if (this.rendition.epubcfi.compare(tempLoc, this.startLoc) < 0) {
-        alert("End location must be before end location.")
+        alert('End location must be before end location.');
         this.endLoc = null;
-      } else 
+      } else {
         this.endLoc  = tempLoc;
+      }
     } else if (tempLoc) {
       this.endLoc  = tempLoc;
     }
@@ -112,19 +114,19 @@ export class SelectLocationsPage implements OnInit, OnDestroy {
     this.book.destroy();
 
     this.modalController.dismiss({
-      'submit': true,
-      'startLoc': this.startLoc,
-      'endLoc' : this.endLoc
+      submit: true,
+      startLoc: this.startLoc,
+      endLoc : this.endLoc
     });
   }
 
   dismiss() {
     this.book.destroy();
-    
+
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
     this.modalController.dismiss({
-      'submit': false,
+      submit: false,
     });
   }
 
@@ -133,52 +135,52 @@ export class SelectLocationsPage implements OnInit, OnDestroy {
    * @param toc table of contents
    */
   getToc(toc) {
-    var sections = [];
-    if(toc.length){
+    let sections = [];
+    if (toc.length){
       toc.forEach((section) => {
         sections.push(section);
-        
+
         // uses recusion for oddly nested epubs
-        sections = sections.concat(this.getToc(section.subitems))
+        sections = sections.concat(this.getToc(section.subitems));
       });
     }
-    
+
     return sections;
   }
 
   beginRendering(toc) {
-    if(this.startLoc){
+    if (this.startLoc){
       this.rendition.display(this.startLoc);
     } else{
       this.rendition.display();
     }
-    
+
     this.toc = toc;
   }
 
   next() {
-    this.rendition.next()
+    this.rendition.next();
   }
 
   prev() {
-    this.rendition.prev()
+    this.rendition.prev();
   }
 
   goBack() {
-    this.navCtrl.back()
+    this.navCtrl.back();
   }
 
   navigateSection(ev){
     try {
       this.rendition.display(ev.detail.value.href);
     } catch (e) {
-      console.log("Error navigating to book location", e);
+      console.log('Error navigating to book location', e);
     }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.loaded=false;
+    this.loaded = false;
   }
 }
 

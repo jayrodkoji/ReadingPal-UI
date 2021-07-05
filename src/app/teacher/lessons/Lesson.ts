@@ -13,16 +13,16 @@ export class Lesson implements ILesson {
   badge_id: string;
 
   constructor(guid: string,
-    book_id: string,
-    level: string,
-    passage_start: string,
-    passage_end: string,
-    title: string,
-    word_count: number,
-    chapter: string,
-    rating: number,
-    lesson_plan_id: string,
-    badge_id: string) {
+              book_id: string,
+              level: string,
+              passage_start: string,
+              passage_end: string,
+              title: string,
+              word_count: number,
+              chapter: string,
+              rating: number,
+              lesson_plan_id: string,
+              badge_id: string) {
 
     this.guid = guid;
     this.book_id = book_id;

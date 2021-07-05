@@ -18,15 +18,15 @@ export class ChapterSelectPopoverPage implements OnInit {
   private rendition: any;
 
   constructor(private http: HttpClient, private popoverCtrl: PopoverController) { }
-    
+
   ngOnInit() {
-    this.getBookToc()
+    this.getBookToc();
   }
 
   getBookToc() {
-    if(this.bookId){
+    if (this.bookId){
       this.loadingToc = true;
-      this.toc = []
+      this.toc = [];
 
       this.book = ePub();
 
@@ -38,32 +38,32 @@ export class ChapterSelectPopoverPage implements OnInit {
             this.toc = this.getToc(toc);
             this.loadingToc = false;
 
-            console.log(this.toc)
+            console.log(this.toc);
           });
         });
-      }); 
+      });
     }
   }
 
   getToc(toc) {
-    var sections = [];
-      if(toc.length){
+    let sections = [];
+    if (toc.length){
         toc.forEach((section) => {
           sections.push(section);
-          
+
           // uses recusion for oddly nested epubs
-          sections = sections.concat(this.getToc(section.subitems))
+          sections = sections.concat(this.getToc(section.subitems));
         });
       }
-    
+
     return sections;
   }
 
   submitChapter(chapter, ind) {
-    let endLoc = this.toc[ind + 1]
+    const endLoc = this.toc[ind + 1];
     this.popoverCtrl.dismiss({
-      'startLoc': chapter,
-      'endLoc': endLoc
-    })
+      startLoc: chapter,
+      endLoc
+    });
   }
 }

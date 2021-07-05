@@ -22,7 +22,7 @@ export class AwardReceivedComponent implements OnInit, AfterViewInit {
     const modal = await modalController.create({
       component: AwardReceivedComponent,
       componentProps: {
-        badgeId: badgeId
+        badgeId
       },
       backdropDismiss: false
     });

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {MessagesService} from "../../Providers/messages-controller/messages.service";
+import {MessagesService} from '../../Providers/messages-controller/messages.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 
@@ -24,18 +24,18 @@ export class SplitPaneComponent implements OnInit {
   ngOnInit() {
     // set selected page
     this.router.events.subscribe((event) => {
-      if(event instanceof NavigationEnd){
+      if (event instanceof NavigationEnd){
         this.setTab();
       }
-    })
+    });
 
     this.getMessages();
 
     // check for new messages every 5 minutes
-    setInterval(() => { this.getMessages() }, 300000);
+    setInterval(() => { this.getMessages(); }, 300000);
   }
 
-  updateSelection (pageName: string) {
+  updateSelection(pageName: string) {
     this.selectedTitle = pageName;
   }
 
@@ -49,19 +49,19 @@ export class SplitPaneComponent implements OnInit {
 
   setTab() {
     // make sure we are still in main category
-    let urlArr = this.router.url.split('/');
+    const urlArr = this.router.url.split('/');
     this.selectedTitle = urlArr[2];
   }
 
   getMessages() {
     this.msgController.getTeachersMessages(localStorage.getItem('logedInUsername'))
       .subscribe((res) => {
-        if(res){
-          this.numUnread = Array.from(new Set(res.sort((a,b) => b.time_stamp-a.time_stamp).map(a => a.annotation_id)))
+        if (res){
+          this.numUnread = Array.from(new Set(res.sort((a, b) => b.time_stamp - a.time_stamp).map(a => a.annotation_id)))
               .map(annotation_id => {
-                return res.find(a => a.annotation_id === annotation_id)
+                return res.find(a => a.annotation_id === annotation_id);
               }).filter((obj) => obj.teacher_read == false).length;
         }
-      })
+      });
   }
 }

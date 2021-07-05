@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {UsersService} from "../../../../../Providers/user-controller/users.service";
+import {UsersService} from '../../../../../Providers/user-controller/users.service';
 @Component({
   selector: 'app-assign-class-card',
   templateUrl: './assign-class-card.component.html',
@@ -9,7 +9,7 @@ export class AssignClassCardComponent implements OnInit {
   @Input() class;
   @Output() studentsChanged = new EventEmitter<any>();
   slideOptions: any;
-  selected: boolean = false;
+  selected = false;
 
   studentsToAdd: any[] = [];
 
@@ -40,15 +40,16 @@ export class AssignClassCardComponent implements OnInit {
   }
 
   studentsAltered() {
-    let data = {students: this.studentsToAdd, class: this.class.id}
+    const data = {students: this.studentsToAdd, class: this.class.id};
     this.studentsChanged.emit(data);
   }
 
   addStudents(students: [any]) {
     if (students && students.length > 0) {
       students.forEach(student => {
-        if(!this.isInList(student))
-          this.studentsToAdd.push(student)
+        if (!this.isInList(student)) {
+          this.studentsToAdd.push(student);
+        }
       });
     }
     else {
@@ -56,20 +57,21 @@ export class AssignClassCardComponent implements OnInit {
     }
 
     this.studentsAltered();
-    console.log(this.studentsToAdd)
+    console.log(this.studentsToAdd);
   }
 
   isInList(student: any) {
-    return this.studentsToAdd.indexOf(student) != -1
+    return this.studentsToAdd.indexOf(student) != -1;
   }
 
   addSingleStudent(event: any, student: any) {
     if (event.detail.checked && student) {
-      if(!this.isInList(student))
-        this.studentsToAdd.push(student)
+      if (!this.isInList(student)) {
+        this.studentsToAdd.push(student);
+      }
     }
     else {
-      this.studentsToAdd = this.studentsToAdd.filter(st => st.username != student.username)
+      this.studentsToAdd = this.studentsToAdd.filter(st => st.username != student.username);
     }
 
     this.studentsAltered();

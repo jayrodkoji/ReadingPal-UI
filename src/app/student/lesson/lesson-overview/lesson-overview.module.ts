@@ -5,8 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { LessonOverviewPageRoutingModule } from './lesson-overview-routing.module';
 import { LessonOverviewPage } from './lesson-overview.page';
 import { StudentQuizCardPage } from './student-quiz-card/student-quiz-card.page';
-import { VocabDefinitionComponent } from "../../../shared/popover/vocab/vocab-definition/vocab-definition.component";
-import { SharedModule } from "../../../shared/shared.module";
+import { VocabDefinitionComponent } from '../../../shared/popover/vocab/vocab-definition/vocab-definition.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UsersService} from "../../../Providers/user-controller/users.service";
-import { StudentService } from "../../../Providers/student-controller/student.service";
+import {UsersService} from '../../../Providers/user-controller/users.service';
+import { StudentService } from '../../../Providers/student-controller/student.service';
 
 @Component({
   selector: 'app-students',
@@ -12,7 +12,7 @@ export class StudentsComponent implements OnInit {
   editInd: number;
   editClass: string;
 
-  isLoading: boolean = true;
+  isLoading = true;
 
   constructor(
       private userService: UsersService,
@@ -70,7 +70,7 @@ export class StudentsComponent implements OnInit {
           reading_level: student.reading_level,
           grade: student.grade
         }).subscribe(() => {
-          alert("Updated info for " + student.username)
+          alert('Updated info for ' + student.username);
     });
   }
 
@@ -91,16 +91,16 @@ export class StudentsComponent implements OnInit {
    * @private
    */
   private submitUserPasswordChange(student) {
-    if(student.password) {
+    if (student.password) {
       this.userService.updatePassword(student.username, student.password).subscribe((res) => {
-        if (res && res.message === "User updated") {
+        if (res && res.message === 'User updated') {
 
           // forget password after 5 seconds
           setTimeout(() => {
             student.password = '';
           }, 5000);
         }
-      })
+      });
     }
   }
 }

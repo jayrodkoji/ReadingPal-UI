@@ -1,5 +1,5 @@
 export interface Reading {
-    id: number
+    id: number;
     book_id: number;
     start_loc: string;
     end_loc: string;

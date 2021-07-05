@@ -1,12 +1,12 @@
 import {Component, Input, OnInit, Output, SimpleChanges} from '@angular/core';
-import { PopoverController } from "@ionic/angular";
-import {ReaderMetaService} from "../../../Providers/reader-meta/reader-meta.service";
-import {EventEmitter} from "events";
-import {DictionaryControllerService} from "../../../Providers/dictionary-controller/dictionary-controller.service";
-import {ImageUtils} from "../../../utils/image-utils";
-import {DomSanitizer} from "@angular/platform-browser";
-import {Message} from "../../../Providers/messages-controller/model/message";
-import {MessagesService} from "../../../Providers/messages-controller/messages.service";
+import { PopoverController } from '@ionic/angular';
+import {ReaderMetaService} from '../../../Providers/reader-meta/reader-meta.service';
+import {EventEmitter} from 'events';
+import {DictionaryControllerService} from '../../../Providers/dictionary-controller/dictionary-controller.service';
+import {ImageUtils} from '../../../utils/image-utils';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Message} from '../../../Providers/messages-controller/model/message';
+import {MessagesService} from '../../../Providers/messages-controller/messages.service';
 
 @Component({
   selector: 'app-word-options',
@@ -28,9 +28,9 @@ export class WordOptionsComponent implements OnInit {
   @Output() updateHighlightEvent = new EventEmitter();
   @Output() deleteAnnotationEvent = new EventEmitter();
 
-  highlighted: boolean = false;
+  highlighted = false;
   highlightColor: string;
-  showNote: boolean = true;
+  showNote = true;
   annotation_id;
   messageData: Message;
   data = {
@@ -39,11 +39,11 @@ export class WordOptionsComponent implements OnInit {
     highlightedText: '',
     definition: '',
     public_access: false,
-  }
+  };
 
-  private hasDefinition: boolean = false;
+  private hasDefinition = false;
   private defLoading: boolean;
-  askQuestion: boolean = false;
+  askQuestion = false;
   currentQuestion: string;
 
   constructor(
@@ -73,13 +73,13 @@ export class WordOptionsComponent implements OnInit {
     }
 
     this.annotationEvent.subscribe((data) => {
-      if(data) {
+      if (data) {
         this.annotation = data;
 
         this.restoreData();
         this.getDefinition();
       }
-    })
+    });
   }
 
   /**
@@ -94,14 +94,16 @@ export class WordOptionsComponent implements OnInit {
       this.data.note = this.annotation.data.note;
       this.showNote = true;
     }
-    if (this.annotation.data.fill)
+    if (this.annotation.data.fill) {
       this.data.highlightedText = this.annotation.data.fill;
+    }
     if (this.annotation.data.definition) {
       this.data.definition = this.annotation.data.definition;
       this.hasDefinition = true;
     }
-    if(this.annotation.data.public_access)
-      this.data.public_access = this.annotation.data.public_access
+    if (this.annotation.data.public_access) {
+      this.data.public_access = this.annotation.data.public_access;
+    }
 
     this.buildMessageData();
   }
@@ -122,14 +124,14 @@ export class WordOptionsComponent implements OnInit {
                 } else {
                   this.defLoading = false;
                 }
-              })
+              });
     } else {
       this.defLoading = false;
     }
   }
 
   buildMessageData(){
-    this.messageData = new Message()
+    this.messageData = new Message();
 
     this.messageData.student_username = this.currentUser.username;
     this.messageData.user_role = this.currentUser.roles[0].type;
@@ -142,8 +144,9 @@ export class WordOptionsComponent implements OnInit {
    *   Checks selected for dictionary compatibility (single word)
    */
   isSingleWord(): boolean {
-    if (this.range)
+    if (this.range) {
       return this.range.toString().match(/[^ ]+/g) && this.range.toString().match(/[^ ]+/g).length == 1;
+    }
 
     return false;
   }
@@ -152,7 +155,7 @@ export class WordOptionsComponent implements OnInit {
    * Updates DB with when submitted
    */
   updateAnnotation() {
-    if(!this.highlighted) {
+    if (!this.highlighted) {
       this.highlighted = !this.highlighted;
       if (this.readerMeta) {
         this.data.creator = this.readerMeta.username;
@@ -176,7 +179,7 @@ export class WordOptionsComponent implements OnInit {
     this.highlighted = !this.highlighted;
 
     if (this.highlighted) {
-      if(this.readerMeta) {
+      if (this.readerMeta) {
         this.data.creator = this.readerMeta.username;
 
         this.ownsNote = true;

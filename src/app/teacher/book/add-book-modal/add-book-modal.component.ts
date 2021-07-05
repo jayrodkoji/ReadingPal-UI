@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { GetBooksService } from "../../../Providers/books/get-books.service";
-import { Book } from "../../../Providers/books/books-service-models/book";
+import { ModalController } from '@ionic/angular';
+import { GetBooksService } from '../../../Providers/books/get-books.service';
+import { Book } from '../../../Providers/books/books-service-models/book';
 import { FileUploader } from 'ng2-file-upload';
-import { DomSanitizer } from "@angular/platform-browser";
-import { HttpClient } from "@angular/common/http";
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -18,16 +18,16 @@ declare var ePub: any;
 export class AddBookModalComponent implements OnInit {
   @Input('book') newBook;
 
-  private inputMode: string = 'load';
-  private bookFile: any
+  private inputMode = 'load';
+  private bookFile: any;
   private cover;
   private sentences;
   private bookPath: any;
 
-  private indexes = ['Flesch Age', 'Flesch-Kincaid', 'Fog', 'Automated Readability']
+  private indexes = ['Flesch Age', 'Flesch-Kincaid', 'Fog', 'Automated Readability'];
 
   public uploader: FileUploader = new FileUploader({});
-  public hasBaseDropZoneOver: boolean = false;
+  public hasBaseDropZoneOver = false;
   private epubBook: any;
 
   syllable = require('syllable');
@@ -46,8 +46,8 @@ export class AddBookModalComponent implements OnInit {
       private http: HttpClient) { }
 
   ngOnInit() {
-    if(!this.newBook) {
-      console.log(this.newBook)
+    if (!this.newBook) {
+      console.log(this.newBook);
       this.newBook = new Book();
       this.newBook.level = 0;
     }
@@ -58,10 +58,10 @@ export class AddBookModalComponent implements OnInit {
   saveBook(book: any) {
 
     if (book.id) {
-      console.log('update', book)
+      console.log('update', book);
       this.bookService.updateBook(book);
     } else {
-      console.log('save', book)
+      console.log('save', book);
       this.bookService.addBook(book);
     }
 
@@ -69,8 +69,9 @@ export class AddBookModalComponent implements OnInit {
   }
 
   closeModal() {
-    if(this.epubBook)
+    if (this.epubBook) {
       this.epubBook.destroy();
+    }
 
     return this.modalCtrl.dismiss();
   }
@@ -82,7 +83,7 @@ export class AddBookModalComponent implements OnInit {
   /*** File Upload Section ***/
 
   addedDropBook(ev) {
-    this.bookFile = ev[0]
+    this.bookFile = ev[0];
     this.addEbook();
     this.getBookInfo();
 
@@ -92,9 +93,10 @@ export class AddBookModalComponent implements OnInit {
 
 
   addedBrowseBook(ev) {
-    if(ev.target.files[0])
-      this.bookFile = ev.target.files[0]
-      this.addEbook();
+    if (ev.target.files[0]) {
+      this.bookFile = ev.target.files[0];
+    }
+    this.addEbook();
 
 
     this.getBookInfo();
@@ -130,7 +132,7 @@ export class AddBookModalComponent implements OnInit {
                 reader.readAsBinaryString(result);
               }
           );
-    })
+    });
 
     this.epubBook.loaded.metadata.then((meta) => {
       this.newBook.title = meta.title;
@@ -139,41 +141,41 @@ export class AddBookModalComponent implements OnInit {
     });
 
     this.epubBook.loaded.navigation.then((toc) => {
-      let tocList = this.getToc(toc);
+      const tocList = this.getToc(toc);
 
       /**** Get reading level  ****/
 
       // has to render to get cfi
-      let rendition = this.epubBook.renderTo('viewer', {
+      const rendition = this.epubBook.renderTo('viewer', {
         height: '0%'
-      })
+      });
 
-      let randomSection = this.getAnalysisSectionInd(tocList);
+      const randomSection = this.getAnalysisSectionInd(tocList);
 
-      let text = ''
+      let text = '';
 
       // display random location
-      rendition.display(tocList[randomSection].href)
+      rendition.display(tocList[randomSection].href);
 
-      rendition.on("rendered", () => {
-        text = text + '' + rendition.getContents()[0].content.textContent
+      rendition.on('rendered', () => {
+        text = text + '' + rendition.getContents()[0].content.textContent;
 
         this.sentences = text.match( /[^\.!\?]+[\.!\?]+/g );
 
-        this.flesch = this.getFleschIndex()
+        this.flesch = this.getFleschIndex();
         this.fleshAge = 20 - Math.floor(this.flesch / 10);
-        this.fleschKincaid = this.getFleschKincaidIndex()
-        this.gunningFog = this.getGunningFog()
-        this.ari = this.getARI()
-      })
-    })
+        this.fleschKincaid = this.getFleschKincaidIndex();
+        this.gunningFog = this.getGunningFog();
+        this.ari = this.getARI();
+      });
+    });
   }
 
   private getAnalysisSectionInd(tocList) {
     // get random section between chapter 1/3 in and second to last chapter
-    let max = tocList.length - 2
-    let min = (tocList.length - 1) / 3
-    return Math.ceil(Math.random() * (max - min) + min)
+    const max = tocList.length - 2;
+    const min = (tocList.length - 1) / 3;
+    return Math.ceil(Math.random() * (max - min) + min);
   }
 
   getFleschIndex() {
@@ -182,17 +184,17 @@ export class AddBookModalComponent implements OnInit {
     let asl = 0;
     let asw = 0;
 
-    for (let sentence of this.sentences){
-      for(let word of sentence.split(' ')){
+    for (const sentence of this.sentences){
+      for (const word of sentence.split(' ')){
         numWords++;
         numSyll += this.syllable(word);
       }
     }
 
-    asl = numWords / this.sentences.length
+    asl = numWords / this.sentences.length;
     asw = numSyll / numWords;
 
-    return parseInt((206.835 - (1.015 * asl) - (84.6 * asw)).toFixed(2))
+    return parseInt((206.835 - (1.015 * asl) - (84.6 * asw)).toFixed(2));
   }
 
   getFleschKincaidIndex() {
@@ -201,17 +203,17 @@ export class AddBookModalComponent implements OnInit {
     let asl = 0;
     let asw = 0;
 
-    for (let sentence of this.sentences){
-      for(let word of sentence.split(' ')){
+    for (const sentence of this.sentences){
+      for (const word of sentence.split(' ')){
         numWords++;
         numSyll += this.syllable(word);
       }
     }
 
-    asl = numWords / this.sentences.length
+    asl = numWords / this.sentences.length;
     asw = numSyll / numWords;
 
-    return parseInt(((0.39 * asl) + (11.8 * asw) - 15.59).toFixed(2))
+    return parseInt(((0.39 * asl) + (11.8 * asw) - 15.59).toFixed(2));
   }
 
   getGunningFog() {
@@ -220,27 +222,28 @@ export class AddBookModalComponent implements OnInit {
     let asl = 0;
     let phw = 0;
 
-    for (let sentence of this.sentences){
-      for(let word of sentence.split(' ')){
+    for (const sentence of this.sentences){
+      for (const word of sentence.split(' ')){
         numWords++;
 
         //  No two-syllable verbs made into three with -es and -ed endings. // TODO check if verb
-        //let wordMinusEnding = word[word.length - 2] === 'e' && (word[word.length - 1] === 'd' || word[word.length - 1] === 's') ? word.slice(0, word.length-2) : word;
+        // let wordMinusEnding = word[word.length - 2] === 'e' && (word[word.length - 1] === 'd' || word[word.length - 1] === 's') ? word.slice(0, word.length-2) : word;
 
-        let syllCount = this.syllable(word);
+        const syllCount = this.syllable(word);
 
         // TODO: Implement spacy for the following rule:
         //  Count the number of words of three or more syllables that are NOT (i) proper nouns,
         //  (ii) combinations of easy words or hyphenated words
-        if (syllCount >= 3)
+        if (syllCount >= 3) {
           hw += syllCount;
+        }
       }
     }
 
-    asl = numWords / this.sentences.length
-    phw = hw / numWords
+    asl = numWords / this.sentences.length;
+    phw = hw / numWords;
 
-    return parseInt((0.4 * (asl + phw)).toFixed(2))
+    return parseInt((0.4 * (asl + phw)).toFixed(2));
   }
 
   getARI() {
@@ -249,8 +252,8 @@ export class AddBookModalComponent implements OnInit {
     let charsDivWords = 0;
     let wordsDivSents = 0;
 
-    for (let sentence of this.sentences){
-      for(let word of sentence.split(' ')){
+    for (const sentence of this.sentences){
+      for (const word of sentence.split(' ')){
         numWords++;
         numChars += word.length;
       }
@@ -260,13 +263,13 @@ export class AddBookModalComponent implements OnInit {
     wordsDivSents = numWords / this.sentences.length;
 
     // The Automated Readability Index (ARI)
-    return parseInt((4.71 * charsDivWords + 0.5 * wordsDivSents - 21.43).toFixed(2))
+    return parseInt((4.71 * charsDivWords + 0.5 * wordsDivSents - 21.43).toFixed(2));
   }
 
   handleReaderLoadedCoverImage(readerEvt) {
     const binaryString = readerEvt.target.result;
     this.newBook.base64Cover = btoa(binaryString);
-    this.cover = this.getCover()
+    this.cover = this.getCover();
   }
 
   /**
@@ -274,13 +277,13 @@ export class AddBookModalComponent implements OnInit {
    * @param toc table of contents
    */
   getToc(toc) {
-    var sections = [];
-    if(toc.length){
+    let sections = [];
+    if (toc.length){
       toc.forEach((section) => {
         sections.push(section);
 
         // uses recusion for oddly nested epubs
-        sections = sections.concat(this.getToc(section.subitems))
+        sections = sections.concat(this.getToc(section.subitems));
       });
     }
 
@@ -289,36 +292,40 @@ export class AddBookModalComponent implements OnInit {
 
 
   getCover() {
-    if(this.newBook.base64Cover)
+    if (this.newBook.base64Cover) {
       return 'data:image/png;base64,'
       + (this.sanitizer.bypassSecurityTrustResourceUrl( this.newBook.base64Cover ) as any).changingThisBreaksApplicationSecurity;
+    }
   }
 
 
   getIndex(ind: any) {
-    if(this.sentences)
+    if (this.sentences) {
       switch (ind) {
         case 'Flesch Age':
           return this.fleshAge;
         case 'Flesch-Kincaid' :
-          return this.fleschKincaid
+          return this.fleschKincaid;
         case 'Fog':
-          return this.gunningFog
+          return this.gunningFog;
         case 'Automated Readability':
-          return this.ari
+          return this.ari;
       }
+    }
   }
 
   browseEmptyImage() {
-    let upload = document.getElementById('empty-upload')
-    if(upload)
+    const upload = document.getElementById('empty-upload');
+    if (upload) {
       upload.click();
+    }
   }
 
   browseExistingImage() {
-    let upload = document.getElementById('exist-upload')
-    if(upload)
+    const upload = document.getElementById('exist-upload');
+    if (upload) {
       upload.click();
+    }
   }
 
   getImage(ev) {
@@ -328,9 +335,10 @@ export class AddBookModalComponent implements OnInit {
   }
 
   browseBooks() {
-    let upload = document.getElementById('book-input')
-    if(upload)
+    const upload = document.getElementById('book-input');
+    if (upload) {
       upload.click();
+    }
   }
 
   getBook(ev) {
@@ -338,13 +346,14 @@ export class AddBookModalComponent implements OnInit {
     reader.onload = this.handleReaderLoadedEpub.bind(this);
     reader.readAsBinaryString(ev.target.files[0]);
 
-    if(ev.target.files && ev.target.files[0].name)
-    this.bookPath = ev.target.files[0].name
+    if (ev.target.files && ev.target.files[0].name) {
+    this.bookPath = ev.target.files[0].name;
+    }
   }
 
 
   hasAllFields() {
     return this.newBook.level && this.newBook.base64Cover && this.newBook.base64eBook && this.newBook.title &&
-        this.newBook.author && this.newBook.shortDescription
+        this.newBook.author && this.newBook.shortDescription;
   }
 }

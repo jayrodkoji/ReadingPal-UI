@@ -12,7 +12,7 @@ describe('QuestionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ QuestionComponent ],
-      imports: [IonicModule.forRoot(), 
+      imports: [IonicModule.forRoot(),
         HttpClientTestingModule,
         ReactiveFormsModule,
       ]

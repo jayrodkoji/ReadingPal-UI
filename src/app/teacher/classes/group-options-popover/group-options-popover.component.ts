@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {PopoverController} from "@ionic/angular";
+import {ActivatedRoute, Router} from '@angular/router';
+import {PopoverController} from '@ionic/angular';
 
 @Component({
   selector: 'app-group-options-popover',

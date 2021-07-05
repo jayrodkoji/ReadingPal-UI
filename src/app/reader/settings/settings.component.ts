@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 
 
-const BOLD = 'bold'
-const NORMAL = 'normal'
-const ITALIC = 'italic'
+const BOLD = 'bold';
+const NORMAL = 'normal';
+const ITALIC = 'italic';
 
 @Component({
   selector: 'app-settings',
@@ -22,13 +22,13 @@ export class SettingsComponent implements OnInit {
   @Output() fontFamilyChangeEvent = new EventEmitter<any>();
   @Output() themeChangeEvent = new EventEmitter<any>();
 
-  fonts = ["Arial", "Brush Script MT", "Courier New", "Garamond", "Georgia", "Helvetica", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana"];
+  fonts = ['Arial', 'Brush Script MT', 'Courier New', 'Garamond', 'Georgia', 'Helvetica', 'Tahoma', 'Times New Roman', 'Trebuchet MS', 'Verdana'];
   selected_font = 0;
   dark = false;
 
-  scrollbar = "::-webkit-scrollbar {width: 5px;}::-webkit-scrollbar-track {background: #fff;}::-webkit-scrollbar-track:hover {background: #f7f7f7;}::-webkit-scrollbar-thumb {background: #ccc;}::-webkit-scrollbar-thumb:hover { background: #888}.inner-scroll {scrollbar-width: thin}"
-  bold: boolean = false;
-  italic: boolean = false;
+  scrollbar = '::-webkit-scrollbar {width: 5px;}::-webkit-scrollbar-track {background: #fff;}::-webkit-scrollbar-track:hover {background: #f7f7f7;}::-webkit-scrollbar-thumb {background: #ccc;}::-webkit-scrollbar-thumb:hover { background: #888}.inner-scroll {scrollbar-width: thin}';
+  bold = false;
+  italic = false;
 
   constructor(
       private menu: MenuController,
@@ -36,12 +36,13 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.fontFamily)
+    if (this.fontFamily) {
       this.fonts.forEach((font, index) => {
         if (font === this.fontFamily) {
           this.selected_font = index;
         }
-      })
+      });
+    }
   }
 
   /**
@@ -56,10 +57,12 @@ export class SettingsComponent implements OnInit {
    * Changes font weight and emits change
    */
   toggleFontWeight(){
-    if(this.fontWeight === BOLD)
+    if (this.fontWeight === BOLD) {
       this.fontWeight = NORMAL;
-    else
+    }
+    else {
       this.fontWeight = BOLD;
+    }
 
     this.fontWeightChangeEvent.emit(this.fontWeight);
   }
@@ -68,10 +71,12 @@ export class SettingsComponent implements OnInit {
    * Changes font style and emits change
    */
   toggleFontStyle(){
-    if(this.fontStyle === ITALIC)
+    if (this.fontStyle === ITALIC) {
       this.fontStyle = NORMAL;
-    else
+    }
+    else {
       this.fontStyle = ITALIC;
+    }
 
     this.fontStyleChangeEvent.emit(this.fontStyle);
   }
@@ -83,7 +88,7 @@ export class SettingsComponent implements OnInit {
   setFontFamily(ind: number) {
     this.selected_font = ind;
 
-    this.fontFamilyChangeEvent.emit(this.fonts[this.selected_font])
+    this.fontFamilyChangeEvent.emit(this.fonts[this.selected_font]);
   }
 
   /**
@@ -94,14 +99,14 @@ export class SettingsComponent implements OnInit {
   }
 
   changeTheme(theme) {
-    console.log(theme)
+    console.log(theme);
 
-    if(theme === 'dark') {
+    if (theme === 'dark') {
       document.body.setAttribute('color-theme', 'dark');
     } else if (theme === 'light') {
-      document.body.setAttribute('color-theme', 'light')
+      document.body.setAttribute('color-theme', 'light');
     }
 
-    this.themeChangeEvent.emit(theme)
+    this.themeChangeEvent.emit(theme);
   }
 }

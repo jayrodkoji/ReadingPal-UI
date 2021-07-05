@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-add-reading-book-select-popover',
@@ -7,8 +7,8 @@ import {ModalController} from "@ionic/angular";
   styleUrls: ['./add-reading-book-select-popover.component.scss'],
 })
 export class AddReadingBookSelectPopoverComponent implements OnInit {
-  @Input('books') books
-  selectedInd: number = -1;
+  @Input('books') books;
+  selectedInd = -1;
   searchText: any;
   selectedBookId: any;
 
@@ -17,10 +17,10 @@ export class AddReadingBookSelectPopoverComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.books.sort((a, b) => a.title.localeCompare(b.title))
+    this.books.sort((a, b) => a.title.localeCompare(b.title));
   }
 
   dismiss() {
-    this.modalController.dismiss(this.selectedBookId)
+    this.modalController.dismiss(this.selectedBookId);
   }
 }

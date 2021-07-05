@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from "@ionic/angular";
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-annotation-options',
@@ -17,11 +17,11 @@ export class AnnotationOptionsComponent implements OnInit {
   ngOnInit() {}
 
   delete() {
-    this.annotationOptions.dismiss({delete: true})
-    //this.presentAnnotationOptions(ev);
+    this.annotationOptions.dismiss({delete: true});
+    // this.presentAnnotationOptions(ev);
   }
 
   navigate() {
-    this.annotationOptions.dismiss({navigate: true})
+    this.annotationOptions.dismiss({navigate: true});
   }
 }
