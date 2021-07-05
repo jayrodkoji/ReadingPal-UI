@@ -31,7 +31,7 @@ export class WordOptionsComponent implements OnInit {
   highlighted = false;
   highlightColor: string;
   showNote = true;
-  annotation_id;
+  annotationId;
   messageData: Message;
   data = {
     creator: null,
@@ -133,11 +133,11 @@ export class WordOptionsComponent implements OnInit {
   buildMessageData(){
     this.messageData = new Message();
 
-    this.messageData.student_username = this.currentUser.username;
-    this.messageData.user_role = this.currentUser.roles[0].type;
-    this.messageData.teacher_username = this.teacher;
-    this.messageData.book_id = this.readerMeta.book_id;
-    this.messageData.annotation_id = this.annotation.data.id;
+    this.messageData.studentUsername = this.currentUser.username;
+    this.messageData.userRole = this.currentUser.roles[0].type;
+    this.messageData.teacherUsername = this.teacher;
+    this.messageData.bookId = this.readerMeta.book_id;
+    this.messageData.annotationId = this.annotation.data.id;
   }
 
   /**
@@ -145,7 +145,7 @@ export class WordOptionsComponent implements OnInit {
    */
   isSingleWord(): boolean {
     if (this.range) {
-      return this.range.toString().match(/[^ ]+/g) && this.range.toString().match(/[^ ]+/g).length == 1;
+      return this.range.toString().match(/[^ ]+/g) && this.range.toString().match(/[^ ]+/g).length === 1;
     }
 
     return false;

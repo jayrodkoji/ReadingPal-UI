@@ -19,7 +19,6 @@ export class AssignGroupCardComponent implements OnInit {
   private students: any;
 
   constructor(
-      private usersController: UsersService,
       private studentController: StudentService
   ) { }
 
@@ -40,7 +39,7 @@ export class AssignGroupCardComponent implements OnInit {
 
         res.forEach(st => {
           this.group.students.forEach(gst => {
-            if (st.id == gst) {
+            if (st.id === gst) {
               this.students.push(st);
             }
           });
@@ -81,7 +80,7 @@ export class AssignGroupCardComponent implements OnInit {
   }
 
   isInList(student: any) {
-    return this.studentsToAdd.indexOf(student) != -1;
+    return this.studentsToAdd.indexOf(student) !== -1;
   }
 
   addSingleStudent(event: any, student: any) {
@@ -91,7 +90,7 @@ export class AssignGroupCardComponent implements OnInit {
       }
     }
     else {
-      this.studentsToAdd = this.studentsToAdd.filter(st => st.username != student.username);
+      this.studentsToAdd = this.studentsToAdd.filter(st => st.username !== student.username);
     }
 
     this.studentsAltered();

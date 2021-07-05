@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import {ReaderMetaService} from '../../../Providers/reader-meta/reader-meta.service';
-import {HighlightData} from '../../../Providers/reader-meta/model/highlightData';
+import { ReaderMetaService } from '../../../Providers/reader-meta/reader-meta.service';
+import { HighlightData } from '../../../Providers/reader-meta/model/highlightData';
 
 const ALPHA = 'aa';
 const HIGHLIGHTYELLOW = '#ffff00' + ALPHA;
@@ -12,7 +12,7 @@ const HIGHLIGHTYELLOW = '#ffff00' + ALPHA;
   styleUrls: ['./color-select.page.scss'],
 })
 export class ColorSelectPage implements OnInit {
-  @Input('readerMeta') readerMeta;
+  @Input() readerMeta;
   @Input() eventEmitter: EventEmitter<any>;
 
   selectedColor;
@@ -22,7 +22,8 @@ export class ColorSelectPage implements OnInit {
   openPicker = false;
   deleteColors = false;
   colorHover = -1;
-  defaultColors = new Array(16).fill({id: null,
+  defaultColors = new Array(16).fill({
+    id: null,
     username: '',
     color: null,
     grid_index: 0,
@@ -33,10 +34,8 @@ export class ColorSelectPage implements OnInit {
   currentAddId: -1;
 
   constructor(
-      private popoverController: PopoverController,
-      private readerMetaService: ReaderMetaService
-  ) {
-  }
+    private readerMetaService: ReaderMetaService
+  ) { }
 
   ngOnInit() {
     this.setHighlightColors();
@@ -52,7 +51,7 @@ export class ColorSelectPage implements OnInit {
   /**
    * Gets all highlight colors from DB
    */
-  setHighlightColors(){
+  setHighlightColors() {
     this.readerMetaService.getHighlights(this.readerMeta.username).subscribe((res: HighlightData[]) => {
       if (res) {
         this.updateColors(res);
@@ -62,10 +61,9 @@ export class ColorSelectPage implements OnInit {
 
   /**
    * Sets all colors in palette
-   * @param colors
    */
   updateColors(colors) {
-    for (const color of colors){
+    for (const color of colors) {
       this.defaultColors[color.grid_index] = color;
     }
   }
@@ -90,7 +88,6 @@ export class ColorSelectPage implements OnInit {
   /**
    * Controls popover to not open more than once
    * when clicked.
-   * @param ind
    */
   setOpenPicker(ind) {
     this.openPicker = !this.openPicker;
@@ -145,7 +142,7 @@ export class ColorSelectPage implements OnInit {
    * @param ind: grid index
    * @param color: hex number to delete
    */
-  deleteColor(ind: number, color: HighlightData){
+  deleteColor(ind: number, color: HighlightData) {
     this.readerMetaService.deleteHighlight(color.id, this.readerMeta.username).subscribe((res) => {
       if (res) {
         this.defaultColors[ind] = '';
@@ -154,24 +151,24 @@ export class ColorSelectPage implements OnInit {
         // if deleted color is selected, set selected to first in grid
         let firstInd = -1;
         let firstColor = '';
-        this.defaultColors.forEach((color) => {
-          if (color.color) {
-            if (firstInd == -1 || color.grid_index < firstInd) {
-              firstInd = color.grid_index;
-              firstColor = color.color;
+        this.defaultColors.forEach((clr) => {
+          if (clr.color) {
+            if (firstInd === -1 || clr.grid_index < firstInd) {
+              firstInd = clr.grid_index;
+              firstColor = clr.color;
             }
           }
         });
 
-        if (firstInd != -1) {
+        if (firstInd !== -1) {
           this.selectedColor = firstColor;
         }
 
         // update meta
         this.readerMeta.last_highlight_color = this.selectedColor;
-        this.readerMetaService.updateReaderMeta(this.readerMeta).subscribe((res) => {
-          if (res) {
-            this.readerMeta = res;
+        this.readerMetaService.updateReaderMeta(this.readerMeta).subscribe((result) => {
+          if (result) {
+            this.readerMeta = result;
             this.eventEmitter.emit(this.readerMeta);
           }
         });

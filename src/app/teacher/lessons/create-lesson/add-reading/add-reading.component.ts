@@ -157,7 +157,7 @@ export class AddReadingComponent implements OnInit {
   getBookTitle() {
     let index = -1;
     this.bookInfos.forEach((book, ind) => {
-      if (book.id == this.readingInfo.bookId){
+      if (book.id === this.readingInfo.bookId){
         index = ind;
       }
     });

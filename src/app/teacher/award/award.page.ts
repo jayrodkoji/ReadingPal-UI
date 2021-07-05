@@ -55,7 +55,6 @@ export class AwardPage implements OnInit {
 
   /**
    * Get Reading Pal created badges
-   * @private
    */
   private getRPBadges() {
     this.badgeCreatorService.getRPBadges().subscribe(

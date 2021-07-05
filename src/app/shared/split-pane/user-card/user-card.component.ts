@@ -1,10 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { StudentService } from '../../../Providers/student-controller/student.service';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Router } from '@angular/router';
-import {BadgeControllerService} from '../../../Providers/badges/badge-controller.service';
+import { BadgeControllerService } from '../../../Providers/badges/badge-controller.service';
 import { ModalController } from '@ionic/angular';
 import { UserPreferencesComponent } from './user-preferences/user-preferences.component';
 
@@ -14,7 +12,7 @@ import { UserPreferencesComponent } from './user-preferences/user-preferences.co
   styleUrls: ['./user-card.component.scss'],
 })
 export class UserCardComponent implements OnInit {
-  student_avatar;
+  studentAvatar;
   dynamicStyle;
   badges: any[];
   subscription;
@@ -37,11 +35,11 @@ export class UserCardComponent implements OnInit {
         this.firstName = data.firstName;
 
         if (data !== null && data.profileimage !== null) {
-          this.student_avatar = 'data:image/png;base64,'
+          this.studentAvatar = 'data:image/png;base64,'
             + (this.sanitizer.bypassSecurityTrustResourceUrl(data.profileimage) as any).changingThisBreaksApplicationSecurity;
         }
         else {
-          this.student_avatar =
+          this.studentAvatar =
             '../../assets/user.png';
         }
 

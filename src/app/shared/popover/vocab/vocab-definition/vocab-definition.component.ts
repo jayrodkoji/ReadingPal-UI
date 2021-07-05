@@ -20,7 +20,7 @@ export class VocabDefinitionComponent implements OnInit {
 
   // checks selected for dictionary compatibility (single word)
   isSingleWord(word: string): boolean {
-    return word.toString().match(/[^ ]+/g) && word.toString().match(/[^ ]+/g).length == 1;
+    return word.toString().match(/[^ ]+/g) && word.toString().match(/[^ ]+/g).length === 1;
 
     return false;
   }

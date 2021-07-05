@@ -33,16 +33,16 @@ export class MessageSystemComponent implements OnInit, OnChanges {
   submitQuestion() {
     if (this.currentQuestion) {
       const message = new Message();
-      message.student_username = this.messageData.student_username;
-      message.teacher_username = this.messageData.teacher_username;
-      message.user_role = this.viewer;
-      message.new_message = this.currentQuestion;
-      message.book_id = this.messageData.book_id;
-      message.annotation_id = this.messageData.annotation_id;
+      message.studentUsername = this.messageData.student_username;
+      message.teacherUsername = this.messageData.teacher_username;
+      message.userRole = this.viewer;
+      message.newMessage = this.currentQuestion;
+      message.bookId = this.messageData.book_id;
+      message.annotationId = this.messageData.annotation_id;
       message.resolved = this.viewer === 'ROLE_TEACHER';
-      message.time_stamp = (Date.now() / 1000);
-      message.teacher_read = this.viewer === 'ROLE_TEACHER';
-      message.student_read = this.viewer === 'ROLE_STUDENT';
+      message.timeStamp = (Date.now() / 1000);
+      message.teacherRead = this.viewer === 'ROLE_TEACHER';
+      message.studentRead = this.viewer === 'ROLE_STUDENT';
 
       this.messagesService.addMessage(message).subscribe((res) => {
         if (res) {
@@ -70,12 +70,12 @@ export class MessageSystemComponent implements OnInit, OnChanges {
           .subscribe((res) => {
             if (res) {
               res.forEach((message) => {
-                if (message.annotation_id == this.messageData.annotation_id) {
+                if (message.annotation_id === this.messageData.annotation_id) {
                   this.messages.push(message);
                 }
               });
 
-              this.messages.sort((a, b) => a.time_stamp - b.time_stamp);
+              this.messages.sort((a, b) => a.timeStamp - b.timeStamp);
 
               if (this.messages.length > 0) {
                 this.hasMessages.emit();
@@ -83,13 +83,13 @@ export class MessageSystemComponent implements OnInit, OnChanges {
 
               this.messages.forEach((msg) => {
                 if (this.viewer === 'ROLE_STUDENT') {
-                  if (!msg.student_read) {
-                    msg.student_read = true;
+                  if (!msg.studentRead) {
+                    msg.studentRead = true;
                     this.messagesService.updateMessage(msg).subscribe();
                   }
                 } else if (this.viewer === 'ROLE_TEACHER') {
-                  if (!msg.teacher_read) {
-                    msg.teacher_read = true;
+                  if (!msg.teacherRead) {
+                    msg.teacherRead = true;
                     this.messagesService.updateMessage(msg).subscribe();
                   }
                 }
@@ -105,8 +105,8 @@ export class MessageSystemComponent implements OnInit, OnChanges {
       this.getMessages();
     }
   }
-  getImage(student_image: any) {
-    return ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(student_image));
+  getImage(studentImage: any) {
+    return ImageUtils.decodeDBImage(this.sanitizer, ImageUtils.convertDBImage(studentImage));
   }
 
 }

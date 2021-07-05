@@ -16,7 +16,6 @@ export class ImageService {
 
   /**
    * Upload Profile Image
-   * @param image
    */
   public updateProfileImage(image: FormData, key) {
     return this.http.post(`${USERS_API_URL}${USER_API_PATH}/uploadProfilePic/${key}`, image);
@@ -34,7 +33,6 @@ export class ImageService {
   /**
    * Download Profile Image
    * Used for saving image (intended for use when image is needed more than once, ie. logged in user)
-   * @param image
    */
   public downloadProfileImage(key) {
     return null;

@@ -29,7 +29,7 @@ export class AddGroupModalComponent implements OnInit {
   }
 
   isInList(student: any) {
-    return this.studentToAdd.indexOf(student) != -1;
+    return this.studentToAdd.indexOf(student) !== -1;
   }
 
   addSingleStudent(event: any, student: any) {
@@ -39,7 +39,7 @@ export class AddGroupModalComponent implements OnInit {
       }
     }
     else {
-      this.studentToAdd = this.studentToAdd.filter(st => st.username != student.username);
+      this.studentToAdd = this.studentToAdd.filter(st => st.username !== student.username);
     }
   }
 
@@ -56,7 +56,7 @@ export class AddGroupModalComponent implements OnInit {
             const groupId = res.id;
 
             this.studentToAdd.forEach(st => {
-              this.groupController.addStudentToGroup(groupId, st.id).subscribe((res) => {
+              this.groupController.addStudentToGroup(groupId, st.id).subscribe((result) => {
               });
             });
 

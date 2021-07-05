@@ -4,32 +4,32 @@ import {Directive, HostListener, Output, EventEmitter} from '@angular/core';
   selector: '[appDragDrop]'
 })
 export class DragDropDirectiveDirective {
-  @Output() onFileDropped: EventEmitter<any> = new EventEmitter();
-  @Output() onDragOverEv: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onDragLeaveEv: EventEmitter<any> = new EventEmitter<any>();
+  @Output() fileDropped: EventEmitter<any> = new EventEmitter();
+  @Output() dragedOverEv: EventEmitter<any> = new EventEmitter<any>();
+  @Output() dragedLeaveEv: EventEmitter<any> = new EventEmitter<any>();
 
   // Dragover listener
-  @HostListener('dragover', ['$event']) onDragOver(evt) {
+  @HostListener('dragover', ['$event']) dragOver(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.onDragOverEv.emit();
+    this.dragedOverEv.emit();
   }
 
   // Dragleave listener
-  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
+  @HostListener('dragleave', ['$event']) public dragLeave(evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    this.onDragLeaveEv.emit();
+    this.dragedLeaveEv.emit();
   }
 
   // Drop listener
-  @HostListener('drop', ['$event']) public ondrop(evt) {
+  @HostListener('drop', ['$event']) public dropped(evt) {
     evt.preventDefault();
     evt.stopPropagation();
     const files = evt.dataTransfer.files;
     if (files.length > 0) {
-      this.onDragLeaveEv.emit();
-      this.onFileDropped.emit(files);
+      this.dragedLeaveEv.emit();
+      this.fileDropped.emit(files);
     }
   }
 

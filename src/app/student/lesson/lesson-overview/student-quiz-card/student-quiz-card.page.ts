@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { QuizQuestion } from 'src/app/Providers/quiz-controller/quiz-data';
 
 @Component({
-  selector: 'student-quiz-card',
+  selector: 'app-student-quiz-card',
   templateUrl: './student-quiz-card.page.html',
   styleUrls: ['./student-quiz-card.page.scss'],
 })

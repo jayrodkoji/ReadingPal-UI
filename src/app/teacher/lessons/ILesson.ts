@@ -1,13 +1,13 @@
 export interface ILesson {
     guid: string;
-    book_id: string;
+    bookId: string;
     level: string;
-    passage_start: string;
-    passage_end: string;
+    passageStart: string;
+    passageEnd: string;
     title: string;
-    word_count: number;
+    wordCount: number;
     chapter: string;
     rating: number;
-    lesson_plan_id: string;
-    badge_id: string;
+    lessonPlanId: string;
+    badgeId: string;
 }

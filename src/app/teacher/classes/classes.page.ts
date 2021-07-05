@@ -97,7 +97,7 @@ export class ClassesPage implements OnInit {
 
                       g.students.forEach(st => {
                         this.users.forEach((us: any) => {
-                          if (us.id == st) {
+                          if (us.id === st) {
                             newStudents.push(us);
                           }
                         });

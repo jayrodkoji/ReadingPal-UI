@@ -10,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'chapter-select-popover',
-    loadChildren: () => import('./add-reading/chapter-select-popover/chapter-select-popover.module').then( m => m.ChapterSelectPopoverPageModule)
+    loadChildren: () => import('./add-reading/chapter-select-popover/chapter-select-popover.module')
+      .then(m => m.ChapterSelectPopoverPageModule)
   }
 
 ];
@@ -19,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CreateLessonPageRoutingModule {}
+export class CreateLessonPageRoutingModule { }

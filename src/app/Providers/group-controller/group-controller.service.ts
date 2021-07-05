@@ -80,7 +80,7 @@ export class GroupControllerService {
 
 class GroupData
 {
-  public class_id: number;
+  public classId: number;
   public id: number;
   public name: string;
 }

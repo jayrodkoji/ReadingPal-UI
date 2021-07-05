@@ -58,9 +58,9 @@ export class SplitPaneComponent implements OnInit {
       .subscribe((res) => {
         if (res){
           this.numUnread = Array.from(new Set(res.sort((a, b) => b.time_stamp - a.time_stamp).map(a => a.annotation_id)))
-              .map(annotation_id => {
-                return res.find(a => a.annotation_id === annotation_id);
-              }).filter((obj) => obj.teacher_read == false).length;
+              .map(annotationId => {
+                return res.find(a => a.annotation_id === annotationId);
+              }).filter((obj) => obj.teacher_read === false).length;
         }
       });
   }

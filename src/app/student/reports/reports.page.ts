@@ -18,7 +18,11 @@ export class ReportsPage implements AfterViewInit {
   studentUsername: string;
 
 
-  constructor(private router: Router, private http: HttpClient, private completedLessonController: CompletedLessonService, private experienceController: ExperienceControllerService) { }
+  constructor(
+    private http: HttpClient,
+    private completedLessonController: CompletedLessonService,
+    private experienceController: ExperienceControllerService
+  ) { }
 
   ngAfterViewInit() {
     this.getStudentData();

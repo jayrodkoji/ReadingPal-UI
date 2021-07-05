@@ -45,8 +45,8 @@ export class StudentPickerComponent implements OnInit {
 
   selectAll() {
     const studentControls = this.studentControls;
-    for (let i = 0; i < this.studentControls.length; i++) {
-      (this.studentControls[i] as FormGroup).controls.selected.setValue(true);
+    for (const studentControl of studentControls) {
+      (studentControl as FormGroup).controls.selected.setValue(true);
     }
   }
 }

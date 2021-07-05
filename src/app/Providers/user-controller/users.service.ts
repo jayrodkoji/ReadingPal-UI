@@ -95,7 +95,7 @@ export class UsersService {
    * Update User
    */
   public updateUser(_id: string, userUpdate: UpdateUser): Observable<any> {
-    const Update_User = gql`
+    const UPDATE = gql`
       mutation updateUser($_id: String!, $userUpdate: UserUpdate) {
         updateUser(_id: $_id, userUpdate: $userUpdate) {
           success
@@ -105,7 +105,7 @@ export class UsersService {
 
     return new Observable(subscriber => {
       this.apollo.mutate({
-        mutation: Update_User,
+        mutation: UPDATE,
         variables: {
           _id,
           userUpdate
@@ -127,7 +127,7 @@ export class UsersService {
    * Delete User
    */
   public deleteUserData(_id: string): Observable<any> {
-    const DELETE_USER = gql`
+    const DELETEUSER = gql`
       mutation DeleteUser($_id: String!) {
         deleteUser(_id: $_id) {
           success
@@ -137,7 +137,7 @@ export class UsersService {
 
     return new Observable(subscriber => {
       this.apollo.mutate({
-        mutation: DELETE_USER,
+        mutation: DELETEUSER,
         variables: {
           _id
         }

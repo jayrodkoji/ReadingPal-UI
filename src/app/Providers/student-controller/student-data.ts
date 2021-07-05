@@ -4,14 +4,14 @@ export class StudentData
 {
     public id: number;
     public username: string;
-    public reading_level: number;
+    public readingLevel: number;
     public grade: string;
 
     // data: Object from the server's user GET request
     constructor(data) {
         this.id = data.id;
         this.username = data.username;
-        this.reading_level = data.readingLevel;
+        this.readingLevel = data.readingLevel;
         this.grade = data.grade;
     }
 }

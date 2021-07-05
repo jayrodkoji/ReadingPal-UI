@@ -116,7 +116,7 @@ export class StudentAssignerComponent implements OnInit {
     const toRemoveInd = [];
     this.students.forEach((st, ind) => {
       console.log('ran');
-      if (st.class == ev.class){
+      if (st.class === ev.class){
         toRemoveInd.push(ind);
       }
     });
@@ -146,7 +146,7 @@ export class StudentAssignerComponent implements OnInit {
   }
 
   isInList(student: any) {
-    return this.students.indexOf(student) != -1;
+    return this.students.indexOf(student) !== -1;
   }
 
   addSingleStudent(event: any, student: any) {
@@ -156,7 +156,7 @@ export class StudentAssignerComponent implements OnInit {
       }
     }
     else {
-      this.students = this.students.filter(st => st.username != student.username);
+      this.students = this.students.filter(st => st.username !== student.username);
     }
 
     console.log(this.students);

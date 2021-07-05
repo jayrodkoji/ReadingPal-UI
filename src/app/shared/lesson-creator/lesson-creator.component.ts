@@ -15,8 +15,8 @@ export class LessonCreatorComponent implements OnInit {
   creator: string;
   level: string;
   chapter: string;
-  start_page: string;
-  end_page: string;
+  startPage: string;
+  endPage: string;
   title: string;
   wordCount: number;
   badgeId: number;
@@ -35,8 +35,8 @@ export class LessonCreatorComponent implements OnInit {
         this.creator,
         this.level,
         this.chapter,
-        this.start_page,
-        this.end_page,
+        this.startPage,
+        this.endPage,
         this.rating,
         this.title,
         this.wordCount,

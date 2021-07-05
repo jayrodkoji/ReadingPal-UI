@@ -6,9 +6,9 @@ export class BookSearchPipeComponent implements PipeTransform {
   /**
    * Transform
    *
-   * @param {any[]} items
-   * @param {string} searchText
-   * @returns {any[]}
+   * @param any[] items: list of items to be filtered
+   * @param string searchText: string to filter list on
+   * @returns any[] : filtered list
    */
   transform(items: any[], searchText: string): any[] {
     if (!items) {

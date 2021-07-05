@@ -23,7 +23,7 @@ export class SettingsComponent implements OnInit {
   @Output() themeChangeEvent = new EventEmitter<any>();
 
   fonts = ['Arial', 'Brush Script MT', 'Courier New', 'Garamond', 'Georgia', 'Helvetica', 'Tahoma', 'Times New Roman', 'Trebuchet MS', 'Verdana'];
-  selected_font = 0;
+  selectedFont = 0;
   dark = false;
 
   scrollbar = '::-webkit-scrollbar {width: 5px;}::-webkit-scrollbar-track {background: #fff;}::-webkit-scrollbar-track:hover {background: #f7f7f7;}::-webkit-scrollbar-thumb {background: #ccc;}::-webkit-scrollbar-thumb:hover { background: #888}.inner-scroll {scrollbar-width: thin}';
@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
     if (this.fontFamily) {
       this.fonts.forEach((font, index) => {
         if (font === this.fontFamily) {
-          this.selected_font = index;
+          this.selectedFont = index;
         }
       });
     }
@@ -83,12 +83,11 @@ export class SettingsComponent implements OnInit {
 
   /**
    * Change font selected and emits change
-   * @param ind
    */
   setFontFamily(ind: number) {
-    this.selected_font = ind;
+    this.selectedFont = ind;
 
-    this.fontFamilyChangeEvent.emit(this.fonts[this.selected_font]);
+    this.fontFamilyChangeEvent.emit(this.fonts[this.selectedFont]);
   }
 
   /**

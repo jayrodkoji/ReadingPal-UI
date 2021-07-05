@@ -4,12 +4,12 @@ export class LessonPostData {
     public creator: string,
     public level: string,
     public chapter: string,
-    public start_page: string,
-    public end_page: string,
+    public startPage: string,
+    public endPage: string,
     public rating: string,
     public title: string,
     public wordCount: number,
     public sequence: number,
     public viewable: boolean,
-    public badge_id: number) {}
+    public badgeId: number) {}
 }

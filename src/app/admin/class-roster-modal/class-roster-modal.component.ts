@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ClassControllerService } from 'src/app/Providers/class-controller/class-controller.service';
 import { AddToRosterModalComponent } from '../add-to-roster-modal/add-to-roster-modal.component';
-import {UsersService} from '../../Providers/user-controller/users.service';
+import { UsersService } from '../../Providers/user-controller/users.service';
 
 @Component({
   selector: 'app-class-roster-modal',
@@ -19,8 +19,8 @@ export class ClassRosterModalComponent implements OnInit {
   potentialStudents;
 
   constructor(
-      private modalController: ModalController,
-      private classController: ClassControllerService,
+    private modalController: ModalController,
+    private classController: ClassControllerService,
   ) { }
 
   dismiss() {
@@ -45,32 +45,33 @@ export class ClassRosterModalComponent implements OnInit {
   }
 
   removeFromClass(student: any) {
-    let new_students: any[] = [];
-    this.allStudentsInClass.forEach(student => {
-      new_students.push(student.username);
+    let newStudents: any[] = [];
+    this.allStudentsInClass.forEach(std => {
+      newStudents.push(std.username);
     });
 
-    new_students = new_students.filter(item => item != student);
+    newStudents = newStudents.filter(item => item !== student);
 
     const updatedClassData = {
       grade: this.classroom.classData.grade,
       id: this.classroom.classData.id,
       name: this.classroom.classData.name,
-      studentsUserNames: new_students,
+      studentsUserNames: newStudents,
       teacherUserName: this.classroom.classData.teacher.username
     };
     this.classController.updateClass(updatedClassData).subscribe((result) => {
-      if (result){
-        this.allStudentsInClass = this.allStudentsInClass.filter(item => item.username != student);
+      if (result) {
+        this.allStudentsInClass = this.allStudentsInClass.filter(item => item.username !== student);
       }
     });
   }
 
   getPotentialStudents() {
-    this.potentialStudents = this.allUsers.filter(item1 => !this.allStudentsInClass.some(item2 => (item2.username === item1.username)) && item1.roles[0].type !== 'ROLE_TEACHER')
-        .sort(function(a, b) {
-          return ('' + a.username).localeCompare(b.username);
-        });
+    this.potentialStudents = this.allUsers.filter(item1 => !this.allStudentsInClass.some(item2 => (item2.username === item1.username)) &&
+     item1.roles[0].type !== 'ROLE_TEACHER')
+      .sort((a, b) => {
+        return ('' + a.username).localeCompare(b.username);
+      });
   }
 
 

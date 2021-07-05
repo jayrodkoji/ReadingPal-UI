@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'dictionary',
+  selector: 'app-dictionary',
   templateUrl: './dictionary.component.html',
   styleUrls: ['./dictionary.component.scss'],
 })
@@ -30,7 +30,7 @@ export class DictionaryComponent implements OnInit {
   }
 
   prevDef() {
-    if (this.definitions && this.definitions[0].shortdef && this.currDef == 0) {
+    if (this.definitions && this.definitions[0].shortdef && this.currDef === 0) {
       this.currDef = this.definitions[0].shortdef.length - 1;
     }
     else {
@@ -39,7 +39,7 @@ export class DictionaryComponent implements OnInit {
   }
 
   nextDef() {
-    if (this.definitions && this.definitions.length && this.currDef == this.definitions[0].shortdef.length - 1) {
+    if (this.definitions && this.definitions.length && this.currDef === this.definitions[0].shortdef.length - 1) {
       this.currDef = 0;
     }
     else {

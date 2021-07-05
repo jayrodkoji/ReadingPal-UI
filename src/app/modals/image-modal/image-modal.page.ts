@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./image-modal.page.scss'],
 })
 export class ImageModalPage implements OnInit {
-  @Input('src') src: string;
+  @Input() src: string;
   url: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) { }

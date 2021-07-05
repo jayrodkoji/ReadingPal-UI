@@ -1,40 +1,42 @@
 import { ILesson } from './ILesson';
 export class Lesson implements ILesson {
   guid: string;
-  book_id: string;
+  bookId: string;
   level: string;
-  passage_start: string;
-  passage_end: string;
+  passageStart: string;
+  passageEnd: string;
   title: string;
-  word_count: number;
+  wordCount: number;
   chapter: string;
   rating: number;
-  lesson_plan_id: string;
-  badge_id: string;
+  lessonPlanId: string;
+  badgeId: string;
 
-  constructor(guid: string,
-              book_id: string,
-              level: string,
-              passage_start: string,
-              passage_end: string,
-              title: string,
-              word_count: number,
-              chapter: string,
-              rating: number,
-              lesson_plan_id: string,
-              badge_id: string) {
+  constructor(
+    guid: string,
+    bookId: string,
+    level: string,
+    passageStart: string,
+    passageEnd: string,
+    title: string,
+    wordCount: number,
+    chapter: string,
+    rating: number,
+    lessonPlanId: string,
+    badgeId: string
+  ) {
 
     this.guid = guid;
-    this.book_id = book_id;
+    this.bookId = bookId;
     this.level = level;
-    this.passage_start = passage_start;
-    this.passage_end = passage_end;
+    this.passageStart = passageStart;
+    this.passageEnd = passageEnd;
     this.title = title;
-    this.word_count = word_count;
+    this.wordCount = wordCount;
     this.chapter = chapter;
     this.rating = rating;
-    this.lesson_plan_id = lesson_plan_id;
-    this.badge_id = badge_id;
+    this.lessonPlanId = lessonPlanId;
+    this.badgeId = badgeId;
   }
 
   static fromData(data: any): ILesson {

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {ClassArray, ClassData, newClassData} from './class-data';
+import {ClassArray, ClassData, NewClassData} from './class-data';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ClassControllerService {
     return this.http.get(this.buildUrl('get-all-classes')) as Observable<ClassArray>;
   }
 
-  addClass(data: newClassData): Observable<any> {
+  addClass(data: NewClassData): Observable<any> {
     return this.http.post(this.buildUrl('add-class'), data);
   }
 

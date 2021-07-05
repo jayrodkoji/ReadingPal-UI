@@ -60,14 +60,12 @@ export class StudentsComponent implements OnInit {
 
   /**
    * Send updates to student
-   * @param student
-   * @private
    */
   private submitStudentChanges(student) {
     this.studentService.updateStudent(
         {id: student.id,
           username: student.username,
-          reading_level: student.reading_level,
+          readingLevel: student.reading_level,
           grade: student.grade
         }).subscribe(() => {
           alert('Updated info for ' + student.username);
@@ -76,8 +74,6 @@ export class StudentsComponent implements OnInit {
 
   /**
    * Update user object
-   * @param student
-   * @private
    */
   private submitUserChanges(student) {
     student.user.username = student.username;
@@ -87,8 +83,6 @@ export class StudentsComponent implements OnInit {
 
   /**
    * Update users password
-   * @param student
-   * @private
    */
   private submitUserPasswordChange(student) {
     if (student.password) {

@@ -11,7 +11,7 @@ import { ImageService } from 'src/app/Providers/image-controller/image.service';
 })
 export class AddUserModalComponent implements OnInit {
   @Input() user: User;
-  @Input() isNewUser: Boolean;
+  @Input() isNewUser: boolean;
   profileImgFile: File;
   profileImageURL: string;
   currentProfileImg: string;
@@ -97,8 +97,8 @@ export class AddUserModalComponent implements OnInit {
   saveUserData(user: User): void {
     // Add the user to the database
     if (this.isNewUser === true) {
-      const new_user = new NewUser(user);
-      this.usersService.addUser(new_user).subscribe((res: any) => {
+      const newUser = new NewUser(user);
+      this.usersService.addUser(newUser).subscribe((res: any) => {
         this.printResultSuccess(res, 'Add User');
       });
     }

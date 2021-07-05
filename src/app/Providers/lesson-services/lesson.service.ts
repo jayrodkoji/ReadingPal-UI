@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { LessonArray, LessonData } from './lesson-services-models/lesson-data';
 import { LessonPostData } from './lesson-services-models/lesson-post-data';
 
@@ -32,36 +32,32 @@ export class LessonService {
       { params });
   }
 
-    /**
-     * save last lesson
-     * @param lessonId
-     * @param studentId
-     */
-    public saveLastLesson(lessonId: string, studentId: string): Observable<any> {
-        const params = new HttpParams()
-            .set('lessonId', lessonId)
-            .set('studentId', studentId);
+  /**
+   * save last lesson
+   */
+  public saveLastLesson(lessonId: string, studentId: string): Observable<any> {
+    const params = new HttpParams()
+      .set('lessonId', lessonId)
+      .set('studentId', studentId);
 
-        return this.http.post(
-            environment.gatewayBaseUrl + '/lessons/save-last-lesson',
-            {},
-            { params });
-    }
+    return this.http.post(
+      environment.gatewayBaseUrl + '/lessons/save-last-lesson',
+      {},
+      { params });
+  }
 
-
-    /**
-     * get last lesson
-     * @param studentId
-     */
-    public getLastLesson(studentId: string): Observable<any[]> {
-        const params = new HttpParams().set('studentId', studentId);
-        return this.http.get(
-            environment.gatewayBaseUrl + '/lessons/get-last-lesson',
-            { params }) as Observable<any[]>;
-    }
 
   /**
-   *
+   * get last lesson
+   */
+  public getLastLesson(studentId: string): Observable<any[]> {
+    const params = new HttpParams().set('studentId', studentId);
+    return this.http.get(
+      environment.gatewayBaseUrl + '/lessons/get-last-lesson',
+      { params }) as Observable<any[]>;
+  }
+
+  /**
    * @param data Must have assigned_date, available_until_date, due_date, lesson_id, student_ids (string[])
    */
   public assignLesson(data: any): Observable<any> {
@@ -87,7 +83,6 @@ export class LessonService {
 
   /**
    * Gets the lessons assigned to a student. Duplicated lessons get filtered by whichever has the highest ID.
-   * @param studentId The id of the student to get the lesson assignments of.
    */
   public getAssignLessonFiltered(studentId: number): Observable<any[]> {
     const subj = new Subject<any[]>();
@@ -133,7 +128,6 @@ export class LessonService {
 
   /**
    * Delete a lesson by id
-   * @param data
    */
   public deleteLesson(data: any): Observable<any> {
     if (!this.lessonsSubject) {
@@ -156,8 +150,6 @@ export class LessonService {
 
   /**
    * Get individual lesson by id
-   *
-   * @param id lesson id requesting
    */
   getLessonById(id: string): Observable<LessonData> {
     if (!this.lessonSubject) {
@@ -176,7 +168,6 @@ export class LessonService {
 
   /**
    * Get all lessons in catalogue
-   *
    */
   getLessons(): Observable<LessonArray> {
     if (!this.lessonsSubject) {
@@ -197,8 +188,6 @@ export class LessonService {
 
   /**
    * Get lessons for student by id
-   *
-   * @param studentId
    */
   getLessonByStudentId(studentId: number): Observable<LessonData[]> {
     if (!this.studentLessonsSubject) {
@@ -221,8 +210,6 @@ export class LessonService {
 
   /**
    * Update lesson by passing lesson data. Lesson will be matched by id on backend.
-   *
-   * @param data lesson object
    */
   public updateLesson(data): Observable<any> {
     if (!this.lessonSubject) {
@@ -234,7 +221,7 @@ export class LessonService {
     this.http.post(
       environment.gatewayBaseUrl + '/lessons/update-lesson',
       data,
-      {params})
+      { params })
       .subscribe(result => {
         const lesson = new LessonData(result);
         this.lessonSubject.next(lesson);
@@ -247,10 +234,6 @@ export class LessonService {
    * Update if lesson is viewable by student or others
    *
    * TODO: May need to update to have viewable by student seperate from others (catalogue)
-   *
-   * @param lessonId
-   * @param username
-   * @param isViewable
    */
   public updateVisibility(lessonId: number, username: string, isViewable: number): Observable<any> {
     if (!this.lessonSubject) {
@@ -264,19 +247,16 @@ export class LessonService {
 
     this.http.post(
       environment.gatewayBaseUrl + '/lessons/update-visibility', { params })
-        .subscribe(result => {
-          const lesson = new LessonData(result);
-          this.lessonSubject.next(lesson);
-        });
+      .subscribe(result => {
+        const lesson = new LessonData(result);
+        this.lessonSubject.next(lesson);
+      });
 
     return this.lessonSubject.asObservable();
   }
 
   /**
    * Allow updating lesson presentation order.
-   *
-   * @param seqNum What position lesson can be presented in
-   * @param lessonId
    */
   public updateSequence(seqNum: number, lessonId: number): Observable<any> {
     const params = new HttpParams()
@@ -291,9 +271,6 @@ export class LessonService {
 
   /**
    * Will be error handling
-   *
-   * @param operation
-   * @param result
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

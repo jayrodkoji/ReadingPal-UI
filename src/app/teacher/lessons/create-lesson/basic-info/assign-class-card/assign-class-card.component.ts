@@ -61,7 +61,7 @@ export class AssignClassCardComponent implements OnInit {
   }
 
   isInList(student: any) {
-    return this.studentsToAdd.indexOf(student) != -1;
+    return this.studentsToAdd.indexOf(student) !== -1;
   }
 
   addSingleStudent(event: any, student: any) {
@@ -71,7 +71,7 @@ export class AssignClassCardComponent implements OnInit {
       }
     }
     else {
-      this.studentsToAdd = this.studentsToAdd.filter(st => st.username != student.username);
+      this.studentsToAdd = this.studentsToAdd.filter(st => st.username !== student.username);
     }
 
     this.studentsAltered();

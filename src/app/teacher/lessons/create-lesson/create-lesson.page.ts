@@ -94,8 +94,8 @@ export class CreateLessonPage implements OnInit {
 
       this.initialReadingInfo = new LessonDataReadingInfo();
       this.initialReadingInfo.bookId = this.lesson.bookId;
-      this.initialReadingInfo.bookStart = this.lesson.start_page;
-      this.initialReadingInfo.bookEnd = this.lesson.end_page;
+      this.initialReadingInfo.bookStart = this.lesson.startPage;
+      this.initialReadingInfo.bookEnd = this.lesson.endPage;
 
       if (this.lesson.badgeId !== null) {
         this.badgeController.getBadgeById(this.lesson.badgeId.toString())

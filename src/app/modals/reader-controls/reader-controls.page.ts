@@ -8,17 +8,17 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./reader-controls.page.scss'],
 })
 export class ReaderControlsPage implements OnInit {
-  @Input('readerMeta') readerMeta;
-  @Input('autoHighlight') autoHighlight;
-  @Input('autoDelete') autoDelete;
-  @Input('favoriteColors') favoriteColors;
+  @Input() readerMeta;
+  @Input() autoHighlight;
+  @Input() autoDelete;
+  @Input() favoriteColors;
   @Output() fontChangeEvent = new EventEmitter<any>();
   @Output() colorSelectEvent = new EventEmitter<any>();
   @Output() autoHighlightEvent = new EventEmitter<any>();
   @Output() autoDeleteEvent = new EventEmitter<any>();
 
   selectedColorChange = new EventEmitter<any>();
-  guide_speed = 63;
+  guideSpeed = 63;
 
   constructor(
     private popoverController: PopoverController,
@@ -43,7 +43,6 @@ export class ReaderControlsPage implements OnInit {
   /**
    *  Change font size
    * Emit 1 for increase, 0 for decrease.
-   * @param value
    */
   changeFontSize(value: number) {
     this.fontChangeEvent.emit(value);

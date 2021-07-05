@@ -1,5 +1,5 @@
-import {Component, OnInit, HostListener, EventEmitter} from '@angular/core';
-import { MenuController, ModalController, NavController, PopoverController  } from '@ionic/angular';
+import { Component, OnInit, HostListener, EventEmitter } from '@angular/core';
+import { MenuController, ModalController, NavController, PopoverController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -12,9 +12,9 @@ import { AnnotationData } from '../Providers/reader-meta/model/annotationData';
 import { Contents, EpubCFI } from 'epubjs';
 import { ImageUtils } from '../utils/image-utils';
 import { DomSanitizer } from '@angular/platform-browser';
-import {FinishedReadingComponent} from './finished-reading/finished-reading.component';
-import {LessonData} from '../Providers/lesson-services/lesson-services-models/lesson-data';
-import {LessonService} from '../Providers/lesson-services/lesson.service';
+import { FinishedReadingComponent } from './finished-reading/finished-reading.component';
+import { LessonData } from '../Providers/lesson-services/lesson-services-models/lesson-data';
+import { LessonService } from '../Providers/lesson-services/lesson.service';
 import { User } from '../Providers/user-controller/model/users-model';
 
 
@@ -39,7 +39,7 @@ export class ReaderPage implements OnInit {
   bookId;
   bookMeta: any;
 
-  //book settings
+  // book settings
   highlightColor: any;
   currentBookmark: any;
   currentAnnotation: any;
@@ -93,8 +93,8 @@ export class ReaderPage implements OnInit {
     private http: HttpClient,
     private readerMetaService: ReaderMetaService,
     private lessonService: LessonService,
-    private sanitizer: DomSanitizer, ) {
-   }
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
     this.rendition = '';
@@ -109,7 +109,7 @@ export class ReaderPage implements OnInit {
       this.isLesson = true;
     }
 
-    if (this.bookId){
+    if (this.bookId) {
       if (this.lessonId) {
         this.getLesson();
       }
@@ -122,17 +122,17 @@ export class ReaderPage implements OnInit {
     }
   }
 
-  getLesson(){
+  getLesson() {
     this.lessonService.getLessonById(this.lessonId.toString()).subscribe((res) => {
       console.log(res);
-      if (res){
+      if (res) {
         this.lesson = new LessonData(res);
 
         console.log(this.lesson);
-        this.startLoc = res.start_page;
+        this.startLoc = res.startPage;
 
-        if (res.end_page === 'end') {
-          this.endLoc = res.end_page;
+        if (res.endPage === 'end') {
+          this.endLoc = res.endPage;
         }
 
         if (this.bookId === this.lesson.bookId.toString()) {
@@ -201,7 +201,6 @@ export class ReaderPage implements OnInit {
 
   /**
    * Gets teach/creator
-   * @param username: typically creator of lesson
    */
   // TODO: change to use userId
   // getTeacherUser(username: string){
@@ -229,13 +228,13 @@ export class ReaderPage implements OnInit {
     });
 
     this.autoHighlightEvent.subscribe(res => {
-      if (res != null) {
+      if (res !== null) {
         this.autoHighlight = res;
       }
     });
 
     this.autoDeleteEvent.subscribe(res => {
-      if (res != null) {
+      if (res !== null) {
         this.autoDelete = res;
       }
     });
@@ -245,7 +244,7 @@ export class ReaderPage implements OnInit {
       let teacherSetFalse = false;
       if (res) {
         res.data.text = this.getRange(res.cfiRange, this.contents).toString();
-        if (this.showTeacherAnnotations){
+        if (this.showTeacherAnnotations) {
           this.toggleTeacherAnnotationsView();
           this.showTeacherAnnotations = false;
           teacherSetFalse = true;
@@ -254,7 +253,7 @@ export class ReaderPage implements OnInit {
         this.currentAnnotation.data.creator = this.bookMeta.username;
         this.addAnnotations(this.currentAnnotation);
 
-        if (teacherSetFalse){
+        if (teacherSetFalse) {
           this.toggleTeacherAnnotationsView();
           this.showTeacherAnnotations = true;
         }
@@ -271,30 +270,30 @@ export class ReaderPage implements OnInit {
     this.deleteAnnotationEvent.subscribe((data) => {
       if (data) {
         this.readerMetaService.deleteAnnotation(data.id, this.bookMeta.username, this.bookMeta.book_id)
-            .subscribe((res: any) => {
-              if (res) {
-                this.removeHighlight(data.cfi_range, this.bookMeta.username);
+          .subscribe((res: any) => {
+            if (res) {
+              this.removeHighlight(data.cfi_range, this.bookMeta.username);
 
-                this.annotations = res.sort((an1, an2) => {
-                  return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
-                });
-              } else {
-                alert('Error deleting Annotation');
-              }
-            });
+              this.annotations = res.sort((an1, an2) => {
+                return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
+              });
+            } else {
+              alert('Error deleting Annotation');
+            }
+          });
       } else {
         this.readerMetaService.deleteAnnotation(this.currentAnnotation.data.id, this.bookMeta.username, this.bookMeta.book_id)
-            .subscribe((res: any) => {
-              if (res) {
-                this.removeHighlight(this.currentAnnotation.cfiRange, this.bookMeta.username);
+          .subscribe((res: any) => {
+            if (res) {
+              this.removeHighlight(this.currentAnnotation.cfiRange, this.bookMeta.username);
 
-                this.annotations = res.sort((an1, an2) => {
-                  return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
-                });
-              } else {
-                alert('Error deleting Annotation');
-              }
-            });
+              this.annotations = res.sort((an1, an2) => {
+                return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
+              });
+            } else {
+              alert('Error deleting Annotation');
+            }
+          });
       }
     });
 
@@ -316,13 +315,13 @@ export class ReaderPage implements OnInit {
     // create book from url
     this.book = ePub();
     this.http.get(environment.gatewayBaseUrl + '/books/getBookWithEBook?id=' + this.bookId).subscribe((data: any) => {
-      if (data){
+      if (data) {
         this.noBookSelected = false;
 
         this.book.open(data.base64eBook, 'base64');
         this.rendition = this.book.renderTo('viewer', {
           width: '100%',
-          height: '100%' ,
+          height: '100%',
           ignoreClass: 'annotator-hl', // Not sure why this is used yet
         });
 
@@ -374,11 +373,11 @@ export class ReaderPage implements OnInit {
       this.contents = contents;
       if (this.autoHighlight) {
         const text = this.getRange(cfiRange, this.contents).toString();
-        this.currentAnnotation = this.setHighlight(cfiRange, contents, {text, creator: this.bookMeta.username}, null);
+        this.currentAnnotation = this.setHighlight(cfiRange, contents, { text, creator: this.bookMeta.username }, null);
         this.addAnnotations(this.currentAnnotation);
       } else {
         this.currentAnnotation = null;
-        this.textOptionsModal(cfiRange, contents).then(() => {});
+        this.textOptionsModal(cfiRange, contents).then(() => { });
       }
     });
 
@@ -392,22 +391,21 @@ export class ReaderPage implements OnInit {
 
     // To run on click for images
     this.rendition.on('click', (ev) => {
-      if (ev.target.src){
-        this.fullImageModal(ev.target.src).then(() => {});
+      if (ev.target.src) {
+        this.fullImageModal(ev.target.src).then(() => { });
       }
     });
   }
 
   /**
    * Render book selection
-   * @param toc
    */
   beginRendering(toc) {
-    if (this.startLoc){
+    if (this.startLoc) {
       this.rendition.display(this.startLoc);
-    } else if (this.bookMeta.last_location){
+    } else if (this.bookMeta.last_location) {
       this.rendition.display(this.bookMeta.last_location);
-    } else{
+    } else {
       this.rendition.display();
     }
 
@@ -417,7 +415,7 @@ export class ReaderPage implements OnInit {
   /**
    * Restore all reader settings
    */
-  setReaderSettings(){
+  setReaderSettings() {
     this.setFontSize(this.bookMeta.font_size);
     this.setFontWeight(this.bookMeta.font_weight);
     this.setFontStyle(this.bookMeta.font_style);
@@ -443,7 +441,7 @@ export class ReaderPage implements OnInit {
 
     if (this.showStudentAnnotations && this.showTeacherAnnotations) {
       this.rendition.annotations.highlights.forEach((ann) => {
-        if (cfiRange === ann.cfiRange && data.username === this.bookMeta.username){
+        if (cfiRange === ann.cfiRange && data.username === this.bookMeta.username) {
           highlightExists = true;
         }
       });
@@ -451,7 +449,7 @@ export class ReaderPage implements OnInit {
 
     if (!highlightExists) {
       const annotation = this.rendition.annotations.add('highlight', cfiRange, data, () => {
-      }, 'epubjs-hl', {fill: color ? color : this.highlightColor, 'mix-blend-mode': 'multiply'});
+      }, 'epubjs-hl', { fill: color ? color : this.highlightColor, 'mix-blend-mode': 'multiply' });
 
       this.rendition.annotations.highlights.push(annotation);
 
@@ -465,7 +463,6 @@ export class ReaderPage implements OnInit {
 
   /**
    * Updates highlight color and window selection color
-   * @param color
    */
   updateHighlightColor(color) {
     this.highlightColor = color;
@@ -479,31 +476,30 @@ export class ReaderPage implements OnInit {
 
   /**
    * Adds annotation to meta and on success adds to rendition
-   * @param annotation
    */
   addAnnotations(annotation) {
     this.readerMetaService.addAnnotation({
       id: null,
       username: this.bookMeta.username,
-      book_id: this.bookMeta.book_id,
-      cfi_range: annotation.cfiRange,
+      bookId: this.bookMeta.book_id,
+      cfiRange: annotation.cfiRange,
       note: annotation.data.note ? annotation.data.note : '',
       fill: annotation.styles.fill,
       definition: annotation.data.definition ? annotation.data.definition : '',
       text: annotation.data.text,
-      public_access: annotation.data.public_access
+      publicAccess: annotation.data.public_access
     }).subscribe((res: Array<AnnotationData>) => {
       if (res) {
         this.annotations = res.sort((an1, an2) => {
-          return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
+          return this.rendition.epubcfi.compare(an1.cfiRange, an2.cfiRange);
         });
 
         this.newAnnotationsEvent.emit(res);
 
         res.forEach((an) => {
-          if (an.cfi_range === annotation.cfiRange) {
+          if (an.cfiRange === annotation.cfiRange) {
             this.rendition.annotations.highlights.forEach((highlight) => {
-              if (an.cfi_range === highlight.cfiRange && highlight.data.creator === this.bookMeta.username) {
+              if (an.cfiRange === highlight.cfiRange && highlight.data.creator === this.bookMeta.username) {
                 highlight.data.id = an.id;
                 this.currentAnnotation = highlight;
 
@@ -530,16 +526,16 @@ export class ReaderPage implements OnInit {
       .subscribe((res: Array<AnnotationData>) => {
         if (res) {
           this.annotations = res.sort((an1, an2) => {
-            return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
+            return this.rendition.epubcfi.compare(an1.cfiRange, an2.cfiRange);
           });
 
           res.forEach((annotation) => {
-            this.setHighlight(annotation.cfi_range, this.contents, {
+            this.setHighlight(annotation.cfiRange, this.contents, {
               note: annotation.note,
               definition: annotation.definition,
               id: annotation.id,
               creator: annotation.username,
-              public_access: annotation.public_access
+              public_access: annotation.publicAccess
             }, annotation.fill);
           });
         }
@@ -562,15 +558,15 @@ export class ReaderPage implements OnInit {
     this.readerMetaService.getAnnotations(this.bookMeta.username, this.bookMeta.book_id)
       .subscribe((res: Array<AnnotationData>) => {
         if (res) {
-          this.annotations = res.sort( (an1, an2) => {
-            return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
+          this.annotations = res.sort((an1, an2) => {
+            return this.rendition.epubcfi.compare(an1.cfiRange, an2.cfiRange);
           });
 
           res.forEach((annotation) => {
             this.rendition.annotations.highlights.forEach((highlight) => {
-              if (annotation.cfi_range === highlight.cfiRange && annotation.username === highlight.data.creator) {
+              if (annotation.cfiRange === highlight.cfiRange && annotation.username === highlight.data.creator) {
                 highlight.data.note = annotation.note;
-                highlight.data.public_access = annotation.public_access;
+                highlight.data.public_access = annotation.publicAccess;
               }
             });
           });
@@ -578,17 +574,17 @@ export class ReaderPage implements OnInit {
       });
   }
 
-  updateAnnotation(annotation){
+  updateAnnotation(annotation) {
     this.readerMetaService.updateAnnotation({
       id: annotation.data.id,
       username: this.bookMeta.username,
-      book_id: this.bookMeta.book_id,
-      cfi_range: annotation.cfiRange,
+      bookId: this.bookMeta.book_id,
+      cfiRange: annotation.cfiRange,
       note: annotation.data.note ? annotation.data.note : '',
       fill: annotation.styles.fill,
       definition: annotation.data.definition ? annotation.data.definition : '',
       text: this.getRange(annotation.cfiRange, this.contents).toString(),
-      public_access: annotation.data.public_access
+      publicAccess: annotation.data.public_access
     }).subscribe((res) => {
       if (!res) {
         alert('Error updating annotation');
@@ -611,17 +607,17 @@ export class ReaderPage implements OnInit {
 
     if (annotation && annotation.data.creator === this.bookMeta.username) {
       this.readerMetaService.deleteAnnotation(annotation.data.id, this.bookMeta.username, this.bookMeta.book_id)
-          .subscribe((res: Array<AnnotationData>) => {
-            if (res) {
-              this.annotations = res.sort((an1, an2) => {
-                return this.rendition.epubcfi.compare(an1.cfi_range, an2.cfi_range);
-              });
+        .subscribe((res: Array<AnnotationData>) => {
+          if (res) {
+            this.annotations = res.sort((an1, an2) => {
+              return this.rendition.epubcfi.compare(an1.cfiRange, an2.cfiRange);
+            });
 
-              this.removeHighlight(cfiRange, this.bookMeta.username);
-            } else {
-              alert('Error deleting Annotation');
-            }
-          });
+            this.removeHighlight(cfiRange, this.bookMeta.username);
+          } else {
+            alert('Error deleting Annotation');
+          }
+        });
     }
   }
 
@@ -644,7 +640,7 @@ export class ReaderPage implements OnInit {
 
           // set current annotation to null if removed
           if (this.currentAnnotation) {
-            if (highlight.data.creator === this.currentAnnotation.data.creator){
+            if (highlight.data.creator === this.currentAnnotation.data.creator) {
               this.currentAnnotation = null;
             }
           }
@@ -658,7 +654,7 @@ export class ReaderPage implements OnInit {
    * May be quicker way. This is easy.
    * Relies on highlights being manually added to annotations.highlights
    */
-  resizeHighlights(){
+  resizeHighlights() {
     for (const highlight of this.rendition.annotations.highlights) {
       this.rendition.annotations.remove(highlight.cfiRange, 'highlight');
       this.rendition.annotations.highlight(highlight.cfiRange, highlight.data, highlight.cb, highlight.className, highlight.styles);
@@ -669,25 +665,25 @@ export class ReaderPage implements OnInit {
    * Modal for reader quick access controls
    */
   async presentReaderControlsModal() {
-      const modal = await this.modalController.create({
-        component: ReaderControlsPage,
-        cssClass: 'options-card',
-        showBackdrop: false,
-        componentProps: {
-          readerMeta: this.bookMeta,
-          autoHighlight: this.autoHighlight,
-          autoDelete: this.autoDelete,
-          fontChangeEvent: this.fontChangeEvent,
-          colorSelectEvent: this.colorSelectEvent,
-          autoHighlightEvent: this.autoHighlightEvent,
-          autoDeleteEvent: this.autoDeleteEvent
-        }
-      });
+    const modal = await this.modalController.create({
+      component: ReaderControlsPage,
+      cssClass: 'options-card',
+      showBackdrop: false,
+      componentProps: {
+        readerMeta: this.bookMeta,
+        autoHighlight: this.autoHighlight,
+        autoDelete: this.autoDelete,
+        fontChangeEvent: this.fontChangeEvent,
+        colorSelectEvent: this.colorSelectEvent,
+        autoHighlightEvent: this.autoHighlightEvent,
+        autoDeleteEvent: this.autoDeleteEvent
+      }
+    });
 
-      await modal.present();
-      await modal.onDidDismiss().then(() => {
-        this.isFloatMenuOpen = false;
-      });
+    await modal.present();
+    await modal.onDidDismiss().then(() => {
+      this.isFloatMenuOpen = false;
+    });
   }
 
   /**
@@ -726,7 +722,7 @@ export class ReaderPage implements OnInit {
           teacher: this.lesson ? this.lesson.creator : null,
           user,
           currentUser: this.currentUser,
-          ownsNote: user ?  user.username === this.currentUser.username : false,
+          ownsNote: user ? user.username === this.currentUser.username : false,
           isStudent: this.isStudent,
           annotationEvent: this.annotationEvent,
           annotation: this.currentAnnotation,
@@ -751,14 +747,13 @@ export class ReaderPage implements OnInit {
   /**
    * Given a range, get owner.
    * If student and teacher have same range default to teacher.
-   * @param range: cfiRange
    */
-  getUserForNote(range){
+  getUserForNote(cfiRange) {
     let user = null;
 
     if (this.showTeacherAnnotations) {
       this.teachersAnnotations.forEach((annotation) => {
-        if (annotation.cfi_range === range) {
+        if (annotation.cfiRange === cfiRange) {
           user = this.teacher;
         }
       });
@@ -766,7 +761,7 @@ export class ReaderPage implements OnInit {
 
     if (this.showStudentAnnotations) {
       this.annotations.forEach((annotation) => {
-        if (annotation.cfi_range === range){
+        if (annotation.cfiRange === cfiRange) {
           user = this.currentUser;
         }
       });
@@ -777,11 +772,10 @@ export class ReaderPage implements OnInit {
 
   /**
    * Gets annotations from svg and displays in text options modal
-   * @param cfiRange
    */
   popoverOnHighlightClick(cfiRange) {
     this.rendition.annotations.highlights.forEach((highlight) => {
-      if (highlight.cfiRange === cfiRange){
+      if (highlight.cfiRange === cfiRange) {
         this.currentAnnotation = highlight;
         this.textOptionsModal(cfiRange, this.contents).then();
       }
@@ -803,7 +797,7 @@ export class ReaderPage implements OnInit {
    */
   getToc(toc) {
     let sections = [];
-    if (toc.length){
+    if (toc.length) {
       toc.forEach((section) => {
         sections.push(section);
 
@@ -834,7 +828,7 @@ export class ReaderPage implements OnInit {
       this.saveLastLocation();
 
       // determines if we have reached end
-      if (this.endLoc){
+      if (this.endLoc) {
         if (this.rendition.epubcfi.isCfiString(this.endLoc)) {
           if (this.rendition.epubcfi.compare(this.rendition.currentLocation().start.cfi, this.endLoc) > 0) {
             this.presentFinishedReadingModal().then();
@@ -860,7 +854,7 @@ export class ReaderPage implements OnInit {
 
     return await modal.onDidDismiss().then((res) => {
       if (res) {
-        if (res.data.finished){
+        if (res.data.finished) {
           this.location.back();
         } else {
           this.isLesson = false;
@@ -881,7 +875,7 @@ export class ReaderPage implements OnInit {
       this.saveLastLocation();
 
       // determines if we have reached end
-      if (this.startLoc){
+      if (this.startLoc) {
         if (this.rendition.epubcfi.isCfiString(this.startLoc)) {
           if (this.rendition.epubcfi.compare(this.rendition.currentLocation().end.cfi, this.startLoc) > 0) {
             this.rendition.next();
@@ -899,10 +893,9 @@ export class ReaderPage implements OnInit {
 
   /**
    * Updates meta with new font size and sets reader font size on success
-   * @param size
    */
-  setFontSize(size: number){
-    if (this.bookMeta.font_size != size) {
+  setFontSize(size: number) {
+    if (this.bookMeta.font_size !== size) {
       this.bookMeta.font_size = size;
       this.saveMeta().subscribe((res) => {
         if (res) {
@@ -913,8 +906,8 @@ export class ReaderPage implements OnInit {
     }
   }
 
-  setFontWeight(weight: string){
-    if (this.bookMeta.font_weight != weight) {
+  setFontWeight(weight: string) {
+    if (this.bookMeta.font_weight !== weight) {
       this.bookMeta.font_weight = weight;
 
       this.saveMeta().subscribe((res) => {
@@ -937,7 +930,7 @@ export class ReaderPage implements OnInit {
   }
 
   setFontStyle(style: string) {
-    if (this.bookMeta.font_style != style) {
+    if (this.bookMeta.font_style !== style) {
       this.bookMeta.font_style = style;
 
       this.saveMeta().subscribe((res) => {
@@ -960,8 +953,8 @@ export class ReaderPage implements OnInit {
     }
   }
 
-  setFontFamily(family){
-    if (this.bookMeta.font_family != family) {
+  setFontFamily(family) {
+    if (this.bookMeta.font_family !== family) {
       this.bookMeta.font_family = family;
 
       this.saveMeta().subscribe((res) => {
@@ -992,17 +985,17 @@ export class ReaderPage implements OnInit {
 
     this.bookMeta.last_location = this.currentLocation.start.cfi;
 
-    this.saveMeta().subscribe(() => {});
+    this.saveMeta().subscribe(() => { });
   }
 
   /* utility */
 
   toggleFloatMenu() {
     this.isFloatMenuOpen = true;
-    this.presentReaderControlsModal().then(() => {});
+    this.presentReaderControlsModal().then(() => { });
   }
 
-  saveMeta(){
+  saveMeta() {
     return this.readerMetaService.updateReaderMeta(this.bookMeta);
   }
 
@@ -1028,7 +1021,7 @@ export class ReaderPage implements OnInit {
       this.showStudentAnnotations = false;
       this.hideHighlights(this.annotations, this.bookMeta.username);
     }
-    else{
+    else {
       this.showStudentAnnotations = true;
       this.showHighlights(this.annotations);
     }
@@ -1042,7 +1035,7 @@ export class ReaderPage implements OnInit {
       this.showTeacherAnnotations = false;
       this.hideHighlights(this.teachersAnnotations, this.teacher.username);
     }
-    else{
+    else {
       this.showTeacherAnnotations = true;
       this.showHighlights(this.teachersAnnotations);
     }
@@ -1052,25 +1045,25 @@ export class ReaderPage implements OnInit {
    * Adds annotations back to rendition
    * @param annotations: annotations to add
    */
-  showHighlights(annotations: Array<AnnotationData>){
+  showHighlights(annotations: Array<AnnotationData>) {
     annotations.forEach((annotation) => {
       let add = true;
 
       if (this.showTeacherAnnotations && this.showStudentAnnotations) {
         this.rendition.annotations.highlights.forEach((ann) => {
-          if (annotation.cfi_range === ann.cfiRange) {
+          if (annotation.cfiRange === ann.cfiRange) {
             add = false;
           }
         });
       }
 
-      if (add){
-        this.setHighlight(annotation.cfi_range, this.contents, {
+      if (add) {
+        this.setHighlight(annotation.cfiRange, this.contents, {
           note: annotation.note,
           definition: annotation.definition,
           id: annotation.id,
           creator: annotation.username,
-          public_access: annotation.public_access
+          public_access: annotation.publicAccess
         }, annotation.fill);
       }
     });
@@ -1080,23 +1073,23 @@ export class ReaderPage implements OnInit {
    * Removes all given annotations from rendition.
    * @param annotations: annotations to remove
    */
-  hideHighlights(annotations: Array<AnnotationData>, user){
+  hideHighlights(annotations: Array<AnnotationData>, user) {
     if (annotations) {
       annotations.forEach((annotation) => {
 
         if (this.showTeacherAnnotations && !this.showStudentAnnotations) {
-          this.removeHighlight(annotation.cfi_range, user);
+          this.removeHighlight(annotation.cfiRange, user);
 
           // add teacher highlight if student with same cfiRange is removed
           if (this.teachersAnnotations) {
             this.teachersAnnotations.forEach((ann) => {
-              if (annotation.cfi_range === ann.cfi_range) {
-                this.setHighlight(ann.cfi_range, this.contents, {
+              if (annotation.cfiRange === ann.cfiRange) {
+                this.setHighlight(ann.cfiRange, this.contents, {
                   note: ann.note,
                   definition: ann.definition,
                   id: ann.id,
                   creator: ann.username,
-                  public_access: ann.public_access
+                  public_access: ann.publicAccess
                 }, annotation.fill);
               }
             });
@@ -1104,16 +1097,16 @@ export class ReaderPage implements OnInit {
         } else if (!this.showTeacherAnnotations && this.showStudentAnnotations) {
           let deleteAnn = true;
           this.annotations.forEach((ann) => {
-            if (annotation.cfi_range === ann.cfi_range) {
+            if (annotation.cfiRange === ann.cfiRange) {
               deleteAnn = false;
             }
           });
 
           if (deleteAnn) {
-            this.removeHighlight(annotation.cfi_range, user);
+            this.removeHighlight(annotation.cfiRange, user);
           }
         } else {
-          this.removeHighlight(annotation.cfi_range, user);
+          this.removeHighlight(annotation.cfiRange, user);
         }
       });
     } else {
@@ -1121,7 +1114,7 @@ export class ReaderPage implements OnInit {
     }
   }
 
-  restoreVisible(){
+  restoreVisible() {
     if (!this.showStudentAnnotations) {
       this.hideHighlights(this.annotations, this.bookMeta.username);
     }
@@ -1134,20 +1127,20 @@ export class ReaderPage implements OnInit {
   changeTheme(ev) {
     this.currentTheme = ev;
     if (ev === 'dark') {
-      this.rendition.themes.default({ body: { background: '#121212', color: '#fff'}});
+      this.rendition.themes.default({ body: { background: '#121212', color: '#fff' } });
       this.rendition.themes.select('dark');
-    }else if (ev === 'light'){
-      this.rendition.themes.default({ body: { background: '#fff'}});
+    } else if (ev === 'light') {
+      this.rendition.themes.default({ body: { background: '#fff' } });
       this.rendition.themes.select('light');
     }
   }
 
-  restoreTheme(){
+  restoreTheme() {
     if (this.currentTheme === 'dark') {
-      this.rendition.themes.default({ body: { background: '#121212', color: '#fff'}});
+      this.rendition.themes.default({ body: { background: '#121212', color: '#fff' } });
       this.rendition.themes.select('dark');
-    }else if (this.currentTheme === 'light'){
-      this.rendition.themes.default({ body: { background: '#fff'}});
+    } else if (this.currentTheme === 'light') {
+      this.rendition.themes.default({ body: { background: '#fff' } });
       this.rendition.themes.select('light');
     }
   }
@@ -1156,7 +1149,7 @@ export class ReaderPage implements OnInit {
     this.location.back();
   }
 
-    goBack() {
-        this.navCtrl.back();
-    }
+  goBack() {
+    this.navCtrl.back();
+  }
 }

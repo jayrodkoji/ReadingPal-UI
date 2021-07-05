@@ -7,7 +7,7 @@ import {ModalController} from '@ionic/angular';
   styleUrls: ['./add-reading-book-select-popover.component.scss'],
 })
 export class AddReadingBookSelectPopoverComponent implements OnInit {
-  @Input('books') books;
+  @Input() books;
   selectedInd = -1;
   searchText: any;
   selectedBookId: any;

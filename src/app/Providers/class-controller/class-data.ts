@@ -15,7 +15,7 @@ export class ClassData {
     }
 }
 
-export class newClassData {
+export class NewClassData {
     public grade: string;
     public name: string;
     public teacherUserName: string;
@@ -27,7 +27,7 @@ export class newClassData {
     }
 }
 
-export class addStudentToClassData {
+export class AddStudentToClassData {
     public classId: string;
     public studentUsername: string;
 
