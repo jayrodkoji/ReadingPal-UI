@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CompletedLessonData } from 'src/app/Providers/completed-lesson/Model/completed-lesson';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { CompletedLessonService } from 'src/app/Providers/completed-lesson/completed-lesson.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -93,7 +93,7 @@ export class ReportsPage implements AfterViewInit {
     });
 
 
-    const ctx = document.getElementById('readingsChart');
+    ctx = document.getElementById('readingsChart');
     const readingChart = new Chart(ctx, {
       type: 'bar',
       data: {

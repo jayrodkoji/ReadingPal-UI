@@ -7,16 +7,15 @@ import { environment } from 'src/environments/environment';
 import { WordOptionsComponent } from '../shared/popover/word-options/word-options.component';
 import { ImageModalPage } from '../modals/image-modal/image-modal.page';
 import { ReaderControlsPage } from '../modals/reader-controls/reader-controls.page';
-import { UsersService } from '../Providers/user-controller/users.service';
 import { ReaderMetaService } from '../Providers/reader-meta/reader-meta.service';
 import { AnnotationData } from '../Providers/reader-meta/model/annotationData';
 import { Contents, EpubCFI } from 'epubjs';
-import { User } from '../_models/user';
 import { ImageUtils } from '../utils/image-utils';
 import { DomSanitizer } from '@angular/platform-browser';
 import {FinishedReadingComponent} from './finished-reading/finished-reading.component';
 import {LessonData} from '../Providers/lesson-services/lesson-services-models/lesson-data';
 import {LessonService} from '../Providers/lesson-services/lesson.service';
+import { User } from '../Providers/user-controller/model/users-model';
 
 
 declare var ePub: any;
@@ -36,11 +35,11 @@ export class ReaderPage implements OnInit {
   lessonId: number;
   lesson: LessonData;
 
-  /** book info **/
+  // book info
   bookId;
   bookMeta: any;
 
-  /** book settings **/
+  //book settings
   highlightColor: any;
   currentBookmark: any;
   currentAnnotation: any;
@@ -50,14 +49,14 @@ export class ReaderPage implements OnInit {
   endLoc = '';
   currentTheme = 'light';
 
-  /** epubjs **/
+  // epubjs
   book: any;
   rendition: any;
   contents: Contents;
   currentLocation;
   toc: any[];
 
-  /** indicators **/
+  // indicators
   isStudent: boolean;
   noBookSelected = false;
   loaded = false;
@@ -69,7 +68,7 @@ export class ReaderPage implements OnInit {
   showTeacherAnnotations = false;
   finishedSection = false;
 
-  /** events **/
+  // events
   fontChangeEvent = new EventEmitter();
   colorSelectEvent = new EventEmitter();
   autoHighlightEvent = new EventEmitter();
@@ -92,7 +91,6 @@ export class ReaderPage implements OnInit {
     private location: Location,
     private navCtrl: NavController,
     private http: HttpClient,
-    private userService: UsersService,
     private readerMetaService: ReaderMetaService,
     private lessonService: LessonService,
     private sanitizer: DomSanitizer, ) {
