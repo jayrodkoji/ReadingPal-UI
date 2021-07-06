@@ -16,10 +16,7 @@ export class StudentAvatarsComponent implements OnInit {
     image: string;
   }[] = [];
 
-  constructor(
-      private sanitizer: DomSanitizer,
-      private http: HttpClient
-  ) {}
+  constructor() {}
 
   ngOnInit() {
     if (!this.slideOptions){
@@ -30,17 +27,6 @@ export class StudentAvatarsComponent implements OnInit {
   }
 
   getUsers() {
-    for (const student of this.students) {
-      this.http.get(
-          environment.gatewayBaseUrl + '/users/getUser?username=' + student.username).subscribe(data => {
-
-        const image = data.profileimage ? 'data:image/png;base64,'
-            + (this.sanitizer.bypassSecurityTrustResourceUrl(data.profileimage) as any).changingThisBreaksApplicationSecurity
-            : '../../assets/user.png';
-
-        this.users.push({username: data.username, image});
-      });
-    }
   }
 
 }

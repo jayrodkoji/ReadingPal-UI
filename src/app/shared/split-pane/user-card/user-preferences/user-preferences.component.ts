@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { User } from 'src/app/Providers/user-controller/model/users-model';
 import { ToasterService } from 'src/app/shared/toastr.service';
 import { ImageUtils } from 'src/app/utils/image-utils';
-import { User } from 'src/app/_models/user';
 
 const AVATAR_MAX_BYTES = 200000;
 const BANNER_MAX_BYTES = 400000;

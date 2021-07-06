@@ -1,9 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CompletedLessonData } from 'src/app/Providers/completed-lesson/Model/completed-lesson';
 import { HttpClient } from '@angular/common/http';
 import { CompletedLessonService } from 'src/app/Providers/completed-lesson/completed-lesson.service';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
 import { ExperienceControllerService } from 'src/app/Providers/experience-controller/experience-controller.service';
 
 @Component({
@@ -30,23 +28,6 @@ export class ReportsPage implements AfterViewInit {
   }
 
   getStudentData() {
-    const username = localStorage.getItem('logedInUsername');
-    this.http.get(
-      environment.gatewayBaseUrl + '/students/student-info?studentUserName=' + username).subscribe((res) => {
-        this.completedLessonController.getStatsForStudent({ id: res.id }).subscribe((statsRes) => {
-          if (statsRes !== null) {
-
-            this.experienceController.getUserPoints(username).subscribe((expResult) => {
-              if (expResult !== null) {
-                this.studentExpLevel = expResult;
-              }
-              this.studentData = statsRes;
-              this.studentUsername = this.studentData.userName;
-              this.chartBuilder();
-            });
-          }
-        });
-      });
   }
 
   chartBuilder() {

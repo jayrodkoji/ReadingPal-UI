@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import { User } from 'src/app/_models/user';
+import { User } from '../user-controller/model/users-model';
 
 @Injectable({
   providedIn: 'root'

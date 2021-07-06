@@ -41,8 +41,8 @@ export class WordOptionsComponent implements OnInit {
     public_access: false,
   };
 
-  private hasDefinition = false;
-  private defLoading: boolean;
+  hasDefinition = false;
+  defLoading: boolean;
   askQuestion = false;
   currentQuestion: string;
 
