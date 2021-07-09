@@ -79,16 +79,14 @@ export class UsersService {
   /**
    * Get User
    */
-  public getUser(query: any): User {
-    this.apollo.watchQuery<any>({
-      query
+  public getUserByEmail(email: string, query: any): Observable<any> {
+    return this.apollo.watchQuery<any>({
+      query,
+      variables: {
+        email: email
+      }
     })
       .valueChanges
-      .subscribe(({ data }) => {
-        return data;
-      });
-
-    return null;
   }
 
   /**

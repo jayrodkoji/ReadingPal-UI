@@ -28,6 +28,11 @@ export class JWTTokenService {
     return this.decodeToken;
   }
 
+  getEmail() {
+    this.decodeToken();
+    return this.decodedToken ? this.decodedToken.email : null;
+  }
+
   getRoles() {
     this.decodeToken();
     return this.decodedToken ? this.decodedToken.roles : null;

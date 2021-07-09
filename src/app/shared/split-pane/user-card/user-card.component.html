@@ -1,26 +1,20 @@
 <ion-grid class="card">
-  <img [src]="dynamicStyle" (error)="dynamicStyle = 'assets/Banners/confetti.jpg'" class="banner-img">
+  <img [src]="user.banner" (error)="user.banner = 'assets/Banners/confetti.jpg'" class="banner-img">
   <ion-row class="ion-justify-content-center">
     <ion-col size="any">
       <h2 class="welcome">Welcome</h2>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-center" *ngIf="userRole && firstName">
+  <ion-row class="ion-justify-content-center" *ngIf="user.firstName">
     <ion-col size="any">
-      <p *ngIf="userRole == 'ROLE_TEACHER'" class="welcome">Teacher {{firstName}}</p>
-      <p *ngIf="userRole == 'ROLE_STUDENT'" class="welcome">Student {{firstName}}</p>
+      <p class="welcome">{{user.firstName}}</p>
     </ion-col>
   </ion-row>
   <ion-row class="avatar-row ion-justify-content-center" >
     <ion-col class="avatar-col ion-align-items-center">
       <ion-avatar (click)="showUserPreferences()">
-        <img [src]="student_avatar" (error)="student_avatar = 'assets/user/default-avatar.png'" class="avatar-image">
+        <img [src]="user.profileImgURL" class="avatar-image">
       </ion-avatar>
-    </ion-col>
-  </ion-row>
-  <ion-row class="ion-justify-content-center" *ngIf="badges">
-    <ion-col size="10" size-md="11" size-lg="12" style="max-width: min(100%, 230px);">
-      <app-top-badges [badges]="badges"></app-top-badges>
     </ion-col>
   </ion-row>
 </ion-grid>

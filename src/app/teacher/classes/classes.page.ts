@@ -68,12 +68,12 @@ export class ClassesPage implements OnInit {
                   t._id === st._id
               )));
 
-          this.users.forEach(usr => {
-            const user = this.userController.getUser(usr.username);
-            if ( user ) {
-              usr = user;
-            }
-          });
+          // this.users.forEach(usr => {
+          //   const user = this.userController.getUser(usr.username);
+          //   if ( user ) {
+          //     usr = user;
+          //   }
+          // });
 
           this.getReadingGroups();
         }

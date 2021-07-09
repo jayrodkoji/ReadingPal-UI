@@ -69,26 +69,26 @@ export class StudentAssignerComponent implements OnInit {
       this.studentDatas = [];
       this.userDatas = [];
 
-      this.classes.forEach(clss => {
-        this.classController.getStudentsWithClassId({id: clss.id})
-            .subscribe(studentDatas => {
-              this.studentDatas = [...new Set(this.studentDatas.concat(studentDatas))];
-              forkJoin(studentDatas.map(s => this.userController.getUser(s.username)))
-                  .subscribe(userDatas => {
-                    this.userDatas = [...new Set(this.userDatas.concat(userDatas))];
+      // this.classes.forEach(clss => {
+      //   this.classController.getStudentsWithClassId({id: clss.id})
+      //       .subscribe(studentDatas => {
+      //         this.studentDatas = [...new Set(this.studentDatas.concat(studentDatas))];
+      //         forkJoin(studentDatas.map(s => this.userController.getUser(s.username)))
+      //             .subscribe(userDatas => {
+      //               this.userDatas = [...new Set(this.userDatas.concat(userDatas))];
 
-                    this.studentDatas.forEach(st => {
-                      this.userDatas.forEach(us => {
-                        if (st.username === us.username){
-                          us.id = st.id;
-                        }
-                      });
-                    });
-                  });
+      //               this.studentDatas.forEach(st => {
+      //                 this.userDatas.forEach(us => {
+      //                   if (st.username === us.username){
+      //                     us.id = st.id;
+      //                   }
+      //                 });
+      //               });
+      //             });
 
-              console.log(this.studentDatas);
-            });
-      });
+      //         console.log(this.studentDatas);
+      //       });
+      // });
     });
 
     this.students = [];

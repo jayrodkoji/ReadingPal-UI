@@ -49,35 +49,35 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.studentController.getStudentByUsername(localStorage.getItem('logedInUsername'))
-      .subscribe(student => {
-        if (student !== null) {
-          this.studentId = student.id;
-          this.lessonController.getAssignLessonFiltered(this.studentId)
-            .subscribe((lessonAssignments: any[]) => {
-              // TODO: Get student's scores to see which lessons they have already completed.
-              this.lessonAssignments = lessonAssignments.map(
-                o => ({
-                  ms: this.msToLesson(o),
-                  assignment: o
-                }));
-              this.lessonAssignments.sort(
-                (a, b) => a.ms - b.ms);
-              forkJoin(this.lessonAssignments.map(
-                o => this.getLesson(o.assignment)
-              )).subscribe(
-                (lessons: any[]) => {
-                  this.loadBooks(lessons)
-                    .subscribe(books => {
-                      this.books = books;
-                      this.assignedLessons = lessons;
-                      this.sliceLessonsToViews();
-                    });
-                }
-              );
-            });
-        }
-      });
+    // this.studentController.getStudentByUsername(localStorage.getItem('logedInUsername'))
+    //   .subscribe(student => {
+    //     if (student !== null) {
+    //       this.studentId = student.id;
+    //       this.lessonController.getAssignLessonFiltered(this.studentId)
+    //         .subscribe((lessonAssignments: any[]) => {
+    //           // TODO: Get student's scores to see which lessons they have already completed.
+    //           this.lessonAssignments = lessonAssignments.map(
+    //             o => ({
+    //               ms: this.msToLesson(o),
+    //               assignment: o
+    //             }));
+    //           this.lessonAssignments.sort(
+    //             (a, b) => a.ms - b.ms);
+    //           forkJoin(this.lessonAssignments.map(
+    //             o => this.getLesson(o.assignment)
+    //           )).subscribe(
+    //             (lessons: any[]) => {
+    //               this.loadBooks(lessons)
+    //                 .subscribe(books => {
+    //                   this.books = books;
+    //                   this.assignedLessons = lessons;
+    //                   this.sliceLessonsToViews();
+    //                 });
+    //             }
+    //           );
+    //         });
+    //     }
+    //   });
   }
 
   sliceLessonsToViews() {

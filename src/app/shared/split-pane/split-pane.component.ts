@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {MessagesService} from '../../Providers/messages-controller/messages.service';
-import { DOCUMENT } from '@angular/common';
 import { AuthService } from 'src/app/Providers/auth/auth.services';
 
 @Component({
@@ -19,7 +18,7 @@ export class SplitPaneComponent implements OnInit {
     private router: Router,
     private msgController: MessagesService,
     private authService: AuthService,
-    @Inject(DOCUMENT) public document: Document, public auth: AuthService
+    public auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -30,18 +29,14 @@ export class SplitPaneComponent implements OnInit {
       }
     });
 
-    this.getMessages();
+    // this.getMessages();
 
     // check for new messages every 5 minutes
-    setInterval(() => { this.getMessages(); }, 300000);
+    // setInterval(() => { this.getMessages(); }, 300000);
   }
 
   updateSelection(pageName: string) {
     this.selectedTitle = pageName;
-  }
-
-  logOut() {
-    this.authService.logout();
   }
 
   setTab() {
@@ -60,5 +55,9 @@ export class SplitPaneComponent implements OnInit {
               }).filter((obj) => obj.teacher_read === false).length;
         }
       });
+  }
+
+  logOut() {
+    this.authService.logout();
   }
 }
