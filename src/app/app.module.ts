@@ -24,6 +24,8 @@ import { environment } from 'src/environments/environment';
 import { ImageService } from './Providers/image-controller/image.service';
 
 import { AuthModule } from '@auth0/auth0-angular';
+import { JWTTokenService } from './Providers/jwt/jwttoken.service';
+import { LocalStorageService } from './Providers/local-storage/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { AuthModule } from '@auth0/auth0-angular';
   providers: [
     ToasterService,
     ImageService,
+    JWTTokenService,
+    LocalStorageService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

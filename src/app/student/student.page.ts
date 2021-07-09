@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { MessagesService } from '../Providers/messages-controller/messages.service';
 
@@ -24,7 +23,6 @@ export class StudentPage implements OnInit {
 
   constructor(
     private menu: MenuController,
-    private router: Router,
     private msgController: MessagesService,
   ) { }
 
@@ -42,15 +40,6 @@ export class StudentPage implements OnInit {
 
   updateSelection(pageName: string) {
     this.selectedTitle = pageName;
-  }
-
-  logOut() {
-    // this.accountServices.logout();
-    localStorage.removeItem('logedInUsername');
-    localStorage.removeItem('logedInRole');
-    this.router.navigate(['/home']).then(() => {
-      window.location.reload();
-    });
   }
 
   getMessages() {

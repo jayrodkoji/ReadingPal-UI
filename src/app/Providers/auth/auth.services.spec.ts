@@ -2,10 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { AccountServices } from './account.services';
+import { AuthService } from './auth.services';
 
-describe('AccountService', () => {
-  let service: AccountServices;
+describe('AuthService', () => {
+  let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('AccountService', () => {
         HttpClientTestingModule
       ]
     });
-    service = TestBed.inject(AccountServices);
+    service = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {MessagesService} from '../../Providers/messages-controller/messages.service';
-import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
+import { AuthService } from 'src/app/Providers/auth/auth.services';
 
 @Component({
   selector: 'app-split-pane',
@@ -18,6 +18,7 @@ export class SplitPaneComponent implements OnInit {
   constructor(
     private router: Router,
     private msgController: MessagesService,
+    private authService: AuthService,
     @Inject(DOCUMENT) public document: Document, public auth: AuthService
   ) {}
 
@@ -40,11 +41,7 @@ export class SplitPaneComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.removeItem('logedInUsername');
-    localStorage.removeItem('logedInRole');
-    this.router.navigate(['/home']).then(() => {
-      window.location.reload();
-    });
+    this.authService.logout();
   }
 
   setTab() {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthorizeGuard } from './Providers/guards/authorize-guard.service';
 
 
 const routes: Routes = [
@@ -19,11 +20,19 @@ const routes: Routes = [
   },
   {
     path: 'student',
-    loadChildren: () => import('./student/student.module').then( m => m.StudentPageModule)
+    loadChildren: () => import('./student/student.module').then( m => m.StudentPageModule),
+    canActivate: [AuthorizeGuard],
+    data: {
+      role: 'ROLE_STUDENT'
+    }
   },
   {
     path: 'teacher',
-    loadChildren: () => import('./teacher/teacher.module').then( m => m.TeacherPageModule)
+    loadChildren: () => import('./teacher/teacher.module').then( m => m.TeacherPageModule),
+    canActivate: [AuthorizeGuard],
+    data: {
+      role: 'ROLE_TEACHER'
+    }
   },
   {
     path: 'admin',

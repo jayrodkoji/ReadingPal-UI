@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { first } from 'rxjs/operators'
-import { AccountServices } from 'src/app/Providers/account/account.services'
+import { AuthService } from 'src/app/Providers/auth/auth.services'
 import { ModalController } from '@ionic/angular'
 import { User } from 'src/app/Providers/user-controller/model/users-model'
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private accountServices: AccountServices,
+    private authServices: AuthService,
     private router: Router,
     private modalCtrl: ModalController
   ) { }
@@ -40,13 +40,14 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true
-    this.accountServices.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
+    this.authServices.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
       .pipe(first())
       .subscribe(
-        (data: User) => {
-          if (this.loginType === 'ROLE_TEACHER' && data.roles.includes('ROLE_TEACHER')) {
+        () => {
+          console.log(this.loginType)
+          if (this.loginType === 'ROLE_TEACHER') {
             this.router.navigate(['../teacher'], { replaceUrl: true })
-          } else if (this.loginType === 'ROLE_STUDENT' && data.roles.includes('ROLE_STUDENT')) {
+          } else if (this.loginType === 'ROLE_STUDENT') {
             this.router.navigate(['../student'], { replaceUrl: true })
           } else {
             this.router.navigate(['/home'])
