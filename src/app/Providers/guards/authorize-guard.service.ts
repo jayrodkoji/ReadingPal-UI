@@ -25,7 +25,7 @@ export class AuthorizeGuard implements CanActivate {
 
   checkUserRole(route: ActivatedRouteSnapshot): boolean {
     const userRoles = this.jwtService.getRoles()
-    if (route.data.role && !userRoles.includes(route.data.role)) {
+    if (route.data.role && !userRoles?.includes(route.data.role)) {
       this.router.navigate(['/home']);
       return false;
     }
