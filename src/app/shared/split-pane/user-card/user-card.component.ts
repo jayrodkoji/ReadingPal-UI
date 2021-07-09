@@ -5,7 +5,6 @@ import { UserPreferencesComponent } from './user-preferences/user-preferences.co
 import { gql } from 'apollo-angular';
 import { JWTTokenService } from 'src/app/Providers/jwt/jwttoken.service';
 import { ImageService } from 'src/app/Providers/image-controller/image.service';
-import { User } from 'src/app/Providers/user-controller/model/users-model';
 
 @Component({
   selector: 'app-user-card',
@@ -18,15 +17,15 @@ export class UserCardComponent implements OnInit {
     profileImgURL: '',
     banner: '',
   }
-  
+
   GET_USER = gql`
-  query getUserByEmail($email: String!) {
-    userByEmail(email: $email) {
-      firstName
-      profileImageKey
+    query getUserByEmail($email: String!) {
+      userByEmail(email: $email) {
+        firstName
+        profileImageKey
+      }
     }
-  }
-`;
+  `;
 
   data: any;
   constructor(
