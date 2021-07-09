@@ -11,7 +11,6 @@ import * as dayjs from 'dayjs';
 import * as RelativeTime from 'dayjs/plugin/relativeTime';
 import * as Duration from 'dayjs/plugin/duration';
 import {AssignmentListViewComponent} from './assignment-list-view/assignment-list-view.component';
-import {CompletedLessonService} from '../../Providers/completed-lesson/completed-lesson.service';
 
 const XS = 530;
 const SM = 642;
@@ -24,8 +23,6 @@ const MD = 1050;
 })
 export class HomePage implements OnInit, AfterViewInit {
   badges = BADGES;
-
-  numStudentsDisplayed: number;
   slideOptions: any;
   book = BOOKS[0];
 
@@ -44,11 +41,9 @@ export class HomePage implements OnInit, AfterViewInit {
     private studentController: StudentService,
     private lessonController: LessonService,
     private bookService: GetBooksService,
-    private completedLessonService: CompletedLessonService,
     private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.setNumStudentsDisplayed(window.innerWidth);
     dayjs.extend(RelativeTime);
     dayjs.extend(Duration);
   }
@@ -169,36 +164,4 @@ export class HomePage implements OnInit, AfterViewInit {
   navLessonOverview() {
     console.log('navigate to lesson overview');
   }
-
-  setNumStudentsDisplayed(windowWidth){
-    if (windowWidth){
-      if (windowWidth < 390){
-        this.numStudentsDisplayed = 2;
-      }
-      else if (windowWidth < XS){
-        this.numStudentsDisplayed = 3;
-      }
-      else if (windowWidth < SM) {
-        this.numStudentsDisplayed = 4;
-      }
-      else if (windowWidth < MD) {
-        this.numStudentsDisplayed = 5;
-      }
-      else {
-        this.numStudentsDisplayed = 7;
-      }
-
-      this.slideOptions = {
-        slidesPerView: this.numStudentsDisplayed,
-        zoom: false,
-        grabCursor: true
-      };
-    }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.setNumStudentsDisplayed(window.innerWidth);
-  }
-
 }

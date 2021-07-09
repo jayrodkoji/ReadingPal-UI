@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RpUtilsModule } from './utils/rp-utils.module';
 
@@ -26,6 +26,7 @@ import { ImageService } from './Providers/image-controller/image.service';
 import { AuthModule } from '@auth0/auth0-angular';
 import { JWTTokenService } from './Providers/jwt/jwttoken.service';
 import { LocalStorageService } from './Providers/local-storage/local-storage.service';
+import { AuthInterceptor } from './Providers/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,11 @@ import { LocalStorageService } from './Providers/local-storage/local-storage.ser
         };
       },
       deps: [HttpLink],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
   ],
   bootstrap: [AppComponent],

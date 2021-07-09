@@ -6,7 +6,6 @@ import { MessagesService } from '../Providers/messages-controller/messages.servi
 @Component({
   selector: 'app-student',
   templateUrl: './student.page.html',
-  styleUrls: ['./student.page.scss'],
 })
 export class StudentPage implements OnInit {
   public studentPages = [
@@ -27,10 +26,10 @@ export class StudentPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getMessages();
+    // this.getMessages();
 
     // check for new messages every 5 minutes
-    setInterval(() => { this.getMessages(); }, 300000);
+    // setInterval(() => { this.getMessages(); }, 300000);
   }
 
   openCustom() {

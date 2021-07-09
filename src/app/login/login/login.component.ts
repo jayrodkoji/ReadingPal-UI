@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { ModalController } from '@ionic/angular'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { first } from 'rxjs/operators'
 import { AuthService } from 'src/app/Providers/auth/auth.services'
-import { ModalController } from '@ionic/angular'
-import { User } from 'src/app/Providers/user-controller/model/users-model'
+
 
 @Component({
   selector: 'app-login',
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         () => {
-          console.log(this.loginType)
           if (this.loginType === 'ROLE_TEACHER') {
             this.router.navigate(['../teacher'], { replaceUrl: true })
           } else if (this.loginType === 'ROLE_STUDENT') {
