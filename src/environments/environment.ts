@@ -3,11 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 const baseUrl = 'http://192.241.200.45:8004';
 const graphqlApiGateway = 'http://localhost:4000';
+const authServer = 'http://localhost:4002';
 // const baseUrl = 'http://localhost:8080';
 export const environment = {
   production: false,
   gatewayBaseUrl: baseUrl,
   graphqlApiGateway,
+  authServer: authServer
 };
 
 

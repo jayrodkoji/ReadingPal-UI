@@ -5,6 +5,7 @@ export class User {
   public username: string;
   public email: string;
   public profileImageKey: string;
+  public roles: [string];
 
   // data: Object from the server's user GET request
   constructor(data) {
@@ -14,6 +15,7 @@ export class User {
     this.username = data?.username;
     this.email = data?.email;
     this.profileImageKey = data?.profileImageKey;
+    this.roles = data?.roles
   }
 }
 
@@ -23,6 +25,7 @@ export class UpdateUser {
   public username?: string;
   public email?: string;
   public profileImageKey?: string;
+  public roles?: [string];
 
   // data: Object from the server's user GET request
   constructor(data) {
@@ -31,6 +34,8 @@ export class UpdateUser {
     this.username = data.username;
     this.email = data.email;
     this.profileImageKey = data.profileImageKey;
+    this.roles = data?.roles;
+
   }
 }
 
@@ -40,6 +45,7 @@ export class NewUser {
   public username!: string;
   public email!: string;
   public profileImageKey?: string;
+  public roles!: [string];
 
   // data: Object from the server's user GET request
   constructor(data) {
@@ -48,5 +54,6 @@ export class NewUser {
     this.username = data.username;
     this.email = data.email;
     this.profileImageKey = data.profileImageKey ? data.profileImageKey : '';
+    this.roles = data?.roles
   }
 }

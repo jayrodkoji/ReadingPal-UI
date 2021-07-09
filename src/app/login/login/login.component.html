@@ -1,54 +1,73 @@
-<ion-grid style="height: 100%;padding: 0">
-  <ion-row class="ion-justify-content-center ion-align-items-end welcome">
-    <ion-col size="12" style="background: var(--ion-color-primary);padding: 0 10px 10px 15px">
-        <h1 style="color: white; font-size: 48px">Login</h1>
+<ion-grid style="height: 100%; padding: 0">
+  <ion-row>
+    <ion-col id="card-header">
+      <h1 style="color: white; font-size: 32px; margin-top: 10px;">Login</h1>
     </ion-col>
   </ion-row>
 
-  <ion-row class="ion-justify-content-center forum-row" style="margin-top: 40px;">
-    <ion-col size="11">
-      <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
-        <ion-item style="border-radius: 4px;" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }">
-          <ion-input type="text"  class="input" placeholder="Username or Email" name="username" formControlName="username"></ion-input>
-          <ion-icon name="alert-circle-outline" *ngIf="submitted && loginForm.controls.username.errors" style="color: var(--ion-color-primary);"></ion-icon>
-        </ion-item>
-        <ion-row>
-          <ion-col>
-            <div *ngIf="submitted && loginForm.controls.username.errors">
-              <div *ngIf="loginForm.controls.username.errors.required" style="color: var(--ion-color-primary)">Username or Email is required</div>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-item style="border-radius: 4px;"  [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }">
-          <ion-input type="password" class="input"  placeholder="Password" name="password" formControlName="password"></ion-input>
-          <ion-icon name="alert-circle-outline" *ngIf="submitted && loginForm.controls.password.errors" style="color: var(--ion-color-primary);"></ion-icon>
-        </ion-item>
-        <ion-row>
-          <ion-col>
-            <div *ngIf="submitted && loginForm.controls.password.errors">
-              <div *ngIf="loginForm.controls.password.errors.required" style="color: var(--ion-color-primary)">Password is required</div>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div style="text-align: right;">
-              <ion-button fill="clear" style="padding: 0px; margin: 0;">
-               <a routerLink="login/forgot-password" routerDirection="root" class="login" (click)="modalCtrl.dismiss()">Forgot Password?</a>
-              </ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-
-        <ion-row class="ion-justify-content-center button-row">
-          <ion-col size="6" size-md="4">
-            <div class="form-actions">
-              <ion-button fill="clear" type="submit" expand="block" class="btn-custom" id="login-btn">
-                <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
-                <ion-label *ngIf="!loading">Log In</ion-label>
-              </ion-button>
-<!--              <a style="text-decoration: none;" routerLink="signup" routerDirection="root"><ion-button type="button" expand="block" class="btn-custom" id="register-btn">Sign Up</ion-button></a>-->
-            </div>
-          </ion-col>
-        </ion-row>
+  <ion-row id="main-content" class="ion-justify-content-center">
+    <ion-col size="11" style="height: 100%; padding-top: 20px;">
+      <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" style="height: 100%;">
+        <ion-grid style="height: 100%; display: flex; flex-flow: column;">
+          <ion-row>
+            <ion-col>
+              <ion-item style="border-radius: 4px;"
+              [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors }">
+              <ion-input type="text" class="input" placeholder="Email" name="email"
+                formControlName="email"></ion-input>
+              <ion-icon name="alert-circle-outline" *ngIf="submitted && loginForm.controls.email.errors"
+                style="color: var(--ion-color-primary);"></ion-icon>
+            </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div *ngIf="submitted && loginForm.controls.email.errors">
+                <div *ngIf="loginForm.controls.email.errors.required" style="color: var(--ion-color-primary)">
+                  Email is required</div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-item style="border-radius: 4px;"
+            [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }">
+            <ion-input type="password" class="input" placeholder="Password" name="password" formControlName="password">
+            </ion-input>
+            <ion-icon name="alert-circle-outline" *ngIf="submitted && loginForm.controls.password.errors"
+              style="color: var(--ion-color-primary);"></ion-icon>
+          </ion-item>
+          <ion-row style="flex-grow: 1;">
+            <ion-col>
+              <div *ngIf="submitted && loginForm.controls.password.errors">
+                <div *ngIf="loginForm.controls.password.errors.required" style="color: var(--ion-color-primary)">
+                  Password is required</div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div style="text-align: right;">
+                <a routerLink="login/forgot-password" routerDirection="root" class="forgot-password"
+                  (click)="dismiss()">Forgot Password?</a>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-between button-row">
+            <ion-col size="6">
+              <div class="form-actions">
+                <ion-button fill="clear" type="submit" class="login-btn" (click)="loginType='ROLE_TEACHER'">
+                  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+                  <ion-label *ngIf="!loading">Log In as Teacher</ion-label>
+                </ion-button>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div class="form-actions" >
+                <ion-button fill="clear" type="submit" class="login-btn" (click)="loginType='ROLE_STUDENT'">
+                  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+                  <ion-label *ngIf="!loading">Log In as Student</ion-label>
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </form>
     </ion-col>
   </ion-row>

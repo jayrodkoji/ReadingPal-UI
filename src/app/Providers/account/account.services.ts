@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { User } from '../user-controller/model/users-model';
   providedIn: 'root'
 })
 export class AccountServices {
-  private baseUrl: string = environment.graphqlApiGateway;
+  private authURL: string = environment.authServer;
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
@@ -19,23 +19,22 @@ export class AccountServices {
     private router: Router,
     private http: HttpClient,
   ) {
-      this.userSubject = new BehaviorSubject<User>(null);
-      this.user = this.userSubject.asObservable();
+    this.userSubject = new BehaviorSubject<User>(null);
+    this.user = this.userSubject.asObservable();
   }
 
-  login(username: string, password: string) {
-    return this.http.get(this.baseUrl + '/users/basicauth',
-    { headers: { authorization: 'Basic ' + window.btoa(username  + ':' + password) }})
-    .pipe(
-      map((user: any) => {
-        // get user from response
-        const role = user.principal.userRoles[0];
-        user = user.principal.user;
-        user.role = role;
-        this.userSubject.next(user);
-        return user;
+  login(email: string, password: string) {
+    return this.http.post(this.authURL + '/login', {},
+      {
+        headers: new HttpHeaders().set('authorization', 'Basic ' + window.btoa(email + ':' + password))
       })
-    );
+      .pipe(
+        map((user: User) => {
+          // get user from response
+          this.userSubject.next(user);
+          return user;
+        })
+      );
   }
 
   logout() {
@@ -43,11 +42,6 @@ export class AccountServices {
     localStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/login']);
-  }
-
-  // TODO: Shem
-  sigup() {
-
   }
 }
 

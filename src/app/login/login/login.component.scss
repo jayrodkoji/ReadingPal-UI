@@ -1,8 +1,31 @@
-.login {
-  text-decoration: none;
-  padding: 5px 10px;
+$header-size: 68px;
+
+#card-header {
+  background: var(--ion-color-primary);
+  padding-left: 15px;
+  height: $header-size;
 }
 
-.login:hover {
-  color: var(--ion-color-primary);
+#main-content {
+  height: calc(100% - #{$header-size});
+}
+
+.forgot-password {
+  text-decoration: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.forgot-password:hover {
+  color: rgb(204, 204, 204);
+}
+
+.button-row {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.login-btn {
+  width: 100%;
+  margin: auto;
 }
